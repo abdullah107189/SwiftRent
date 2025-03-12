@@ -1,1 +1,18 @@
 @import "tailwindcss";
+body {
+  background-color: #1b1b1b;
+}
+@layer components {
+  .orange {
+    @apply text-[#f5b754];
+  }
+  .fBlack {
+    @apply text-[#1b1b1b];
+  }
+  .sBlack {
+    @apply text-[#222222];
+  }
+  .tBlack {
+    @apply text-[#999];
+  }
+}

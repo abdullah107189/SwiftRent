@@ -4,6 +4,7 @@ import Home from "../page/Home";
 import { Contact } from "../page/Contact/Contact";
 import Services from "../page/services/Services";
 import About from "../page/About/About";
+
 export const router = createBrowserRouter([
   {
     path: "/",

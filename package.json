@@ -17,6 +17,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0",
     "sort-by": "^1.2.0",
+    "swiper": "^11.2.5",
     "tailwindcss": "^4.0.12",
     "vite-project": "file:"
   },

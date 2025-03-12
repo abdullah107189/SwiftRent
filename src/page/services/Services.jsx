@@ -1,5 +1,6 @@
 import React from "react";
 import serviceImage from "../../assets/servicesImg.jpg";
+import "./service.css";
 
 // Importing images for services
 import Corporate from "../../assets/Corprate.webp";
@@ -44,7 +45,7 @@ const Services = () => {
       </div>
 
       {/* Service Cards Section */}
-      <div className="w-10/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 justify-items-center items-center my-16">
+      <div className="w-10/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 three-col lg:grid-cols-4 gap-6 p-6 justify-items-center items-center my-16">
         <ServiceCard
           image={Luxury_Car_Rental}
           serviceName="Luxury Car Rental"

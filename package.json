@@ -12,6 +12,7 @@
   "dependencies": {
     "@glidejs/glide": "^3.7.1",
     "@tailwindcss/vite": "^4.0.12",
+    "aos": "^2.3.4",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
     "react": "^19.0.0",

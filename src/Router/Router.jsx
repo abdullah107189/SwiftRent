@@ -5,14 +5,17 @@ import Services from "../page/services/Services";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home></Home>,
       },
       {
+        path: '/contact',
+        element: <Contact />,
+},{
         path: "/services",
         element: <Services />,
       },

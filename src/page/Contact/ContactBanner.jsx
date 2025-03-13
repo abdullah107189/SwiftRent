@@ -1,7 +1,7 @@
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useEffect } from 'react';
-import contactBanner from '../../assets/ContactBanner/car.avif';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import contactBanner from "../../assets/ContactBanner/car.avif";
 
 const ContactBanner = () => {
   useEffect(() => {

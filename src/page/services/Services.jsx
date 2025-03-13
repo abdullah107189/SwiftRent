@@ -11,6 +11,8 @@ import Private_Transfer from "../../assets/Private-Transfer.jpg";
 import Luxury_Car_Rental from "../../assets/Luxury_Car_Rental.jpg";
 import Wedding_Car_Rentals from "../../assets/Wedding_Car_Rentals.jpg";
 import ServiceCard from "../../components/serviceCard/ServiceCard";
+import BookAuto from "./BookAuto";
+import OtherServices from "./OtherServices";
 
 const Services = () => {
   const text = "What We Do";
@@ -23,7 +25,7 @@ const Services = () => {
   return (
     <div className="relative w-full bg-[#1B1B1B] ">
       {/* Background Image */}
-      <div className="relative w-full h-[700px] ">
+      <div className="relative w-full h-[500px] md:h-[650px]">
         <img
           src={serviceImage}
           alt="Our Services"
@@ -86,6 +88,8 @@ const Services = () => {
           serviceNumber="08"
         />
       </div>
+      <BookAuto />
+      <OtherServices />
     </div>
   );
 };

@@ -2,9 +2,9 @@ import {
   MdOutlineMailOutline,
   MdAddLocation,
   MdOutlineAddIcCall,
-} from 'react-icons/md';
+} from "react-icons/md";
 
-import { CiClock1 } from 'react-icons/ci';
+import { CiClock1 } from "react-icons/ci";
 
 const Card = () => {
   return (

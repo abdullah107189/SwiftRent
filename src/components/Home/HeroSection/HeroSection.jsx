@@ -8,6 +8,13 @@ import { Pagination, Autoplay } from "swiper/modules";
 import backgroundImage1 from "../../../assets/heroSection/1.jpg";
 import backgroundImage2 from "../../../assets/heroSection/2.jpg";
 import backgroundImage3 from "../../../assets/heroSection/3.jpg";
+import {
+  FaCarSide,
+  FaUsers,
+  FaCogs,
+  FaSuitcaseRolling,
+  FaUser,
+} from "react-icons/fa";
 
 const HeroSection = () => {
   const specs1 = [

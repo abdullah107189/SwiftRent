@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import backgroundImage1 from "../../../assets/heroSection/1.jpg";
 import backgroundImage2 from "../../../assets/heroSection/2.jpg";
 import backgroundImage3 from "../../../assets/heroSection/3.jpg";
+import CarDetails from "./CardDetils";
 
 const HeroSection = () => {
   return (
@@ -39,7 +40,7 @@ const HeroSection = () => {
               backgroundImage: `url(${backgroundImage1})`,
             }}
           >
-            <h1>hello</h1>
+            <CarDetails></CarDetails>
           </div>
         </SwiperSlide>
 

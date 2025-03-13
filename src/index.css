@@ -4,7 +4,7 @@ body {
   color: white;
 }
 @layer components {
-  .orange {
+  .oranget {
     @apply text-[#f5b754];
   }
   .fBgBlack {

@@ -28,6 +28,6 @@
 }
 
 .hFull {
-  min-height: calc(100vh - 69px);
+  min-height: calc(100vh - 0px);
   padding: 0;
 }

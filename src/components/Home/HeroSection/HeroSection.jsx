@@ -6,10 +6,13 @@ import "swiper/css/navigation";
 import "./herSection.css";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
+import backgroundImage1 from "../../../assets/heroSection/1.jpg";
+import backgroundImage2 from "../../../assets/heroSection/2.jpg";
+import backgroundImage3 from "../../../assets/heroSection/3.jpg";
 
 const HeroSection = () => {
   return (
-    <div className="hFull border flex items-center justify-center">
+    <div className="hFull flex items-center justify-center">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -30,15 +33,36 @@ const HeroSection = () => {
         className="mySwiper "
       >
         <SwiperSlide>
-          <div className="hFull">
-            
+          <div
+            className="hFull bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${backgroundImage1})`,
+            }}
+          >
+            <h1>hello</h1>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
-          <div className="hFull"></div>
+          <div
+            className="hFull bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${backgroundImage2})`,
+            }}
+          >
+            <h1>hello</h1>
+          </div>
         </SwiperSlide>
+
         <SwiperSlide>
-          <div className="hFull"></div>
+          <div
+            className="hFull bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${backgroundImage3})`,
+            }}
+          >
+            <h1>hello</h1>
+          </div>
         </SwiperSlide>
       </Swiper>
     </div>

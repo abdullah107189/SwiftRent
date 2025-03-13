@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SectionHeader = ({ title, subtitle }) => {
-  // Split subtitle into "Rental" and "Car Types"
+
   const [firstWord, ...restWords] = subtitle ? subtitle.split(' ') : [];
   const remainingText = restWords.join(' ');
 

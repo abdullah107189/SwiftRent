@@ -95,32 +95,56 @@ const HeroSection = () => {
                 </div>
 
                 <div className="relative z-10 text-white p-8">
-                  <div className="uppercase text-sm mb-2 tracking-[1rem] flex gap-5 items-center orange">
+                  <div
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                    className="uppercase text-sm mb-2 tracking-[1rem] flex gap-5 items-center orange"
+                  >
                     <p className="w-2 h-2 rounded-full bgOrange"></p>
                     Economy
                   </div>
-                  <h1 className="text-6xl font-bold mb-4">
+                  <h1
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                    className="text-6xl font-bold mb-4"
+                  >
                     Bugatti Mistral W16
                   </h1>
-                  <p className="text-lg mb-6">
+                  <p
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                    className="text-lg mb-6"
+                  >
                     Reserve now and get the best offer
                     <span className="font-bold orange ml-5 text-2xl">$750</span>
                     /DAY
                   </p>
                   <div className="flex gap-5 ">
-                    <button className="fillBtn">
+                    <button
+                      data-aos="fade-up"
+                      data-aos-delay="500"
+                      className="fillBtn"
+                    >
                       View Details
                       <span className="ml-2 -rotate-45">&#8594;</span>
                     </button>
 
-                    <button className="outlineBtn">
+                    <button
+                      data-aos="fade-up"
+                      data-aos-delay="600"
+                      className="outlineBtn"
+                    >
                       Rent Now <span className="ml-2 -rotate-45">&#8594;</span>
                     </button>
                   </div>
                 </div>
               </div>
               {/* right side content  */}
-              <div className="bg-[#1b1b1b] rounded-2xl p-10 w-[400px] z-10">
+              <div
+                data-aos="fade-left"
+                data-aos-delay="700"
+                className="bg-[#1b1b1b] rounded-2xl p-10 w-[400px] z-10"
+              >
                 {specs1.map((spec, index) => (
                   <div
                     key={index}

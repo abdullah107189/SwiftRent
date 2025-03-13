@@ -27,6 +27,7 @@ const ServiceCard = ({ image, serviceName, serviceNumber }) => {
         {serviceNumber}
       </div>
     </div>
+    </div>
   );
 };
 

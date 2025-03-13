@@ -11,8 +11,8 @@ import { useEffect } from 'react';
 const Card = () => {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Smooth animation
-      once: true, // Ensures animation happens only once
+      duration: 1000,
+      once: true,
     });
   }, []);
 

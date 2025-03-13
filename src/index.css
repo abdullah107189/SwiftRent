@@ -5,9 +5,16 @@ body {
   color: white;
 }
 @layer components {
+  /* orange text color  */
   .orange {
     @apply text-[#f5b754];
   }
+
+  /* orange background color  */
+  .bgOrange {
+    @apply bg-[#f5b754];
+  }
+
   .fBgBlack {
     @apply bg-[#1b1b1b];
   }
@@ -20,7 +27,6 @@ body {
   .tBlack {
     @apply text-[#999];
   }
-
   .mxw {
     @apply max-w-7xl mx-auto;
   }
@@ -30,3 +36,7 @@ body {
     font-optical-sizing: auto;
   }
 }
+/* .fontOutfit > {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+} */

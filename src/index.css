@@ -1,4 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+}
+@font-outfit {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+}
 body {
   background-color: #1b1b1b;
   color: white;
@@ -26,11 +34,6 @@ body {
   .tBlack {
     @apply text-[#999];
   }
-  .tBgBlack {
-    @apply bg-[#999];
-  }
-
-  /* use for max width */
   .mxw {
     @apply max-w-7xl mx-auto;
   }
@@ -43,3 +46,7 @@ body {
     @apply border hover:border-[#f5b754] border-white hover:bg-[#f5b754] hover:text-black py-2 px-6 rounded-full flex items-center transform duration-200;
   }
 }
+/* .fontOutfit > {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+} */

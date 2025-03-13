@@ -1,31 +1,57 @@
+import { MdArrowOutward } from 'react-icons/md';
 import carParallex from '../../assets/ContactBanner/Homepage-Model-S-Desktop-US.avif';
+import { FaWhatsapp } from 'react-icons/fa';
 const CarParallax = () => {
+  const text = 'GET IN TOUCH';
+  const letters = text.split('').map((char, index) => (
+    <span key={index} className="inline-block mx-[2px]">
+      {char === ' ' ? '\u00A0\u00A0\u00A0' : char}
+    </span>
+  ));
   return (
     <div>
       <div
-        className="mx-auto overflow-y-scroll bg-cover bg-fixed bg-center bg-no-repeat shadow-lg h-[500px] sm:h-[600px] lg:h-[700px]"
-        style={{ backgroundImage: `url(${carParallex})` }}
+        className="mx-auto w-full overflow-y-scroll bg-cover bg-fixed bg-center bg-no-repeat shadow-lg h-[500px] sm:h-[550px] "
+        style={{ backgroundImage: `url(${carParallex})`, width: '100%' }}
       >
-        <div className="mt-40">
-          <div className="space-y-6">
+        <div className="mt-40 w-96 mx-auto">
+          <div className="space-y-2 text-center">
             {/* Title */}
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#F5B754]">
-              Rent Your Car
+            <p className="text-xl text-[#F5B754] uppercase tracking-wide text-center">
+              {letters}
+            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold text-center">
+              Interested in Renting?
             </h2>
-            <p className="text-lg sm:text-xl">
-              Interested in Renting? <br />
+            <p className="text-sm text-white py-2">
               Don't hesitate and send us a message.
             </p>
 
             {/* WhatsApp Button */}
-            <a
-              href="https://wa.me/yourwhatsappnumber"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block py-3 px-8 bg-[#25D366] text-white text-lg font-bold rounded-full hover:bg-[#128C7E] transition"
-            >
-              WhatsApp Rent Now
-            </a>
+            <div className="flex gap-4">
+              <a
+                href="https://wa.me/yourwhatsappnumber"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block py-3 px-8 bg-[#F5B754] text-black text-lg rounded-full hover:bg-[#ffffff] transition-all duration-300 
+  hover:-translate-y-1.5"
+              >
+                <p className="flex items-center gap-2">
+                  {' '}
+                  <FaWhatsapp /> <span>WhatsApp</span>
+                </p>
+              </a>
+              <button
+                className="border py-3 px-8 rounded-full flex gap-2 items-center 
+  hover:bg-[#F5B754] hover:text-black transition-all duration-300 
+  hover:-translate-y-1.5"
+              >
+                Rent Now{' '}
+                <span>
+                  <MdArrowOutward />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

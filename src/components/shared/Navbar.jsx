@@ -10,7 +10,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/"
-          className="font-bold text-tBlack hover:text-orange px-3 py-2"
+          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Home
@@ -19,7 +19,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/about"
-          className="font-bold text-[#999] hover:text-[#f5b754] px-3 py-2"
+          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           About
@@ -28,7 +28,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/services"
-          className="font-bold text-[#999] hover:text-[#f5b754] px-3 py-2"
+          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Service
@@ -37,7 +37,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/contact"
-          className="font-bold text-[#999] hover:text-[#f5b754] px-3 py-2"
+          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Contact
@@ -47,10 +47,10 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-fBlack bg-opacity-50 text-tBlack w-full ">
-      <div className="w-full md:w-11/12 mx-auto flex justify-between items-center p-4 lg:p-8 border-b border-orange-300">
+    <div className="navbar sBgBlack bg-opacity-50 text-tBlack w-full ">
+      <div className="mxw flex justify-between items-center py-4 lg:py-8">
         <Link to="/" className="flex items-center">
-          <span className="ml-2 text-3xl font-black text-[#999]">
+          <span className="ml-2 text-3xl font-black tBlack">
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>
@@ -63,19 +63,19 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(true)}
             className="p-2 rounded-full hover:bg-[#f5b754] transition duration-300"
           >
-            <Menu className="h-6 w-6 text-[#999]" />
+            <Menu className="h-6 w-6 tBlack" />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-white bg-opacity-80 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-opacity duration-300">
+        <div className="fixed inset-0 bg-[#1b1b1b] bg-opacity-80 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-opacity duration-300">
           <button
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-6 right-6 p-3 rounded-full bg-white hover:bg-[#f5b754] transition duration-300"
           >
-            <X className="h-6 w-6 text-[#999]" />
+            <X className="h-6 w-6 tBlack" />
           </button>
           <ul className="space-y-6 text-center">{navOptions}</ul>
         </div>

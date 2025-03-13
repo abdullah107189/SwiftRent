@@ -8,7 +8,6 @@ import Airport_Service from "../../assets/Airport-Service.webp";
 import Fleet_leasing from "../../assets/Fleet-leasing.jpg";
 import Car_Rental_with_Driver from "../../assets/Car-Rental-with-Driver.jpg";
 import Private_Transfer from "../../assets/Private-Transfer.jpg";
-import VIP_Transfer from "../../assets/VIP-Transfer.jpg";
 import Luxury_Car_Rental from "../../assets/Luxury_Car_Rental.jpg";
 import Wedding_Car_Rentals from "../../assets/Wedding_Car_Rentals.jpg";
 import ServiceCard from "../../components/serviceCard/ServiceCard";
@@ -77,7 +76,7 @@ const Services = () => {
           serviceNumber="06"
         />
         <ServiceCard
-          image={VIP_Transfer}
+          image={Luxury_Car_Rental}
           serviceName="VIP Transfer"
           serviceNumber="07"
         />

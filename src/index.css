@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 body {
   background-color: #1b1b1b;
   color: white;
@@ -19,7 +20,13 @@ body {
   .tBlack {
     @apply text-[#999];
   }
+
   .mxw {
     @apply max-w-7xl mx-auto;
+  }
+
+  .fontOutfit > {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
   }
 }

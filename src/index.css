@@ -16,8 +16,10 @@ body {
   .sBgBlack {
     background-color: #222222;
   }
-
   .tBlack {
     @apply text-[#999];
+  }
+  .mxw {
+    @apply max-w-7xl mx-auto;
   }
 }

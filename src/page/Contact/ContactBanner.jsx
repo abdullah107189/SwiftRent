@@ -1,16 +1,5 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 import contactBanner from "../../assets/ContactBanner/car.avif";
-
 const ContactBanner = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
-
   return (
     <div className="e h-auto">
       <section

@@ -1,37 +1,75 @@
-import { NavLink } from "react-router-dom";
+import { X, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = () => {
-  return (
-    <div className="text-white">
-      <div className="text-center flex items-center justify-center md:gap-10">
-        <NavLink
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navOptions = (
+    <>
+      <li>
+        <Link
           to="/"
-          className="text-center  text-xl orange hover:text-orange-300"
+          className="font-bold text-gray-700 hover:text-blue-600 px-3 py-2"
+          onClick={() => setIsMenuOpen(false)}
         >
           Home
-        </NavLink>
-
-        <NavLink
+        </Link>
+      </li>
+      <li>
+        <Link
           to="/about"
-          className="text-center  text-xl hover:text-orange-300"
+          className="font-bold text-gray-700 hover:text-blue-600 px-3 py-2"
+          onClick={() => setIsMenuOpen(false)}
         >
           About
-        </NavLink>
-
-        <NavLink
+        </Link>
+      </li>
+      <li>
+        <Link
           to="/services"
-          className="text-center  text-xl hover:text-orange-300"
+          className="font-bold text-gray-700 hover:text-blue-600 px-3 py-2"
+          onClick={() => setIsMenuOpen(false)}
         >
-          Services
-        </NavLink>
+          Service
+        </Link>
+      </li>
+    </>
+  );
 
-        <NavLink
-          to="/contact"
-          className="text-center  text-xl hover:text-orange-300"
-        >
-          Contact
-        </NavLink>
+  return (
+    <div className="navbar bg-black bg-opacity-50 text-white w-full fixed top-0 left-0 z-50">
+      <div className="w-full md:w-11/12 mx-auto flex justify-between items-center px-4 lg:px-8">
+        <Link to="/" className="flex items-center">
+          <span className="ml-2 text-xl font-bold text-gray-800">
+            SwiftRent
+          </span>
+        </Link>
+        <div className="hidden md:flex items-center gap-4">
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+        </div>
+        <div className="md:hidden flex items-center gap-4">
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="p-2 rounded-full hover:bg-gray-300 transition duration-300"
+          >
+            <Menu className="h-6 w-6 text-gray-700" />
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-white bg-opacity-80 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-opacity duration-300">
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 right-6 p-3 rounded-full bg-white hover:bg-gray-200 transition duration-300"
+          >
+            <X className="h-6 w-6 text-black" />
+          </button>
+          <ul className="space-y-6 text-center">{navOptions}</ul>
+        </div>
+      )}
     </div>
   );
 };

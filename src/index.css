@@ -1,13 +1,27 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import "tailwindcss";
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+}
+@font-outfit {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+}
 body {
   background-color: #1b1b1b;
   color: white;
 }
 @layer components {
+  /* orange text color  */
   .orange {
     @apply text-[#f5b754];
   }
+
+  /* orange background color  */
+  .bgOrange {
+    @apply bg-[#f5b754];
+  }
+
   .fBgBlack {
     @apply bg-[#1b1b1b];
   }
@@ -20,13 +34,19 @@ body {
   .tBlack {
     @apply text-[#999];
   }
-
   .mxw {
     @apply max-w-7xl mx-auto;
   }
-
-  .fontOutfit > {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
+  /* action btn  */
+  .fillBtn {
+    @apply bg-[#f5b754] hover:bg-white text-black  py-2 px-6 rounded-full flex items-center transform duration-200;
+  }
+  /* hover btn using for outline  */
+  .outlineBtn {
+    @apply border hover:border-[#f5b754] border-white hover:bg-[#f5b754] hover:text-black py-2 px-6 rounded-full flex items-center transform duration-200;
   }
 }
+/* .fontOutfit > {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+} */

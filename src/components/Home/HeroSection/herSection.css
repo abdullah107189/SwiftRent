@@ -1,0 +1,33 @@
+.custom-pagination {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  opacity: 100;
+  position: relative;
+  top: -20px;
+}
+
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  position: absolute;
+  width: 100%;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #f5b754;
+  border: none;
+}
+
+.hFull {
+  min-height: calc(100vh - 69px);
+  padding: 0;
+}

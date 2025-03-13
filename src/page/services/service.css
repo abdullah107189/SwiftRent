@@ -1,0 +1,7 @@
+@media (min-width: 1051px) and (max-width: 1380px) {
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}

@@ -72,9 +72,6 @@ export default function Carousel() {
                 src="https://Tailwindmix.b-cdn.net/carousel/logos/carousel-logo-image-6.svg"
                 className="m-auto h-20 max-h-full w-auto max-w-full"
               />
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum,
-              odio eveniet! Ratione vel quae, labore adipisci libero placeat
-              delectus velit.
             </li>
           </ul>
         </div>

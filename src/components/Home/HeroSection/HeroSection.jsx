@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div className="border hFull flex items-center justify-center">
+    <div className="hFull border flex items-center justify-center">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -30,7 +30,9 @@ const HeroSection = () => {
         className="mySwiper "
       >
         <SwiperSlide>
-          <div className="hFull"></div>
+          <div className="hFull">
+            
+          </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="hFull"></div>

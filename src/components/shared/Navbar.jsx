@@ -10,7 +10,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/"
-          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
+          className="font-bold hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Home
@@ -19,7 +19,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/about"
-          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
+          className="font-bold hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           About
@@ -28,7 +28,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/services"
-          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
+          className="font-bold hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Service
@@ -37,7 +37,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/contact"
-          className="font-bold tBlack hover:text-[#f5b754] px-3 py-2"
+          className="font-bold hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Contact
@@ -47,8 +47,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar sBgBlack bg-opacity-50 text-tBlack w-full ">
-      <div className="mxw flex justify-between items-center py-4 lg:py-8">
+    <div className="navbar bg-transparent bg-opacity-50 text-white  w-full fixed z-10 ">
+      <div className="mxw flex justify-between items-center py-2 lg:py-5">
         <Link to="/" className="flex items-center">
           <span className="ml-2 text-3xl font-black tBlack">
             <span className="text-[#f5b754]">S</span>wift

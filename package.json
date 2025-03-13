@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@glidejs/glide": "^3.7.1",
     "@tailwindcss/vite": "^4.0.12",
+    "aos": "^2.3.4",
     "localforage": "^1.10.0",
+    "lucide-react": "^0.479.0",
     "match-sorter": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.3.0",
     "sort-by": "^1.2.0",
     "swiper": "^11.2.5",

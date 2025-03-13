@@ -2,13 +2,17 @@ import React from "react";
 
 const ServiceCard = ({ image, serviceName, serviceNumber }) => {
   return (
-    <div className="relative w-full h-full shadow-lg rounded-lg overflow-hidden group">
+    <div className="relative w-full h-full  shadow-lg rounded-lg overflow-hidden group ">
       {/* Image */}
       <img
         src={image}
         alt={serviceName}
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
       />
+      <div className="absolute bottom-9 left-4 text-white text-lg font-semibold ">
+        {serviceName}
+      </div>
+      <div className="absolute bottom-4 right-4 flex items-center justify-center w-12 h-12 bg-[#F5B754] rounded-full text-white font-bold text-xl">
 
       {/* Bottom Dark Gradient Overlay */}
       <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>

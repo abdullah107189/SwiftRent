@@ -13,8 +13,6 @@ import Luxury_Car_Rental from "../../assets/Luxury_Car_Rental.jpg";
 import Wedding_Car_Rentals from "../../assets/Wedding_Car_Rentals.jpg";
 import ServiceCard from "../../components/serviceCard/ServiceCard";
 
-
-
 const Services = () => {
   const text = "What We Do";
   const letters = text.split("").map((char, index) => (

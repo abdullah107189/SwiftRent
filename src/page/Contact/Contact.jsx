@@ -1,17 +1,19 @@
-import Card from './Card';
-import Carousel from './Carousel';
-import CarParallax from './CarParallax';
-import ContactBanner from './ContactBanner';
-import ContactForm from './ContactFrom';
+import Card from "./Card";
+import Carousel from "./Carousel";
+import CarParallax from "./CarParallax";
+import ContactBanner from "./ContactBanner";
+import ContactForm from "./ContactFrom";
 
 const Contact = () => {
   return (
-    <div className="max-w-screen-xl mx-auto relative">
+    <div className="relative">
       <ContactBanner />
-      <Card />
-      <ContactForm />
-      <CarParallax />
-      <Carousel />
+      <div className="mxw">
+        <Card />
+        <ContactForm />
+        <CarParallax />
+        <Carousel />
+      </div>
     </div>
   );
 };

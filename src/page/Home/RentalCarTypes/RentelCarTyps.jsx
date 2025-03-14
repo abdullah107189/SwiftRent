@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./rentel.css";
 import { Navigation, Pagination } from "swiper/modules";
+import NameCard from "../../../components/shared/card/NameCard";
 
 const carTypes = [
   { title: "Luxury Cars", image: "https://i.ibb.co/Y7HgktqJ/download-45.jpg" },
@@ -37,7 +38,7 @@ export default function RentalCarTypes() {
       >
         {carTypes.map((car, index) => (
           <SwiperSlide key={index}>
-            <RentalCarTypesCard car={car} />
+            <NameCard image={car?.image} name={car?.title}></NameCard>
           </SwiperSlide>
         ))}
       </Swiper>

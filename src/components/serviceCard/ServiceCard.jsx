@@ -21,7 +21,7 @@ const ServiceCard = ({ image, serviceName, serviceNumber }) => {
       </h2>
 
       {/* Custom Rounded Bottom Left Corner */}
-      <div className="absolute bottom-0 left-0 w-20 h-20 bg-[#222222] rounded-tr-[50px]"></div>
+      <div className="absolute bottom-0 left-0 w-20 h-20 fBgBlack rounded-tr-[50px]"></div>
 
       {/* Service Number in Circle with Border & Hover Effect */}
       <div className="absolute bottom-0 left-0 flex items-center justify-center w-14 h-14 border-2 border-[#F5B754] bg-transparent text-white font-bold text-xl rounded-full transition duration-300 group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">

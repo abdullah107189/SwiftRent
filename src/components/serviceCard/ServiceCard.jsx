@@ -8,7 +8,7 @@ const ServiceCard = ({ image, serviceName, serviceNumber }) => {
         <img
           src={image}
           alt={serviceName}
-          className="w-full h-full object-cover rounded-xl transition-transform duration-300 hover:scale-110"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
       </div>
 

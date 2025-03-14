@@ -6,7 +6,7 @@ function CarPromoVideo() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
-    <div className="relative h-[500px] overflow-hidden flex items-center justify-center ">
+    <div className="relative h-[450px] overflow-hidden flex items-center justify-center ">
       <div
         className="absolute top-0 left-0 w-full h-full bg-fixed bg-center bg-cover"
         style={{ backgroundImage: `url(${CarPromo})` }}

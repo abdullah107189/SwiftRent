@@ -30,12 +30,12 @@ const letters = text.split("").map((char, index) => (
 
 const OtherServiceCard = ({ serviceName, description, serviceNumber }) => {
   return (
-    <div className="relative w-full h-full p-12  shadow-lg rounded-xl bg-[#222222] text-white ">
+    <div className="relative w-full h-full p-12  shadow-lg rounded-3xl bg-[#222222] text-white ">
       {/* Service Title */}
       <h3 className="text-xl font-bold">{serviceName}</h3>
 
       {/* Service Description */}
-      <p className="text-gray-400 mt-2">{description}</p>
+      <p className="tBlack mt-2">{description}</p>
 
       {/* Styled Circle */}
       <div className="absolute bottom--2 left-0 flex items-center justify-center w-14 h-14 border-t-4 border-gray-600 bg-[#222222] text-[#F5B754] font-bold text-lg rounded-full transition duration-300 ">
@@ -47,8 +47,8 @@ const OtherServiceCard = ({ serviceName, description, serviceNumber }) => {
 
 const OtherServices = () => {
   return (
-    <div>
-      <div className="flex flex-col justify-center items-center mt-24">
+    <div className="mb-15">
+      <div className="flex flex-col justify-center items-center mt-24 ">
         <p className="text-[12px] text-[#F5B754] uppercase tracking-wide">
           {letters}
         </p>

@@ -18,7 +18,7 @@ import CarPromoVideo from "./CarPromoVideo";
 
 const Services = () => {
   return (
-    <div className="relative w-full bg-[#1B1B1B] ">
+    <div className="relative  bg-[#1B1B1B] ">
       {/* Page Header section */}
       <PageHeader
         subTitle={"What We Do"}
@@ -28,7 +28,7 @@ const Services = () => {
       ></PageHeader>
 
       {/* Service Cards Section */}
-      <div className=" mxw grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 three-col lg:grid-cols-3 gap-6 p-6 justify-items-center items-center my-16">
+      <div className="mxw grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center my-16">
         <ServiceCard
           image={Luxury_Car_Rental}
           serviceName="Luxury Car Rental"

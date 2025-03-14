@@ -3,8 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/effect-fade";
 import "./herSection.css";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import backgroundImage1 from "../../../assets/heroSection/1.jpg";
 import backgroundImage2 from "../../../assets/heroSection/2.jpg";
 import backgroundImage3 from "../../../assets/heroSection/3.jpg";
@@ -58,6 +59,7 @@ const HeroSection = () => {
       <Swiper
         slidesPerView={1}
         loop={true}
+        effect={"fade"}
         // autoplay={{
         //     delay: 2500,
         //     disableOnInteraction: false,
@@ -70,7 +72,7 @@ const HeroSection = () => {
             return `<span class="${className} custom-pagination"></span>`;
           },
         }}
-        modules={[Pagination, Autoplay]}
+        modules={[Pagination, Autoplay,EffectFade]}
         className="mySwiper "
       >
         {/* first slider  */}

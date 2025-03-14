@@ -1,16 +1,15 @@
-import contactBanner from "../../assets/ContactBanner/car.avif";
-
 const PageHeader = ({
   subTitle,
   title,
   titleWhite,
   titleOrange,
   line = true,
+  image,
 }) => {
   return (
     <section
       className="relative bg-cover bg-center bg-no-repeat h-[60vh] md:h-[70vh] flex items-center"
-      style={{ backgroundImage: `url(${contactBanner})` }}
+      style={{ backgroundImage: `url(${image})` }}
     >
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>

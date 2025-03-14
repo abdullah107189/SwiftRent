@@ -24,7 +24,7 @@ const ServiceCard = ({ image, serviceName, serviceNumber }) => {
       <div className="absolute bottom-0 left-0 w-20 h-20 fBgBlack rounded-tr-[50px]"></div>
 
       {/* Service Number in Circle with Border & Hover Effect */}
-      <div className="absolute bottom-0 left-0 flex items-center justify-center w-14 h-14 border-2 border-[#F5B754] bg-transparent text-white font-bold text-xl rounded-full transition duration-300 group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
+      <div className="absolute bottom-0 left-0 flex items-center justify-center w-14 h-14 border-3 border-[#F5B754] bg-transparent text-white font-bold text-xl rounded-full transition duration-300 group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
         {serviceNumber}
       </div>
     </div>

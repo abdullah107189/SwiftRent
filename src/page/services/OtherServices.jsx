@@ -30,7 +30,7 @@ const letters = text.split("").map((char, index) => (
 
 const OtherServiceCard = ({ serviceName, description, serviceNumber }) => {
   return (
-    <div className="relative w-full h-full p-12  shadow-lg rounded-xl bg-[#222222] text-white ">
+    <div className="relative w-full h-full p-12  shadow-lg rounded-3xl bg-[#222222] text-white ">
       {/* Service Title */}
       <h3 className="text-xl font-bold">{serviceName}</h3>
 

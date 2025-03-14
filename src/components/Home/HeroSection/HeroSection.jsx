@@ -57,7 +57,6 @@ const HeroSection = () => {
     <div className="hFull flex items-center justify-center">
       <Swiper
         slidesPerView={1}
-        spaceBetween={30}
         loop={true}
         // autoplay={{
         //     delay: 2500,
@@ -124,6 +123,10 @@ const HeroSection = () => {
                       data-aos="fade-up"
                       data-aos-delay="500"
                       className="fillBtn"
+                      style={{
+                        transform: "transition",
+                        animationDuration: "1s",
+                      }}
                     >
                       View Details
                       <span className="ml-2 -rotate-45">&#8594;</span>

@@ -35,7 +35,7 @@ const OtherServiceCard = ({ serviceName, description, serviceNumber }) => {
       <h3 className="text-xl font-bold">{serviceName}</h3>
 
       {/* Service Description */}
-      <p className="text-gray-400 mt-2">{description}</p>
+      <p className="tBlack mt-2">{description}</p>
 
       {/* Styled Circle */}
       <div className="absolute bottom--2 left-0 flex items-center justify-center w-14 h-14 border-t-4 border-gray-600 bg-[#222222] text-[#F5B754] font-bold text-lg rounded-full transition duration-300 ">

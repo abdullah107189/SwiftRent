@@ -93,7 +93,7 @@ const HeroSection = () => {
                   <div className="absolute inset-0 bg-black opacity-50"></div>
                 </div>
 
-                <div className="relative z-10 text-white p-8">
+                <div className="relative z-10 text-white ">
                   <div
                     data-aos="fade-up"
                     data-aos-delay="200"
@@ -146,7 +146,7 @@ const HeroSection = () => {
               <div
                 data-aos="fade-left"
                 data-aos-delay="700"
-                className="bg-[#1b1b1b] rounded-2xl p-10 w-[400px] z-10"
+                className="bg-[#1b1b1b] md:flex flex-col hidden rounded-2xl p-10 w-[400px] z-10"
               >
                 {specs1.map((spec, index) => (
                   <div
@@ -180,7 +180,7 @@ const HeroSection = () => {
           >
             <div className="mxw flex items-center justify-between">
               {/* left side content  */}
-              <div className=" h-screen flex items-center">
+              <div className="h-screen flex items-center">
                 {/* Background Image (Replace with your Bugatti image) */}
                 <div
                   className="absolute inset-0 bg-cover bg-center"
@@ -190,7 +190,7 @@ const HeroSection = () => {
                   <div className="absolute inset-0 bg-black opacity-50"></div>
                 </div>
 
-                <div className="relative z-10 text-white p-8">
+                <div className="relative z-10 text-white ">
                   <div className="uppercase text-sm mb-2 tracking-[1rem] flex gap-5 items-center orange">
                     <p className="w-2 h-2 rounded-full bgOrange"></p>
                     Economy
@@ -214,7 +214,7 @@ const HeroSection = () => {
                 </div>
               </div>
               {/* right side content  */}
-              <div className="bg-[#1b1b1b] rounded-2xl p-10 w-[400px] z-10">
+              <div className="bg-[#1b1b1b] md:flex flex-col hidden rounded-2xl p-10 w-[400px] z-10">
                 {specs2.map((spec, index) => (
                   <div
                     key={index}
@@ -258,7 +258,7 @@ const HeroSection = () => {
                   <div className="absolute inset-0 bg-black opacity-50"></div>
                 </div>
 
-                <div className="relative z-10 text-white p-8">
+                <div className="relative z-10 text-white ">
                   <div className="uppercase text-sm mb-2 tracking-[1rem] flex gap-5 items-center orange">
                     <p className="w-2 h-2 rounded-full bgOrange"></p>
                     Economy
@@ -284,7 +284,7 @@ const HeroSection = () => {
                 </div>
               </div>
               {/* right side content  */}
-              <div className="bg-[#1b1b1b] rounded-2xl p-10 w-[400px] z-10">
+              <div className="bg-[#1b1b1b] md:flex flex-col hidden rounded-2xl p-10 w-[400px] z-10">
                 {specs3.map((spec, index) => (
                   <div
                     key={index}

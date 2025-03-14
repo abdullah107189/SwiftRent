@@ -11,10 +11,10 @@ const CarParallax = () => {
   return (
     <div>
       <div
-        className="mx-auto w-full overflow-y-scroll bg-cover bg-fixed bg-center bg-no-repeat shadow-lg h-[500px] sm:h-[550px] "
+        className="mx-auto w-full flex justify-center text-center items-center bg-cover bg-fixed bg-center bg-no-repeat shadow-lg h-[500px] sm:h-[550px] "
         style={{ backgroundImage: `url(${carParallex})`, width: '100%' }}
       >
-        <div className="mt-40 w-96 mx-auto">
+        <div className=" w-96 mx-auto">
           <div className="space-y-2 text-center">
             {/* Title */}
             <p className="text-xl text-[#F5B754] uppercase tracking-wide text-center">

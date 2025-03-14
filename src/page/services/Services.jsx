@@ -62,30 +62,30 @@ const Services = () => {
           serviceName="Corporate Car Rental"
           serviceNumber="03"
         />
-        <ServiceCard
+        {/* <ServiceCard
           image={Fleet_leasing}
           serviceName="Fleet Leasing"
           serviceNumber="04"
-        />
+        /> */}
         <ServiceCard
           image={Car_Rental_with_Driver}
           serviceName="Car Rental with Driver"
-          serviceNumber="05"
+          serviceNumber="04"
         />
-        <ServiceCard
+        {/* <ServiceCard
           image={Private_Transfer}
           serviceName="Private Transfer"
           serviceNumber="06"
-        />
+        /> */}
         <ServiceCard
           image={Luxury_Car_Rental}
           serviceName="VIP Transfer"
-          serviceNumber="07"
+          serviceNumber="05"
         />
         <ServiceCard
           image={Airport_Service}
           serviceName="Airport Transfer"
-          serviceNumber="08"
+          serviceNumber="06"
         />
       </div>
       <BookAuto />

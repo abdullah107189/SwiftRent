@@ -37,7 +37,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/contact"
-          className="font-bold hover:text-[#f5b754] px-3 py-2"
+          className="font-bold hover:text-[#f5b754] lx-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Contact
@@ -47,10 +47,10 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-transparent bg-opacity-50 text-white  w-full fixed z-10 ">
+    <div className="navbar bg-transparent bg-opacity-50 text-white  w-full fixed z-10">
       <div className="mxw flex justify-between items-center py-2 lg:py-5">
         <Link to="/" className="flex items-center">
-          <span className="ml-2 text-3xl font-black tBlack">
+          <span className="text-3xl font-black tBlack">
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>

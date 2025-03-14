@@ -47,8 +47,8 @@ const OtherServiceCard = ({ serviceName, description, serviceNumber }) => {
 
 const OtherServices = () => {
   return (
-    <div>
-      <div className="flex flex-col justify-center items-center mt-24">
+    <div className="mb-15">
+      <div className="flex flex-col justify-center items-center mt-24 ">
         <p className="text-[12px] text-[#F5B754] uppercase tracking-wide">
           {letters}
         </p>

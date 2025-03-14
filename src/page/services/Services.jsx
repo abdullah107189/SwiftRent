@@ -14,6 +14,7 @@ import ServiceCard from "../../components/serviceCard/ServiceCard";
 import BookAuto from "./BookAuto";
 import OtherServices from "./OtherServices";
 import PageHeader from "../../components/shared/PageHeader";
+import CarPromoVideo from "./CarPromoVideo";
 
 const Services = () => {
   return (
@@ -71,6 +72,7 @@ const Services = () => {
       </div>
       <BookAuto />
       <OtherServices />
+      <CarPromoVideo />
     </div>
   );
 };

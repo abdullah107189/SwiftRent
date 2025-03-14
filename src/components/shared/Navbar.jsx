@@ -1,9 +1,28 @@
 import { X, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsAnimating(true);
+        setTimeout(() => {
+          setIsScrolled(true);
+          setIsAnimating(false);
+        }, 200);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navOptions = (
     <>
@@ -47,7 +66,11 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-transparent bg-opacity-50 text-white  w-full fixed z-10">
+    <div
+      className={`navbar w-full fixed z-50 transition-all duration-300 ${
+        isScrolled ? "bg-[#1b1b1b] bg-opacity-90 shadow-lg" : "bg-transparent"
+      } ${isAnimating ? "-top-16" : "top-0"}`}
+    >
       <div className="mxw flex justify-between items-center py-2 lg:py-5">
         <Link to="/" className="flex items-center">
           <span className="text-3xl font-black tBlack">

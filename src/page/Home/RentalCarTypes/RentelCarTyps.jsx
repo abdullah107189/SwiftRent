@@ -18,7 +18,7 @@ const carTypes = [
 
 export default function RentalCarTypes() {
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}

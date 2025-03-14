@@ -1,16 +1,19 @@
 const CarRentalProcessCard = () => {
   return (
-    <div className="relative w-full my-12 h-52 shadow-lg rounded-lg overflow-hidden group bg-[#222222] p-6">
-      {/* Content Box */}
-      <div className=" p-4 rounded-xl transition-transform duration-300 rounded-bl-[50px] group-hover:scale-105">
-        <h2 className="text-white text-lg font-bold">Choose A Car</h2>
-        <p className="text-[#999] mt-2">
+    <div className="relative h-[300px] md:h-[350px] rounded-3xl overflow-hidden shadow-lg group sBgBlack">
+      {/* Service Name */}
+      <div className=" text-white lg:pt-20 lg:p-10 md:pt-10 md:p-5 pt-14 p-7">
+        <h1 className="text-2xl font-bold ">Choose A Car</h1>
+        <p className="tBlack mt-3">
           View our range of cars, find your perfect car for the coming days.
         </p>
       </div>
 
-      {/* Serial Number in Circle */}
-      <div className="absolute left-0 bottom-0 flex items-center justify-center w-14 h-14 border border-[#F5B754] bg-transparent text-white font-bold text-lg rounded-full transition duration-300 group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
+      {/* Custom Rounded Bottom Left Corner */}
+      <div className="absolute bottom-0 left-0 w-20 h-20 fBgBlack rounded-tr-[50px]"></div>
+
+      {/* Service Number in Circle with Border & Hover Effect */}
+      <div className="absolute bottom-0 left-0 flex items-center justify-center w-15 h-15 sBgBlack text-white font-bold text-xl rounded-full ">
         01.
       </div>
     </div>

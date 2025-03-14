@@ -37,7 +37,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/contact"
-          className="font-bold hover:text-[#f5b754] px-3 py-2"
+          className="font-bold hover:text-[#f5b754] lx-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Contact

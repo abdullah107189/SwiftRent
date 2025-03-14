@@ -2,7 +2,7 @@ import React from "react";
 
 const ServiceCard = ({ image, serviceName, serviceNumber }) => {
   return (
-    <div className="relative h-[300px] md:h-[350px] rounded-2xl overflow-hidden shadow-lg group ">
+    <div className="relative h-[300px] md:h-[350px] rounded-3xl overflow-hidden shadow-lg group ">
       {/* Image Section */}
       <div className="relative w-full h-full rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
         <img

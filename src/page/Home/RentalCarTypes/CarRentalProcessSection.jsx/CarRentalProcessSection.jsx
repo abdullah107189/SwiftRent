@@ -6,7 +6,7 @@ const CarRentalProcessSection = () => {
         <div>
             <SectionHeader title="Steps" subtitle="Car Rental Process" />
                {/* Other content */}
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-5">
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
            <CarRentalProcessCard/>
             <CarRentalProcessCard/>
             <CarRentalProcessCard/>

@@ -60,7 +60,7 @@ const Services = () => {
           serviceNumber="06"
         /> */}
         <ServiceCard
-          image={Luxury_Car_Rental}
+          image={Fleet_leasing}
           serviceName="VIP Transfer"
           serviceNumber="05"
         />

@@ -6,7 +6,7 @@ const SimpleCard = ({ title, details, number }) => {
       {/* content  */}
       <div>
         <h5 className="text-white font-bold text-xl">{title}</h5>
-        <p className=" text-[14px] font-light leading-[1.95em] tBlack mb-3">
+        <p className=" text-[14px] font-light leading-[1.95em] tBlack my-3">
           {details}
         </p>
       </div>

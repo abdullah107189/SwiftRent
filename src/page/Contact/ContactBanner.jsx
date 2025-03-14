@@ -1,19 +1,10 @@
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useEffect } from 'react';
-import contactBanner from '../../assets/ContactBanner/car.avif';
+import contactBanner from "../../assets/ContactBanner/car.avif";
 
 const ContactBanner = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
-  const text = 'GET IN TOUCH';
-  const letters = text.split('').map((char, index) => (
+  const text = "GET IN TOUCH";
+  const letters = text.split("").map((char, index) => (
     <span key={index} className="inline-block mx-[2px]">
-      {char === ' ' ? '\u00A0\u00A0\u00A0' : char}
+      {char === " " ? "\u00A0\u00A0\u00A0" : char}
     </span>
   ));
   return (
@@ -23,7 +14,7 @@ const ContactBanner = () => {
         style={{ backgroundImage: `url(${contactBanner})` }}
       >
         {/* Background Overlay */}
-        <div className="absolute "></div>
+        <div className="absolute"></div>
 
         {/* Content */}
         <div className="relative mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">

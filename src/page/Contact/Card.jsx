@@ -17,7 +17,7 @@ const Card = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-4 py-16">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-4 relative -top-20">
       {/* Email Card */}
       <div
         className="h-48 rounded-lg sBgBlack p-6 shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#F5B754] group"

@@ -1,11 +1,16 @@
-import React from 'react';
+import React from "react";
+import PageHeader from "../../components/shared/PageHeader";
 
 const About = () => {
-    return (
-        <div>
-            about page...
-        </div>
-    );
+  return (
+    <div>
+      <PageHeader
+        subTitle={"Rentax"}
+        titleWhite={"About"}
+        titleOrange={"Us"}
+      ></PageHeader>
+    </div>
+  );
 };
 
 export default About;

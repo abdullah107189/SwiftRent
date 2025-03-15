@@ -15,9 +15,9 @@ const Navbar = () => {
     }
 
     if (window.scrollY > 450) {
-      setIsNavBg(true);
+      setIsAnimating(true);
     } else {
-      setIsNavBg(false);
+      setIsAnimating(false);
     }
   };
 
@@ -76,7 +76,7 @@ const Navbar = () => {
         isScroll ? "bg-[#1b1b1b] bg-opacity-50 backdrop-blur-lg shadow-sm " : ""
       } ${isAnimating ? "-top-16" : "top-0"}`}
     >
-      <div className="mxw flex justify-between items-center py-2 lg:py-5">
+      <div className="mxw flex w-full justify-between items-center ">
         <Link to="/" className="flex items-center">
           <span className="text-3xl font-black text-white">
             <span className="text-[#f5b754]">S</span>wift

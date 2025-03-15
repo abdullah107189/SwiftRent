@@ -1,5 +1,5 @@
 import { X, Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom"; // Import NavLink
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
@@ -22,80 +22,47 @@ const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <Link
+        <NavLink
           to="/"
-          className="font-bold hover:text-[#f5b754] px-3 py-2"
+          className={({ isActive }) =>
+            `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
+              isActive ? "orange" : ""
+            }`
+          }
           onClick={() => setIsMenuOpen(false)}
         >
           Home
-        </Link>
+        </NavLink>
       </li>
       {["About", "Services", "Contact"].map((item, index) => (
         <li key={index} onClick={() => setIsMenuOpen(false)}>
-          <Link
+          <NavLink
             to={`/${item.toLowerCase()}`}
-            className="font-bold hover:text-[#f5b754] px-3 py-2"
+            className={({ isActive }) =>
+              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
+                isActive ? "orange" : ""
+              }`
+            }
           >
             {item}
-          </Link>
+          </NavLink>
         </li>
       ))}
     </>
   );
 
-  // const navOptions = (
-  //   <>
-  //     <li>
-  //       <Link
-  //         to="/"
-  //         className="font-bold hover:text-[#f5b754] px-3 py-2"
-  //         onClick={() => setIsMenuOpen(false)}
-  //       >
-  //         Home
-  //       </Link>
-  //     </li>
-  //     <li>
-  //       <Link
-  //         to="/about"
-  //         className="font-bold hover:text-[#f5b754] px-3 py-2"
-  //         onClick={() => setIsMenuOpen(false)}
-  //       >
-  //         About
-  //       </Link>
-  //     </li>
-  //     <li>
-  //       <Link
-  //         to="/services"
-  //         className="font-bold hover:text-[#f5b754] px-3 py-2"
-  //         onClick={() => setIsMenuOpen(false)}
-  //       >
-  //         Service
-  //       </Link>
-  //     </li>
-  //     <li>
-  //       <Link
-  //         to="/contact"
-  //         className="font-bold hover:text-[#f5b754] lx-3 py-2"
-  //         onClick={() => setIsMenuOpen(false)}
-  //       >
-  //         Contact
-  //       </Link>
-  //     </li>
-  //   </>
-  // );
-
   return (
     <div
       className={`w-full fixed top-0 z-50 transition-all duration-500 
-  ${isScrolled ? "sBgBlack bg-opacity-90 shadow-lg" : "bg-transparent"}`}
+      ${isScrolled ? "sBgBlack bg-opacity-90 shadow-lg" : "bg-transparent"}`}
     >
       <div className="mxw flex justify-between items-center py-3">
-        <Link to="/" className="flex items-center">
-          <span className="text-3xl font-black tBlack">
+        <NavLink to="/" className="flex items-center">
+          <span className="text-3xl font-black text-white">
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>
-        </Link>
+        </NavLink>
         <div className="hidden md:flex items-center gap-4">
           <ul className="menu menu-horizontal px-1 flex gap-4">{navOptions}</ul>
         </div>

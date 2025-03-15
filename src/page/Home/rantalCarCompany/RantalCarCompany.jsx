@@ -40,6 +40,7 @@ export default function RentalCarCompany() {
                 <IoMdCheckmark />
               </span>{" "}
               Economy Cars
+              
             </li>
           </ul>
           <div className="flex justify-center md:justify-start">

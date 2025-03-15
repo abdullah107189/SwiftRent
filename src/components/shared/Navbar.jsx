@@ -5,19 +5,12 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScroll, setIsScroll] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
       setIsScroll(true);
     } else {
       setIsScroll(false);
-    }
-
-    if (window.scrollY > 450) {
-      setIsAnimating(true);
-    } else {
-      setIsAnimating(false);
     }
   };
 
@@ -74,7 +67,7 @@ const Navbar = () => {
     <div
       className={`navbar w-full fixed z-50 transition-all duration-300 ${
         isScroll ? "bg-[#1b1b1b] bg-opacity-50 backdrop-blur-lg shadow-sm " : ""
-      } ${isAnimating ? "-top-16" : "top-0"}`}
+      } `}
     >
       <div className="mxw flex w-full justify-between items-center ">
         <Link to="/" className="flex items-center">

@@ -10,7 +10,10 @@ const Footer = () => {
         <div className=" grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <h2 className="text-3xl font-bold">
-              <span className="text-[#f5b754]">R</span>ENAX
+              <span className="text-3xl font-black text-white">
+                <span className="text-[#f5b754]">S</span>wift
+                <span className="text-[#f5b754]">R</span>ent
+              </span>
             </h2>
             <p className="mt-5 text-[#999]">
               Rent a car imperdiet sapien porttito the bibenum ellentesue the

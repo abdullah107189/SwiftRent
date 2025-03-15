@@ -1,11 +1,13 @@
 import React from "react";
 import NameCard from "../../../components/shared/card/NameCard";
 import ImageCard from "../../../components/shared/card/ImageCard";
+import { IoMdCheckmark } from "react-icons/io";
 import { FaMarker } from "react-icons/fa";
 
 const car = [
   {
-    image: "https://i.ibb.co.com/xq60b7hg/car-Company.jpg",
+    image:
+      "https://i.ibb.co.com/0pxqDF9p/handsome-business-man-by-white-car-1303-16415.jpg",
   },
 ];
 
@@ -15,8 +17,8 @@ export default function RentalCarCompany() {
       <div className="grid grid-cols-1 md:grid-cols-2 items-center max-w-7xl mx-auto gap-12 lg:gap-28">
         {/* Left Content Section */}
         <div className="space-y-6 text-center md:text-left">
-          <p className="text-[#E8A743] uppercase tracking-widest text-sm md:text-base">
-            Rentax
+          <p className="uppercase text-sm mb-2 tracking-[1rem] flex gap-5 items-center orange">
+            SwiftRent
           </p>
           <h1 className="text-3xl md:text-4xl font-bold leading-snug">
             We Are More Than <br />
@@ -28,15 +30,31 @@ export default function RentalCarCompany() {
           </p>
           <ul className="space-y-3">
             <li className="flex justify-center md:justify-start items-center gap-3">
-              <span className="text-[#E8A743] text-lg">✔</span> Sports and
-              Luxury Cars
+              <span className="text-[#E8A743] text-lg p-2 rounded-full  bg-[#2f2e2d] ">
+                {" "}
+                <IoMdCheckmark />
+              </span>{" "}
+              Sports and Luxury Cars
             </li>
             <li className="flex justify-center md:justify-start items-center gap-3">
+              <span className="text-[#E8A743] text-lg p-2 rounded-full  bg-[#2f2e2d]">
+                <IoMdCheckmark />
+              </span>{" "}
+              Economy Cars
+            </li>
+          </ul>
+          <div className="flex justify-center md:justify-start">
+            <button
+              className="fillBtn transition-all  duration-300 
+  hover:-translate-y-1.5 "
+            >
+
               <span className="text-[#E8A743] bg-[#E8A743]/10 p-3 rounded-full text-lg"><FaMarker></FaMarker></span> Economy Cars
             </li>
           </ul>
           <div className="flex justify-center md:justify-start">
             <button className="fillBtn hover:-translate-y-1.5">
+
               Read More →
             </button>
           </div>

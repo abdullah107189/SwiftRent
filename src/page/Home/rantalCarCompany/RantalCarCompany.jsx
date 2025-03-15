@@ -4,7 +4,8 @@ import ImageCard from "../../../components/shared/card/ImageCard";
 
 const car = [
   {
-    image: "https://i.ibb.co.com/xq60b7hg/car-Company.jpg",
+    image:
+      "https://i.ibb.co.com/0pxqDF9p/handsome-business-man-by-white-car-1303-16415.jpg",
   },
 ];
 
@@ -15,7 +16,7 @@ export default function RentalCarCompany() {
         {/* Left Content Section */}
         <div className="space-y-6 text-center md:text-left">
           <p className="text-[#E8A743] uppercase tracking-widest text-sm md:text-base">
-            Rentax
+            SwiftRent
           </p>
           <h1 className="text-3xl md:text-4xl font-bold leading-snug">
             We Are More Than <br />

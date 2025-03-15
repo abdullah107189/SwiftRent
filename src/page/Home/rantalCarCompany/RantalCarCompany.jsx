@@ -1,5 +1,4 @@
 import React from "react";
-import NameCard from "../../../components/shared/card/NameCard";
 import ImageCard from "../../../components/shared/card/ImageCard";
 import { IoMdCheckmark } from "react-icons/io";
 
@@ -38,7 +37,7 @@ export default function RentalCarCompany() {
             <li className="flex justify-center md:justify-start items-center gap-3">
               <span className="text-[#E8A743] text-lg p-2 rounded-full  bg-[#2f2e2d]">
                 <IoMdCheckmark />
-              </span>{" "}
+              </span>
               Economy Cars
               
             </li>

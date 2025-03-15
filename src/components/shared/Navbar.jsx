@@ -1,9 +1,33 @@
 import { X, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScroll, setIsScroll] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setIsScroll(true);
+    } else {
+      setIsScroll(false);
+    }
+
+    if (window.scrollY > 450) {
+      setIsNavBg(true);
+    } else {
+      setIsNavBg(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const navOptions = (
     <>
@@ -47,10 +71,14 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-transparent bg-opacity-50 text-white  w-full fixed z-10">
+    <div
+      className={`navbar w-full fixed z-50 transition-all duration-300 ${
+        isScroll ? "bg-[#1b1b1b] bg-opacity-50 backdrop-blur-lg shadow-sm " : ""
+      } ${isAnimating ? "-top-16" : "top-0"}`}
+    >
       <div className="mxw flex justify-between items-center py-2 lg:py-5">
         <Link to="/" className="flex items-center">
-          <span className="text-3xl font-black tBlack">
+          <span className="text-3xl font-black text-white">
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>

@@ -12,7 +12,7 @@ const CarParallax = () => {
     <div>
       <div
         style={{ backgroundImage: `url(${carParallex})`, width: '100%' }}
-        className="mx-auto w-full overflow-y-scroll bg-cover bg-fixed bg-center bg-no-repeat shadow-lg h-[500px] sm:h-[550px] flex justify-center text-center items-center "
+        className="mx-auto w-full  bg-cover bg-fixed bg-center bg-no-repeat shadow-lg h-[500px] sm:h-[550px] flex justify-center text-center items-center "
       >
         <div className=" w-96 mx-auto">
           <div className="space-y-2 text-center">
@@ -28,7 +28,7 @@ const CarParallax = () => {
             </p>
 
             {/* WhatsApp Button */}
-            <div className="flex gap-4">
+            <div className="flex justify-center items-center text-center gap-4">
               <a
                 href="https://wa.me/yourwhatsappnumber"
                 target="_blank"

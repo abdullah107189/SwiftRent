@@ -12,6 +12,7 @@
   "dependencies": {
     "@glidejs/glide": "^3.7.1",
     "@tailwindcss/vite": "^4.0.12",
+    "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "localforage": "^1.10.0",
     "lucide-react": "^0.479.0",

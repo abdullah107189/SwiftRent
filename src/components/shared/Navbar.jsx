@@ -5,16 +5,11 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setIsAnimating(true);
-        setTimeout(() => {
-          setIsScrolled(true);
-          setIsAnimating(false);
-        }, 200);
+        setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
@@ -35,43 +30,67 @@ const Navbar = () => {
           Home
         </Link>
       </li>
-      <li>
-        <Link
-          to="/about"
-          className="font-bold hover:text-[#f5b754] px-3 py-2"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          About
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/services"
-          className="font-bold hover:text-[#f5b754] px-3 py-2"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Service
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/contact"
-          className="font-bold hover:text-[#f5b754] lx-3 py-2"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Contact
-        </Link>
-      </li>
+      {["About", "Services", "Contact"].map((item, index) => (
+        <li key={index} onClick={() => setIsMenuOpen(false)}>
+          <Link
+            to={`/${item.toLowerCase()}`}
+            className="font-bold hover:text-[#f5b754] px-3 py-2"
+          >
+            {item}
+          </Link>
+        </li>
+      ))}
     </>
   );
 
+  // const navOptions = (
+  //   <>
+  //     <li>
+  //       <Link
+  //         to="/"
+  //         className="font-bold hover:text-[#f5b754] px-3 py-2"
+  //         onClick={() => setIsMenuOpen(false)}
+  //       >
+  //         Home
+  //       </Link>
+  //     </li>
+  //     <li>
+  //       <Link
+  //         to="/about"
+  //         className="font-bold hover:text-[#f5b754] px-3 py-2"
+  //         onClick={() => setIsMenuOpen(false)}
+  //       >
+  //         About
+  //       </Link>
+  //     </li>
+  //     <li>
+  //       <Link
+  //         to="/services"
+  //         className="font-bold hover:text-[#f5b754] px-3 py-2"
+  //         onClick={() => setIsMenuOpen(false)}
+  //       >
+  //         Service
+  //       </Link>
+  //     </li>
+  //     <li>
+  //       <Link
+  //         to="/contact"
+  //         className="font-bold hover:text-[#f5b754] lx-3 py-2"
+  //         onClick={() => setIsMenuOpen(false)}
+  //       >
+  //         Contact
+  //       </Link>
+  //     </li>
+  //   </>
+  // );
+
   return (
     <div
-      className={`navbar w-full fixed z-50 transition-all duration-300 ${
+      className={`navbar w-full fixed top-0 z-50 transition-all duration-500 ${
         isScrolled ? "bg-[#1b1b1b] bg-opacity-90 shadow-lg" : "bg-transparent"
-      } ${isAnimating ? "-top-16" : "top-0"}`}
+      }`}
     >
-      <div className="mxw flex justify-between items-center py-2 lg:py-5">
+      <div className="mxw flex justify-between items-center py-5">
         <Link to="/" className="flex items-center">
           <span className="text-3xl font-black tBlack">
             <span className="text-[#f5b754]">S</span>wift

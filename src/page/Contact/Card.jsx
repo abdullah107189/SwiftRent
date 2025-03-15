@@ -2,11 +2,11 @@ import {
   MdOutlineMailOutline,
   MdAddLocation,
   MdOutlineAddIcCall,
-} from 'react-icons/md';
-import { CiClock1 } from 'react-icons/ci';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useEffect } from 'react';
+} from "react-icons/md";
+import { CiClock1 } from "react-icons/ci";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const Card = () => {
   useEffect(() => {
@@ -28,7 +28,7 @@ const Card = () => {
         <h2 className="text-2xl font-bold text-white group-hover:text-[#1C1818] transition-all duration-300 ease-in-out">
           Email us
         </h2>
-        <p className="tBlack group-hover:text-[#1C1818]">info@renax.com</p>
+        <p className="tBlack group-hover:text-[#1C1818]">info@swiftrent.com</p>
         <MdOutlineMailOutline className="text-8xl text-slate-300 absolute bottom-0 right-2 opacity-15 transform translate-x-2 translate-y-2 group-hover:text-slate-500" />
       </div>
 

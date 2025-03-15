@@ -2,6 +2,7 @@ import React from "react";
 import NameCard from "../../../components/shared/card/NameCard";
 import ImageCard from "../../../components/shared/card/ImageCard";
 import { IoMdCheckmark } from "react-icons/io";
+import { FaMarker } from "react-icons/fa";
 
 const car = [
   {
@@ -47,6 +48,13 @@ export default function RentalCarCompany() {
               className="fillBtn transition-all  duration-300 
   hover:-translate-y-1.5 "
             >
+
+              <span className="text-[#E8A743] bg-[#E8A743]/10 p-3 rounded-full text-lg"><FaMarker></FaMarker></span> Economy Cars
+            </li>
+          </ul>
+          <div className="flex justify-center md:justify-start">
+            <button className="fillBtn hover:-translate-y-1.5">
+
               Read More →
             </button>
           </div>

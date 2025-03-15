@@ -16,7 +16,10 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const navOptions = (
@@ -92,7 +95,7 @@ const Navbar = () => {
     >
       <div className="mxw flex justify-between items-center py-5">
         <Link to="/" className="flex items-center">
-          <span className="text-3xl font-black tBlack">
+          <span className="text-3xl font-black text-white">
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>

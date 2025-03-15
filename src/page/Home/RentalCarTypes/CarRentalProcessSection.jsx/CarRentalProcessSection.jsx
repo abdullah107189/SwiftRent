@@ -1,5 +1,5 @@
 import SectionHeader from "../../../../components/shared/SectionHeader";
-import SimpleCard from "../../../../components/shared/simpleCard";
+import SimpleCard from "../../../../components/shared/card/SimpleCard";
 
 const CarRentalProcessSection = () => {
   return (

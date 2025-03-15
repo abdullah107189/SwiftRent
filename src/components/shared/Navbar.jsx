@@ -16,10 +16,7 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navOptions = (
@@ -89,13 +86,12 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar w-full fixed top-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-[#1b1b1b] bg-opacity-90 shadow-lg" : "bg-transparent"
-      }`}
+      className={`w-full fixed top-0 z-50 transition-all duration-500 
+  ${isScrolled ? "bg-[#1b1b1b] bg-opacity-90 shadow-lg" : "bg-transparent"}`}
     >
-      <div className="mxw flex justify-between items-center py-5">
-        <Link to="/" className="flex items-center">
-          <span className="text-3xl font-black text-white">
+      <div className="max-w-7xl mx-auto px-5 flex justify-between items-center py-3">
+        <Link to="/" className="flex  items-center">
+          <span className="text-3xl font-black tBlack">
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>

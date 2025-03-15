@@ -72,7 +72,7 @@ const HeroSection = () => {
             return `<span class="${className} custom-pagination"></span>`;
           },
         }}
-        modules={[Pagination, Autoplay,EffectFade]}
+        modules={[Pagination, Autoplay, EffectFade]}
         className="mySwiper "
       >
         {/* first slider  */}

@@ -1,6 +1,5 @@
 import React from "react";
 import SimpleCard from "../../components/shared/card/SimpleCard";
-
 const services = [
   {
     serviceName: "Daily Car Rental",

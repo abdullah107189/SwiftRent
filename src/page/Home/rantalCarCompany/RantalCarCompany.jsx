@@ -44,14 +44,18 @@ export default function RentalCarCompany() {
             </li>
           </ul>
           <div className="flex justify-center md:justify-start">
-            <button
+
+            //Rahul vai solve this issue
+            {/* <button
               className="fillBtn transition-all  duration-300 
   hover:-translate-y-1.5 "
             >
 
               <span className="text-[#E8A743] bg-[#E8A743]/10 p-3 rounded-full text-lg"><FaMarker></FaMarker></span> Economy Cars
             </li>
-          </ul>
+          </ul> */}
+
+
           <div className="flex justify-center md:justify-start">
             <button className="fillBtn hover:-translate-y-1.5">
 
@@ -65,6 +69,7 @@ export default function RentalCarCompany() {
           <ImageCard image={car[0]?.image} />
         </div>
       </div>
+    </div>
     </div>
   );
 }

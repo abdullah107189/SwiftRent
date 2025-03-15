@@ -48,7 +48,7 @@ export default function RentalCarCompany() {
               className="fillBtn transition-all  duration-300 
   hover:-translate-y-1.5 "
             >
-              Read More →
+              Read  More →
             </button>
           </div>
         </div>

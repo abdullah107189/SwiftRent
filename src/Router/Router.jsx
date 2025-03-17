@@ -5,7 +5,7 @@ import Services from "../page/services/Services";
 import About from "../page/About/About";
 import Contact from "../page/Contact/Contact";
 import LogIn from "../page/Authentication/LogIn";
-import Register from "../page/Form/Register";
+import Register from "../page/Authentication/Register";
 
 export const router = createBrowserRouter([
   {
@@ -28,14 +28,14 @@ export const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
       },
-      {
-        path: "/login",
-        element: <LogIn />,
-      },
     ],
   },
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <LogIn />,
   },
 ]);

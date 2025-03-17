@@ -34,7 +34,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {["About", "Services", "Contact"].map((item, index) => (
+      {["About", "Services", "Contact", "Register"].map((item, index) => (
         <li key={index} onClick={() => setIsMenuOpen(false)}>
           <NavLink
             to={`/${item.toLowerCase()}`}

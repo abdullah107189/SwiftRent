@@ -31,35 +31,25 @@ export default function RentalCarCompany() {
           <ul className="space-y-3">
             <li className="flex justify-center md:justify-start items-center gap-3">
               <span className="text-[#E8A743] text-lg p-2 rounded-full  bg-[#2f2e2d] ">
-                {" "}
                 <IoMdCheckmark />
-              </span>{" "}
+              </span>
               Sports and Luxury Cars
             </li>
             <li className="flex justify-center md:justify-start items-center gap-3">
               <span className="text-[#E8A743] text-lg p-2 rounded-full  bg-[#2f2e2d]">
                 <IoMdCheckmark />
-              </span>{" "}
+              </span>
               Economy Cars
             </li>
           </ul>
           <div className="flex justify-center md:justify-start">
-            <button
-              className="fillBtn transition-all  duration-300 
-  hover:-translate-y-1.5 "
-            >
-
-              <span className="text-[#E8A743] bg-[#E8A743]/10 p-3 rounded-full text-lg"><FaMarker></FaMarker></span> Economy Cars
-            </li>
-          </ul>
-          <div className="flex justify-center md:justify-start">
-            <button className="fillBtn hover:-translate-y-1.5">
-
-              Read More →
-            </button>
+            <div className="flex justify-center md:justify-start">
+              <button className="fillBtn hover:-translate-y-1.5">
+                Read More →
+              </button>
+            </div>
           </div>
         </div>
-
         {/* Right Image Section */}
         <div className="flex justify-center md:justify-end md:mx-10">
           <ImageCard image={car[0]?.image} />

@@ -1,16 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import register from "../../assets/register.jpeg";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import registerImg from "../../assets/register.jpeg";
 import { FcGoogle } from "react-icons/fc";
+import AuthContext from "../../providers/AuthContext";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      const result = await createUser(data.email, data.password);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User created successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("Sign up failed:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
       <div className="flex flex-col lg:flex-row max-w-4xl w-full  rounded-md  overflow-hidden">
         {/* Left side - Image */}
         <div className="hidden lg:block w-1/2">
           <img
-            src={register}
+            src={registerImg}
             alt="Register"
             className="w-full h-full object-cover"
           />
@@ -28,7 +58,7 @@ const Register = () => {
               </span>
             </p>
           </div>
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
               <div>
                 <label htmlFor="name" className="block mb-2 text-sm">
@@ -36,12 +66,17 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  name="name"
                   id="name"
+                  {...register("name", { required: "Name is required" })}
                   placeholder="Enter Your Name Here"
                   className="w-[300px] px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                   required
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm">
@@ -49,12 +84,16 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
                   id="email"
-                  required
+                  {...register("email", { required: "Email is required" })}
                   placeholder="Enter Your Email Here"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="password" className="text-sm mb-2 block">
@@ -62,20 +101,44 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-                  name="password"
                   id="password"
-                  required
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: { value: 6, message: "Minimum 6 characters" },
+                    maxLength: { value: 20, message: "Maximum 20 characters" },
+                    pattern: {
+                      value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                      message:
+                        "Must contain upper, lower, number & special char",
+                    },
+                  })}
                   placeholder="*******"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
             </div>
             <div>
-              <button
+              {/* <button
                 type="submit"
                 className="bgOrange hover:bg-[#f5b754ef] w-full rounded-md py-3 text-white"
               >
                 Continue
+              </button> */}
+              <button
+                type="submit"
+                className={`w-full py-2 mt-4 rounded-md bg-[#f5b754] text-white ${
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-[#f5b754ef]"
+                }`}
+                disabled={loading}
+              >
+                {loading ? "Registering..." : "Register"}
               </button>
             </div>
           </form>

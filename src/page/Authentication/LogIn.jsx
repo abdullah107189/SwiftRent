@@ -1,9 +1,43 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImage from "../../assets/login.png";
 import { FcGoogle } from "react-icons/fc";
+import AuthContext from "../../providers/AuthContext";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    try {
+      const result = await signIn(email, password);
+      console.log(result.user);
+      Swal.fire({
+        title: "User Login Successful!",
+        icon: "success",
+      });
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error("Login failed:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.message,
+      });
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
       <div className="flex flex-col lg:flex-row max-w-4xl w-full rounded-md overflow-hidden">
@@ -27,7 +61,7 @@ const Login = () => {
             </h1>
             <p className=" text-gray-200">Welcome back!</p>
           </div>
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm">
@@ -35,12 +69,13 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
-                  id="email"
-                  required
-                  placeholder="Enter Your Email Here"
+                  {...register("email", { required: "Email is required" })}
+                  placeholder="Enter Your Email"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
               </div>
               <div>
                 <label htmlFor="password" className="text-sm mb-2 block">
@@ -48,22 +83,29 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
-                  name="password"
-                  id="password"
-                  required
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
                   placeholder="*******"
                   className="w-[300px] px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
-                <div className="text-right mt-2">
-                  <a
-                    href="#"
-                    className="text-sm hover:underline text-[#f5b754]"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
+                {errors.password && (
+                  <p className="text-red-500 text-sm">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
+              <div className="text-right mt-2">
+                <a href="#" className="text-sm hover:underline text-[#f5b754]">
+                  Forgot password?
+                </a>
               </div>
             </div>
+
             <div>
               <button
                 type="submit"

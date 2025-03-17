@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import loginImage from "../../assets/login.png";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   return (
@@ -72,11 +73,22 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <p className="px-6 text-sm text-center text-gray-200 pt-3">
-            New Here?{" "}
+          <div className="flex items-center pt-4 space-x-1">
+            <div className="flex-1 h-px sm:w-10 dark:bg-gray-500"></div>
+            <p className="px-3 text-sm dark:text-gray-300">
+              Login with social accounts
+            </p>
+            <div className="flex-1 h-px sm:w-16 dark:bg-gray-500"></div>
+          </div>
+          <div className="flex justify-center items-center w-[300px] rounded-md space-x-2 border m-3 p-2 border-[#b88d47ef] border-rounded cursor-pointer">
+            <FcGoogle size={32} />
+            <p>Continue with Google</p>
+          </div>
+          <p className="px-6 text-sm text-center text-gray-200">
+            Don&apos;t have an account yet?{" "}
             <Link
               to="/register"
-              className="hover:underline hover:text-[#f5b754] text-gray-200"
+              className="hover:underline hover:text-[#f5b754ef] text-gray-200"
             >
               Create an account
             </Link>

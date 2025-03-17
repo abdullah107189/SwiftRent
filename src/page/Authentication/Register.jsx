@@ -16,7 +16,7 @@ const Register = () => {
         </div>
 
         {/* Right side - Form */}
-        <div className="flex flex-col max-w-md w-full p-6  sBgBlack text-gray-200 items-center justify-center mx-auto">
+        <div className="flex flex-col max-w-md lg:w-full p-6  sBgBlack text-gray-200 items-center justify-center mx-auto rounded-xl lg:rounded-none">
           <div className="mb-8 text-center">
             <h1 className="my-3 text-4xl font-bold">Register</h1>
             <p className="text-sm text-gray-200">

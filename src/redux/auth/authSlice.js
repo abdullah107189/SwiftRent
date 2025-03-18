@@ -1,30 +1,42 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,  } from 'firebase/auth';
-import auth from '../../firebase/firebase.config';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import auth from "../../firebase/firebase.config";
 
 // Thunks for async actions
 export const registerUser = createAsyncThunk(
-  'auth/registerUser',
+  "auth/registerUser",
   async ({ email, password }) => {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     return userCredential.user;
   }
 );
 
 export const loginUser = createAsyncThunk(
-  'auth/loginUser',
+  "auth/loginUser",
   async ({ email, password }) => {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     return userCredential.user;
   }
 );
 
-export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
+export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   await signOut(auth);
 });
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     user: null,
     loading: false,
@@ -35,8 +47,10 @@ const authSlice = createSlice({
       state.user = action.payload;
     },
   },
+
   extraReducers: (builder) => {
     builder
+      // register
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -49,6 +63,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
+
+      // login
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -61,6 +77,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
+
+      // logout
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       });

@@ -11,8 +11,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { loading, error } = useSelector((state) => state.auth);
-  const from = location.state?.from?.pathname || '/';
+  const { loading } = useSelector((state) => state.auth);
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -23,10 +23,10 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       await dispatch(loginUser(data)).unwrap();
-      Swal.fire('Login Successful!', '', 'success');
+      Swal.fire("Login Successful!", "", "success");
       navigate(from, { replace: true });
     } catch (err) {
-      Swal.fire('Error', err.message, 'error');
+      Swal.fire("Error", err.message, "error");
     }
   };
   return (
@@ -102,7 +102,7 @@ const Login = () => {
                 type="submit"
                 className="bgOrange hover:bg-[#f5b754ef] w-full rounded-md py-3 text-white"
               >
-                {loading ? 'Loading...' : 'Login'}
+                {loading ? "Loading..." : "Login"}
               </button>
             </div>
           </form>

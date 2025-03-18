@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,13 +10,29 @@ import auth from "../../firebase/firebase.config";
 // Thunks for async actions
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
-  async ({ email, password }) => {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    return userCredential.user;
+  async ({ email, password, userInfo }) => {
+    // console.log(userInfo);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const newUser = {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        userName: userInfo.name,
+      };
+
+      const response = await axios.post(
+        "http://localhost:3000/add-user",
+        newUser
+      );
+
+      return response.data.user;
+    } catch (error) {
+      return error.message || "Registration failed";
+    }
   }
 );
 
@@ -78,7 +95,7 @@ const authSlice = createSlice({
         state.error = action.error.message;
       })
 
-      // logout 
+      // logout
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       });

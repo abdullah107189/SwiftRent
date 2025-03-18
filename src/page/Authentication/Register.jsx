@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/authSlice";
+import axios from "axios";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,14 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const resultAction = await dispatch(
-      registerUser({ email: data.email, password: data.password })
+      registerUser({
+        email: data.email,
+        password: data.password,
+        userInfo: data,
+      })
     );
     if (resultAction.fulfilled.match(resultAction)) {
+      axios.post();
       Swal.fire({
         position: "center",
         icon: "success",
@@ -106,12 +112,12 @@ const Register = () => {
                   {...register("password", {
                     required: "Password is required",
                     minLength: { value: 6, message: "Minimum 6 characters" },
-                    maxLength: { value: 20, message: "Maximum 20 characters" },
-                    pattern: {
-                      value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                      message:
-                        "Must contain upper, lower, number & special char",
-                    },
+                    // maxLength: { value: 20, message: "Maximum 20 characters" },
+                    // pattern: {
+                    //   value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                    //   message:
+                    //     "Must contain upper, lower, number & special char",
+                    // },
                   })}
                   placeholder="*******"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"

@@ -19,7 +19,6 @@ const Dashboard = () => {
           <Outlet />
         </main>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,25 +1,28 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../../assets/register.jpeg";
 import { FcGoogle } from "react-icons/fc";
-import AuthContext from "../../providers/AuthContext";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/auth/authSlice";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading } = useSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    setLoading(true);
-    try {
-      await createUser(data.email, data.password);
+    const resultAction = await dispatch(
+      registerUser({ email: data.email, password: data.password })
+    );
+    if (resultAction.fulfilled.match(resultAction)) {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -28,10 +31,8 @@ const Register = () => {
         timer: 1500,
       });
       navigate("/");
-    } catch (error) {
-      console.error("Sign up failed:", error);
-    } finally {
-      setLoading(false);
+    } else {
+      console.error("Sign up failed:", resultAction.payload);
     }
   };
   return (

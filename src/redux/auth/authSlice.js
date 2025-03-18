@@ -78,7 +78,7 @@ const authSlice = createSlice({
         state.error = action.error.message;
       })
 
-      // logout
+      // logout 
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       });

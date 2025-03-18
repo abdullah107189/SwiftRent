@@ -19,11 +19,11 @@ const SIDEBAR_ITEMS = [
     path: 'overview',
   },
   { name: 'Add-Car', icon: Car, color: '#f5b754', path: 'addcar' },
-  { name: 'Product', icon: Car, color: '#f5b754', path: '/product' },
-  { name: 'User', icon: User, color: '#f5b754', path: '/user' },
-  { name: 'Order', icon: ShoppingCart, color: '#f5b754', path: '/order' },
-  { name: 'Analytics', icon: TrendingUp, color: '#f5b754', path: '/analytics' },
-  { name: 'Settings', icon: Settings, color: '#f5b754', path: '/settings' },
+  { name: 'Product', icon: Car, color: '#f5b754', path: 'car-product' },
+  { name: 'User', icon: User, color: '#f5b754', path: 'users' },
+  { name: 'Order', icon: ShoppingCart, color: '#f5b754', path: 'order' },
+  { name: 'Analytics', icon: TrendingUp, color: '#f5b754', path: 'analytics' },
+  { name: 'Settings', icon: Settings, color: '#f5b754', path: 'settings' },
 ];
 
 const Sidebar = () => {

@@ -1,8 +1,12 @@
-import { X, Menu } from 'lucide-react';
-import { NavLink } from 'react-router-dom'; // Import NavLink
-import { useEffect, useState } from 'react';
+import { X, Menu } from "lucide-react";
+import { NavLink } from "react-router-dom"; // Import NavLink
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { user, loading } = useSelector((state) => state.auth);
+  console.log(user);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -15,8 +19,8 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navOptions = (
@@ -26,7 +30,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-              isActive ? 'orange' : ''
+              isActive ? "orange" : ""
             }`
           }
           onClick={() => setIsMenuOpen(false)}
@@ -34,14 +38,14 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {['About', 'Services', 'Contact', 'Dashboard', 'Register'].map(
+      {["About", "Services", "Contact", "Dashboard", "Register"].map(
         (item, index) => (
           <li key={index} onClick={() => setIsMenuOpen(false)}>
             <NavLink
               to={`/${item.toLowerCase()}`}
               className={({ isActive }) =>
                 `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-                  isActive ? 'orange' : ''
+                  isActive ? "orange" : ""
                 }`
               }
             >
@@ -56,7 +60,7 @@ const Navbar = () => {
   return (
     <div
       className={`w-full fixed top-0 z-50 transition-all duration-500 
-      ${isScrolled ? 'sBgBlack bg-opacity-90 shadow-lg' : 'bg-transparent'}`}
+      ${isScrolled ? "sBgBlack bg-opacity-90 shadow-lg" : "bg-transparent"}`}
     >
       <div className="mxw flex justify-between items-center py-3">
         <NavLink to="/" className="flex items-center">

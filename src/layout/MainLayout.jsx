@@ -5,7 +5,16 @@ import Footer from "../components/shared/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { authStateListener } from "../redux/auth/authListener";
+
 const MainLayout = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authStateListener(dispatch);
+  }, [dispatch]);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,

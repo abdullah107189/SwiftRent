@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImage from "../../assets/login.png";
 import { FcGoogle } from "react-icons/fc";
-import AuthContext from "../../providers/AuthContext";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../redux/auth/authSlice";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const from = location.state?.from?.pathname || "/";
+  const { loading, error } = useSelector((state) => state.auth);
+  const from = location.state?.from?.pathname || '/';
 
   const {
     register,
@@ -20,22 +21,12 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
     try {
-      const result = await signIn(email, password);
-      console.log(result.user);
-      Swal.fire({
-        title: "User Login Successful!",
-        icon: "success",
-      });
+      await dispatch(loginUser(data)).unwrap();
+      Swal.fire('Login Successful!', '', 'success');
       navigate(from, { replace: true });
-    } catch (error) {
-      console.error("Login failed:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text: error.message,
-      });
+    } catch (err) {
+      Swal.fire('Error', err.message, 'error');
     }
   };
   return (
@@ -111,7 +102,7 @@ const Login = () => {
                 type="submit"
                 className="bgOrange hover:bg-[#f5b754ef] w-full rounded-md py-3 text-white"
               >
-                Login
+                {loading ? 'Loading...' : 'Login'}
               </button>
             </div>
           </form>

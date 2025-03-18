@@ -19,9 +19,9 @@ const Register = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const result = await createUser(data.email, data.password);
+      await createUser(data.email, data.password);
       Swal.fire({
-        position: "top-end",
+        position: "center",
         icon: "success",
         title: "User created successfully.",
         showConfirmButton: false,

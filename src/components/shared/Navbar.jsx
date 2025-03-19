@@ -30,8 +30,10 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-              isActive ? "orange" : ""
+            `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+              isActive
+                ? "text-[#f5b754] bg-transparent"
+                : "text-white bg-transparent"
             }`
           }
           onClick={() => setIsMenuOpen(false)}
@@ -44,8 +46,10 @@ const Navbar = () => {
           <NavLink
             to={`/${item.toLowerCase()}`}
             className={({ isActive }) =>
-              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-                isActive ? "orange" : ""
+              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                isActive
+                  ? "text-[#f5b754] bg-transparent"
+                  : "text-white bg-transparent"
               }`
             }
           >
@@ -56,19 +60,20 @@ const Navbar = () => {
       {user ? (
         <li className="flex items-center gap-2">
           <img
-            src={user.avatar || avatar}
+            src={user?.photoURL || avatar}
             alt="User Avatar"
             className="w-8 h-8 rounded-full"
           />
-          <span className="font-bold text-white">{user.name}</span>
         </li>
       ) : (
         <li onClick={() => setIsMenuOpen(false)}>
           <NavLink
             to="/login"
             className={({ isActive }) =>
-              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-                isActive ? "orange" : ""
+              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                isActive
+                  ? "text-[#f5b754] bg-transparent"
+                  : "text-white bg-transparent"
               }`
             }
           >
@@ -91,8 +96,8 @@ const Navbar = () => {
             <span className="text-[#f5b754]">R</span>ent
           </span>
         </NavLink>
-        <div className="hidden md:flex items-center gap-4">
-          <ul className="menu menu-horizontal px-1 flex gap-4">{navOptions}</ul>
+        <div className="hidden md:flex items-center my-3 gap-4">
+          <ul className="px-1 flex gap-4">{navOptions}</ul>
         </div>
         <div className="md:hidden flex items-center gap-4">
           <button

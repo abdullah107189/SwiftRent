@@ -1,7 +1,8 @@
 import { X, Menu } from "lucide-react";
-import { NavLink } from "react-router-dom"; // Import NavLink
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import avatar from "../../assets/default-avatar.png";
 
 const Navbar = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -38,21 +39,42 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {["About", "Services", "Contact", "Dashboard", "Register"].map(
-        (item, index) => (
-          <li key={index} onClick={() => setIsMenuOpen(false)}>
-            <NavLink
-              to={`/${item.toLowerCase()}`}
-              className={({ isActive }) =>
-                `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-                  isActive ? "orange" : ""
-                }`
-              }
-            >
-              {item}
-            </NavLink>
-          </li>
-        )
+      {["About", "Services", "Contact", "Dashboard"].map((item, index) => (
+        <li key={index} onClick={() => setIsMenuOpen(false)}>
+          <NavLink
+            to={`/${item.toLowerCase()}`}
+            className={({ isActive }) =>
+              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
+                isActive ? "orange" : ""
+              }`
+            }
+          >
+            {item}
+          </NavLink>
+        </li>
+      ))}
+      {user ? (
+        <li className="flex items-center gap-2">
+          <img
+            src={user.avatar || avatar}
+            alt="User Avatar"
+            className="w-8 h-8 rounded-full"
+          />
+          <span className="font-bold text-white">{user.name}</span>
+        </li>
+      ) : (
+        <li onClick={() => setIsMenuOpen(false)}>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
+                isActive ? "orange" : ""
+              }`
+            }
+          >
+            Login
+          </NavLink>
+        </li>
       )}
     </>
   );

@@ -11,7 +11,7 @@ import {
   Cell,
 } from 'recharts';
 
-const COLORS = ['#6366F1', '#8B5CF6', '#EC4899', '#10B981', '#F59E0B'];
+const COLORS = ['#f5b754', '#8B5CF6', '#EC4899', '#10B981', '#F59E0B'];
 
 const SALES_CHANNEL_DATA = [
   { name: 'Website', value: 45600 },
@@ -23,7 +23,7 @@ const SALES_CHANNEL_DATA = [
 const SalesChannelChart = () => {
   return (
     <motion.div
-      className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 lg:col-span-2 border border-gray-700"
+      className="bg-sBgBlack  bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 lg:col-span-2 border border-gray-700"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}

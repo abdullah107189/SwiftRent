@@ -1,4 +1,4 @@
-import { X, Menu } from "lucide-react";
+import { Menu, ChevronRight } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -75,7 +75,7 @@ const Navbar = () => {
       ))}
       {user ? (
         <>
-          {/*Dropdown on desktop, direct menu on mobile */}
+          {/* Dropdown on desktop, direct menu on mobile */}
           <li className="relative md:block hidden">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -172,19 +172,19 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(true)}
             className="p-2 rounded-full hover:bg-[#f5b754] transition duration-300"
           >
-            <Menu className="h-6 w-6 tBlack" />
+            <Menu className="h-6 w-6 text-white" />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-[#1b1b1b] bg-opacity-80 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-opacity duration-300">
+        <div className="fixed top-0 right-0 h-full w-1/2 bg-[#1b1b1b] bg-opacity-95 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-transform duration-300 transform translate-x-0">
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-white hover:bg-[#f5b754] transition duration-300"
+            className="absolute top-6 left-6 p-2 rounded-full bg-white hover:bg-[#f5b754] transition duration-300"
           >
-            <X className="h-6 w-6 tBlack" />
+            <ChevronRight className="h-5 w-5 orange hover:text-white" />
           </button>
           <ul className="space-y-6 text-center">{navOptions}</ul>
         </div>

@@ -61,7 +61,7 @@ const CarForm = () => {
               placeholder="Car Name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -71,7 +71,7 @@ const CarForm = () => {
               name="brand"
               value={formData.brand}
               onChange={handleChange}
-              className="w-full p-2 border rounded text-gray-700"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             >
               <option value="">Select a Brand</option>
@@ -94,7 +94,7 @@ const CarForm = () => {
               placeholder="Type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -103,7 +103,7 @@ const CarForm = () => {
             <DatePicker
               selected={formData.date}
               onChange={date => setFormData({ ...formData, date })}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
             />
           </div>
         </div>
@@ -117,7 +117,7 @@ const CarForm = () => {
               placeholder="Transmission"
               value={formData.transmission}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -129,7 +129,7 @@ const CarForm = () => {
               placeholder="Seats"
               value={formData.seats}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -144,7 +144,7 @@ const CarForm = () => {
               placeholder="Fuel Type"
               value={formData.fuel}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -156,7 +156,7 @@ const CarForm = () => {
               placeholder="Price Per Day"
               value={formData.pricePerDay}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -171,7 +171,7 @@ const CarForm = () => {
               placeholder="City"
               value={formData.city}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -183,7 +183,7 @@ const CarForm = () => {
               placeholder="Pickup Point"
               value={formData.pickupPoint}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -198,7 +198,7 @@ const CarForm = () => {
               placeholder="Dropoff Point"
               value={formData.dropoffPoint}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -210,7 +210,7 @@ const CarForm = () => {
               placeholder="Features (comma separated)"
               value={formData.features}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
               required
             />
           </div>
@@ -224,11 +224,11 @@ const CarForm = () => {
                 Image Input {index + 1}
               </label>
               <input
-                type="text"
+                type="file"
                 placeholder={`Image URL ${index + 1}`}
                 value={formData.images[index]}
                 onChange={e => handleImageChange(e, index)}
-                className="w-full p-2 border rounded"
+                className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
                 required
               />
             </div>
@@ -242,7 +242,7 @@ const CarForm = () => {
             name="shortDescription"
             value={formData.description}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full  p-3 block bg-[#222222] text-gray-400 border-none rounded-3xl focus:outline-none focus:ring-0"
             placeholder="Write a short description..."
             required
           />
@@ -250,7 +250,7 @@ const CarForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 md:col-span-2"
+          className="w-full fillBtn text-center items-center flex justify-center py-3"
         >
           Submit
         </button>

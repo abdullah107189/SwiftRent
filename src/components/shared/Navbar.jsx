@@ -74,42 +74,65 @@ const Navbar = () => {
         </li>
       ))}
       {user ? (
-        <li className="relative">
-          <button
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="flex items-center gap-2 focus:outline-none"
-          >
-            <img
-              src={user?.photoURL || avatar}
-              alt="User Avatar"
-              className="w-8 h-8 rounded-full"
-            />
-          </button>
-          {isDropdownOpen && (
-            <ul className="absolute right-0 mt-2 w-40 bg-[#1b1b1b] text-white rounded-md shadow-lg z-10">
-              <li>
-                <NavLink
-                  to="/dashboard"
-                  className="block px-4 py-2 hover:bg-[#f5b754] hover:text-black"
-                  onClick={() => {
-                    setIsDropdownOpen(false);
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  Dashboard
-                </NavLink>
-              </li>
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="block w-full text-left px-4 py-2 hover:bg-[#f5b754] hover:text-black"
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
-          )}
-        </li>
+        <>
+          {/*Dropdown on desktop, direct menu on mobile */}
+          <li className="relative md:block hidden">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center gap-2 focus:outline-none"
+            >
+              <img
+                src={user?.photoURL || avatar}
+                alt="User Avatar"
+                className="w-8 h-8 rounded-full"
+              />
+            </button>
+            {isDropdownOpen && (
+              <ul className="absolute right-0 mt-2 w-40 bg-[#1b1b1b] text-white rounded-md shadow-lg z-10">
+                <li>
+                  <NavLink
+                    to="/dashboard"
+                    className="block px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
+          </li>
+          {/* Direct dashboard and logout in mobile menu */}
+          <li className="md:hidden" onClick={() => setIsMenuOpen(false)}>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                  isActive
+                    ? "text-[#f5b754] bg-transparent"
+                    : "text-white bg-transparent"
+                }`
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li className="md:hidden" onClick={handleLogout}>
+            <button className="font-bold text-white hover:text-[#f5b754] px-3 py-2 bg-transparent w-full text-center">
+              Logout
+            </button>
+          </li>
+        </>
       ) : (
         <li onClick={() => setIsMenuOpen(false)}>
           <NavLink

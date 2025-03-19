@@ -1,15 +1,18 @@
 import { X, Menu } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/default-avatar.png";
+import { logoutUser } from "../../redux/auth/authSlice";
 
 const Navbar = () => {
   const { user, loading } = useSelector((state) => state.auth);
-  console.log(user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +26,19 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    dispatch(logoutUser())
+      .unwrap()
+      .then(() => {
+        navigate("/login");
+        setIsMenuOpen(false);
+        setIsDropdownOpen(false);
+      })
+      .catch((error) => {
+        console.error("Logout failed:", error);
+      });
+  };
 
   const navOptions = (
     <>
@@ -41,7 +57,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {["About", "Services", "Contact", "Dashboard"].map((item, index) => (
+      {["About", "Services", "Contact"].map((item, index) => (
         <li key={index} onClick={() => setIsMenuOpen(false)}>
           <NavLink
             to={`/${item.toLowerCase()}`}
@@ -58,12 +74,41 @@ const Navbar = () => {
         </li>
       ))}
       {user ? (
-        <li className="flex items-center gap-2">
-          <img
-            src={user?.photoURL || avatar}
-            alt="User Avatar"
-            className="w-8 h-8 rounded-full"
-          />
+        <li className="relative">
+          <button
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="flex items-center gap-2 focus:outline-none"
+          >
+            <img
+              src={user?.photoURL || avatar}
+              alt="User Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+          </button>
+          {isDropdownOpen && (
+            <ul className="absolute right-0 mt-2 w-40 bg-[#1b1b1b] text-white rounded-md shadow-lg z-10">
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  className="block px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                  onClick={() => {
+                    setIsDropdownOpen(false);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          )}
         </li>
       ) : (
         <li onClick={() => setIsMenuOpen(false)}>

@@ -21,12 +21,23 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      await dispatch(loginUser(data)).unwrap();
-      Swal.fire("Login Successful!", "", "success");
+    const resultAction = await dispatch(
+      loginUser({
+        email: data.email,
+        password: data.password,
+      })
+    );
+    if (resultAction.meta.requestStatus === "fulfilled") {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Login successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       navigate(from, { replace: true });
-    } catch (err) {
-      Swal.fire("Error", err.message, "error");
+    } else {
+      console.error("Sign up failed:", resultAction.payload);
     }
   };
   return (

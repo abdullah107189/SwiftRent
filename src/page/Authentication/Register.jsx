@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/authSlice";
 import GoogleLogIn from "./GoogleLogIn";
-
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,7 +26,10 @@ const Register = () => {
       registerUser({
         email: data.email,
         password: data.password,
-        userInfo: data,
+        userInfo: {
+          name: data.name,
+          email: data.email,
+        },
       })
     );
 

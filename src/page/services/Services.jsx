@@ -6,7 +6,8 @@ import BookAuto from "./BookAuto";
 import OtherServices from "./OtherServices";
 import CarPromoVideo from "./CarPromoVideo";
 import NumberCard from "../../components/shared/card/NumberCard";
-import { DollarSign } from "lucide-react";
+import { DollarSign, X } from "lucide-react";
+import { IoFilter } from "react-icons/io5";
 
 const Services = () => {
   const [cars, setCars] = useState([]);
@@ -15,6 +16,8 @@ const Services = () => {
   const [priceRange, setPriceRange] = useState([0, 100000]);
   const [carType, setCarType] = useState("");
   const [fuelType, setFuelType] = useState("");
+  const [showFilter, setShowFilter] = useState(false);
+  const [sortOption, setSortOption] = useState("default");
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/cars`)
@@ -37,21 +40,72 @@ const Services = () => {
     .filter((car) => (carType ? car.type === carType : true))
     .filter((car) => (fuelType ? car.fuel === fuelType : true));
 
+  const sortedCars = [...filteredCars].sort((a, b) => {
+    if (sortOption === "priceAsc") return a.price - b.price;
+    if (sortOption === "priceDesc") return b.price - a.price;
+    if (sortOption === "nameAsc") return a.name.localeCompare(b.name);
+    if (sortOption === "nameDesc") return b.name.localeCompare(a.name);
+    return 0;
+  });
+
   return (
-    <div className="relative bg-[#1B1B1B]  ">
-      {/* Page Header section */}
+    <div className="relative bg-[#1B1B1B]">
+      {/* Page Header */}
       <PageHeader
-        subTitle={"Available Cars"}
-        titleWhite={"Our"}
-        titleOrange={"Cars"}
+        subTitle="Available Cars"
+        titleWhite="Our"
+        titleOrange="Cars"
         image={serviceBackgroundPhoto}
       />
 
-      {/* Main Content Section */}
-      <div className=" mxw grid grid-cols-1 md:grid-cols-5 gap-6 my-16">
-        {/* Filter Section */}
-        <div className="md:col-span-1 bg-[#141313] p-6 rounded-lg w-full md:w-auto">
-          <h3 className="text-white text-xl mb-4">Filter</h3>
+      {/* Filter Button  */}
+      <div className="mxw flex justify-between items-center  p-4 rounded-lg mt-16 ">
+        {/* Filtered Cars Length */}
+        <h2 className="text-white text-[12px] font-bold">
+          {filteredCars.length} Results for Cars
+        </h2>
+
+        <div className="flex items-center gap-4 text-[12px]">
+          {/* Sorting Dropdown */}
+          <select
+            className="bg-gray-900 text-white p-2 rounded cursor-pointer "
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="default">Sort By</option>
+            <option value="priceAsc">Price: Low to High</option>
+            <option value="priceDesc">Price: High to Low</option>
+            <option value="nameAsc">Name: A to Z</option>
+            <option value="nameDesc">Name: Z to A</option>
+          </select>
+
+          {/* Filter  */}
+          <button
+            onClick={() => setShowFilter(true)}
+            className="md:hidden flex items-center gap-2 bg-gray-900 text-white px-3 py-2 rounded cursor-pointer"
+          >
+            <IoFilter size={20} />
+            Filter
+          </button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="mxw grid grid-cols-1 md:grid-cols-5  gap-6 mb-16 ">
+        {/* Filter Section (Hidden on md screens) */}
+        <div
+          className={`fixed text-[12px] md:static top-0 left-0 w-72 h-full md:w-auto md:h-auto bg-[#141313] p-6 rounded-lg transition-transform ${
+            showFilter ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0 z-50`}
+        >
+          {/* Close Button (Only for small screens) */}
+          <button
+            onClick={() => setShowFilter(false)}
+            className="absolute top-4 right-4 text-white md:hidden"
+          >
+            <X size={24} />
+          </button>
+
+          <h3 className="text-white text-md mb-4">Filter</h3>
           <input
             type="text"
             placeholder="Search cars..."
@@ -117,7 +171,7 @@ const Services = () => {
           </button>
         </div>
 
-        {/* Cars Card Section */}
+        {/* Car Cards */}
         <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
           {filteredCars.length > 0 ? (
             filteredCars.map((car, index) => (

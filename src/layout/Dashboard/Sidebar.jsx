@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   BarChart2,
   Car,
@@ -7,86 +8,74 @@ import {
   TrendingUp,
   User,
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AiOutlineClose } from 'react-icons/ai';
+import { CiBookmark } from 'react-icons/ci';
 import { NavLink } from 'react-router-dom';
 
 const SIDEBAR_ITEMS = [
   { name: 'Overview', icon: BarChart2, path: 'overview' },
   { name: 'Add-Car', icon: Car, path: 'addcar' },
-  { name: 'Product', icon: Car, path: 'car-product' },
+  { name: 'Booking', icon: CiBookmark, path: 'car-product' },
   { name: 'User', icon: User, path: 'users' },
   { name: 'Order', icon: ShoppingCart, path: 'order' },
+
   { name: 'Analytics', icon: TrendingUp, path: 'analytics' },
   { name: 'Settings', icon: Settings, path: 'settings' },
 ];
 
 const Sidebar = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
-      if (window.innerWidth < 768) {
-        setSidebarOpen(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <motion.div
-      className={`relative z-50 transition-all duration-300 ease-in-out flex-shrink-0 
-              ${isSidebarOpen ? 'w-[220px]' : 'w-[80px]'}`}
-      animate={{ width: isSidebarOpen ? (isSmallScreen ? 80 : 220) : 80 }}
-      initial={{ width: isSmallScreen ? 80 : 220 }}
-    >
-      <div className="h-full bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-slate-100">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setSidebarOpen(!isSidebarOpen)}
-          className="hidden sm:block kp-2 rounded-full transition-colors max-w-fit"
-        >
-          <Menu size={24} />
-        </motion.button>
-
-        <nav className="mt-8 flex-grow">
-          {SIDEBAR_ITEMS.map(item => (
+    <div className="z-20 bg-gray-800">
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full bg-gray-950 text-white w-64 transition-transform duration-300 ${
+          isOpen ? 'translate-x-0' : '-translate-x-64'
+        } md:static md:translate-x-0`}
+      >
+        <div className="p-4 flex justify-between items-center ">
+          <NavLink to="/" className="flex  items-center text-center">
+            <span className="text-3xl font-black text-white">
+              <span className="text-[#f5b754]">S</span>wift
+              <span className="text-[#f5b754]">R</span>ent
+            </span>
+          </NavLink>
+          <AiOutlineClose
+            className="cursor-pointer md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+        </div>
+        <nav className="p-4">
+          {SIDEBAR_ITEMS.map(({ name, icon: Icon, path }) => (
             <NavLink
-              key={item.path}
-              to={item.path}
+              key={path}
+              to={path}
               className={({ isActive }) =>
-                `block transition-colors ${
+                `flex items-center gap-3 p-3 rounded-lg transition my-2 ${
                   isActive
-                    ? 'bg-[#f5b754] text-white font-semibold rounded-2xl'
-                    : 'text-[#f5b754]'
+                    ? 'bg-gray-700 text-yellow-400'
+                    : 'hover:bg-yellow-400'
                 }`
               }
             >
-              <motion.div className="flex items-center p-4 text-sm rounded-2xl transition-color mb-2">
-                <item.icon size={28} style={{ minWidth: '20px' }} />
-                <AnimatePresence>
-                  {isSidebarOpen && !isSmallScreen && (
-                    <motion.span
-                      className="ml-4 whitespace-nowrap text-xl"
-                      initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: 'auto' }}
-                      exit={{ opacity: 0, width: 0 }}
-                      transition={{ duration: 0.2, delay: 0.3 }}
-                    >
-                      {item.name}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+              <Icon size={20} />
+              <span>{name}</span>
             </NavLink>
           ))}
         </nav>
       </div>
-    </motion.div>
+
+      {/* Mobile Toggle Button */}
+      {!isOpen && (
+        <button
+          className="md:hidden fixed top-4 left-4 bg-gray-800 text-white p-2 rounded-full"
+          onClick={() => setIsOpen(true)}
+        >
+          <Menu />
+        </button>
+      )}
+    </div>
   );
 };
 

@@ -9,7 +9,6 @@ import Register from '../page/Authentication/Register';
 import Dashboard from '../layout/Dashboard/Dashboard';
 import OverviewPage from '../DeahBoardPage/OverviewPage';
 import AddToCar from '../DeahBoardPage/AddToCar';
-import Customers from '../DeahBoardPage/Customers';
 import CarProducatPage from '../DeahBoardPage/CarProducatPage';
 import UsersPage from '../DeahBoardPage/Users/UsersPage';
 import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
@@ -52,7 +51,6 @@ export const router = createBrowserRouter([
       { path: 'order', element: <OrdersPage /> },
       { path: 'analytics', element: <Analytics /> },
       { path: 'settings', element: <SettingsPage /> },
-      { path: 'customers', element: <Customers /> },
     ],
   },
   {

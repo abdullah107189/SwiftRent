@@ -6,7 +6,7 @@ import avatar from "../../assets/default-avatar.png";
 import { logoutUser } from "../../redux/auth/authSlice";
 
 const Navbar = () => {
-  const { user, loading } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

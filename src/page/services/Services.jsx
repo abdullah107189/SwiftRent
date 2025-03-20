@@ -12,10 +12,10 @@ import { IoFilter } from "react-icons/io5";
 const Services = () => {
   const [cars, setCars] = useState([]);
   const [search, setSearch] = useState("");
-  const [filterBrand, setFilterBrand] = useState("");
+  const [filterBrand, setFilterBrand] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100000]);
-  const [carType, setCarType] = useState("");
-  const [fuelType, setFuelType] = useState("");
+  const [carType, setCarType] = useState([]);
+  const [fuelType, setFuelType] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [sortOption, setSortOption] = useState("default");
 
@@ -28,17 +28,19 @@ const Services = () => {
 
   const resetFilters = () => {
     setSearch("");
-    setFilterBrand("");
+    setFilterBrand([]);
     setPriceRange([0, 100000]);
-    setCarType("");
-    setFuelType("");
+    setCarType([]);
+    setFuelType([]);
   };
 
   const filteredCars = cars
     .filter((car) => car.name.toLowerCase().includes(search.toLowerCase()))
-    .filter((car) => (filterBrand ? car.brand === filterBrand : true))
-    .filter((car) => (carType ? car.type === carType : true))
-    .filter((car) => (fuelType ? car.fuel === fuelType : true));
+    .filter((car) =>
+      filterBrand.length ? filterBrand.includes(car.brand) : true
+    )
+    .filter((car) => (carType.length ? carType.includes(car.type) : true))
+    .filter((car) => (fuelType.length ? fuelType.includes(car.fuel) : true));
 
   const sortedCars = [...filteredCars].sort((a, b) => {
     if (sortOption === "priceAsc") return a.price - b.price;
@@ -47,6 +49,14 @@ const Services = () => {
     if (sortOption === "nameDesc") return b.name.localeCompare(a.name);
     return 0;
   });
+
+  const toggleFilterOption = (filter, setFilter) => {
+    setFilter((prev) =>
+      prev.includes(filter)
+        ? prev.filter((item) => item !== filter)
+        : [...prev, filter]
+    );
+  };
 
   return (
     <div className="relative bg-[#1B1B1B]">
@@ -59,7 +69,7 @@ const Services = () => {
       />
 
       {/* Filter Button  */}
-      <div className="mxw flex justify-between items-center  p-4 rounded-lg mt-16 ">
+      <div className="mxw flex justify-between items-center p-4 rounded-lg mt-16 ">
         {/* Filtered Cars Length */}
         <h2 className="text-white text-[12px] font-bold">
           {filteredCars.length} Results for Cars
@@ -68,7 +78,7 @@ const Services = () => {
         <div className="flex items-center gap-4 text-[12px]">
           {/* Sorting Dropdown */}
           <select
-            className="bg-gray-900 text-white p-2 rounded cursor-pointer "
+            className="bg-gray-900 text-white p-2 rounded cursor-pointer"
             onChange={(e) => setSortOption(e.target.value)}
           >
             <option value="default">Sort By</option>
@@ -90,7 +100,7 @@ const Services = () => {
       </div>
 
       {/* Main Content */}
-      <div className="mxw grid grid-cols-1 md:grid-cols-5  gap-6 mb-16 ">
+      <div className="mxw grid grid-cols-1 md:grid-cols-5 gap-6 mb-16 ">
         {/* Filter Section (Hidden on md screens) */}
         <div
           className={`fixed text-[12px] md:static top-0 left-0 w-72 h-full md:w-auto md:h-auto bg-[#141313] p-6 rounded-lg transition-transform ${
@@ -113,33 +123,55 @@ const Services = () => {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full p-2 mb-4 rounded bg-gray-900 text-white"
           />
-          <select
-            className="w-full p-2 mb-4 rounded bg-gray-900 text-white"
-            onChange={(e) => setFilterBrand(e.target.value)}
-          >
-            <option value="">Select Brand</option>
-            <option value="Toyota">Toyota</option>
-            <option value="Honda">Honda</option>
-            <option value="BMW">BMW</option>
-          </select>
-          <select
-            className="w-full p-2 mb-4 rounded bg-gray-900 text-white"
-            onChange={(e) => setCarType(e.target.value)}
-          >
-            <option value="">Select Car Type</option>
-            <option value="SUV">SUV</option>
-            <option value="Sedan">Sedan</option>
-            <option value="Truck">Truck</option>
-          </select>
-          <select
-            className="w-full p-2 mb-4 rounded bg-gray-900 text-white"
-            onChange={(e) => setFuelType(e.target.value)}
-          >
-            <option value="">Select Fuel Type</option>
-            <option value="Petrol">Petrol</option>
-            <option value="Diesel">Diesel</option>
-            <option value="Electric">Electric</option>
-          </select>
+
+          {/* Brand Filter with Checkboxes */}
+          <div className="mb-4 text-white">
+            <h4 className="mb-2">Select Brand</h4>
+            {["Toyota", "Honda", "BMW"].map((brand) => (
+              <label key={brand} className="flex items-center gap-2 mb-2">
+                <input
+                  type="checkbox"
+                  checked={filterBrand.includes(brand)}
+                  onChange={() => toggleFilterOption(brand, setFilterBrand)}
+                  className="accent-[#F5B754]"
+                />
+                {brand}
+              </label>
+            ))}
+          </div>
+
+          {/* Car Type Filter with Checkboxes */}
+          <div className="mb-4 text-white">
+            <h4 className="mb-2">Select Car Type</h4>
+            {["SUV", "Sedan", "Truck"].map((type) => (
+              <label key={type} className="flex items-center gap-2 mb-2">
+                <input
+                  type="checkbox"
+                  checked={carType.includes(type)}
+                  onChange={() => toggleFilterOption(type, setCarType)}
+                  className="accent-[#F5B754]"
+                />
+                {type}
+              </label>
+            ))}
+          </div>
+
+          {/* Fuel Type Filter with Checkboxes */}
+          <div className="mb-4 text-white">
+            <h4 className="mb-2">Select Fuel Type</h4>
+            {["Petrol", "Diesel", "Electric"].map((fuel) => (
+              <label key={fuel} className="flex items-center gap-2 mb-2">
+                <input
+                  type="checkbox"
+                  checked={fuelType.includes(fuel)}
+                  onChange={() => toggleFilterOption(fuel, setFuelType)}
+                  className="accent-[#F5B754]"
+                />
+                {fuel}
+              </label>
+            ))}
+          </div>
+
           <div className="text-white">
             <label className="flex items-center gap-2">
               <DollarSign color="#F5B754" size={20} />

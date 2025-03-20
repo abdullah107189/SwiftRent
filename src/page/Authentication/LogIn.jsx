@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImage from "../../assets/login.png";
-import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/auth/authSlice";
+import GoogleLogIn from "./GoogleLogIn";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -113,10 +113,7 @@ const Login = () => {
             </p>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-500"></div>
           </div>
-          <div className="flex justify-center items-center w-[300px] rounded-md space-x-2 border m-3 p-2 border-[#b88d47ef] border-rounded cursor-pointer">
-            <FcGoogle size={32} />
-            <p>Continue with Google</p>
-          </div>
+          <GoogleLogIn></GoogleLogIn>
           <p className="px-6 text-sm text-center text-gray-200">
             Don&apos;t have an account yet?{" "}
             <Link

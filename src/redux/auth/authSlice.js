@@ -21,9 +21,9 @@ export const registerUser = createAsyncThunk(
       const newUser = {
         uid: userCredential.user.uid,
         email: userCredential.user.email,
-        userName: userInfo.name,
+        name: userInfo.name,
       };
-
+      console.log(newUser, userInfo);
       const response = await axios.post(
         "http://localhost:3000/add-user",
         newUser

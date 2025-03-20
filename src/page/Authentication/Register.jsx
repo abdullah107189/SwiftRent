@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/authSlice";
 
-
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,10 +23,13 @@ const Register = () => {
       registerUser({
         email: data.email,
         password: data.password,
-        userInfo: data,
+        userInfo: {
+          name: data.name,
+          email: data.email,
+        },
       })
     );
-  
+
     if (resultAction.meta.requestStatus === "fulfilled") {
       Swal.fire({
         position: "center",
@@ -41,7 +43,7 @@ const Register = () => {
       console.error("Sign up failed:", resultAction.payload);
     }
   };
-  
+
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
       <div className="flex flex-col lg:flex-row max-w-4xl w-full  rounded-md  overflow-hidden">

@@ -77,22 +77,24 @@ const Navbar = () => {
         <>
           {/* Dropdown on desktop, direct menu on mobile */}
           <li className="relative md:block hidden">
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center gap-2 focus:outline-none"
-            >
-              <img
-                src={user?.photoURL || avatar}
-                alt="User Avatar"
-                className="w-8 h-8 rounded-full"
-              />
-            </button>
-            {isDropdownOpen && (
-              <ul className="absolute right-0 mt-2 w-40 bg-[#1b1b1b] text-white rounded-md shadow-lg z-10">
+            {/* using daisy ui  */}
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="cursor-pointer avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user?.photoURL || avatar}
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content border-[#f5b754]/10 border fBgBlack rounded-box z-1 mt-3 w-40 p-2 shadow"
+              >
                 <li>
                   <NavLink
                     to="/dashboard"
-                    className="block px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                    className="block text-[16px] px-4 py-2 hover:bg-[#f5b754] hover:text-black"
                     onClick={() => {
                       setIsDropdownOpen(false);
                       setIsMenuOpen(false);
@@ -104,13 +106,13 @@ const Navbar = () => {
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                    className="block w-full text-[16px] text-left px-4 py-2 hover:bg-[#f5b754] hover:text-black"
                   >
                     Logout
                   </button>
                 </li>
               </ul>
-            )}
+            </div>
           </li>
           {/* Direct dashboard and logout in mobile menu */}
           <li className="md:hidden" onClick={() => setIsMenuOpen(false)}>
@@ -179,7 +181,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed top-0 right-0 h-full w-1/2 bg-[#1b1b1b] bg-opacity-95 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-transform duration-300 transform translate-x-0">
+        <div className="fixed top-0 md:hidden right-0 h-full w-1/2 bg-[#1b1b1b] bg-opacity-95 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-transform duration-300 transform translate-x-0">
           <button
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-6 left-6 p-2 rounded-full bg-white hover:bg-[#f5b754] transition duration-300"

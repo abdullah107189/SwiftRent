@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../../assets/register.jpeg";
-import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/authSlice";
+import GoogleLogIn from "./GoogleLogIn";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -167,10 +167,7 @@ const Register = () => {
             </p>
             <div className="flex-1 h-px sm:w-7 dark:bg-gray-500"></div>
           </div>
-          <div className="flex justify-center items-center w-[300px] rounded-md space-x-2 border m-3 p-2 border-[#b88d47ef] border-rounded cursor-pointer">
-            <FcGoogle size={32} />
-            <p>Continue with Google</p>
-          </div>
+          <GoogleLogIn></GoogleLogIn>
           <p className="px-6 text-sm text-center text-gray-200">
             Don't have an account yet?{" "}
             <Link

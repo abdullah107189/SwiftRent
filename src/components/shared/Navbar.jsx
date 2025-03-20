@@ -1,14 +1,18 @@
-import { X, Menu } from "lucide-react";
-import { NavLink } from "react-router-dom"; // Import NavLink
+import { Menu, ChevronRight } from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import avatar from "../../assets/default-avatar.png";
+import { logoutUser } from "../../redux/auth/authSlice";
 
 const Navbar = () => {
-  const { user, loading } = useSelector((state) => state.auth);
-  console.log(user);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,14 +27,29 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLogout = () => {
+    dispatch(logoutUser())
+      .unwrap()
+      .then(() => {
+        navigate("/login");
+        setIsMenuOpen(false);
+        setIsDropdownOpen(false);
+      })
+      .catch((error) => {
+        console.error("Logout failed:", error);
+      });
+  };
+
   const navOptions = (
     <>
       <li>
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-              isActive ? "orange" : ""
+            `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+              isActive
+                ? "text-[#f5b754] bg-transparent"
+                : "text-white bg-transparent"
             }`
           }
           onClick={() => setIsMenuOpen(false)}
@@ -38,21 +57,97 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {["About", "Services", "Contact", "Dashboard", "Register"].map(
-        (item, index) => (
-          <li key={index} onClick={() => setIsMenuOpen(false)}>
+      {["About", "Services", "Contact"].map((item, index) => (
+        <li key={index} onClick={() => setIsMenuOpen(false)}>
+          <NavLink
+            to={`/${item.toLowerCase()}`}
+            className={({ isActive }) =>
+              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                isActive
+                  ? "text-[#f5b754] bg-transparent"
+                  : "text-white bg-transparent"
+              }`
+            }
+          >
+            {item}
+          </NavLink>
+        </li>
+      ))}
+      {user ? (
+        <>
+          {/* Dropdown on desktop, direct menu on mobile */}
+          <li className="relative md:block hidden">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center gap-2 focus:outline-none"
+            >
+              <img
+                src={user?.photoURL || avatar}
+                alt="User Avatar"
+                className="w-8 h-8 rounded-full"
+              />
+            </button>
+            {isDropdownOpen && (
+              <ul className="absolute right-0 mt-2 w-40 bg-[#1b1b1b] text-white rounded-md shadow-lg z-10">
+                <li>
+                  <NavLink
+                    to="/dashboard"
+                    className="block px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
+          </li>
+          {/* Direct dashboard and logout in mobile menu */}
+          <li className="md:hidden" onClick={() => setIsMenuOpen(false)}>
             <NavLink
-              to={`/${item.toLowerCase()}`}
+              to="/dashboard"
               className={({ isActive }) =>
-                `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent px-3 py-2 ${
-                  isActive ? "orange" : ""
+                `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                  isActive
+                    ? "text-[#f5b754] bg-transparent"
+                    : "text-white bg-transparent"
                 }`
               }
             >
-              {item}
+              Dashboard
             </NavLink>
           </li>
-        )
+          <li className="md:hidden" onClick={handleLogout}>
+            <button className="font-bold text-white hover:text-[#f5b754] px-3 py-2 bg-transparent w-full text-center">
+              Logout
+            </button>
+          </li>
+        </>
+      ) : (
+        <li onClick={() => setIsMenuOpen(false)}>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                isActive
+                  ? "text-[#f5b754] bg-transparent"
+                  : "text-white bg-transparent"
+              }`
+            }
+          >
+            Login
+          </NavLink>
+        </li>
       )}
     </>
   );
@@ -69,27 +164,27 @@ const Navbar = () => {
             <span className="text-[#f5b754]">R</span>ent
           </span>
         </NavLink>
-        <div className="hidden md:flex items-center gap-4">
-          <ul className="menu menu-horizontal px-1 flex gap-4">{navOptions}</ul>
+        <div className="hidden md:flex items-center my-3 gap-4">
+          <ul className="px-1 flex gap-4">{navOptions}</ul>
         </div>
         <div className="md:hidden flex items-center gap-4">
           <button
             onClick={() => setIsMenuOpen(true)}
             className="p-2 rounded-full hover:bg-[#f5b754] transition duration-300"
           >
-            <Menu className="h-6 w-6 tBlack" />
+            <Menu className="h-6 w-6 text-white" />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-[#1b1b1b] bg-opacity-80 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-opacity duration-300">
+        <div className="fixed top-0 right-0 h-full w-1/2 bg-[#1b1b1b] bg-opacity-95 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-transform duration-300 transform translate-x-0">
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-white hover:bg-[#f5b754] transition duration-300"
+            className="absolute top-6 left-6 p-2 rounded-full bg-white hover:bg-[#f5b754] transition duration-300"
           >
-            <X className="h-6 w-6 tBlack" />
+            <ChevronRight className="h-5 w-5 orange hover:text-white" />
           </button>
           <ul className="space-y-6 text-center">{navOptions}</ul>
         </div>

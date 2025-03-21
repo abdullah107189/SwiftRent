@@ -1,5 +1,5 @@
 import { Menu, ChevronRight } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/default-avatar.png";
@@ -193,7 +193,7 @@ const Navbar = () => {
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>
-        </NavLink>
+        </Link>
         <div className="hidden md:flex items-center my-3 gap-4">
           <ul className="px-1 flex gap-4">{navOptions}</ul>
         </div>

@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../components/common/Header';
-
+import { imageUpload } from '../components/CarImageUploade/imageUpload';
+import useAxiosePublic from '../hooks/useAxiosePublic';
+import Spinner from '../components/Spinner';
+import Swal from 'sweetalert2';
 const AddToCar = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  // State to manage form data
-  const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState(false);
+  const axiosPublic = useAxiosePublic();
+  const [carData, setCarData] = useState({
     name: '',
     brand: '',
     type: '',
@@ -14,82 +16,90 @@ const AddToCar = () => {
     transmission: '',
     seats: '',
     fuel: '',
-    pricePerDay: '',
     location: {
       city: '',
       pickupPoint: '',
       dropOffPoint: '',
     },
-    availability: 'available',
+    availability: '',
     features: [],
-    userRating: 0,
-    reviews: [],
+    price: '',
     image: ['', '', ''],
-    startDate,
   });
-  console.log(formData);
-  // Handle input changes
+  if (loading) {
+    return <Spinner />;
+  }
   const handleChange = e => {
     const { name, value } = e.target;
-    if (name in formData.location) {
-      setFormData({
-        ...formData,
+    if (name.includes('location')) {
+      setCarData(prevState => ({
+        ...prevState,
         location: {
-          ...formData.location,
-          [name]: value,
+          ...prevState.location,
+          [name.split('.')[1]]: value,
         },
-      });
+      }));
     } else {
-      setFormData({
-        ...formData,
-        [name]: value,
+      setCarData(prevState => ({ ...prevState, [name]: value }));
+    }
+  };
+
+  const handleImageChange = async (e, index) => {
+    const imageCarUpload = e.target.files[0];
+    console.log(imageCarUpload);
+    if (!imageCarUpload) return;
+
+    const uploadedUrl = await imageUpload(imageCarUpload);
+    if (uploadedUrl) {
+      setCarData(prevData => {
+        const updatedImages = [...prevData.image];
+        updatedImages[index] = uploadedUrl;
+        return { ...prevData, image: updatedImages };
       });
     }
   };
 
-  // Handle features input (comma-separated)
-  const handleFeaturesChange = e => {
-    const featuresArray = e.target.value
-      .split(',')
-      .map(feature => feature.trim());
-    setFormData({
-      ...formData,
-      features: featuresArray,
-    });
-  };
-
-  // Handle image URLs input
-  const handleImageChange = (e, index) => {
-    const newImages = [...formData.image];
-    newImages[index] = e.target.value;
-    setFormData({
-      ...formData,
-      image: newImages,
-    });
-  };
-
-  // Handle form submission
   const handleSubmit = async e => {
     e.preventDefault();
-    // try {
-    //   const response = await axios.post(
-    //     'http://localhost:5000/api/cars',
-    //     formData
-    //   );
-    //   alert('Car data submitted successfully!');
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error('Error submitting form:', error);
-    //   alert('Failed to submit car data.');
-    // }
+    console.log(carData);
+
+    try {
+      setLoading(true);
+      const car = await axiosPublic.post('/add-car', carData);
+
+      console.log(car);
+
+      // Success Alert
+      Swal.fire({
+        title: 'Success!',
+        text: 'Car added successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+    } catch (error) {
+      console.log(error);
+
+      // Error Alert
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to add car. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      setCarData('');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen  text-white ">
+    <div className="min-h-screen text-white">
       <Header title="Add to Car" />
-      <div className=" px-8">
-        <h1 className="text-3xl font-bold mb-8 text-center">Add Car Details</h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="px-8">
+        <h1 className="text-2xl font-bold pt-4 mb-8 text-center">
+          Add Car Details
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
           {/* Car Name and Brand */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -97,9 +107,9 @@ const AddToCar = () => {
               <input
                 type="text"
                 name="name"
-                value={formData.name}
+                value={carData.name}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
@@ -108,40 +118,41 @@ const AddToCar = () => {
               <input
                 type="text"
                 name="brand"
-                value={formData.brand}
+                value={carData.brand}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
           </div>
-          {/* Image URLs */}
+
+          {/* Image Upload */}
           <div className="w-full flex flex-col md:flex-row gap-4">
-            {formData.image.map((img, index) => (
+            {carData.image.map((_, index) => (
               <div key={index} className="w-full">
                 <label className="block text-sm font-medium mb-1">
-                  Image URL {index + 1}
+                  Image {index + 1}
                 </label>
                 <input
                   type="file"
-                  value={img}
                   onChange={e => handleImageChange(e, index)}
-                  className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                  className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                   required
                 />
               </div>
             ))}
           </div>
+
           {/* Type and Year */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-1">Type</label>
+              <label className="block text-sm font-medium mb-1">Car Type</label>
               <input
                 type="text"
                 name="type"
-                value={formData.type}
+                value={carData.type}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
@@ -150,9 +161,9 @@ const AddToCar = () => {
               <input
                 type="number"
                 name="year"
-                value={formData.year}
+                value={carData.year}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
@@ -167,9 +178,9 @@ const AddToCar = () => {
               <input
                 type="text"
                 name="transmission"
-                value={formData.transmission}
+                value={carData.transmission}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
@@ -178,15 +189,15 @@ const AddToCar = () => {
               <input
                 type="number"
                 name="seats"
-                value={formData.seats}
+                value={carData.seats}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
           </div>
 
-          {/* Fuel and Price Per Day */}
+          {/* Fuel and Price */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium mb-1">
@@ -195,99 +206,32 @@ const AddToCar = () => {
               <input
                 type="text"
                 name="fuel"
-                value={formData.fuel}
+                value={carData.fuel}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Price Per Day
-              </label>
+              <label className="block text-sm font-medium mb-1">Price</label>
               <input
                 type="number"
-                name="pricePerDay"
-                value={formData.pricePerDay}
+                name="price"
+                value={carData.price}
                 onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 required
               />
             </div>
-          </div>
-
-          {/* Location Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium mb-1">City</label>
-              <input
-                type="text"
-                name="city"
-                value={formData.location.city}
-                onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Pickup Point
-              </label>
-              <input
-                type="text"
-                name="pickupPoint"
-                value={formData.location.pickupPoint}
-                onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-                required
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block mb-1 font-medium">Date</label>
-              <DatePicker
-                selected={startDate}
-                onChange={date => setStartDate(date)}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Dropoff Point
-              </label>
-              <input
-                type="text"
-                name="dropOffPoint"
-                value={formData.location.dropOffPoint}
-                onChange={handleChange}
-                className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Features */}
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Features (comma-separated)
-            </label>
-            <input
-              type="text"
-              value={formData.features.join(', ')}
-              onChange={handleFeaturesChange}
-              className="w-full p-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-              required
-            />
           </div>
 
           {/* Submit Button */}
           <div className="text-center">
             <button
               type="submit"
-              className="bg-[#f5b754] text-white px-6 py-3 rounded-lg hover:bg-[#bfa781] transition duration-300"
+              className="px-6 py-3 bg-[#f5b754] text-white font-semibold rounded-lg hover:bg-[#d49343] transition"
             >
-              Submit Car Data
+              Add Car
             </button>
           </div>
         </form>

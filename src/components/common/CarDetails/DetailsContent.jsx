@@ -46,7 +46,7 @@ export default function DetailsContent() {
 
       {/* Policies and Agreement Section */}
       <div>
-        <h2 className="text-3xl font-bold mb-4">Policies and agreement</h2>
+        <h2 className="text-3xl font-bold mb-4">Policies or agreement</h2>
         <div className="space-y-2">
           {policies.map((policy, index) => (
             <div

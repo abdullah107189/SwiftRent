@@ -61,7 +61,7 @@ const Header = ({ title }) => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content border-[#f5b754]/10 border fBgBlack rounded-box z-1 mt-3 w-40 p-2 shadow"
                   >
-                    <h2 className="text-xl font-bold">WELCOME!</h2>
+                    <h2 className="text-xl font-bold">WELCOME to</h2>
                     <div class="p-2">
                       <a
                         href="#"

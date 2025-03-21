@@ -3,10 +3,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../components/common/Header';
 import { imageUpload } from '../components/CarImageUploade/imageUpload';
 import useAxiosePublic from '../hooks/useAxiosePublic';
-import Spinner from '../components/Spinner';
+
 import Swal from 'sweetalert2';
+
 const AddToCar = () => {
-  const [loading, setLoading] = useState(false);
   const axiosPublic = useAxiosePublic();
   const [carData, setCarData] = useState({
     name: '',
@@ -21,22 +21,21 @@ const AddToCar = () => {
       pickupPoint: '',
       dropOffPoint: '',
     },
-    availability: '',
+    availability: 'Available',
     features: [],
     price: '',
     image: ['', '', ''],
   });
-  if (loading) {
-    return <Spinner />;
-  }
+
   const handleChange = e => {
     const { name, value } = e.target;
     if (name.includes('location')) {
+      const locationField = name.split('.')[1];
       setCarData(prevState => ({
         ...prevState,
         location: {
           ...prevState.location,
-          [name.split('.')[1]]: value,
+          [locationField]: value,
         },
       }));
     } else {
@@ -46,7 +45,7 @@ const AddToCar = () => {
 
   const handleImageChange = async (e, index) => {
     const imageCarUpload = e.target.files[0];
-    console.log(imageCarUpload);
+
     if (!imageCarUpload) return;
 
     const uploadedUrl = await imageUpload(imageCarUpload);
@@ -64,7 +63,6 @@ const AddToCar = () => {
     console.log(carData);
 
     try {
-      setLoading(true);
       const car = await axiosPublic.post('/add-car', carData);
 
       console.log(car);
@@ -87,8 +85,6 @@ const AddToCar = () => {
         confirmButtonText: 'OK',
       });
       setCarData('');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -223,6 +219,46 @@ const AddToCar = () => {
                 required
               />
             </div>
+          </div>
+
+          {/* Location Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium mb-1">City</label>
+              <input
+                type="text"
+                name="location.city"
+                value={carData.location.city}
+                onChange={handleChange}
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Pickup Point
+              </label>
+              <input
+                type="text"
+                name="location.pickupPoint"
+                value={carData.location.pickupPoint}
+                onChange={handleChange}
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Drop-off Point */}
+          <div>
+            <input
+              type="text"
+              name="location.dropOffPoint"
+              placeholder="Drop-off Point"
+              value={carData.location.dropOffPoint}
+              onChange={handleChange}
+              className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+            />
           </div>
 
           {/* Submit Button */}

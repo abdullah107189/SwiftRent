@@ -38,7 +38,6 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }) => {
-    console.log(email, password);
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,

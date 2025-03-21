@@ -20,7 +20,7 @@ export default function RentalCarCompany() {
           </p>
           <h1 className="text-3xl md:text-4xl font-bold leading-snug">
             We Are More Than <br />
-            <span className="text-[#E8A743]">A Car Rental Company</span>
+            <span className="text-[#E8A743]">A Car Rental Company section</span>
           </h1>
           <p className="text-gray-400 leading-relaxed text-sm md:text-base">
             Car repair quisuqe sodales dui ut varius vestibulum drana tortor

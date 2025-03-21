@@ -87,7 +87,7 @@ const AddToCar = () => {
   return (
     <div className="min-h-screen  text-white ">
       <Header title="Add to Car" />
-      <div className="max-w-3xl mx-auto px-8">
+      <div className=" px-8">
         <h1 className="text-3xl font-bold mb-8 text-center">Add Car Details</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Car Name and Brand */}

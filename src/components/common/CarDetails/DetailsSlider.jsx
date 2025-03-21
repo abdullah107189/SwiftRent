@@ -10,9 +10,9 @@ export default function DetailsSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto p-4">
+    <div className="relative w-full max-w-4xl mx-auto md:p-4 py-4">
       {/* Image Slider */}
-      <div className="rounded-2xl overflow-hidden shadow-lg">
+      <div className="rounded-3xl overflow-hidden shadow-lg">
         <img
           src={images[currentIndex]}
           alt={`Car ${currentIndex + 1}`}
@@ -27,7 +27,7 @@ export default function DetailsSlider() {
             key={index}
             size={12}
             className={`cursor-pointer ${
-              currentIndex === index ? "text-red-500" : "text-gray-400"
+              currentIndex === index ? "orange" : "text-gray-400"
             }`}
             onClick={() => setCurrentIndex(index)}
           />

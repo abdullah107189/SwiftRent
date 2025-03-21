@@ -73,7 +73,7 @@ const Navbar = () => {
           className="font-bold hover:text-[#f5b754] px-3 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
-          Service
+          Services
         </Link>
       </li>
       <li>
@@ -85,22 +85,7 @@ const Navbar = () => {
           Contact
         </Link>
       </li>
-      {["About", "Services", "Contact"].map((item, index) => (
-        <li key={index} onClick={() => setIsMenuOpen(false)}>
-          <NavLink
-            to={`/${item.toLowerCase()}`}
-            className={({ isActive }) =>
-              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
-                isActive
-                  ? "text-[#f5b754] bg-transparent"
-                  : "text-white bg-transparent"
-              }`
-            }
-          >
-            {item}
-          </NavLink>
-        </li>
-      ))}
+
       {user ? (
         <>
           {/* Dropdown on desktop, direct menu on mobile */}

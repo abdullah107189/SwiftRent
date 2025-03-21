@@ -1,12 +1,12 @@
 // import React from "react";
-import { CiFacebook, CiTwitter } from "react-icons/ci";
-import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { RiLinkedinLine } from "react-icons/ri";
+import { CiFacebook, CiTwitter } from 'react-icons/ci';
+import { FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import { RiLinkedinLine } from 'react-icons/ri';
 
 const Footer = () => {
   return (
-    <div className="mxw">
-      <footer className="bg-[#1b1b1b] text-white py-6">
+    <div className="mxw px-2">
+      <footer className="bg-[#1b1b1b] text-white py-6 ">
         <div className=" grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <h2 className="text-3xl font-bold">

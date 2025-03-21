@@ -28,6 +28,9 @@ body {
   .tBlack {
     @apply text-[#999];
   }
+  .tBgBlack {
+    @apply bg-[#999];
+  }
   .mxw {
     @apply max-w-7xl mx-auto px-2;
   }

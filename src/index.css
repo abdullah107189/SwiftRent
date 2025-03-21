@@ -12,7 +12,7 @@ body {
   }
 
   /* orange background color  */
-  .bgOrange {
+  .bgOrange  {
     @apply bg-[#f5b754];
   }
 

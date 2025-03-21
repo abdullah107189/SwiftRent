@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import serviceBackgroundPhoto from "../../assets/heroSection/3.jpg";
 import "./service.css";
 import PageHeader from "../../components/shared/PageHeader";
@@ -19,11 +19,27 @@ const Services = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [sortOption, setSortOption] = useState("default");
 
+  const filterRef = useRef(null);
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/cars`)
       .then((res) => res.json())
       .then((data) => setCars(data))
       .catch((error) => console.error("Error fetching cars:", error));
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setShowFilter(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const resetFilters = () => {
@@ -40,7 +56,8 @@ const Services = () => {
       filterBrand.length ? filterBrand.includes(car.brand) : true
     )
     .filter((car) => (carType.length ? carType.includes(car.type) : true))
-    .filter((car) => (fuelType.length ? fuelType.includes(car.fuel) : true));
+    .filter((car) => (fuelType.length ? fuelType.includes(car.fuel) : true))
+    .filter((car) => car.price >= priceRange[0] && car.price <= priceRange[1]);
 
   const sortedCars = [...filteredCars].sort((a, b) => {
     if (sortOption === "priceAsc") return a.price - b.price;
@@ -68,17 +85,16 @@ const Services = () => {
         image={serviceBackgroundPhoto}
       />
 
-      {/* Filter Button  */}
-      <div className="mxw flex justify-between items-center p-4 rounded-lg mt-16 ">
-        {/* Filtered Cars Length */}
-        <h2 className="text-white text-[12px] font-bold">
+      {/* Filter Button */}
+      <div className="mxw flex justify-between items-center p-4 rounded-lg mt-16  mb-1 ">
+        <h2 className="text-white text-xl font-bold">
           {filteredCars.length} Results for Cars
         </h2>
 
-        <div className="flex items-center gap-4 text-[12px]">
+        <div className="flex items-center gap-4 text-[12px] p-4">
           {/* Sorting Dropdown */}
           <select
-            className="bg-gray-900 text-white p-2 rounded cursor-pointer"
+            className="sBgBlack text-white p-2 rounded cursor-pointer "
             onChange={(e) => setSortOption(e.target.value)}
           >
             <option value="default">Sort By</option>
@@ -87,11 +103,10 @@ const Services = () => {
             <option value="nameAsc">Name: A to Z</option>
             <option value="nameDesc">Name: Z to A</option>
           </select>
-
-          {/* Filter  */}
+          {/* Filter */}
           <button
             onClick={() => setShowFilter(true)}
-            className="md:hidden flex items-center gap-2 bg-gray-900 text-white px-3 py-2 rounded cursor-pointer"
+            className="md:hidden flex items-center gap-2 sBgBlack text-white px-3 py-2 rounded cursor-pointer"
           >
             <IoFilter size={20} />
             Filter
@@ -101,16 +116,16 @@ const Services = () => {
 
       {/* Main Content */}
       <div className="mxw grid grid-cols-1 md:grid-cols-5 gap-6 mb-16 ">
-        {/* Filter Section (Hidden on md screens) */}
         <div
-          className={`fixed text-[12px] md:static top-0 left-0 w-72 h-full md:w-auto md:h-auto bg-[#141313] p-6 rounded-lg transition-transform ${
+          ref={filterRef} // Added ref to the filter section
+          className={`fixed mt-15 md:mt-0 text-[12px] md:static top-0 left-0 w-72 h-full md:w-auto md:h-auto bg-[#141313] p-6 rounded-lg transition-transform ${
             showFilter ? "translate-x-0" : "-translate-x-full"
-          } md:translate-x-0 z-50`}
+          } md:translate-x-0 z-40`}
         >
           {/* Close Button (Only for small screens) */}
           <button
             onClick={() => setShowFilter(false)}
-            className="absolute top-4 right-4 text-white md:hidden"
+            className="absolute top-4 right-4 text-white md:hidden cursor-pointer"
           >
             <X size={24} />
           </button>
@@ -121,19 +136,22 @@ const Services = () => {
             placeholder="Search cars..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-2 mb-4 rounded bg-gray-900 text-white"
+            className="w-full p-2 mb-4 rounded bg-gray-900 text-white cursor-pointer"
           />
 
           {/* Brand Filter with Checkboxes */}
-          <div className="mb-4 text-white">
+          <div className="mb-4 text-white ">
             <h4 className="mb-2">Select Brand</h4>
             {["Toyota", "Honda", "BMW"].map((brand) => (
-              <label key={brand} className="flex items-center gap-2 mb-2">
+              <label
+                key={brand}
+                className="flex items-center gap-2 mb-2 cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   checked={filterBrand.includes(brand)}
                   onChange={() => toggleFilterOption(brand, setFilterBrand)}
-                  className="accent-[#F5B754]"
+                  className="accent-[#F5B754] cursor-pointer"
                 />
                 {brand}
               </label>
@@ -141,15 +159,18 @@ const Services = () => {
           </div>
 
           {/* Car Type Filter with Checkboxes */}
-          <div className="mb-4 text-white">
+          <div className="mb-4 text-white ">
             <h4 className="mb-2">Select Car Type</h4>
             {["SUV", "Sedan", "Truck"].map((type) => (
-              <label key={type} className="flex items-center gap-2 mb-2">
+              <label
+                key={type}
+                className="flex items-center gap-2 mb-2 cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   checked={carType.includes(type)}
                   onChange={() => toggleFilterOption(type, setCarType)}
-                  className="accent-[#F5B754]"
+                  className="accent-[#F5B754] cursor-pointer"
                 />
                 {type}
               </label>
@@ -160,12 +181,15 @@ const Services = () => {
           <div className="mb-4 text-white">
             <h4 className="mb-2">Select Fuel Type</h4>
             {["Petrol", "Diesel", "Electric"].map((fuel) => (
-              <label key={fuel} className="flex items-center gap-2 mb-2">
+              <label
+                key={fuel}
+                className="flex items-center gap-2 mb-2 cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   checked={fuelType.includes(fuel)}
                   onChange={() => toggleFilterOption(fuel, setFuelType)}
-                  className="accent-[#F5B754]"
+                  className="accent-[#F5B754] cursor-pointer"
                 />
                 {fuel}
               </label>
@@ -183,21 +207,13 @@ const Services = () => {
               max="100000"
               value={priceRange[0]}
               onChange={(e) => setPriceRange([e.target.value, priceRange[1]])}
-              className="w-full accent-[#F5B754]"
-            />
-            <input
-              type="range"
-              min="0"
-              max="100000"
-              value={priceRange[1]}
-              onChange={(e) => setPriceRange([priceRange[0], e.target.value])}
-              className="w-full accent-[#F5B754]"
+              className="w-full accent-[#F5B754] cursor-pointer"
             />
           </div>
 
           <button
             onClick={resetFilters}
-            className="w-full mt-4 p-2 bg-[#F5B754] text-white rounded"
+            className="w-full mt-4 p-2 bg-[#F5B754] text-white rounded cursor-pointer"
           >
             Reset Filter
           </button>
@@ -205,8 +221,8 @@ const Services = () => {
 
         {/* Car Cards */}
         <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
-          {filteredCars.length > 0 ? (
-            filteredCars.map((car, index) => (
+          {sortedCars.length > 0 ? (
+            sortedCars.map((car, index) => (
               <NumberCard
                 key={car._id}
                 image={car.image || "https://via.placeholder.com/300"}

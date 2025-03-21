@@ -14,6 +14,7 @@ import UsersPage from "../DeahBoardPage/Users/UsersPage";
 import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
 import Analytics from "../DeahBoardPage/Analytics/Analytics";
 import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
+import CarDetails from "../components/common/CarDetails/CarDetails";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/services",
         element: <Services />,
+      },
+      {
+        path: "/car-details",
+        element:  <CarDetails/>,
       },
     ],
   },

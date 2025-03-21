@@ -23,7 +23,6 @@ export const registerUser = createAsyncThunk(
         email: userCredential.user.email,
         name: userInfo.name,
       };
-      console.log(newUser, userInfo);
       const response = await axios.post(
         "http://localhost:3000/add-user",
         newUser
@@ -39,12 +38,18 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }) => {
+    console.log(email, password);
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
-    return userCredential.user;
+    try {
+      await axios.patch("http://localhost:3000/update-last-login", { email });
+      return userCredential.user;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 );
 

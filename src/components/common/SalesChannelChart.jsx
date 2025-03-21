@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
   BarChart,
   Bar,
@@ -9,21 +9,21 @@ import {
   ResponsiveContainer,
   Legend,
   Cell,
-} from 'recharts';
+} from "recharts";
 
-const COLORS = ['#f5b754', '#8B5CF6', '#EC4899', '#10B981', '#F59E0B'];
+const COLORS = ["#f5b754", "#8B5CF6", "#EC4899", "#10B981", "#F59E0B"];
 
 const SALES_CHANNEL_DATA = [
-  { name: 'Website', value: 45600 },
-  { name: 'Mobile App', value: 38200 },
-  { name: 'Marketplace', value: 29800 },
-  { name: 'Social Media', value: 18700 },
+  { name: "Website", value: 45600 },
+  { name: "Mobile App", value: 38200 },
+  { name: "Marketplace", value: 29800 },
+  { name: "Social Media", value: 18700 },
 ];
 
 const SalesChannelChart = () => {
   return (
     <motion.div
-      className="bg-sBgBlack  bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 lg:col-span-2 border border-gray-700"
+      className="sBgBlack backdrop-blur-md shadow-lg rounded-3xl p-6 lg:col-span-2"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
@@ -40,13 +40,13 @@ const SalesChannelChart = () => {
             <YAxis stroke="#9CA3AF" />
             <Tooltip
               contentStyle={{
-                backgroundColor: 'rgba(31, 41, 55, 0.8)',
-                borderColor: '#4B5563',
+                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                borderColor: "#4B5563",
               }}
-              itemStyle={{ color: '#E5E7EB' }}
+              itemStyle={{ color: "#E5E7EB" }}
             />
             <Legend />
-            <Bar dataKey={'value'} fill="#8884d8">
+            <Bar dataKey={"value"} fill="#8884d8">
               {SALES_CHANNEL_DATA.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}

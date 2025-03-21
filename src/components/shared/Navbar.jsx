@@ -12,7 +12,6 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +32,6 @@ const Navbar = () => {
       .then(() => {
         navigate("/login");
         setIsMenuOpen(false);
-        setIsDropdownOpen(false);
       })
       .catch((error) => {
         console.error("Logout failed:", error);
@@ -96,7 +94,6 @@ const Navbar = () => {
                     to="/dashboard"
                     className="block text-[16px] px-4 py-2 hover:bg-[#f5b754] hover:text-black"
                     onClick={() => {
-                      setIsDropdownOpen(false);
                       setIsMenuOpen(false);
                     }}
                   >

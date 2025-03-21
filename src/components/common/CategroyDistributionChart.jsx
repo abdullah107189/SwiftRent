@@ -21,7 +21,7 @@ const COLORS = ['#6366F1', '#8B5CF6', '#EC4899', '#10B981', '#F59E0B'];
 const CategoryDistributionChart = () => {
   return (
     <motion.div
-      className="bg-sBgBlack bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700"
+      className="sBgBlack backdrop-blur-md shadow-lg rounded-3xl md:p-6 p-3"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}

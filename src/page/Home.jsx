@@ -10,6 +10,7 @@ const Home = () => {
       <HeroSection></HeroSection>
       <div className="mxw">
         <RentalCarCompany />
+
         <RentalCarSection />
         <CarRentalProcessSection />
       </div>

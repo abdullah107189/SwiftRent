@@ -56,7 +56,8 @@ const Services = () => {
       filterBrand.length ? filterBrand.includes(car.brand) : true
     )
     .filter((car) => (carType.length ? carType.includes(car.type) : true))
-    .filter((car) => (fuelType.length ? fuelType.includes(car.fuel) : true));
+    .filter((car) => (fuelType.length ? fuelType.includes(car.fuel) : true))
+    .filter((car) => car.price >= priceRange[0] && car.price <= priceRange[1]);
 
   const sortedCars = [...filteredCars].sort((a, b) => {
     if (sortOption === "priceAsc") return a.price - b.price;
@@ -220,8 +221,8 @@ const Services = () => {
 
         {/* Car Cards */}
         <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
-          {filteredCars.length > 0 ? (
-            filteredCars.map((car, index) => (
+          {sortedCars.length > 0 ? (
+            sortedCars.map((car, index) => (
               <NumberCard
                 key={car._id}
                 image={car.image || "https://via.placeholder.com/300"}

@@ -1,7 +1,7 @@
-import { NavLink, Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
+import { NavLink, Outlet } from 'react-router-dom';
+import Sidebar from './Sidebar';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 const Dashboard = () => {
   return (
@@ -12,12 +12,12 @@ const Dashboard = () => {
         {/* opening button for small devices  */}
         <label
           htmlFor="my-drawer-2"
-          className="bg-[#302a20] orange p-3 rounded-full drawer-button lg:hidden fixed top-3 left-3 z-[10]"
+          className="bg-[#302a20] orange p-3 rounded-full drawer-button lg:hidden fixed top-3 left-3 z-[100]"
         >
           <FaBars className="text-xl" />
         </label>
       </div>
-      <div className="drawer-side z-[20]">
+      <div className="drawer-side z-[120]">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"

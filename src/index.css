@@ -1,6 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui";
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 body {
   background-color: #1b1b1b;
   color: white;
@@ -28,12 +28,15 @@ body {
   .tBlack {
     @apply text-[#999];
   }
+  .tBgBlack {
+    @apply bg-[#999];
+  }
   .mxw {
     @apply max-w-7xl mx-auto px-2;
   }
 
   .fontOutfit > {
-    font-family: "Outfit", sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-optical-sizing: auto;
   }
   /* action btn  */

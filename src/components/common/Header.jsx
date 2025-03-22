@@ -1,7 +1,6 @@
 import { useState } from "react";
-
 const Header = ({ title }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setIsOpen] = useState(false);
 
   return (
     <header className="px-2 bg-opacity-50 backdrop-blur-lg border-b border-gray-700 m sticky top-0 z-50 block">
@@ -16,6 +15,10 @@ const Header = ({ title }) => {
                 src="https://simgbb.com/avatar/dJqZjDSZwR5z.png"
                 alt=""
                 className="size-10 object-cover cursor-pointer"
+                onClick={() => setIsOpen(!open)}
+                src="https://simgbb.com/avatar/dJqZjDSZwR5z.png"
+                alt=""
+                class="size-10 object-cover cursor-pointer"
               />
             </div>
           </div>
@@ -28,6 +31,12 @@ const Header = ({ title }) => {
               <a
                 href="#"
                 className="block rounded-lg px-4 py-2 text-sm text-gray-500 "
+
+            <div class="p-2">
+              <a
+                href="#"
+                class="block rounded-lg px-4 py-2 text-sm text-gray-500 "
+
                 role="menuitem"
               >
                 My profile
@@ -85,5 +94,4 @@ const Header = ({ title }) => {
     </header>
   );
 };
-
 export default Header;

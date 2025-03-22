@@ -1,11 +1,10 @@
-import Header from '../components/common/Header';
-import { motion } from 'framer-motion';
-import StatCard from '../components/common/StatCard';
-import { BarChart, ShoppingCart, Users, Zap } from 'lucide-react';
-import CarProductsTablel from '../components/CarProductsTablel';
-import SalesOverviewChart from '../components/common/SalesOverviewChart';
-import CategoryDistributionChart from '../components/common/CategroyDistributionChart';
-import SalesTrendChart from './SalesTrendChart';
+import Header from "../components/common/Header";
+import { motion } from "framer-motion";
+import StatCard from "../components/common/StatCard";
+import { BarChart, ShoppingCart, Users, Zap } from "lucide-react";
+import CarProductsTablel from "../components/CarProductsTablel";
+import CategoryDistributionChart from "../components/common/CategroyDistributionChart";
+import SalesTrendChart from "./SalesTrendChart";
 
 const CarProducatPage = () => {
   return (

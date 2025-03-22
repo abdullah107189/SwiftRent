@@ -1,5 +1,5 @@
 import { Menu, ChevronRight } from "lucide-react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/default-avatar.png";
@@ -11,22 +11,19 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScroll, setIsScroll] = useState(false);
-
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setIsScroll(true);
-    } else {
-      setIsScroll(false);
-    }
-  };
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogout = () => {
@@ -44,7 +41,7 @@ const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <Link
+        <NavLink
           to="/"
           className={({ isActive }) =>
             `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
@@ -56,34 +53,7 @@ const Navbar = () => {
           onClick={() => setIsMenuOpen(false)}
         >
           Home
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/about"
-          className="font-bold hover:text-[#f5b754] px-3 py-2"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          About
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/services"
-          className="font-bold hover:text-[#f5b754] px-3 py-2"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Service
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/contact"
-          className="font-bold hover:text-[#f5b754] lx-3 py-2"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Contact
-        </Link>
+        </NavLink>
       </li>
       {["About", "Services", "Contact"].map((item, index) => (
         <li key={index} onClick={() => setIsMenuOpen(false)}>
@@ -183,17 +153,16 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar w-full fixed z-50 transition-all duration-300 ${
-        isScroll ? "bg-[#1b1b1b] bg-opacity-50 backdrop-blur-lg shadow-sm " : ""
-      } `}
+      className={`w-full fixed top-0 z-50 transition-all duration-500 
+      ${isScrolled ? "sBgBlack bg-opacity-90 shadow-lg" : "bg-transparent"}`}
     >
-      <div className="mxw flex w-full justify-between items-center ">
-        <Link to="/" className="flex items-center">
+      <div className="mxw flex justify-between items-center py-3">
+        <NavLink to="/" className="flex items-center">
           <span className="text-3xl font-black text-white">
             <span className="text-[#f5b754]">S</span>wift
             <span className="text-[#f5b754]">R</span>ent
           </span>
-        </Link>
+        </NavLink>
         <div className="hidden md:flex items-center my-3 gap-4">
           <ul className="px-1 flex gap-4">{navOptions}</ul>
         </div>

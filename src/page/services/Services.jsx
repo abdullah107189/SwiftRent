@@ -22,7 +22,7 @@ const Services = () => {
   const filterRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/cars`)
+    fetch(`${import.meta.env.VITE_BASEURL}/cars`)
       .then((res) => res.json())
       .then((data) => setCars(data))
       .catch((error) => console.error("Error fetching cars:", error));
@@ -94,11 +94,13 @@ const Services = () => {
         <div className="flex items-center gap-4 text-[12px] p-4">
           {/* Sorting Dropdown */}
           <select
-            className="sBgBlack text-white p-2 rounded cursor-pointer "
+            className="sBgBlack text-white p-2  rounded cursor-pointer accent-[#F5B754]"
             onChange={(e) => setSortOption(e.target.value)}
           >
             <option value="default">Sort By</option>
-            <option value="priceAsc">Price: Low to High</option>
+            <option value="priceAsc accent-[#F5B754]">
+              Price: Low to High
+            </option>
             <option value="priceDesc">Price: High to Low</option>
             <option value="nameAsc">Name: A to Z</option>
             <option value="nameDesc">Name: Z to A</option>
@@ -117,8 +119,8 @@ const Services = () => {
       {/* Main Content */}
       <div className="mxw grid grid-cols-1 md:grid-cols-5 gap-6 mb-16 ">
         <div
-          ref={filterRef} // Added ref to the filter section
-          className={`fixed mt-15 md:mt-0 text-[12px] md:static top-0 left-0 w-72 h-full md:w-auto md:h-auto bg-[#141313] p-6 rounded-lg transition-transform ${
+          ref={filterRef}
+          className={`fixed mt-15 md:mt-0 text-[12px] md:static top-0 left-0 w-72 h-full md:w-auto md:h-[600px] bg-[#141313] p-6 rounded-lg transition-transform ${
             showFilter ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0 z-40`}
         >
@@ -206,7 +208,25 @@ const Services = () => {
               min="0"
               max="100000"
               value={priceRange[0]}
-              onChange={(e) => setPriceRange([e.target.value, priceRange[1]])}
+              onChange={(e) =>
+                setPriceRange([
+                  Math.min(Number(e.target.value), priceRange[1]),
+                  priceRange[1],
+                ])
+              }
+              className="w-full accent-[#F5B754] cursor-pointer"
+            />
+            <input
+              type="range"
+              min="0"
+              max="100000"
+              value={priceRange[1]}
+              onChange={(e) =>
+                setPriceRange([
+                  priceRange[0],
+                  Math.max(Number(e.target.value), priceRange[0]),
+                ])
+              }
               className="w-full accent-[#F5B754] cursor-pointer"
             />
           </div>

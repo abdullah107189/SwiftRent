@@ -22,7 +22,7 @@ const Services = () => {
   const filterRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/cars`)
+    fetch(`${import.meta.env.VITE_BASEURL}/cars`)
       .then((res) => res.json())
       .then((data) => setCars(data))
       .catch((error) => console.error("Error fetching cars:", error));

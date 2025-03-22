@@ -235,7 +235,7 @@ const Services = () => {
             sortedCars.map((car, index) => (
               <NumberCard
                 key={car._id}
-                image={car.image || "https://via.placeholder.com/300"}
+                image={car.image[0] || "https://via.placeholder.com/300"} // প্রথম ছবি ব্যবহৃত হচ্ছে
                 name={car.name}
                 number={(index + 1).toString().padStart(2, "0")}
               />

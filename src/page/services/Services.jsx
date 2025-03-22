@@ -8,9 +8,10 @@ import CarPromoVideo from "./CarPromoVideo";
 import NumberCard from "../../components/shared/card/NumberCard";
 import { DollarSign, X } from "lucide-react";
 import { IoFilter } from "react-icons/io5";
+import useGetCars from "../../hooks/useGetCars";
 
 const Services = () => {
-  const [cars, setCars] = useState([]);
+  const { cars } = useGetCars();
   const [search, setSearch] = useState("");
   const [filterBrand, setFilterBrand] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100000]);
@@ -18,15 +19,7 @@ const Services = () => {
   const [fuelType, setFuelType] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [sortOption, setSortOption] = useState("default");
-
   const filterRef = useRef(null);
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_BASEURL}/cars`)
-      .then((res) => res.json())
-      .then((data) => setCars(data))
-      .catch((error) => console.error("Error fetching cars:", error));
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

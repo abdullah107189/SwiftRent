@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 // Thunks for async actions
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password, userInfo }) => {
+    const axiosPublic = useAxiosPublic();
     // console.log(userInfo);
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -23,10 +24,7 @@ export const registerUser = createAsyncThunk(
         email: userCredential.user.email,
         name: userInfo.name,
       };
-      const response = await axios.post(
-        "http://localhost:3000/add-user",
-        newUser
-      );
+      const response = await axiosPublic.post("/add-user", newUser);
 
       return response.data.user;
     } catch (error) {
@@ -38,14 +36,14 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }) => {
-    console.log(email, password);
+    const axiosPublic = useAxiosPublic();
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
     try {
-      await axios.patch("http://localhost:3000/update-last-login", { email });
+      await axiosPublic.patch("/update-last-login", { email });
       return userCredential.user;
     } catch (error) {
       console.log(error.message);

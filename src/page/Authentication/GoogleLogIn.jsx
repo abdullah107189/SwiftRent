@@ -6,11 +6,12 @@ import { signInWithPopup } from "firebase/auth";
 import auth, { googleProvider } from "../../firebase/firebase.config";
 import Swal from "sweetalert2";
 import { setUser } from "../../redux/auth/authSlice";
-import axios from "axios";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const GoogleLogIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const axiosPublic = useAxiosPublic();
 
   const handleGoogleLogin = async () => {
     try {
@@ -26,7 +27,7 @@ const GoogleLogIn = () => {
       };
 
       // Sending user data to the server
-      await axios.post("http://localhost:3000/add-user", userData);
+      await axiosPublic.post("/add-user", userData);
 
       // Setting up users in Redux
       dispatch(setUser(userData));

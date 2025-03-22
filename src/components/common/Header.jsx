@@ -23,10 +23,7 @@ const Header = ({ title }) => {
                 7
               </span>
             </a>
-            <Link
-              to="/dashboard/profile"
-              className="overflow-hidden rounded-full border border-gray-300 shadow-inner"
-            >
+            <Link className="overflow-hidden rounded-full border border-gray-300 shadow-inner">
               <span className="sr-only">Toggle dashboard menu</span>
               <img
                 src={user?.photoURL || avatar}

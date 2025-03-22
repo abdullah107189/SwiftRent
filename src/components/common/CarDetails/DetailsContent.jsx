@@ -17,7 +17,7 @@ export default function DetailsContent() {
   };
 
   return (
-    <div className="bg-black rounded-3xl text-white p-6">
+    <div className="sBgBlack rounded-3xl text-white p-6">
       {/* Premium Amenities Section */}
       <div className="mb-10">
         <h2 className="text-3xl font-bold mb-4">
@@ -47,18 +47,16 @@ export default function DetailsContent() {
       {/* Policies and Agreement Section */}
       <div>
         <h2 className="text-3xl font-bold mb-4">Policies or agreement</h2>
-        <div className="space-y-2">
+        <div className="space-y-3">
           {policies.map((policy, index) => (
             <div
+              onClick={() => togglePolicy(index)}
               key={index}
-              className={`p-4 rounded-md ${
-                openIndex === index ? "bgOrange" : "bg-gray-800"
+              className={`p-4 rounded-2xl ${
+                openIndex === index ? "bg-[#f5b754]/40" : "bg-white/10"
               }`}
             >
-              <button
-                onClick={() => togglePolicy(index)}
-                className="flex justify-between w-full text-left font-semibold"
-              >
+              <button className={`flex justify-between w-full font-semibold text-xl ${openIndex === index ? "mb-5": "mb-0"} `}>
                 {policy}
                 {openIndex === index ? <FaMinus /> : <FaPlus />}
               </button>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Header from "../components/common/Header";
 import { imageUpload } from "../components/CarImageUploade/imageUpload";
-import useAxiosePublic from "../hooks/useAxiosePublic";
+import useAxiosePublic from "../hooks/useAxiosPublic";
 import Spinner from "../components/Spinner";
 import Swal from "sweetalert2";
 const AddToCar = () => {

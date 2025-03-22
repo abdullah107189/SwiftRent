@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import { loginUser } from "../redux/auth/authSlice";
 
 const useAuthForm = (authAction, successRedirect = "/") => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, error } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -23,17 +24,20 @@ const useAuthForm = (authAction, successRedirect = "/") => {
     const resultAction = await dispatch(authAction(data));
     if (resultAction.meta.requestStatus === "fulfilled") {
       Swal.fire({
-        position: "center",
         icon: "success",
         title: `${
-          authAction.name === "loginUser" ? "Login" : "User created"
+          authAction === loginUser ? "Login" : "User  created"
         } successfully.`,
-        showConfirmButton: false,
         timer: 1500,
       });
       navigate(from, { replace: true });
     } else {
-      console.error(`${authAction.name} failed:`, resultAction.payload);
+      const errorMsg = resultAction.payload || "Something went wrong!";
+      Swal.fire({
+        icon: "error",
+        title: `${authAction === loginUser ? "Login" : "Registration"} Failed`,
+        text: errorMsg,
+      });
     }
   };
 
@@ -47,6 +51,7 @@ const useAuthForm = (authAction, successRedirect = "/") => {
     showPassword,
     togglePasswordVisibility,
     onSubmit,
+    error,
   };
 };
 

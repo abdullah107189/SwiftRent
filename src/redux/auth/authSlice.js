@@ -10,7 +10,7 @@ import auth from "../../firebase/firebase.config";
 // Thunks for async actions
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
-  async ({ email, password, userInfo }) => {
+  async ({ email, password, userInfo }, { rejectWithValue }) => {
     // console.log(userInfo);
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -30,24 +30,32 @@ export const registerUser = createAsyncThunk(
 
       return response.data.user;
     } catch (error) {
-      return error.message || "Registration failed";
+      return rejectWithValue(
+        error.code === "auth/email-already-in-use"
+          ? "This email is already registered"
+          : "Registration failed: " + error.message
+      );
     }
   }
 );
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async ({ email, password }) => {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+  async ({ email, password }, { rejectWithValue }) => {
     try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       await axios.patch("http://localhost:3000/update-last-login", { email });
       return userCredential.user;
     } catch (error) {
-      console.log(error.message);
+      return rejectWithValue(
+        error.code === "auth/invalid-credential"
+          ? "Incorrect Email/Password"
+          : "Login failed: " + error.message
+      );
     }
   }
 );
@@ -82,7 +90,7 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
 
       // login
@@ -96,7 +104,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
 
       // logout

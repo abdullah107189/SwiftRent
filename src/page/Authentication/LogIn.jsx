@@ -15,12 +15,7 @@ const Login = () => {
     showPassword,
     togglePasswordVisibility,
     onSubmit,
-  } = useAuthForm((data) =>
-    loginUser({
-      email: data.email,
-      password: data.password,
-    })
-  );
+  } = useAuthForm(loginUser);
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
@@ -104,6 +99,11 @@ const Login = () => {
                 </a>
               </div>
             </div>
+
+            {/* Show error message in UI
+            {error && (
+              <p className="text-red-500 text-sm text-center">{error}</p>
+            )} */}
 
             <div>
               <button

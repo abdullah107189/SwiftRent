@@ -8,9 +8,9 @@ import CarPromoVideo from "./CarPromoVideo";
 import NumberCard from "../../components/shared/card/NumberCard";
 import { DollarSign, X } from "lucide-react";
 import { IoFilter } from "react-icons/io5";
+import useGetCars from "../../hooks/useGetCars";
 
 const Services = () => {
-  const [cars, setCars] = useState([]);
   const [search, setSearch] = useState("");
   const [filterBrand, setFilterBrand] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100000]);
@@ -18,15 +18,17 @@ const Services = () => {
   const [fuelType, setFuelType] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [sortOption, setSortOption] = useState("default");
-
   const filterRef = useRef(null);
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/cars`)
-      .then((res) => res.json())
-      .then((data) => setCars(data))
-      .catch((error) => console.error("Error fetching cars:", error));
-  }, []);
+  const { cars } = useGetCars(
+    { search },
+    { filterBrand },
+    { priceRange },
+    { carType },
+    { fuelType },
+    { sortOption }
+  );
+  console.log(cars);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,9 +36,7 @@ const Services = () => {
         setShowFilter(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -49,23 +49,6 @@ const Services = () => {
     setCarType([]);
     setFuelType([]);
   };
-
-  const filteredCars = cars
-    .filter((car) => car.name.toLowerCase().includes(search.toLowerCase()))
-    .filter((car) =>
-      filterBrand.length ? filterBrand.includes(car.brand) : true
-    )
-    .filter((car) => (carType.length ? carType.includes(car.type) : true))
-    .filter((car) => (fuelType.length ? fuelType.includes(car.fuel) : true))
-    .filter((car) => car.price >= priceRange[0] && car.price <= priceRange[1]);
-
-  const sortedCars = [...filteredCars].sort((a, b) => {
-    if (sortOption === "priceAsc") return a.price - b.price;
-    if (sortOption === "priceDesc") return b.price - a.price;
-    if (sortOption === "nameAsc") return a.name.localeCompare(b.name);
-    if (sortOption === "nameDesc") return b.name.localeCompare(a.name);
-    return 0;
-  });
 
   const toggleFilterOption = (filter, setFilter) => {
     setFilter((prev) =>
@@ -88,7 +71,7 @@ const Services = () => {
       {/* Filter Button */}
       <div className="mxw flex justify-between items-center p-4 rounded-lg mt-16  mb-1 ">
         <h2 className="text-white text-xl font-bold">
-          {filteredCars.length} Results for Cars
+          {cars.length} Results for Cars
         </h2>
 
         <div className="flex items-center gap-4 text-[12px] p-4">
@@ -98,7 +81,7 @@ const Services = () => {
             onChange={(e) => setSortOption(e.target.value)}
           >
             <option value="default">Sort By</option>
-            <option value="priceAsc">Price: Low to High</option>
+            <option value="priceAsc ">Price: Low to High</option>
             <option value="priceDesc">Price: High to Low</option>
             <option value="nameAsc">Name: A to Z</option>
             <option value="nameDesc">Name: Z to A</option>
@@ -117,8 +100,8 @@ const Services = () => {
       {/* Main Content */}
       <div className="mxw grid grid-cols-1 md:grid-cols-5 gap-6 mb-16 ">
         <div
-          ref={filterRef} // Added ref to the filter section
-          className={`fixed mt-15 md:mt-0 text-[12px] md:static top-0 left-0 w-72 h-full md:w-auto md:h-auto bg-[#141313] p-6 rounded-lg transition-transform ${
+          ref={filterRef}
+          className={`fixed mt-15 md:mt-0 text-[12px] md:sticky top-20 left-0 w-72 h-full md:w-auto md:h-[600px] sBgBlack p-6 rounded-lg transition-transform ${
             showFilter ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0 z-40`}
         >
@@ -136,9 +119,8 @@ const Services = () => {
             placeholder="Search cars..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-2 mb-4 rounded bg-gray-900 text-white cursor-pointer"
+            className="w-full p-2 mb-2 block bg-[#222222] text-gray-400 border border-tBgBlack rounded-full focus:outline-none focus:ring-0"
           />
-
           {/* Brand Filter with Checkboxes */}
           <div className="mb-4 text-white ">
             <h4 className="mb-2">Select Brand</h4>
@@ -187,7 +169,6 @@ const Services = () => {
               >
                 <input
                   type="checkbox"
-                  checked={fuelType.includes(fuel)}
                   onChange={() => toggleFilterOption(fuel, setFuelType)}
                   className="accent-[#F5B754] cursor-pointer"
                 />
@@ -206,7 +187,25 @@ const Services = () => {
               min="0"
               max="100000"
               value={priceRange[0]}
-              onChange={(e) => setPriceRange([e.target.value, priceRange[1]])}
+              onChange={(e) =>
+                setPriceRange([
+                  Math.min(Number(e.target.value), priceRange[1]),
+                  priceRange[1],
+                ])
+              }
+              className="w-full accent-[#F5B754] cursor-pointer"
+            />
+            <input
+              type="range"
+              min="0"
+              max="100000"
+              value={priceRange[1]}
+              onChange={(e) =>
+                setPriceRange([
+                  priceRange[0],
+                  Math.max(Number(e.target.value), priceRange[0]),
+                ])
+              }
               className="w-full accent-[#F5B754] cursor-pointer"
             />
           </div>
@@ -221,8 +220,8 @@ const Services = () => {
 
         {/* Car Cards */}
         <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
-          {sortedCars.length > 0 ? (
-            sortedCars.map((car, index) => (
+          {cars.length > 0 ? (
+            cars.map((car, index) => (
               <NumberCard
                 key={car._id}
                 image={car.image || "https://via.placeholder.com/300"}

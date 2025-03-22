@@ -3,14 +3,15 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signInWithPopup } from "firebase/auth";
-import auth, {  googleProvider } from "../../firebase/firebase.config";
+import auth, { googleProvider } from "../../firebase/firebase.config";
 import Swal from "sweetalert2";
 import { setUser } from "../../redux/auth/authSlice";
-
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const GoogleLogIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const axiosPublic = useAxiosPublic();
 
   const handleGoogleLogin = async () => {
     try {
@@ -21,9 +22,12 @@ const GoogleLogIn = () => {
       const userData = {
         uid: user.uid,
         email: user.email,
-        userName: user.displayName,
+        name: user.displayName,
         photoURL: user.photoURL,
       };
+
+      // Sending user data to the server
+      await axiosPublic.post("/add-user", userData);
 
       // Setting up users in Redux
       dispatch(setUser(userData));

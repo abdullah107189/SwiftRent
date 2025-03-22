@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../components/common/Header';
@@ -6,26 +7,40 @@ import useAxiosePublic from '../hooks/useAxiosePublic';
 
 import Swal from 'sweetalert2';
 
+=======
+import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import Header from "../components/common/Header";
+import { imageUpload } from "../components/CarImageUploade/imageUpload";
+import useAxiosePublic from "../hooks/useAxiosPublic";
+import Spinner from "../components/Spinner";
+import Swal from "sweetalert2";
+>>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
 const AddToCar = () => {
   const axiosPublic = useAxiosePublic();
   const [carData, setCarData] = useState({
-    name: '',
-    brand: '',
-    type: '',
-    year: '',
-    transmission: '',
-    seats: '',
-    fuel: '',
+    name: "",
+    brand: "",
+    type: "",
+    year: "",
+    transmission: "",
+    seats: "",
+    fuel: "",
     location: {
-      city: '',
-      pickupPoint: '',
-      dropOffPoint: '',
+      city: "",
+      pickupPoint: "",
+      dropOffPoint: "",
     },
+<<<<<<< HEAD
     availability: 'Available',
+=======
+    availability: "",
+>>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
     features: [],
-    price: '',
-    image: ['', '', ''],
+    price: "",
+    image: ["", "", ""],
   });
+<<<<<<< HEAD
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -36,10 +51,23 @@ const AddToCar = () => {
         location: {
           ...prevState.location,
           [locationField]: value,
+=======
+  if (loading) {
+    return <Spinner />;
+  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name.includes("location")) {
+      setCarData((prevState) => ({
+        ...prevState,
+        location: {
+          ...prevState.location,
+          [name.split(".")[1]]: value,
+>>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
         },
       }));
     } else {
-      setCarData(prevState => ({ ...prevState, [name]: value }));
+      setCarData((prevState) => ({ ...prevState, [name]: value }));
     }
   };
 
@@ -50,7 +78,7 @@ const AddToCar = () => {
 
     const uploadedUrl = await imageUpload(imageCarUpload);
     if (uploadedUrl) {
-      setCarData(prevData => {
+      setCarData((prevData) => {
         const updatedImages = [...prevData.image];
         updatedImages[index] = uploadedUrl;
         return { ...prevData, image: updatedImages };
@@ -58,44 +86,55 @@ const AddToCar = () => {
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(carData);
 
     try {
+<<<<<<< HEAD
       const car = await axiosPublic.post('/add-car', carData);
+=======
+      setLoading(true);
+      const car = await axiosPublic.post("/add-car", carData);
+>>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
 
       console.log(car);
 
       // Success Alert
       Swal.fire({
-        title: 'Success!',
-        text: 'Car added successfully!',
-        icon: 'success',
-        confirmButtonText: 'OK',
+        title: "Success!",
+        text: "Car added successfully!",
+        icon: "success",
+        confirmButtonText: "OK",
       });
     } catch (error) {
       console.log(error);
 
       // Error Alert
       Swal.fire({
-        title: 'Error!',
-        text: 'Failed to add car. Please try again.',
-        icon: 'error',
-        confirmButtonText: 'OK',
+        title: "Error!",
+        text: "Failed to add car. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
       });
+<<<<<<< HEAD
       setCarData('');
+=======
+      setCarData("");
+    } finally {
+      setLoading(false);
+>>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
     }
   };
 
   return (
     <div className="min-h-screen text-white">
       <Header title="Add to Car" />
-      <div className="px-8">
+      <div className="px-4 pb-4">
         <h1 className="text-2xl font-bold pt-4 mb-8 text-center">
           Add Car Details
         </h1>
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Car Name and Brand */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -131,9 +170,8 @@ const AddToCar = () => {
                 </label>
                 <input
                   type="file"
-                  onChange={e => handleImageChange(e, index)}
+                  onChange={(e) => handleImageChange(e, index)}
                   className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-                  required
                 />
               </div>
             ))}

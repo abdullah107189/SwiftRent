@@ -7,10 +7,10 @@ import { FaWhatsapp } from "react-icons/fa";
 
 export default function DetailsLeft() {
   return (
-    <div className="bg-rose-50/30 p-6 rounded-2xl shadow-md w-90  ">
+    <div className="bg-rose-50/30 p-6 rounded-3xl shadow-md md:w-90  ">
       {/* Price Section */}
-      <h2 className="text-4xl font-extrabold text-white">
-        $139 <span className="text-2xl">/Per Day</span>
+      <h2 className="text-4xl font-extrabold orange">
+        $139 <span className="text-2xl text-white ">/Per Day</span>
       </h2>
 
       <hr className="my-4" />
@@ -59,11 +59,11 @@ export default function DetailsLeft() {
 
       {/* Booking Buttons */}
       <div className="flex items-center gap-4">
-        <button className="bg-red-500 text-white text-lg font-semibold px-6 py-3 rounded-full flex items-center gap-3 hover:bg-red-600">
+        <button className="fillBtn">
           Book Now <BsArrowUpRight size={22} />
         </button>
         <span className="text-xl font-bold">OR</span>
-        <button className="bg-green-500 text-white p-4 rounded-full hover:bg-green-600">
+        <button className="bgOrange text-white p-3 rounded-full hover:bg-green-600">
           <FaWhatsapp size={24} />
         </button>
       </div>

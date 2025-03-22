@@ -1,45 +1,27 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import loginImage from "../../assets/login.png";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../redux/auth/authSlice";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import GoogleLogIn from "./GoogleLogIn";
+import useAuthForm from "../../hooks/useAuthForm";
+import { loginUser } from "../../redux/auth/authSlice";
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { loading } = useSelector((state) => state.auth);
-  const from = location.state?.from?.pathname || "/";
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    errors,
+    loading,
+    showPassword,
+    togglePasswordVisibility,
+    onSubmit,
+  } = useAuthForm((data) =>
+    loginUser({
+      email: data.email,
+      password: data.password,
+    })
+  );
 
-  const onSubmit = async (data) => {
-    const resultAction = await dispatch(
-      loginUser({
-        email: data.email,
-        password: data.password,
-      })
-    );
-    if (resultAction.meta.requestStatus === "fulfilled") {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Login successfully.",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      navigate(from, { replace: true });
-    } else {
-      console.error("Sign up failed:", resultAction.payload);
-    }
-  };
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
       <div className="flex flex-col lg:flex-row max-w-4xl w-full rounded-md overflow-hidden">
@@ -61,7 +43,7 @@ const Login = () => {
                 <span className="text-[#f5b754]">R</span>ent
               </span>
             </h1>
-            <p className=" text-gray-200">Welcome back!</p>
+            <p className="text-gray-200">Welcome back!</p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
@@ -71,6 +53,7 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
+                  id="email"
                   {...register("email", { required: "Email is required" })}
                   placeholder="Enter Your Email"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
@@ -83,18 +66,32 @@ const Login = () => {
                 <label htmlFor="password" className="text-sm mb-2 block">
                   Password
                 </label>
-                <input
-                  type="password"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters",
-                    },
-                  })}
-                  placeholder="*******"
-                  className="w-[300px] px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters",
+                      },
+                    })}
+                    placeholder="Enter Your Password Here"
+                    className="w-[300px] px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
+                  >
+                    {showPassword ? (
+                      <AiOutlineEyeInvisible size={20} />
+                    ) : (
+                      <AiOutlineEye size={20} />
+                    )}
+                  </button>
+                </div>
                 {errors.password && (
                   <p className="text-red-500 text-sm">
                     {errors.password.message}
@@ -111,7 +108,12 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="bgOrange hover:bg-[#f5b754ef] w-full rounded-md py-3 text-white"
+                className={`bgOrange w-full rounded-md py-3 text-white ${
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-[#f5b754ef]"
+                }`}
+                disabled={loading}
               >
                 {loading ? "Loading..." : "Login"}
               </button>
@@ -124,9 +126,9 @@ const Login = () => {
             </p>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-500"></div>
           </div>
-          <GoogleLogIn></GoogleLogIn>
+          <GoogleLogIn />
           <p className="px-6 text-sm text-center text-gray-200">
-            Don&apos;t have an account yet?{" "}
+            Don't have an account yet?{" "}
             <Link
               to="/register"
               className="hover:underline hover:text-[#f5b754ef] text-gray-200"

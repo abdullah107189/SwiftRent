@@ -11,14 +11,10 @@ const Header = ({ title }) => {
           <div tabIndex={0} role="button" className="cursor-pointer avatar">
             <div className="w-8 rounded-full">
               <img
-                onClick={() => setOpen(!open)} // setIsOpen => setOpen
-                src="https://simgbb.com/avatar/dJqZjDSZwR5z.png"
-                alt=""
-                className="size-10 object-cover cursor-pointer"
                 onClick={() => setIsOpen(!open)}
                 src="https://simgbb.com/avatar/dJqZjDSZwR5z.png"
                 alt=""
-                class="size-10 object-cover cursor-pointer"
+                className="size-10 object-cover cursor-pointer"
               />
             </div>
           </div>
@@ -30,13 +26,7 @@ const Header = ({ title }) => {
             <div className="p-2">
               <a
                 href="#"
-                className="block rounded-lg px-4 py-2 text-sm text-gray-500 "
-
-            <div class="p-2">
-              <a
-                href="#"
                 class="block rounded-lg px-4 py-2 text-sm text-gray-500 "
-
                 role="menuitem"
               >
                 My profile
@@ -49,7 +39,7 @@ const Header = ({ title }) => {
           <button
             type="button"
             className="overflow-hidden rounded-full border border-gray-300 shadow-inner"
-            onClick={() => setOpen(!open)}
+            onClick={() => setIsOpen(!open)}
           >
             <span className="sr-only">Toggle dashboard menu</span>
             <img

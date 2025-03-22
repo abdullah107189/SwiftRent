@@ -235,9 +235,11 @@ const Services = () => {
             sortedCars.map((car, index) => (
               <NumberCard
                 key={car._id}
-                image={car.image[0] || "https://via.placeholder.com/300"} // প্রথম ছবি ব্যবহৃত হচ্ছে
+                image={car.image[0] || "https://via.placeholder.com/300"}
                 name={car.name}
                 number={(index + 1).toString().padStart(2, "0")}
+                brand={car.brand}
+                price={car.price}
               />
             ))
           ) : (

@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "./useAuth";
+import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from './useAuth';
 
 const axiosSecure = axios.create({
   baseURL: `${import.meta.env.VITE_BASEURL}`,
@@ -12,7 +12,7 @@ const useAxiosSecure = () => {
 
   axiosSecure.interceptors.request.use(
     function (config) {
-      const token = localStorage.getItem("access-token");
+      const token = localStorage.getItem('access-token');
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
@@ -22,12 +22,12 @@ const useAxiosSecure = () => {
   );
 
   axiosSecure.interceptors.response.use(
-    (res) => {
+    res => {
       return res;
     },
-    (error) => {
+    error => {
       if (error.response.status === 403 || error.response.status === 401) {
-        navigate("/login", { state: { location }, replace: true });
+        navigate('/login', { state: { location }, replace: true });
         logoutUser();
       }
       return Promise.reject(error);

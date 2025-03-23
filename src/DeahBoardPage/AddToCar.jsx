@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
-import Header from '../components/common/Header';
-import { imageUpload } from '../components/CarImageUploade/imageUpload';
-import useAxiosePublic from '../hooks/useAxiosePublic';
-
-import Swal from 'sweetalert2';
-
-=======
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Header from "../components/common/Header";
@@ -15,7 +5,6 @@ import { imageUpload } from "../components/CarImageUploade/imageUpload";
 import useAxiosePublic from "../hooks/useAxiosPublic";
 import Spinner from "../components/Spinner";
 import Swal from "sweetalert2";
->>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
 const AddToCar = () => {
   const axiosPublic = useAxiosePublic();
   const [carData, setCarData] = useState({
@@ -31,27 +20,11 @@ const AddToCar = () => {
       pickupPoint: "",
       dropOffPoint: "",
     },
-<<<<<<< HEAD
-    availability: 'Available',
-=======
     availability: "",
->>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
     features: [],
     price: "",
     image: ["", "", ""],
   });
-<<<<<<< HEAD
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    if (name.includes('location')) {
-      const locationField = name.split('.')[1];
-      setCarData(prevState => ({
-        ...prevState,
-        location: {
-          ...prevState.location,
-          [locationField]: value,
-=======
   if (loading) {
     return <Spinner />;
   }
@@ -63,7 +36,6 @@ const AddToCar = () => {
         location: {
           ...prevState.location,
           [name.split(".")[1]]: value,
->>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
         },
       }));
     } else {
@@ -91,12 +63,8 @@ const AddToCar = () => {
     console.log(carData);
 
     try {
-<<<<<<< HEAD
-      const car = await axiosPublic.post('/add-car', carData);
-=======
       setLoading(true);
       const car = await axiosPublic.post("/add-car", carData);
->>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
 
       console.log(car);
 
@@ -117,13 +85,9 @@ const AddToCar = () => {
         icon: "error",
         confirmButtonText: "OK",
       });
-<<<<<<< HEAD
-      setCarData('');
-=======
       setCarData("");
     } finally {
       setLoading(false);
->>>>>>> f00b61d29c7a311281fb746c6088badb7b581913
     }
   };
 

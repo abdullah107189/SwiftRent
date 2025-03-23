@@ -19,8 +19,8 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="flex w-full max-w-7xl my-7 rounded-md overflow-hidden gap-10">
-        {/* Left side -  */}
+      <div className="flex w-full max-w-7xl rounded-md overflow-hidden gap-10">
+        {/* Left side */}
         <div className="md:block hidden md:w-2/3 h-screen">
           <img
             src={loginImage}
@@ -29,7 +29,7 @@ const Login = () => {
           />
         </div>
 
-        {/* Right side - Form (1/3 on large screens, full width on mobile) */}
+        {/* Right side */}
         <div className="flex flex-col md:w-1/3 w-full p-6 text-gray-200 items-center justify-center mx-auto md:bg-transparent">
           <div className="mb-6 text-center">
             <h1 className="my-3 text-4xl font-bold">

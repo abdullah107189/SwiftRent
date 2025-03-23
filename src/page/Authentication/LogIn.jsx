@@ -20,7 +20,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex w-full max-w-7xl my-7 rounded-md overflow-hidden gap-10">
-        {/* Left side - Image (2/3 on large screens, hidden on mobile) */}
+        {/* Left side -  */}
         <div className="md:block hidden md:w-2/3 h-screen">
           <img
             src={loginImage}

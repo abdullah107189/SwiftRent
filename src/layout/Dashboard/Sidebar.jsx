@@ -32,9 +32,10 @@ const menuItems = {
   ],
 
   customer: [
+    { name: 'Dashboard', path: 'overview', icon: FaTachometerAlt },
     { name: 'Browse Cars', path: 'browse-cars', icon: FaCar },
     { name: 'My Bookings', path: 'my-bookings', icon: FaShoppingCart },
-    { name: 'Give Review', path: 'reviews', icon: FaStar },
+    // { name: 'Give Review', path: 'reviews', icon: FaStar },
     { name: 'Payment History', path: 'payments', icon: FaMoneyBill },
     { name: 'Update Profile', path: 'profile', icon: FaUser },
     { name: 'Settings', path: 'settings', icon: Settings },

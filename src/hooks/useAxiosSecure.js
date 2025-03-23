@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useAuthForm from './useAuthForm';
 // import useAuth from './useAuth';
 
 const axiosSecure = axios.create({
   baseURL: `${import.meta.env.VITE_BASEURL}`,
 });
 const useAxiosSecure = () => {
-  const { logoutUser } = useAuth();
+  const { logoutUser } = useAuthForm();
   const location = useLocation();
   const navigate = useNavigate();
 

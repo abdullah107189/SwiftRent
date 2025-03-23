@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { FaUser, FaSave, FaUpload, FaTrash } from 'react-icons/fa';
 import Header from '../../components/common/Header';
-import { useSelector } from 'react-redux';
 
 const UpdateProfile = () => {
-  const { users } = useSelector(state => state.auth);
   const [user, setUser] = useState({
     firstName: 'Ali',
     lastName: 'Tufan',
@@ -79,9 +77,9 @@ const UpdateProfile = () => {
             <form onSubmit={handleSubmit} className="space-y-6 w-full">
               <div className="text-center">
                 <label htmlFor="profilePic" className="cursor-pointer">
-                  {users?.photoURL ? (
+                  {user.profilePic ? (
                     <img
-                      src={users?.photoURL}
+                      src={user.profilePic}
                       alt="Profile"
                       className="w-16 h-16 rounded-full mx-auto border-4 border-blue-500 object-cover"
                     />

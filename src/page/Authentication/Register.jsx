@@ -1,56 +1,34 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import registerImg from "../../assets/register.jpeg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../redux/auth/authSlice";
 import GoogleLogIn from "./GoogleLogIn";
+import useAuthForm from "../../hooks/useAuthForm";
+import { registerUser } from "../../redux/auth/authSlice";
+
 const Register = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { loading } = useSelector((state) => state.auth);
-
-  // Added state for password visibility
-  const [showPassword, setShowPassword] = useState(false);
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = async (data) => {
-    const resultAction = await dispatch(
-      registerUser({
+    errors,
+    loading,
+    showPassword,
+    togglePasswordVisibility,
+    onSubmit,
+  } = useAuthForm((data) =>
+    registerUser({
+      email: data.email,
+      password: data.password,
+      userInfo: {
+        name: data.name,
         email: data.email,
-        password: data.password,
-        userInfo: {
-          name: data.name,
-          email: data.email,
-        },
-      })
-    );
-
-    if (resultAction.meta.requestStatus === "fulfilled") {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "User created successfully.",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      navigate("/");
-    } else {
-      console.error("Sign up failed:", resultAction.payload);
-    }
-  };
+      },
+    })
+  );
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
-      <div className="flex flex-col lg:flex-row max-w-4xl w-full  rounded-md  overflow-hidden">
-        {/* Left side - Image */}
+      <div className="flex flex-col lg:flex-row max-w-4xl w-full rounded-md overflow-hidden">
         <div className="hidden lg:block w-1/2">
           <img
             src={registerImg}
@@ -58,14 +36,12 @@ const Register = () => {
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* Right side - Form */}
-        <div className="flex flex-col max-w-md lg:w-full p-6  sBgBlack text-gray-200 items-center justify-center mx-auto rounded-xl lg:rounded-none">
+        <div className="flex flex-col max-w-md lg:w-full p-6 sBgBlack text-gray-200 items-center justify-center mx-auto rounded-xl lg:rounded-none">
           <div className="mb-8 text-center">
             <h1 className="my-3 text-4xl font-bold">Register</h1>
             <p className="text-sm text-gray-200">
               Welcome to{" "}
-              <span className=" font-black text-white">
+              <span className="font-black text-white">
                 <span className="text-[#f5b754]">S</span>wift
                 <span className="text-[#f5b754]">R</span>ent
               </span>
@@ -83,7 +59,6 @@ const Register = () => {
                   {...register("name", { required: "Name is required" })}
                   placeholder="Enter Your Name Here"
                   className="w-[300px] px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
-                  required
                 />
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">
@@ -131,7 +106,7 @@ const Register = () => {
                   />
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={togglePasswordVisibility}
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
                   >
                     {showPassword ? (
@@ -169,9 +144,9 @@ const Register = () => {
             </p>
             <div className="flex-1 h-px sm:w-7 dark:bg-gray-500"></div>
           </div>
-          <GoogleLogIn></GoogleLogIn>
+          <GoogleLogIn />
           <p className="px-6 text-sm text-center text-gray-200">
-            Don't have an account yet?{" "}
+            Already have an account?{" "}
             <Link
               to="/login"
               className="hover:underline hover:text-[#f5b754ef] text-gray-200"

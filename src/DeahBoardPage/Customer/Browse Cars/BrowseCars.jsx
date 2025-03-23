@@ -48,10 +48,8 @@ const BrowseCars = () => {
                 className="w-full h-40 object-cover rounded-md"
               />
               <div className="mt-4">
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {car.name}
-                </h2>
-                <p className="text-gray-600">{car.price}</p>
+                <h2 className="text-xl font-semibold text-white">{car.name}</h2>
+                <p className="text-white">{car.price}</p>
                 <button className="mt-3 px-4 py-2 fillBtn">Rent Now</button>
               </div>
             </div>

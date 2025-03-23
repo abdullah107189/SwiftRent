@@ -14,7 +14,7 @@ import UsersPage from '../DeahBoardPage/Users/UsersPage';
 import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
 import Analytics from '../DeahBoardPage/Analytics/Analytics';
 import SettingsPage from '../DeahBoardPage/SettingsPage/SettingsPage';
-import Profile from '../DeahBoardPage/SettingsPage/Profile ';
+
 import CarDetails from '../components/Home/HeroSection/CardDetils';
 import BrowseCars from '../DeahBoardPage/Customer/Browse Cars/BrowseCars';
 import MyBookings from '../DeahBoardPage/Customer/MyBookings/MyBookings';

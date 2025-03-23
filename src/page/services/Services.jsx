@@ -11,7 +11,6 @@ import { IoFilter } from "react-icons/io5";
 import useGetCars from "../../hooks/useGetCars";
 
 const Services = () => {
-  const { cars } = useGetCars();
   const [search, setSearch] = useState("");
   const [filterBrand, setFilterBrand] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100000]);
@@ -21,15 +20,23 @@ const Services = () => {
   const [sortOption, setSortOption] = useState("default");
   const filterRef = useRef(null);
 
+  const { cars } = useGetCars(
+    { search },
+    { filterBrand },
+    { priceRange },
+    { carType },
+    { fuelType },
+    { sortOption }
+  );
+  console.log(cars);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (filterRef.current && !filterRef.current.contains(event.target)) {
         setShowFilter(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -42,23 +49,6 @@ const Services = () => {
     setCarType([]);
     setFuelType([]);
   };
-
-  const filteredCars = cars
-    .filter((car) => car.name.toLowerCase().includes(search.toLowerCase()))
-    .filter((car) =>
-      filterBrand.length ? filterBrand.includes(car.brand) : true
-    )
-    .filter((car) => (carType.length ? carType.includes(car.type) : true))
-    .filter((car) => (fuelType.length ? fuelType.includes(car.fuel) : true))
-    .filter((car) => car.price >= priceRange[0] && car.price <= priceRange[1]);
-
-  const sortedCars = [...filteredCars].sort((a, b) => {
-    if (sortOption === "priceAsc") return a.price - b.price;
-    if (sortOption === "priceDesc") return b.price - a.price;
-    if (sortOption === "nameAsc") return a.name.localeCompare(b.name);
-    if (sortOption === "nameDesc") return b.name.localeCompare(a.name);
-    return 0;
-  });
 
   const toggleFilterOption = (filter, setFilter) => {
     setFilter((prev) =>
@@ -81,7 +71,7 @@ const Services = () => {
       {/* Filter Button */}
       <div className="mxw flex justify-between items-center p-4 rounded-lg mt-16  mb-1 ">
         <h2 className="text-white text-xl font-bold">
-          {filteredCars.length} Results for Cars
+          {cars.length} Results for Cars
         </h2>
 
         <div className="flex items-center gap-4 text-[12px] p-4">
@@ -179,7 +169,6 @@ const Services = () => {
               >
                 <input
                   type="checkbox"
-                  checked={fuelType.includes(fuel)}
                   onChange={() => toggleFilterOption(fuel, setFuelType)}
                   className="accent-[#F5B754] cursor-pointer"
                 />
@@ -231,13 +220,15 @@ const Services = () => {
 
         {/* Car Cards */}
         <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
-          {sortedCars.length > 0 ? (
-            sortedCars.map((car, index) => (
+          {cars.length > 0 ? (
+            cars.map((car, index) => (
               <NumberCard
                 key={car._id}
-                image={car.image[0] || "https://via.placeholder.com/300"} // প্রথম ছবি ব্যবহৃত হচ্ছে
+                image={car.image[0] || "https://via.placeholder.com/300"}
                 name={car.name}
                 number={(index + 1).toString().padStart(2, "0")}
+                brand={car.brand}
+                price={car.price}
               />
             ))
           ) : (

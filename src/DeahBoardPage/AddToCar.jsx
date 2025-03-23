@@ -1,57 +1,56 @@
-import { useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
-import Header from "../components/common/Header";
-import { imageUpload } from "../components/CarImageUploade/imageUpload";
-import useAxiosePublic from "../hooks/useAxiosPublic";
-import Spinner from "../components/Spinner";
-import Swal from "sweetalert2";
+import { useState } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
+import Header from '../components/common/Header';
+import { imageUpload } from '../components/CarImageUploade/imageUpload';
+import useAxiosePublic from '../hooks/useAxiosPublic';
+
+import Swal from 'sweetalert2';
+
 const AddToCar = () => {
-  const [loading, setLoading] = useState(false);
   const axiosPublic = useAxiosePublic();
   const [carData, setCarData] = useState({
-    name: "",
-    brand: "",
-    type: "",
-    year: "",
-    transmission: "",
-    seats: "",
-    fuel: "",
+    name: '',
+    brand: '',
+    type: '',
+    year: '',
+    transmission: '',
+    seats: '',
+    fuel: '',
     location: {
-      city: "",
-      pickupPoint: "",
-      dropOffPoint: "",
+      city: '',
+      pickupPoint: '',
+      dropOffPoint: '',
     },
-    availability: "",
+    availability: 'Available',
     features: [],
-    price: "",
-    image: ["", "", ""],
+    price: '',
+    image: ['', '', ''],
   });
-  if (loading) {
-    return <Spinner />;
-  }
-  const handleChange = (e) => {
+
+  const handleChange = e => {
     const { name, value } = e.target;
-    if (name.includes("location")) {
-      setCarData((prevState) => ({
+    if (name.includes('location')) {
+      const locationField = name.split('.')[1];
+      setCarData(prevState => ({
         ...prevState,
         location: {
           ...prevState.location,
-          [name.split(".")[1]]: value,
+          [locationField]: value,
         },
       }));
     } else {
-      setCarData((prevState) => ({ ...prevState, [name]: value }));
+      setCarData(prevState => ({ ...prevState, [name]: value }));
     }
   };
 
   const handleImageChange = async (e, index) => {
     const imageCarUpload = e.target.files[0];
-    console.log(imageCarUpload);
+
     if (!imageCarUpload) return;
 
     const uploadedUrl = await imageUpload(imageCarUpload);
     if (uploadedUrl) {
-      setCarData((prevData) => {
+      setCarData(prevData => {
         const updatedImages = [...prevData.image];
         updatedImages[index] = uploadedUrl;
         return { ...prevData, image: updatedImages };
@@ -59,36 +58,33 @@ const AddToCar = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     console.log(carData);
 
     try {
-      setLoading(true);
-      const car = await axiosPublic.post("/add-car", carData);
+      const car = await axiosPublic.post('/add-car', carData);
 
       console.log(car);
 
       // Success Alert
       Swal.fire({
-        title: "Success!",
-        text: "Car added successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
+        title: 'Success!',
+        text: 'Car added successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK',
       });
     } catch (error) {
       console.log(error);
 
       // Error Alert
       Swal.fire({
-        title: "Error!",
-        text: "Failed to add car. Please try again.",
-        icon: "error",
-        confirmButtonText: "OK",
+        title: 'Error!',
+        text: 'Failed to add car. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
       });
-      setCarData("");
-    } finally {
-      setLoading(false);
+      setCarData('');
     }
   };
 
@@ -135,7 +131,7 @@ const AddToCar = () => {
                 </label>
                 <input
                   type="file"
-                  onChange={(e) => handleImageChange(e, index)}
+                  onChange={e => handleImageChange(e, index)}
                   className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
                 />
               </div>
@@ -222,6 +218,46 @@ const AddToCar = () => {
                 required
               />
             </div>
+          </div>
+
+          {/* Location Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium mb-1">City</label>
+              <input
+                type="text"
+                name="location.city"
+                value={carData.location.city}
+                onChange={handleChange}
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Pickup Point
+              </label>
+              <input
+                type="text"
+                name="location.pickupPoint"
+                value={carData.location.pickupPoint}
+                onChange={handleChange}
+                className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Drop-off Point */}
+          <div>
+            <input
+              type="text"
+              name="location.dropOffPoint"
+              placeholder="Drop-off Point"
+              value={carData.location.dropOffPoint}
+              onChange={handleChange}
+              className="w-full p-3 bg-[#f5b754]/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+            />
           </div>
 
           {/* Submit Button */}

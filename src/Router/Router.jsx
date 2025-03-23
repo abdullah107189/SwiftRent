@@ -15,6 +15,7 @@ import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
 import Analytics from '../DeahBoardPage/Analytics/Analytics';
 import SettingsPage from '../DeahBoardPage/SettingsPage/SettingsPage';
 import Profile from '../DeahBoardPage/SettingsPage/Profile ';
+import CarDetails from '../components/common/CarDetails/CarDetails';
 
 export const router = createBrowserRouter([
   {

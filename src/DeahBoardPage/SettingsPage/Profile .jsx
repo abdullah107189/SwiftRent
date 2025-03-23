@@ -1,26 +1,69 @@
 import { User } from 'lucide-react';
 import SettingSection from './SettingSection';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import imageUploade from '../../components/CarImageUploade/ImageChanges';
+import Header from '../../components/common/Header';
 
 const Profile = () => {
+  const { user } = useSelector(state => state.auth);
+  console.log(user?.displayName);
+  const dispatch = useDispatch();
+  const [image, setImage] = useState(user?.photoURL || '');
+  const [imageFile, setImageFile] = useState(null);
+  console.log(image, imageFile);
+  const handleImageChange = async e => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const uploadedImageUrl = await imageUploade(file);
+        setImage(uploadedImageUrl);
+        setImageFile(file);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    }
+  };
+  const handelEditProfile = () => {};
   return (
-    <SettingSection icon={User} title={'Profile'}>
-      <div className="flex flex-col sm:flex-row items-center mb-6">
-        <img
-          src="https://scontent.fjed5-1.fna.fbcdn.net/v/t39.30808-1/405446777_1330349001180200_5529436962829068080_n.jpg?stp=c0.15.1536.1536a_dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_ohc=REd_2O0i_XIQ7kNvgEdMLkp&_nc_oc=AdlMU-fep4f1-K9jN0gmVyb716uGnCurbCfJwXm91_HJq3CpWWvq5WKUyRuQGz08ZK7yStNeWwRxdB-NnwhGoKjh&_nc_zt=24&_nc_ht=scontent.fjed5-1.fna&_nc_gid=LKq_oE6kVSdILxcl0PrvLQ&oh=00_AYF7OWKMph0WxmxjBoY2ijkKyjUAyi2a_pGgm8K7ebk50A&oe=67DFBD8E"
-          alt="Profile"
-          className="rounded-full w-20 h-20 object-cover mr-4"
-        />
+    <>
+      <SettingSection icon={User} title={'Profile'}>
+        <div className="flex flex-col sm:flex-row items-center mb-6">
+          {/* Profile Image */}
+          <label htmlFor="file-upload" className="cursor-pointer">
+            <img
+              src={image}
+              alt="Profile"
+              referrerPolicy="no-referrer"
+              className="rounded-full w-20 h-20 object-cover mr-4"
+            />
+          </label>
 
-        <div>
-          <h3 className="text-lg font-semibold text-gray-100">IBRAHIM</h3>
-          <p className="text-gray-400">abc@example.com</p>
+          {/* Hidden file input */}
+          <input
+            type="file"
+            id="file-upload"
+            className="hidden"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+
+          <div>
+            <h3 className="text-lg font-semibold text-gray-100">
+              {user?.displayName}
+            </h3>
+            <p className="text-gray-400">{user?.email}</p>
+          </div>
         </div>
-      </div>
 
-      <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-200 w-full sm:w-auto">
-        Edit Profile
-      </button>
-    </SettingSection>
+        <button
+          onClick={handelEditProfile}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-200 w-full sm:w-auto"
+        >
+          Edit Profile
+        </button>
+      </SettingSection>
+    </>
   );
 };
 export default Profile;

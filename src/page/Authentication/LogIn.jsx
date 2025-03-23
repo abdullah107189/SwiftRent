@@ -18,10 +18,10 @@ const Login = () => {
   } = useAuthForm(loginUser);
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
-      <div className="flex flex-col lg:flex-row max-w-4xl w-full rounded-md overflow-hidden">
-        {/* Left side - Image */}
-        <div className="hidden lg:block w-1/2 bg-[#201e1e]">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="flex w-full max-w-7xl my-7 rounded-md overflow-hidden gap-10">
+        {/* Left side - Image (2/3 on large screens, hidden on mobile) */}
+        <div className="md:block hidden md:w-2/3 h-screen">
           <img
             src={loginImage}
             alt="Login"
@@ -29,9 +29,9 @@ const Login = () => {
           />
         </div>
 
-        {/* Right side - Form */}
-        <div className="flex flex-col max-w-md lg:w-full p-6 sBgBlack text-gray-200 items-center justify-center mx-auto rounded-xl lg:rounded-none">
-          <div className="mb-8 text-center">
+        {/* Right side - Form (1/3 on large screens, full width on mobile) */}
+        <div className="flex flex-col md:w-1/3 w-full p-6 text-gray-200 items-center justify-center mx-auto md:bg-transparent">
+          <div className="mb-6 text-center">
             <h1 className="my-3 text-4xl font-bold">
               <span className="font-black text-white">
                 <span className="text-[#f5b754]">S</span>wift
@@ -40,10 +40,13 @@ const Login = () => {
             </h1>
             <p className="text-gray-200">Welcome back!</p>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-4 w-full max-w-sm"
+          >
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="block mb-2 text-sm">
+                <label htmlFor="email" className="block mb-1 text-sm">
                   Email address
                 </label>
                 <input
@@ -58,7 +61,7 @@ const Login = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="password" className="text-sm mb-2 block">
+                <label htmlFor="password" className="text-sm mb-1 block">
                   Password
                 </label>
                 <div className="relative">
@@ -73,7 +76,7 @@ const Login = () => {
                       },
                     })}
                     placeholder="Enter Your Password Here"
-                    className="w-[300px] px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                    className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                   />
                   <button
                     type="button"
@@ -93,22 +96,17 @@ const Login = () => {
                   </p>
                 )}
               </div>
-              <div className="text-right mt-2">
+              <div className="text-right">
                 <a href="#" className="text-sm hover:underline text-[#f5b754]">
                   Forgot password?
                 </a>
               </div>
             </div>
 
-            {/* Show error message in UI
-            {error && (
-              <p className="text-red-500 text-sm text-center">{error}</p>
-            )} */}
-
             <div>
               <button
                 type="submit"
-                className={`bgOrange w-full rounded-md py-3 text-white ${
+                className={`bg-[#f5b754] w-full rounded-md py-3 text-white ${
                   loading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-[#f5b754ef]"
@@ -119,23 +117,19 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <div className="flex items-center pt-4 space-x-1">
-            <div className="flex-1 h-px sm:w-10 dark:bg-gray-500"></div>
-            <p className="px-3 text-sm dark:text-gray-300">
+          <div className="flex items-center py-10 space-x-1 w-full max-w-sm">
+            <div className="flex-1 h-px bg-gray-500"></div>
+            <p className="px-3 text-sm text-gray-300">
               Login with social accounts
             </p>
-            <div className="flex-1 h-px sm:w-16 dark:bg-gray-500"></div>
+            <div className="flex-1 h-px bg-gray-500"></div>
           </div>
           <GoogleLogIn />
-          <p className="px-6 text-sm text-center text-gray-200">
+          <p className="pt-5 text-sm text-center text-gray-200">
             Don't have an account yet?{" "}
-            <Link
-              to="/register"
-              className="hover:underline hover:text-[#f5b754ef] text-gray-200"
-            >
-              Create an account
+            <Link to="/register" className="underline orange hover:text-white">
+              Create an account.
             </Link>
-            .
           </p>
         </div>
       </div>

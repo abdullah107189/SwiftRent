@@ -58,7 +58,7 @@ const GoogleLogIn = () => {
   return (
     <div
       onClick={handleGoogleLogin}
-      className="flex justify-center items-center w-[300px] rounded-md space-x-2 border m-3 p-2 border-[#b88d47ef] border-rounded cursor-pointer hover:bg-gray-800 transition-colors"
+      className="flex justify-center items-center w-[220px]  rounded-md space-x-2 border m-3 p-2 border-[#b88d47ef] border-rounded cursor-pointer hover:bg-gray-800 transition-colors"
     >
       <FcGoogle size={32} />
       <p>Continue with Google</p>

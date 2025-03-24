@@ -23,36 +23,45 @@ import UpdateProfile from '../DeahBoardPage/UpdateProfile/UpdateProfile';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home></Home>,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <About></About>,
       },
       {
-        path: '/contact',
+        path: "/contact",
         element: <Contact />,
       },
       {
-        path: '/services',
+        path: "/services",
         element: <Services />,
       },
       {
-        path: '/car-details',
+        path: "/car-details/:id",
         element: <CarDetails />,
       },
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <Dashboard />,
     children: [
       { index: true, element: <Navigate to="overview" /> },
+      { path: "overview", element: <OverviewPage /> },
+      { path: "addcar", element: <AddToCar /> },
+
+      { path: "car-product", element: <CarProducatPage /> },
+      { path: "users", element: <UsersPage /> },
+      { path: "order", element: <OrdersPage /> },
+      { path: "analytics", element: <Analytics /> },
+
+      { path: "settings", element: <SettingsPage /> },
       { path: 'overview', element: <OverviewPage /> },
       { path: 'add-car', element: <AddToCar /> },
 
@@ -69,11 +78,11 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/register',
+    path: "/register",
     element: <Register />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <LogIn />,
   },
 ]);

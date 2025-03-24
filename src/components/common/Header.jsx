@@ -8,7 +8,7 @@ const Header = ({ title }) => {
   console.log(dispatch);
 
   return (
-    <header className=" px-2 bg-opacity-50 backdrop-blur-lg border-b border-gray-700 m sticky top-0 z-50 bolck ">
+    <header className=" px-2 bg-opacity-50 backdrop-blur-lg border-b border-gray-700 m sticky top-0 z-50 bolck py-2">
       <div className="flex justify-between items-center w-full">
         <h1 className="text-3xl mb-3 font-semibold">{title}</h1>
 

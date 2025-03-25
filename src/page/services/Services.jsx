@@ -28,7 +28,6 @@ const Services = () => {
     { fuelType },
     { sortOption }
   );
-  console.log(cars);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

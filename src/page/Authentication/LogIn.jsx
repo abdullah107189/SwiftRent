@@ -117,7 +117,7 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <div className="flex items-center py-10 space-x-1 w-full max-w-sm">
+          <div className="flex items-center pt-4 space-x-1 w-full max-w-sm">
             <div className="flex-1 h-px bg-gray-500"></div>
             <p className="px-3 text-sm text-gray-300">
               Login with social accounts

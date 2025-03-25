@@ -1,7 +1,9 @@
 import React from "react";
 import { FaTag } from "react-icons/fa"; // Importing FaTag from react-icons
+import { Link, useNavigate } from "react-router-dom";
 
-const NumberCard = ({ name, image, number, brand, price }) => {
+const NumberCard = ({ _id, name, image, number, brand, price }) => {
+  const navigate = useNavigate();
   return (
     <div className="relative  w-full h-[420px] rounded-3xl overflow-hidden group border border-gray-700 shadow-lg shadow-gray-900">
       {/* Image Section */}
@@ -67,7 +69,9 @@ const NumberCard = ({ name, image, number, brand, price }) => {
 
         {/* Buttons */}
         <div className="mt-3 flex gap-4 justify-center">
-          <button className="fillBtn">View Details</button>
+          <Link to={`/car-details/${_id}`} className="fillBtn">
+            View Details
+          </Link>
           <button className="outlineBtn">Book Now</button>
         </div>
       </div>

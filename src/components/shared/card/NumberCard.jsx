@@ -1,9 +1,8 @@
 import React from "react";
 import { FaTag } from "react-icons/fa"; // Importing FaTag from react-icons
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NumberCard = ({ _id, name, image, number, brand, price }) => {
-  const navigate = useNavigate();
   return (
     <div className="relative  w-full h-[420px] rounded-3xl overflow-hidden group border border-gray-700 shadow-lg shadow-gray-900">
       {/* Image Section */}

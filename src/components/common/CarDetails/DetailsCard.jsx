@@ -2,7 +2,7 @@ import React from "react";
 import DetailsLeft from "./DetailsLeft";
 import DetailsRight from "./DetailsRight";
 
-export default function DetailsCard({car}) {
+export default function DetailsCard({ car }) {
   return (
     <div className="grid py-16 grid-cols-12 gap-6">
       {/* Left Section - Sticky */}

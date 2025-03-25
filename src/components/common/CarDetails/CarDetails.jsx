@@ -10,22 +10,24 @@ export default function CarDetails() {
   const [loading, setLoading] = useState(true);
 
 
-  console.log(id)
-  useEffect(() => {
-    const fetchCarDetails = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/cars/${id}`); 
-        const data = await response.json();
-        setCar(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching car details:", error);
-        setLoading(false);
-      }
-    };
 
-    fetchCarDetails();
-  }, [id]);
+ useEffect(() => {
+   const fetchCarDetails = async () => {
+     try {
+       const response = await fetch(`http://localhost:3000/cars/${id}`);
+       const data = await response.json();
+       console.log("Fetched Car Data:", data); // এখানে ডাটা চেক করো
+       setCar(data);
+       setLoading(false);
+     } catch (error) {
+       console.error("Error fetching car details:", error);
+       setLoading(false);
+     }
+   };
+
+   fetchCarDetails();
+ }, [id]);
+
 
   if (loading) {
     return <p className="text-center text-white">Loading...</p>;
@@ -44,7 +46,6 @@ export default function CarDetails() {
         image={detaisImg}
       />
       <div className="mxw">
-        <div>h{car.name  }</div>
         <DetailsCard car={car} />
       </div>
     </div>

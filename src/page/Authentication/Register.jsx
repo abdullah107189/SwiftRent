@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import registerImg from "../../assets/register.jpeg";
+import registerImg from "../../assets/Sign up.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import GoogleLogIn from "./GoogleLogIn";
 import useAuthForm from "../../hooks/useAuthForm";
@@ -27,18 +27,18 @@ const Register = () => {
   );
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
-      <div className="flex flex-col lg:flex-row max-w-4xl w-full rounded-md overflow-hidden">
-        <div className="hidden lg:block w-1/2">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="flex w-full max-w-7xl rounded-md overflow-hidden gap-10">
+        <div className="md:block hidden md:w-2/3 h-screen">
           <img
             src={registerImg}
             alt="Register"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="flex flex-col max-w-md lg:w-full p-6 sBgBlack text-gray-200 items-center justify-center mx-auto rounded-xl lg:rounded-none">
+        <div className="flex flex-col md:w-1/3 w-full p-6 text-gray-200 items-center justify-center mx-auto md:bg-transparent">
           <div className="mb-8 text-center">
-            <h1 className="my-3 text-4xl font-bold">Register</h1>
+            <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
             <p className="text-sm text-gray-200">
               Welcome to{" "}
               <span className="font-black text-white">
@@ -149,11 +149,10 @@ const Register = () => {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="hover:underline hover:text-[#f5b754ef] text-gray-200"
+              className="underline text-[#f5b754ef] hover:text-gray-200"
             >
-              Login
+              Login.
             </Link>
-            .
           </p>
         </div>
       </div>

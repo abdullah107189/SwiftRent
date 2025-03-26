@@ -228,6 +228,10 @@ const Services = () => {
                 number={(index + 1).toString().padStart(2, "0")}
                 brand={car.brand}
                 price={car.price}
+
+                _id={car._id}
+                // --------------------------
+
               />
             ))
           ) : (

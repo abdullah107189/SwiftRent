@@ -10,7 +10,7 @@ export default function DetailsLeft({ car }) {
     <div className="sBgBlack p-6 rounded-3xl shadow-md md:w-90  ">
       {/* Price Section */}
       <h2 className="text-4xl font-extrabold orange">
-        $139 <span className="text-2xl text-white ">/Per Day </span>
+        ${car.price }<span className="text-2xl text-white ">/Per Day </span>
       </h2>
 
       <hr className="my-4 text-white/20" />

@@ -1,0 +1,6 @@
+.carousel .control-dots {
+  position: absolute;
+  bottom: -30px; /* নিচে নিয়ে যাওয়া */
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -6,6 +6,8 @@ import ClientsSay from "./clientsSay/ClientsSay";
 import ExpertsTeam from "./expertsTeam/ExpertsTeam";
 import RentalCarCompany from "../Home/rantalCarCompany/RantalCarCompany";
 import InterestedRenting from "./interestedRenting/InterestedRenting";
+import AboutContact from "./aboutContact/AboutContact";
+import AboutFlag from "./aboutFlag/AboutFlag";
 const About = () => {
   return (
     <div>
@@ -22,7 +24,9 @@ const About = () => {
 
         <ClientsSay />
         <ExpertsTeam />
-        <InterestedRenting/>
+        <InterestedRenting />
+        <AboutFlag/>
+        <AboutContact/>
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ import {
   FaSuitcaseRolling,
   FaUser,
 } from "react-icons/fa";
+import EidCountdown from "../../EidCountdown/EidCountdown";
 
 const HeroSection = () => {
   const specs1 = [
@@ -55,7 +56,11 @@ const HeroSection = () => {
     { icon: <FaUser />, label: "Age", value: 30 },
   ];
   return (
-    <div className="hFull flex items-center justify-center">
+    <div className="hFull flex items-center justify-center relative">
+      {/* Eid Countdown */}
+      <div className="absolute top-13 left-1/2 transform -translate-x-1/2 z-20">
+        <EidCountdown />
+      </div>
       <Swiper
         slidesPerView={1}
         loop={true}

@@ -26,8 +26,17 @@ const GoogleLogIn = () => {
         photoURL: user.photoURL,
       };
 
-      // Sending user data to the server
-      await axiosPublic.post("/add-user", userData);
+      // Check if user exists, if not add them, then update last login
+      const existingUserResponse = await axiosPublic.post(
+        "/add-user",
+        userData
+      );
+      if (existingUserResponse.data.message !== "User already exists") {
+        console.log("New user added:", existingUserResponse.data);
+      }
+
+      // Update last login time
+      await axiosPublic.patch("/update-last-login", { email: user.email });
 
       // Setting up users in Redux
       dispatch(setUser(userData));

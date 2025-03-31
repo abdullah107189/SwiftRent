@@ -156,7 +156,7 @@ const Navbar = () => {
       className={`w-full fixed top-0 z-50 transition-all duration-500 
       ${isScrolled ? "sBgBlack bg-opacity-90 shadow-lg" : "bg-transparent"}`}
     >
-      <div className="mxw flex justify-between items-center py-3">
+      <div className="mxw flex justify-between items-center">
         <NavLink to="/" className="flex items-center">
           <span className="text-3xl font-black text-white">
             <span className="text-[#f5b754]">S</span>wift

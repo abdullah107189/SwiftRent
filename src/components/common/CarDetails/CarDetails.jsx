@@ -4,30 +4,27 @@ import detaisImg from "/src/assets/details/details.png";
 import PageHeader from "../../shared/PageHeader";
 import DetailsCard from "./DetailsCard";
 
-export default function CarDetails() {
-  const { id } = useParams(); 
+const CarDetails = () => {
+  const { id } = useParams();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchCarDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/cars/${id}`);
+        const data = await response.json();
+        console.log("Fetched Car Data:", data); // এখানে ডাটা চেক করো
+        setCar(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching car details:", error);
+        setLoading(false);
+      }
+    };
 
-
- useEffect(() => {
-   const fetchCarDetails = async () => {
-     try {
-       const response = await fetch(`http://localhost:3000/cars/${id}`);
-       const data = await response.json();
-       console.log("Fetched Car Data:", data); // এখানে ডাটা চেক করো
-       setCar(data);
-       setLoading(false);
-     } catch (error) {
-       console.error("Error fetching car details:", error);
-       setLoading(false);
-     }
-   };
-
-   fetchCarDetails();
- }, [id]);
-
+    fetchCarDetails();
+  }, [id]);
 
   if (loading) {
     return <p className="text-center text-white">Loading...</p>;
@@ -36,7 +33,6 @@ export default function CarDetails() {
   if (!car) {
     return <p className="text-center text-red-500">Car not found!</p>;
   }
-
   return (
     <div>
       <PageHeader
@@ -50,4 +46,6 @@ export default function CarDetails() {
       </div>
     </div>
   );
-}
+};
+
+export default CarDetails;

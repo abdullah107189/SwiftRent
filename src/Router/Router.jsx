@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/car-details/:id",
-      element: <CarDetails/>,
+        element: <CarDetails />,
       },
     ],
   },

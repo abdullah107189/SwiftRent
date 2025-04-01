@@ -20,6 +20,8 @@ import MyBookings from "../DeahBoardPage/Customer/MyBookings/MyBookings";
 import PaymentHistory from "../DeahBoardPage/Customer/Payment History/PaymentHistory";
 import UpdateProfile from "../DeahBoardPage/UpdateProfile/UpdateProfile";
 import CarDetails from "../components/common/CarDetails/CarDetails";
+import NumberCard from "../components/shared/card/NumberCard";
+import BookAuto from "../page/services/BookAuto";
 
 export const router = createBrowserRouter([
   {
@@ -43,9 +45,17 @@ export const router = createBrowserRouter([
         element: <Services />,
       },
       {
-
         path: "/car-details/:id",
         element: <CarDetails />,
+      },
+
+      {
+        path: "/number-card",
+        element: <NumberCard />,
+      },
+      {
+        path: "/book-auto",
+        element: <BookAuto />,
       },
     ],
   },

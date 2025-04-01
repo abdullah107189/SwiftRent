@@ -4,7 +4,6 @@ import book_Auto from "../../assets/car-of-the-year-rs.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAxiosPublic from "../../hooks/useAxiosPublic";

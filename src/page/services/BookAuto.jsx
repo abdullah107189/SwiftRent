@@ -5,6 +5,8 @@ import { FaCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function BookAuto() {
@@ -45,7 +47,7 @@ function BookAuto() {
       !dropOffLocation ||
       !returnDate
     ) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
@@ -60,10 +62,11 @@ function BookAuto() {
     try {
       const response = await axiosPublic.post("/book-auto", bookingData);
 
-      alert("Booking successful!");
+      toast.success("Booking successful!");
       console.log(response.data);
     } catch (error) {
       console.error("Error booking car:", error);
+      toast.error("Error booking the car.");
     }
   };
 
@@ -185,6 +188,9 @@ function BookAuto() {
           </button>
         </div>
       </div>
+
+      {/* ToastContainer for displaying toast notifications */}
+      <ToastContainer position="top-right" autoClose={1000} />
     </div>
   );
 }

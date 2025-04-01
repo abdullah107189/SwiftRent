@@ -63,9 +63,9 @@ export default function ExpertsTeam() {
           pagination={{ clickable: true }}
           modules={[FreeMode, Pagination]}
           breakpoints={{
-            320: { slidesPerView: 1 }, 
-            768: { slidesPerView: 2 }, 
-            1024: { slidesPerView: 3 }, 
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
           className="mySwiper"
         >

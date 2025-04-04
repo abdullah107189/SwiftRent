@@ -74,7 +74,7 @@ const Sidebar = () => {
         console.error('Logout failed:', error);
       });
   };
-  const userRole = 'customer';
+  const userRole = 'admin';
 
   // Get the menu items based on the user's role
   const items = menuItems[userRole];

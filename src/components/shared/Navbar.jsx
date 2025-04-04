@@ -1,12 +1,12 @@
-import { Menu, ChevronRight } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import avatar from "../../assets/default-avatar.png";
-import { logoutUser } from "../../redux/auth/authSlice";
+import { Menu, ChevronRight } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import avatar from '../../assets/default-avatar.png';
+import { logoutUser } from '../../redux/auth/authSlice';
 
 const Navbar = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,19 +22,19 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLogout = () => {
     dispatch(logoutUser())
       .unwrap()
       .then(() => {
-        navigate("/login");
+        navigate('/login');
         setIsMenuOpen(false);
       })
-      .catch((error) => {
-        console.error("Logout failed:", error);
+      .catch(error => {
+        console.error('Logout failed:', error);
       });
   };
 
@@ -46,8 +46,8 @@ const Navbar = () => {
           className={({ isActive }) =>
             `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
               isActive
-                ? "text-[#f5b754] bg-transparent"
-                : "text-white bg-transparent"
+                ? 'text-[#f5b754] bg-transparent'
+                : 'text-white bg-transparent'
             }`
           }
           onClick={() => setIsMenuOpen(false)}
@@ -55,15 +55,15 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {["About", "Services", "Contact"].map((item, index) => (
+      {['Services', 'About', 'Contact'].map((item, index) => (
         <li key={index} onClick={() => setIsMenuOpen(false)}>
           <NavLink
             to={`/${item.toLowerCase()}`}
             className={({ isActive }) =>
               `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
                 isActive
-                  ? "text-[#f5b754] bg-transparent"
-                  : "text-white bg-transparent"
+                  ? 'text-[#f5b754] bg-transparent'
+                  : 'text-white bg-transparent'
               }`
             }
           >
@@ -118,8 +118,8 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
                   isActive
-                    ? "text-[#f5b754] bg-transparent"
-                    : "text-white bg-transparent"
+                    ? 'text-[#f5b754] bg-transparent'
+                    : 'text-white bg-transparent'
                 }`
               }
             >
@@ -139,8 +139,8 @@ const Navbar = () => {
             className={({ isActive }) =>
               `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
                 isActive
-                  ? "text-[#f5b754] bg-transparent"
-                  : "text-white bg-transparent"
+                  ? 'text-[#f5b754] bg-transparent'
+                  : 'text-white bg-transparent'
               }`
             }
           >
@@ -154,7 +154,7 @@ const Navbar = () => {
   return (
     <div
       className={`w-full fixed top-0 z-50 transition-all duration-500 
-      ${isScrolled ? "sBgBlack bg-opacity-90 shadow-lg" : "bg-transparent"}`}
+      ${isScrolled ? 'sBgBlack bg-opacity-90 shadow-lg' : 'bg-transparent'}`}
     >
       <div className="mxw flex justify-between items-center">
         <NavLink to="/" className="flex items-center">

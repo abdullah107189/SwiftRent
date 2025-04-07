@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -60,6 +61,20 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   await signOut(auth);
 });
 
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async ({ newPassword }, { rejectWithValue }) => {
+    try {
+      const user = auth.currentUser;
+      if (!user) throw new Error("No user is currently logged in");
+      await updatePassword(user, newPassword);
+      return "Password updated successfully";
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -106,6 +121,18 @@ const authSlice = createSlice({
       // logout
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
+      })
+      // change password
+      .addCase(changePassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

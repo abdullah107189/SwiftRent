@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import detaisImg from '/src/assets/details/details.png';
-import PageHeader from '../../shared/PageHeader';
-import DetailsCard from './DetailsCard';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import detaisImg from "/src/assets/details/details.png";
+import PageHeader from "../../shared/PageHeader";
+import DetailsCard from "./DetailsCard";
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -14,11 +14,11 @@ const CarDetails = () => {
       try {
         const response = await fetch(`http://localhost:3000/cars/${id}`);
         const data = await response.json();
-        console.log('Fetched Car Data:', data);
+        console.log("Fetched Car Data:", data);
         setCar(data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching car details:', error);
+        console.error("Error fetching car details:", error);
         setLoading(false);
       }
     };

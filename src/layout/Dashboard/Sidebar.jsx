@@ -31,7 +31,7 @@ const menuItems = {
     { name: 'Settings', path: 'settings', icon: Settings },
   ],
 
-  customer: [
+  client: [
     { name: 'Dashboard', path: 'overview', icon: FaTachometerAlt },
     { name: 'Browse Cars', path: 'browse-cars', icon: FaCar },
     { name: 'My Bookings', path: 'my-bookings', icon: FaShoppingCart },

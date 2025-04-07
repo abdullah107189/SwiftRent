@@ -1,12 +1,11 @@
-import React from 'react'
-import DetailsSlider from './DetailsSlider'
-import DetailsContent from './DetailsContent'
+// import Car_Details from './Car_Details';
+// import DetailsContent from './DetailsContent';
 
-export default function DetailsRight() {
-  return (
-      <div>
-      <DetailsSlider />
-      <DetailsContent/>
-    </div>
-  )
-}
+// export default function DetailsRight() {
+//   return (
+//     <div>
+//       <Car_Details />
+//       <DetailsContent />
+//     </div>
+//   );
+// }

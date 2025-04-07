@@ -2,7 +2,7 @@ import React from "react";
 import PageHeader from "../../components/shared/PageHeader";
 import aboutBanner from "../../assets/Bentley-Bentayga-car.jpg";
 import CarPromoVideo from "../services/CarPromoVideo";
-import ClientsSay from "./clientsSay/ClientsSay";
+// import ClientsSay from "./clientsSay/ClientsSay";
 import ExpertsTeam from "./expertsTeam/ExpertsTeam";
 import RentalCarCompany from "../Home/rantalCarCompany/RantalCarCompany";
 import InterestedRenting from "./interestedRenting/InterestedRenting";
@@ -22,11 +22,11 @@ const About = () => {
 
         <CarPromoVideo />
 
-        <ClientsSay />
+        {/* <ClientsSay /> */}
         <ExpertsTeam />
         <InterestedRenting />
-        <AboutFlag/>
-        <AboutContact/>
+        <AboutFlag />
+        <AboutContact />
       </div>
     </div>
   );

@@ -55,7 +55,7 @@ const HeroSection = () => {
     { icon: <FaUser />, label: "Age", value: 30 },
   ];
   return (
-    <div className="hFull flex items-center justify-center relative">
+    <div className="hFull flex items-center justify-center">
       <Swiper
         slidesPerView={1}
         loop={true}
@@ -78,7 +78,7 @@ const HeroSection = () => {
         {/* first slider  */}
         <SwiperSlide>
           <div
-            className="hFull bg-cover bg-center"
+            className="hFull bg-cover bg-center w-full"
             style={{
               backgroundImage: `url(${backgroundImage1})`,
             }}
@@ -175,7 +175,7 @@ const HeroSection = () => {
         {/* second slider  */}
         <SwiperSlide>
           <div
-            className="hFull bg-cover bg-center"
+            className="hFull bg-cover bg-center w-full"
             style={{
               backgroundImage: `url(${backgroundImage2})`,
             }}
@@ -243,7 +243,7 @@ const HeroSection = () => {
         {/* third slider  */}
         <SwiperSlide>
           <div
-            className="hFull bg-cover bg-center"
+            className="hFull bg-cover bg-center w-full"
             style={{
               backgroundImage: `url(${backgroundImage3})`,
             }}

@@ -1,11 +1,10 @@
-// src/components/BookAuto.js
 import React, { useState } from "react";
 import book_Auto from "../../assets/car-of-the-year-rs.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function BookAuto() {
@@ -46,7 +45,7 @@ function BookAuto() {
       !dropOffLocation ||
       !returnDate
     ) {
-      toast.error("Please fill in all fields.");
+      // toast.error("Please fill in all fields.");
       return;
     }
 
@@ -61,11 +60,11 @@ function BookAuto() {
     try {
       const response = await axiosPublic.post("/book-auto", bookingData);
 
-      toast.success("Booking successful!");
+      // toast.success("Booking successful!");
       console.log(response.data);
     } catch (error) {
       console.error("Error booking car:", error);
-      toast.error("Error booking the car.");
+      // toast.error("Error booking the car.");
     }
   };
 
@@ -189,7 +188,7 @@ function BookAuto() {
       </div>
 
       {/* ToastContainer for displaying toast notifications */}
-      <ToastContainer position="top-right" autoClose={1000} />
+      {/* <ToastContainer position="top-right" autoClose={1000} /> */}
     </div>
   );
 }

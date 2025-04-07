@@ -20,45 +20,41 @@ const reviews = [
   },
   {
     name: "Michael Brown",
-    review:
-      " Really impressed with the professionalismReally impressed with the professionalism.",
+    review: "Really impressed with the professionalism.",
     rating: 4,
     image: "https://via.placeholder.com/150",
   },
   {
     name: "Emma Watson",
-    review:
-      "Absolutely loved it! Will come back for sure Really impressed with the professionalism.",
+    review: "Absolutely loved it! Will come back for sure.",
     rating: 5,
     image: "https://via.placeholder.com/150",
   },
   {
     name: "John Doe",
-    review:
-      "Best experience ever! Highly recommended Really impressed with the professionalism.",
+    review: "Best experience ever! Highly recommended.",
     rating: 4,
     image: "https://via.placeholder.com/150",
   },
   {
     name: "Alice Green",
-    review:
-      "Superb service and great value for money!Really impressed with the professionalism",
+    review: "Superb service and great value for money!",
     rating: 5,
     image: "https://via.placeholder.com/150",
   },
 ];
 
 export default function ClientsSay() {
-  const [slidePercentage, setSlidePercentage] = useState(100);
+  const [itemsToShow, setItemsToShow] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        setSlidePercentage(33.33); // Desktop (3 cards)
+        setItemsToShow(3);
       } else if (window.innerWidth >= 768) {
-        setSlidePercentage(50); // Tablet (2 cards)
+        setItemsToShow(2);
       } else {
-        setSlidePercentage(100); // Mobile (1 card)
+        setItemsToShow(1);
       }
     };
 
@@ -75,14 +71,14 @@ export default function ClientsSay() {
         <Carousel
           showThumbs={false}
           showStatus={false}
-          showIndicators={false} // No Indicators
+          showIndicators={false}
           infiniteLoop={true}
-          autoPlay={true} // Auto Play Enabled
-          interval={3000} // 3 seconds per slide
-          stopOnHover={true} // Stops when hovered
-          showArrows={false} // Side Buttons Hidden
+          autoPlay={true}
+          interval={3000}
+          stopOnHover={true}
+          showArrows={false}
           centerMode={true}
-          centerSlidePercentage={slidePercentage} // Responsive card layout
+          centerSlidePercentage={100 / itemsToShow}
         >
           {reviews.map((review, index) => (
             <div key={index} className="cursor-pointer">

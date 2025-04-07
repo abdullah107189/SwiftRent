@@ -106,7 +106,7 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className={`bg-[#f5b754] w-full rounded-md py-3 text-white ${
+                className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
                   loading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-[#f5b754ef]"

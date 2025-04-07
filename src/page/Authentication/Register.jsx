@@ -179,7 +179,7 @@ const Register = () => {
             </p>
             <div className="flex-1 h-px bg-gray-500"></div>
           </div>
-          <GoogleLogIn />
+          <GoogleLogIn toggle={toggle} />
           <p className="pt-5 text-sm text-center text-gray-200">
             Already have an account?{" "}
             <Link

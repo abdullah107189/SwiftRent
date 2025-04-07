@@ -1,11 +1,9 @@
-import { IoIosNotificationsOutline } from 'react-icons/io';
-import { Link } from 'react-router-dom';
-import avatar from '../../assets/default-avatar.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { Link } from "react-router-dom";
+import avatar from "../../assets/default-avatar.png";
+import { useSelector } from "react-redux";
 const Header = ({ title }) => {
-  const { user } = useSelector(state => state.auth);
-  const dispatch = useDispatch();
-  console.log(dispatch);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <header className=" px-2 bg-opacity-50 backdrop-blur-lg border-b border-gray-700 m sticky top-0 z-50 bolck py-2">

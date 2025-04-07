@@ -16,7 +16,6 @@ import {
   FaSuitcaseRolling,
   FaUser,
 } from "react-icons/fa";
-import EidCountdown from "../../EidCountdown/EidCountdown";
 
 const HeroSection = () => {
   const specs1 = [
@@ -56,11 +55,7 @@ const HeroSection = () => {
     { icon: <FaUser />, label: "Age", value: 30 },
   ];
   return (
-    <div className="hFull flex items-center justify-center relative">
-      {/* Eid Countdown */}
-      <div className="absolute top-13 left-1/2 transform -translate-x-1/2 z-20">
-        <EidCountdown />
-      </div>
+    <div className="hFull flex items-center justify-center">
       <Swiper
         slidesPerView={1}
         loop={true}
@@ -83,7 +78,7 @@ const HeroSection = () => {
         {/* first slider  */}
         <SwiperSlide>
           <div
-            className="hFull bg-cover bg-center"
+            className="hFull bg-cover bg-center w-full"
             style={{
               backgroundImage: `url(${backgroundImage1})`,
             }}
@@ -180,7 +175,7 @@ const HeroSection = () => {
         {/* second slider  */}
         <SwiperSlide>
           <div
-            className="hFull bg-cover bg-center"
+            className="hFull bg-cover bg-center w-full"
             style={{
               backgroundImage: `url(${backgroundImage2})`,
             }}
@@ -248,7 +243,7 @@ const HeroSection = () => {
         {/* third slider  */}
         <SwiperSlide>
           <div
-            className="hFull bg-cover bg-center"
+            className="hFull bg-cover bg-center w-full"
             style={{
               backgroundImage: `url(${backgroundImage3})`,
             }}

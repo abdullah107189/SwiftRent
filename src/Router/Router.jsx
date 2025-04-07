@@ -22,6 +22,7 @@ import UpdateProfile from "../DeahBoardPage/UpdateProfile/UpdateProfile";
 import CarDetails from "../components/common/CarDetails/CarDetails";
 import NumberCard from "../components/shared/card/NumberCard";
 import BookAuto from "../page/services/BookAuto";
+import ForgetPassword from "../page/Authentication/ForgetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -95,5 +96,9 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <LogIn />,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword />,
   },
 ]);

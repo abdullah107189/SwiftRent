@@ -1,12 +1,19 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import registerImg from "../../assets/Sign up.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import GoogleLogIn from "./GoogleLogIn";
 import useAuthForm from "../../hooks/useAuthForm";
 import { registerUser } from "../../redux/auth/authSlice";
+import { AiOutlineUser } from "react-icons/ai";
 
 const Register = () => {
+  const [toggle, setToggle] = useState("customer");
+
+  const handleToggle = (value) => {
+    setToggle(value);
+  };
+
   const {
     register,
     handleSubmit,
@@ -22,6 +29,7 @@ const Register = () => {
       userInfo: {
         name: data.name,
         email: data.email,
+        role: toggle,
       },
     })
   );
@@ -48,6 +56,32 @@ const Register = () => {
               </span>
             </h1>
             <p className="text-gray-200">Create your account!</p>
+          </div>
+          <div className="flex justify-center items-center w-full mb-2">
+            <div className="flex items-center bg-gray-100 rounded-xl p-2 w-full">
+              <button
+                className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
+                  toggle === "customer"
+                    ? "bg-[#f5b754] text-white"
+                    : "bg-gray-100 text-gray-600"
+                }`}
+                onClick={() => handleToggle("customer")}
+              >
+                <AiOutlineUser size={20} className="mr-2" />
+                Customer
+              </button>
+              <button
+                className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
+                  toggle === "driver"
+                    ? "bg-[#f5b754] text-white"
+                    : "bg-gray-100 text-gray-600"
+                }`}
+                onClick={() => handleToggle("driver")}
+              >
+                <AiOutlineUser size={20} className="mr-2" />
+                Driver
+              </button>
+            </div>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -127,7 +161,7 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                className={`bg-[#f5b754] w-full rounded-md py-3 text-white ${
+                className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
                   loading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-[#f5b754ef]"

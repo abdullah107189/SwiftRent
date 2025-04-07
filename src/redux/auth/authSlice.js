@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
@@ -13,20 +14,16 @@ const axiosPublic = useAxiosPublic();
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password, userInfo }, { rejectWithValue }) => {
-    // console.log(userInfo);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      const newUser = {
+      const response = await axiosPublic.post("/add-user", {
+        ...userInfo,
         uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        name: userInfo.name,
-      };
-      const response = await axiosPublic.post("/add-user", newUser);
-
+      });
       return response.data.user;
     } catch (error) {
       return rejectWithValue(

@@ -23,6 +23,7 @@ import CarDetails from "../components/common/CarDetails/CarDetails";
 import NumberCard from "../components/shared/card/NumberCard";
 import BookAuto from "../page/services/BookAuto";
 import ForgetPassword from "../page/Authentication/ForgetPassword";
+import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,7 @@ export const router = createBrowserRouter([
       { path: "payments", element: <PaymentHistory /> },
       { path: "profile", element: <UpdateProfile /> },
       { path: "settings", element: <SettingsPage /> },
+      { path: "change-password", element: <ChangePassword /> },
     ],
   },
   {

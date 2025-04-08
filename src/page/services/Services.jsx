@@ -69,7 +69,7 @@ const Services = () => {
 
       <div className="relative">
         {/* cars count and sort */}
-        <div className="mxw flex justify-between items-center rounded-lg mt-16 md:sticky fBgBlack md:top-14 md:z-10">
+        <div className="mxw flex justify-between items-center rounded-lg mt-16 md:sticky fBgBlack md:top-12 md:z-10">
           <h2 className="text-white text-4xl my-5 font-bold">
             {cars.length} Results for Cars
           </h2>

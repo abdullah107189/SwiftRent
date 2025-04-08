@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  FaLinkedinIn,
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp,
+} from "react-icons/fa"; // Updated icons
+
+// Social media icons component
+const SocialIcon = ({ icon: Icon }) => (
+  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white">
+    <Icon className="text-sm" /> {/* Render the icon component */}
+  </div>
+);
 
 const ExpertDetails = () => {
   const { id } = useParams();
   const [expert, setExpert] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("Biography"); // State for active tab
 
   useEffect(() => {
     const fetchExpert = async () => {
@@ -23,32 +37,90 @@ const ExpertDetails = () => {
     fetchExpert();
   }, [id]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading)
+    return <p className="text-center mt-10 text-white">Loading...</p>;
 
   if (!expert)
-    return <p className="text-center mt-10 text-red-500">Expert not found</p>;
+    return <p className="text-center mt-10 orange">Expert not found</p>;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10">
-      <img
-        src={expert.image}
-        alt={expert.name}
-        className="w-64 h-64 object-cover rounded-xl mx-auto mb-6 shadow-md"
-      />
-      <h1 className="text-3xl font-bold text-center mb-2">{expert.name}</h1>
-      <p className="text-center text-gray-500 mb-6">{expert.role}</p>
-      <p className="text-base text-gray-700 leading-relaxed text-center">
-        {expert.bio}
-      </p>
-      <div className="mt-6 text-center">
-        <a
-          href={expert.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-        >
-          Visit LinkedIn
-        </a>
+    <div className="min-h-screen  text-white flex items-center justify-center py-10">
+      <div className="max-w-5xl w-full flex flex-col md:flex-row gap-8 px-4">
+        {/* Left Section: Image and Contact */}
+        <div className="flex flex-col items-center md:w-1/3">
+          <img
+            src={expert.image}
+            alt={expert.name}
+            className="w-64 h-80 object-cover rounded-xl shadow-md mb-6"
+          />
+          <div className="flex gap-4 mb-4 cursor-pointer">
+            <SocialIcon icon={FaLinkedinIn} />
+            <SocialIcon icon={FaFacebookF} />
+            <SocialIcon icon={FaInstagram} />
+            <SocialIcon icon={FaWhatsapp} />
+          </div>
+          <p className="text-sm text-gray-400">
+            My e-mail address:{" "}
+            <span className="font-semibold">{expert.email}</span>
+          </p>
+        </div>
+
+        {/* Right Section: Details */}
+        <div className="md:w-2/3">
+          {/* Name and Role */}
+          <h1 className="text-2xl font-bold mb-2">
+            Hello, I’m {expert.name}. I work as your sales consultant at{" "}
+            <span className="orange">{expert.role}</span>.
+          </h1>
+
+          {/* Qualifications */}
+          <ul className="list-none mb-6">
+            {expert.qualifications.map((qualification, index) => (
+              <li
+                key={index}
+                className="flex items-center gap-2 text-gray-400 mb-3"
+              >
+                <span className="orange">✓</span> {qualification}
+              </li>
+            ))}
+          </ul>
+
+          {/* Tabs */}
+          <div className="flex gap-4 mb-4 ">
+            {["Biography", "Education", "Awards"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`text-sm font-semibold pb-1 ${
+                  activeTab === tab
+                    ? "orange border-b-2 border-orange"
+                    : "text-gray-400"
+                }`}
+              >
+                {tab.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Content */}
+          <div className="text-gray-400 ">
+            {activeTab === "Biography" && <p>{expert.bio}</p>}
+            {activeTab === "Education" && (
+              <ul className="list-disc list-inside ">
+                {expert.education.map((edu, index) => (
+                  <li key={index}>{edu}</li>
+                ))}
+              </ul>
+            )}
+            {activeTab === "Awards" && (
+              <ul className="list-disc list-inside">
+                {expert.awards.map((award, index) => (
+                  <li key={index}>{award}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

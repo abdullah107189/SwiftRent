@@ -20,7 +20,7 @@ const Services = () => {
   const [sortOption, setSortOption] = useState("default");
   const filterRef = useRef(null);
 
-  const { cars } = useGetCars(
+  const { cars, isFetching } = useGetCars(
     { search },
     { filterBrand },
     { priceRange },
@@ -69,7 +69,7 @@ const Services = () => {
 
       <div className="relative">
         {/* cars count and sort */}
-        <div className="mxw flex justify-between items-center rounded-lg mt-16 md:sticky fBgBlack md:top-12 md:z-10">
+        <div className=" mxw flex justify-between items-center rounded-lg mt-16 md:sticky fBgBlack md:top-12 md:z-10">
           <h2 className="text-white text-4xl my-5 font-bold">
             {cars.length} Results for Cars
           </h2>
@@ -98,7 +98,8 @@ const Services = () => {
         </div>
 
         {/* Main Content */}
-        <div className="mxw grid grid-cols-1 md:grid-cols-5 gap-6 mb-16">
+        <div className=" mxw grid grid-cols-1 md:grid-cols-5 gap-6 mb-16">
+          {/* filtering left side  */}
           <div
             ref={filterRef}
             className={`fixed mt-15 md:mt-0 text-[12px] md:sticky top-35 left-0 w-72 h-full md:w-auto md:h-[600px] sBgBlack p-6 rounded-3xl transition-transform ${
@@ -114,7 +115,6 @@ const Services = () => {
                 <X size={24} />
               </button>
 
-              <h3 className="text-white text-md mb-4">Filter</h3>
               <input
                 type="text"
                 placeholder="Search cars..."
@@ -122,6 +122,7 @@ const Services = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full p-2 mb-2 block bg-[#222222] text-gray-400 border border-tBgBlack rounded-full focus:outline-none focus:ring-0"
               />
+
               {/* Brand Filter with Checkboxes */}
               <div className="mb-4 text-white">
                 <h4 className="mb-2">Select Brand</h4>
@@ -222,23 +223,93 @@ const Services = () => {
 
           {/* Car Cards */}
           <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
-            {cars.length > 0 ? (
-              cars.map((car, index) => (
-                <NumberCard
-                  key={car._id}
-                  image={car.image[0] || "https://via.placeholder.com/300"}
-                  name={car.name}
-                  number={(index + 1).toString().padStart(2, "0")}
-                  brand={car.brand}
-                  price={car.price}
-                  _id={car._id}
-                  // --------------------------
-                />
-              ))
+            {isFetching ? (
+              <>
+                {Array.from({ length: 6 }, (_, index) => (
+                  <div
+                    key={index}
+                    className="relative w-full h-[420px] rounded-3xl overflow-hidden group border border-gray-700 shadow-lg shadow-gray-900"
+                  >
+                    {/* Image Section */}
+                    <div className="relative w-full h-[65%] rounded-t-3xl overflow-hidden transition-transform duration-300 hover:scale-100 animate-pulse">
+                      <div className="bg-gray-700 w-full h-full"></div>
+                    </div>
+
+                    {/* Bottom Dark Gradient Overlay */}
+                    <div className="absolute bottom-[35%] left-0 w-full h-[35%] bg-gradient-to-t from-black/95 via-black/60 to-transparent"></div>
+
+                    <div className="flex items-center absolute bottom-[35%] left-0 animate-pulse">
+                      <div className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b]">
+                        <div className="w-[60px] h-[60px] leading-[60px] border border-[#F5B754] bg-gray-700 rounded-full overflow-hidden text-transparent font-bold text-[14px] text-center">
+                          {/* Placeholder for number */}
+                        </div>
+                        <div className="absolute -top-[19px] -left-[4px] rotate-[-90deg]">
+                          <svg
+                            viewBox="0 0 11 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-5"
+                          >
+                            <path
+                              d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
+                              fill="#1b1b1b"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div className="absolute -bottom-[2px] -right-[22px] rotate-[-90deg]">
+                          <svg
+                            viewBox="0 0 11 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
+                              fill="#1b1b1b"
+                            ></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="p-4 pb-7 text-white relative bg-[#1b1b1b] rounded-b-3xl animate-pulse">
+                      <div className="bg-gray-700 h-6 w-3/4 rounded mb-2"></div>
+                      <div className="flex justify-between text-sm text-gray-400 mt-2">
+                        <div className="bg-gray-700 h-4 w-1/3 rounded"></div>
+                        <div className="bg-gray-700 h-4 w-1/3 rounded"></div>
+                      </div>
+
+                      {/* Buttons */}
+                      <div className="mt-3 flex gap-4 justify-center">
+                        <div className="bg-gray-700 h-10 w-1/3 rounded"></div>
+                        <div className="bg-gray-700 h-10 w-1/3 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
             ) : (
-              <p className="text-white text-center col-span-full text-2xl">
-                No car available
-              </p>
+              <>
+                {cars.length > 0 ? (
+                  cars.map((car, index) => (
+                    <NumberCard
+                      key={car._id}
+                      image={car.image[0] || "https://via.placeholder.com/300"}
+                      name={car.name}
+                      number={(index + 1).toString().padStart(2, "0")}
+                      brand={car.brand}
+                      price={car.price}
+                      _id={car._id}
+                      // --------------------------
+                    />
+                  ))
+                ) : (
+                  <p className="text-white text-center col-span-full text-2xl">
+                    No car available
+                  </p>
+                )}
+              </>
             )}
           </div>
         </div>

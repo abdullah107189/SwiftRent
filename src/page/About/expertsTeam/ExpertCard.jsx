@@ -1,9 +1,19 @@
 import React from "react";
 import { FaInfo } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const ExpertCard = ({ expert }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/expert/${expert._id}`);
+  };
+
   return (
-    <div className="relative h-[300px] w-full md:h-[450px] rounded-3xl overflow-hidden group">
+    <div
+      onClick={handleClick}
+      className="relative h-[300px] w-full md:h-[450px] rounded-3xl overflow-hidden group cursor-pointer"
+    >
       {/* Content */}
       <div className="relative w-full h-full rounded-xl overflow-hidden transition-transform duration-300 hover:scale-100">
         <img

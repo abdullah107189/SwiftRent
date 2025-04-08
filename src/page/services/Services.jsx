@@ -11,20 +11,39 @@ import { IoFilter } from "react-icons/io5";
 import useGetCars from "../../hooks/useGetCars";
 import { FaSearch } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const Services = () => {
-  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [filterBrand, setFilterBrand] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 100000]);
   const [carType, setCarType] = useState([]);
   const [fuelType, setFuelType] = useState([]);
-  const [showFilter, setShowFilter] = useState(false);
+  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+
+  const [allFilter, setAllFilter] = useState();
   const [sortOption, setSortOption] = useState("default");
+  // -----------------------------------
+  const [showFilter, setShowFilter] = useState(false);
   const filterRef = useRef(null);
   const axiosPublic = useAxiosPublic();
-  const { cars, isFetching } = useGetCars();
+
+  const { cars, isFetching } = useGetCars({
+    search: searchQuery,
+    filter: allFilter,
+    sortOption: sortOption,
+  });
   const [carsFilterData, setCarsFilterData] = useState([]);
 
+  const handleFilter = () => {
+    if (priceRange.min > priceRange.max && priceRange.max !== "") {
+      return toast.error("Can't allow this price range");
+    }
+    setAllFilter({ filterBrand, carType, fuelType, priceRange });
+  };
+
+  // get data for show filter menu
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axiosPublic.get("/cars");
@@ -32,6 +51,15 @@ const Services = () => {
     };
     fetchData();
   }, []);
+
+  const handlePriceChange = (e) => {
+    const { name, value } = e.target;
+    setPriceRange((prev) => ({
+      ...prev,
+      [name]: parseInt(value),
+    }));
+  };
+
   const getUniqueValues = (data, key) => {
     return [...new Set(data.map((item) => item[key]))];
   };
@@ -58,11 +86,11 @@ const Services = () => {
   };
 
   const resetFilters = () => {
-    setSearch("");
+    setSearchInput("");
     setFilterBrand([]);
-    setPriceRange([0, 100000]);
     setCarType([]);
     setFuelType([]);
+    setPriceRange({ min: "", max: "" });
   };
   // for small devices
   useEffect(() => {
@@ -91,14 +119,18 @@ const Services = () => {
         {/* cars count and sort */}
         <div className=" mxw flex justify-between items-center rounded-lg mt-16 md:sticky fBgBlack md:top-12 md:z-10">
           <h2 className="text-white text-2xl my-2 font-bold">
-            {cars.length} Results for Cars
+            {cars.length || 0} Results for Cars
           </h2>
 
           <div className="flex items-center gap-4 text-[12px] px-2">
             {/* Sorting Dropdown */}
             <select
               className="sBgBlack text-white p-2 rounded-3xl cursor-pointer "
-              onChange={(e) => setSortOption(e.target.value)}
+              onChange={(e) => {
+                const selected = e.target.value;
+                if (selected === sortOption) return;
+                setSortOption(selected);
+              }}
             >
               <option value="default">Sort By</option>
               <option value="priceAsc ">Price: Low to High</option>
@@ -139,11 +171,14 @@ const Services = () => {
                 <input
                   type="text"
                   placeholder="Search cars..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)} // Update the search state
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
                   className="w-full p-2 mb-2 block bg-[#222222] text-gray-400 border border-gray-600 rounded-full focus:outline-none focus:ring-0"
                 />
-                <button className="cursor-pointer hover:bg-white/10 p-[10px] rounded-full absolute right-1  sBgBlack top-1/2 transform -translate-y-1/2 orange">
+                <button
+                  onClick={() => setSearchQuery(searchInput)}
+                  className="cursor-pointer hover:bg-white/10 p-[10px] rounded-full absolute right-1  sBgBlack top-1/2 transform -translate-y-1/2 orange"
+                >
                   <FaSearch />
                 </button>
               </div>
@@ -207,6 +242,7 @@ const Services = () => {
                 ))}
               </div>
 
+              {/* Price Range Type Filter */}
               <div className="">
                 <h1 className="mb-2 text-xl font-semibold">
                   Select Price Range
@@ -214,25 +250,27 @@ const Services = () => {
                 <div className="flex gap-2">
                   <input
                     type="number"
+                    name="min"
                     placeholder="Min Price"
                     min={1}
-                    defaultValue={1}
-                    // value={minPrice}
-                    // onChange={(e) => setMinPrice(e.target.value)}
+                    value={priceRange.min}
+                    onChange={handlePriceChange}
                     className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="number"
+                    name="max"
                     placeholder="Max Price"
-                    // value={maxPrice}
-                    // onChange={(e) => setMaxPrice(e.target.value)}
-                    className="p-2 border w-full border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={priceRange.max}
+                    onChange={handlePriceChange}
+                    className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
+
               <div className="flex flex-wrap items-center justify-between gap-1 mt-3">
                 <button
-                  // onClick={handleFilter}
+                  onClick={handleFilter}
                   className="fillBtn w-full flex justify-center mb-3"
                 >
                   Filter

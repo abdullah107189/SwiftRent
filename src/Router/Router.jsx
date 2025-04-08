@@ -24,6 +24,7 @@ import NumberCard from "../components/shared/card/NumberCard";
 import BookAuto from "../page/services/BookAuto";
 import ForgetPassword from "../page/Authentication/ForgetPassword";
 import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
+import ExpertDetails from "../page/About/expertsTeam/ExpertDetails";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/book-auto",
         element: <BookAuto />,
+      },
+      {
+        path: "/expert/:id",
+        element: <ExpertDetails />,
       },
     ],
   },

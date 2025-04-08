@@ -129,7 +129,7 @@ const Login = () => {
           </div>
           <GoogleLogIn />
           <p className="pt-5 text-sm text-center text-gray-200">
-            Don't have an account yet?{" "}
+            Don't have an account yet?
             <Link to="/register" className="underline orange hover:text-white">
               Create an account.
             </Link>

@@ -15,6 +15,7 @@ const useGetCars = (
   const {
     data: cars = [],
     isLoading,
+    isFetching,
     refetch,
   } = useQuery({
     queryKey: [
@@ -32,7 +33,7 @@ const useGetCars = (
     },
   });
 
-  return { cars, refetch, isLoading };
+  return { cars, refetch, isLoading, isFetching };
 };
 
 export default useGetCars;

@@ -1,85 +1,49 @@
-import { Info } from "lucide-react";
-import React, { useState } from "react";
-import { FaInfo, FaPlay } from "react-icons/fa";
+import React from "react";
+import { FaInfo } from "react-icons/fa";
 
-const ExpertCard = ({ name, number }) => {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-
+const ExpertCard = ({ expert }) => {
   return (
     <div className="relative h-[300px] w-full md:h-[450px] rounded-3xl overflow-hidden group">
       {/* Content */}
       <div className="relative w-full h-full rounded-xl overflow-hidden transition-transform duration-300 hover:scale-100">
         <img
-          src="https://i.ibb.co.com/xq60b7hg/car-Company.jpg"
-          alt="img"
+          src={expert?.image}
+          alt={expert?.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
-
         <div className="absolute bottom-0 w-full h-[20%] bg-gradient-to-t from-black/80 to-transparent"></div>
       </div>
 
-      {/* Under number and rounded style */}
+      {/* Bottom Info */}
       <div className="flex items-center absolute bottom-0 left-0">
-        <div
-          className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b] cursor-pointer"
-          onClick={() => setIsVideoOpen(true)}
-        >
+        <div className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b]">
           <div className="w-[60px] h-[60px] flex items-center justify-center border border-[#F5B754] bg-transparent rounded-full text-white font-bold text-[14px] text-center group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
-            {number ? number : <FaInfo className="text-lg border-none" />}
+            <FaInfo className="text-lg" />
           </div>
           <div className="absolute -top-[19px] -left-[4px] rotate-[-90deg]">
             <svg
               viewBox="0 0 11 11"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
               className="w-6 h-5"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                fill="#1b1b1b"
-              ></path>
+              <path d="M11 0L0 0L0 11C0 4.92 4.92 0 11 0Z" fill="#1b1b1b" />
             </svg>
           </div>
           <div className="absolute -bottom-[2px] -right-[22px] rotate-[-90deg]">
             <svg
               viewBox="0 0 11 11"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
               className="w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                fill="#1b1b1b"
-              ></path>
+              <path d="M11 0L0 0L0 11C0 4.92 4.92 0 11 0Z" fill="#1b1b1b" />
             </svg>
           </div>
         </div>
         <div className="ml-4">
-          <h1 className=" text-xl  font-semibold">Mr. Done</h1>
-          <p className="text-sm tBlack">Salse custam</p>
+          <h1 className="text-xl font-semibold">{expert?.name}</h1>
+          <p className="text-sm tBlack">{expert?.role}</p>
         </div>
       </div>
-
-      {/* Video Modal */}
-      {/* {isVideoOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/85 bg-opacity-80 z-50">
-          <div className="relative w-[70%] h-[60%] max-w-3xl">
-            <iframe
-              className="w-full h-full"
-              src="https://www.youtube.com/embed/1LkIftbmBZc?list=PLWFs1ZghJen-h0YvUsSJsgP6rmlFdKJLq&index=2&autoplay=1"
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            ></iframe>
-            <button
-              className="absolute top-2 right-2 bg-white text-black px-3 py-1 rounded-full text-xl"
-              onClick={() => setIsVideoOpen(false)}
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import serviceBackgroundPhoto from "../../assets/heroSection/3.jpg";
 import "./service.css";
 import PageHeader from "../../components/shared/PageHeader";
@@ -10,6 +10,7 @@ import { DollarSign, X } from "lucide-react";
 import { IoFilter } from "react-icons/io5";
 import useGetCars from "../../hooks/useGetCars";
 import { FaSearch } from "react-icons/fa";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Services = () => {
   const [search, setSearch] = useState("");
@@ -20,8 +21,49 @@ const Services = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [sortOption, setSortOption] = useState("default");
   const filterRef = useRef(null);
-
+  const axiosPublic = useAxiosPublic();
   const { cars, isFetching } = useGetCars();
+  const [carsFilterData, setCarsFilterData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axiosPublic.get("/cars");
+      setCarsFilterData(data);
+    };
+    fetchData();
+  }, []);
+  const getUniqueValues = (data, key) => {
+    return [...new Set(data.map((item) => item[key]))];
+  };
+
+  const uniqueBrands = useMemo(
+    () => getUniqueValues(carsFilterData, "brand"),
+    [carsFilterData]
+  );
+  const uniqueCarTypes = useMemo(
+    () => getUniqueValues(carsFilterData, "type"),
+    [carsFilterData]
+  );
+  const uniqueFuelTypes = useMemo(
+    () => getUniqueValues(carsFilterData, "fuel"),
+    [carsFilterData]
+  );
+
+  const handleChange = (item, stateArray, setStateArray) => {
+    if (stateArray.includes(item)) {
+      setStateArray(stateArray.filter((i) => i !== item));
+    } else {
+      setStateArray([...stateArray, item]);
+    }
+  };
+
+  const resetFilters = () => {
+    setSearch("");
+    setFilterBrand([]);
+    setPriceRange([0, 100000]);
+    setCarType([]);
+    setFuelType([]);
+  };
   // for small devices
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,22 +76,6 @@ const Services = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handleBrandChange = (x, state, setState) => {
-    if (state.includes(x)) {
-      setState(state.filter((item) => item !== x));
-    } else {
-      setState([...state, x]);
-    }
-  };
-
-  const resetFilters = () => {
-    setSearch("");
-    setFilterBrand([]);
-    setPriceRange([0, 100000]);
-    setCarType([]);
-    setFuelType([]);
-  };
 
   return (
     <div className="relative bg-[#1B1B1B]">
@@ -96,11 +122,11 @@ const Services = () => {
           {/* filtering left side  */}
           <div
             ref={filterRef}
-            className={`mt-15 md:mt-0 text-[12px] top-35 left-0 w-72 h-full md:w-auto md:h-[600px] sBgBlack p-6 rounded-3xl transition-transform ${
+            className={`mt-15 md:mt-0 text-[12px] top-35 left-0 w-72 h-full md:w-auto  transition-transform ${
               showFilter ? "translate-x-0" : "-translate-x-full"
             } md:translate-x-0 z-0`}
           >
-            <div>
+            <div className="sBgBlack  p-6 rounded-3xl ">
               {/* Close Button (Only for small screens) */}
               <button
                 onClick={() => setShowFilter(false)}
@@ -122,10 +148,10 @@ const Services = () => {
                 </button>
               </div>
 
-              {/* Brand Filter with Checkboxes */}
+              {/* Brand Filter */}
               <div className="mb-4 text-white">
-                <h4 className="mb-2">Select Brand</h4>
-                {["Toyota", "Honda", "BMW"].map((brand) => (
+                <h4 className="mb-2 text-xl font-semibold">Select Brand</h4>
+                {uniqueBrands.map((brand) => (
                   <label
                     key={brand}
                     className="flex items-center gap-2 mb-2 cursor-pointer"
@@ -133,8 +159,8 @@ const Services = () => {
                     <input
                       type="checkbox"
                       checked={filterBrand.includes(brand)}
-                      onClick={() =>
-                        handleBrandChange(brand, filterBrand, setFilterBrand)
+                      onChange={() =>
+                        handleChange(brand, filterBrand, setFilterBrand)
                       }
                       className="accent-[#F5B754] cursor-pointer"
                     />
@@ -143,10 +169,10 @@ const Services = () => {
                 ))}
               </div>
 
-              {/* Car Type Filter with Checkboxes */}
-              <div className="mb-4 text-white ">
-                <h4 className="mb-2">Select Car Type</h4>
-                {["SUV", "Sedan", "Truck"].map((type) => (
+              {/* Car Type Filter */}
+              <div className="mb-4 text-white">
+                <h4 className="mb-2 text-xl font-semibold">Select Car Type</h4>
+                {uniqueCarTypes.map((type) => (
                   <label
                     key={type}
                     className="flex items-center gap-2 mb-2 cursor-pointer"
@@ -154,9 +180,7 @@ const Services = () => {
                     <input
                       type="checkbox"
                       checked={carType.includes(type)}
-                      onClick={() =>
-                        handleBrandChange(type, carType, setCarType)
-                      }
+                      onChange={() => handleChange(type, carType, setCarType)}
                       className="accent-[#F5B754] cursor-pointer"
                     />
                     {type}
@@ -164,10 +188,10 @@ const Services = () => {
                 ))}
               </div>
 
-              {/* Fuel Type Filter with Checkboxes */}
+              {/* Fuel Type Filter */}
               <div className="mb-4 text-white">
-                <h4 className="mb-2">Select Fuel Type</h4>
-                {["Petrol", "Diesel", "Electric"].map((fuel) => (
+                <h4 className="mb-2 text-xl font-semibold">Select Fuel Type</h4>
+                {uniqueFuelTypes.map((fuel) => (
                   <label
                     key={fuel}
                     className="flex items-center gap-2 mb-2 cursor-pointer"
@@ -175,9 +199,7 @@ const Services = () => {
                     <input
                       type="checkbox"
                       checked={fuelType.includes(fuel)}
-                      onClick={() =>
-                        handleBrandChange(fuel, fuelType, setFuelType)
-                      }
+                      onChange={() => handleChange(fuel, fuelType, setFuelType)}
                       className="accent-[#F5B754] cursor-pointer"
                     />
                     {fuel}
@@ -186,7 +208,9 @@ const Services = () => {
               </div>
 
               <div className="">
-                <h1 className="mb-2">Select Price Range</h1>
+                <h1 className="mb-2 text-xl font-semibold">
+                  Select Price Range
+                </h1>
                 <div className="flex gap-2">
                   <input
                     type="number"

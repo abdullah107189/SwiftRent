@@ -9,6 +9,8 @@ import { AiOutlineUser } from "react-icons/ai";
 
 const Register = () => {
   const [toggle, setToggle] = useState("customer");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleToggle = (value) => {
     setToggle(value);
@@ -21,9 +23,16 @@ const Register = () => {
     loading,
     showPassword,
     togglePasswordVisibility,
-    onSubmit,
-  } = useAuthForm((data) =>
-    registerUser({
+    onSubmit: authOnSubmit,
+  } = useAuthForm(registerUser);
+
+  const onSubmit = (data) => {
+    if (data.password !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+    setPasswordError("");
+    authOnSubmit({
       email: data.email,
       password: data.password,
       userInfo: {
@@ -31,8 +40,8 @@ const Register = () => {
         email: data.email,
         role: toggle,
       },
-    })
-  );
+    });
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -155,6 +164,35 @@ const Register = () => {
                   <p className="text-red-500 text-sm">
                     {errors.password.message}
                   </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="confirmPassword" className="text-sm mb-1 block">
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm Your Password"
+                    className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
+                  >
+                    {showPassword ? (
+                      <AiOutlineEyeInvisible size={20} />
+                    ) : (
+                      <AiOutlineEye size={20} />
+                    )}
+                  </button>
+                </div>
+                {passwordError && (
+                  <p className="text-red-500 text-sm">{passwordError}</p>
                 )}
               </div>
             </div>

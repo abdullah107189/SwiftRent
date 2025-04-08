@@ -181,7 +181,7 @@ const Register = () => {
           </div>
           <GoogleLogIn toggle={toggle} />
           <p className="pt-5 text-sm text-center text-gray-200">
-            Already have an account?{" "}
+            Already have an account?
             <Link
               to="/login"
               className="underline text-[#f5b754] hover:text-white"

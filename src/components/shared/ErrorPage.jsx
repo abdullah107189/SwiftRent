@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 const ErrorPage = () => {
   const navigate = useNavigate();
 
+  const handleGoHome = () => {
+    navigate("/");
+  };
+
   return (
     <div
       className="
@@ -20,7 +24,7 @@ const ErrorPage = () => {
       </div>
 
       {/* Headline */}
-      <h1 className="mt-8 text-5xl font-bold md:text-6xl lg:text-7xl">
+      <h1 className="mt-8 text-5xl orange text-center font-bold md:text-6xl lg:text-7xl">
         Page Not Found
       </h1>
       <p className="mt-4 text-center text-lg md:text-xl lg:text-2xl">
@@ -30,7 +34,7 @@ const ErrorPage = () => {
       </p>
 
       {/* Go Home button */}
-      <button onClick={() => navigate("/")} className="fillBtn mt-8">
+      <button onClick={handleGoHome} className="fillBtn mt-8">
         Go Back Home
       </button>
     </div>

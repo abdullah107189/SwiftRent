@@ -25,11 +25,13 @@ import BookAuto from "../page/services/BookAuto";
 import ForgetPassword from "../page/Authentication/ForgetPassword";
 import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
 import ExpertDetails from "../page/About/expertsTeam/ExpertDetails";
+import ErrorPage from "../components/shared/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

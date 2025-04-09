@@ -6,31 +6,33 @@ import { useNavigate } from "react-router-dom";
 const ErrorPage = () => {
   const navigate = useNavigate();
 
-  const handleGoHome = () => {
-    navigate("/");
-  };
-
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="card w-96 bg-[#222222] shadow-xl">
-        <figure>
-          <Lottie animationData={carAnimation} loop={true} />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title text-4xl font-bold">
-            404 - Page Not Found
-          </h2>
-          <p className="text-xl mt-4">
-            Our cars couldn't find this page either. Maybe it's time to rent one
-            and explore!
-          </p>
-          <div className="card-actions justify-end mt-8">
-            <button className="fillBtn" onClick={handleGoHome}>
-              Go Back Home
-            </button>
-          </div>
-        </div>
+    <div
+      className="
+        flex flex-col items-center justify-center
+        w-full min-h-screen bg-[#222222]
+        p-4 text-white
+      "
+    >
+      {/* Lottie car animation */}
+      <div className="w-full max-w-sm">
+        <Lottie animationData={carAnimation} loop className="w-full h-auto" />
       </div>
+
+      {/* Headline */}
+      <h1 className="mt-8 text-5xl font-bold md:text-6xl lg:text-7xl">
+        Page Not Found
+      </h1>
+      <p className="mt-4 text-center text-lg md:text-xl lg:text-2xl">
+        Our cars couldn’t find this page either.
+        <br />
+        Maybe it’s time to rent one and explore!
+      </p>
+
+      {/* Go Home button */}
+      <button onClick={() => navigate("/")} className="fillBtn mt-8">
+        Go Back Home
+      </button>
     </div>
   );
 };

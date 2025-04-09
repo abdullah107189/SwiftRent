@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import registerImg from "../../assets/Sign up.png";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import GoogleLogIn from "./GoogleLogIn";
-import useAuthForm from "../../hooks/useAuthForm";
-import { registerUser } from "../../redux/auth/authSlice";
-import { AiOutlineUser } from "react-icons/ai";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import registerImg from '../../assets/Sign up.png';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import GoogleLogIn from './GoogleLogIn';
+import useAuthForm from '../../hooks/useAuthForm';
+import { registerUser } from '../../redux/auth/authSlice';
+import { AiOutlineUser } from 'react-icons/ai';
 
 const Register = () => {
-  const [toggle, setToggle] = useState("customer");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [toggle, setToggle] = useState('customer');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  const handleToggle = (value) => {
+  const handleToggle = value => {
     setToggle(value);
   };
 
@@ -26,12 +26,12 @@ const Register = () => {
     onSubmit: authOnSubmit,
   } = useAuthForm(registerUser);
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     if (data.password !== confirmPassword) {
-      setPasswordError("Passwords do not match");
+      setPasswordError('Passwords do not match');
       return;
     }
-    setPasswordError("");
+    setPasswordError('');
     authOnSubmit({
       email: data.email,
       password: data.password,
@@ -70,22 +70,22 @@ const Register = () => {
             <div className="flex items-center bg-gray-100 rounded-xl p-2 w-full">
               <button
                 className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
-                  toggle === "customer"
-                    ? "bg-[#f5b754] text-white"
-                    : "bg-gray-100 text-gray-600"
+                  toggle === 'customer'
+                    ? 'bg-[#f5b754] text-white'
+                    : 'bg-gray-100 text-gray-600'
                 }`}
-                onClick={() => handleToggle("customer")}
+                onClick={() => handleToggle('customer')}
               >
                 <AiOutlineUser size={20} className="mr-2" />
                 Customer
               </button>
               <button
                 className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
-                  toggle === "driver"
-                    ? "bg-[#f5b754] text-white"
-                    : "bg-gray-100 text-gray-600"
+                  toggle === 'driver'
+                    ? 'bg-[#f5b754] text-white'
+                    : 'bg-gray-100 text-gray-600'
                 }`}
-                onClick={() => handleToggle("driver")}
+                onClick={() => handleToggle('driver')}
               >
                 <AiOutlineUser size={20} className="mr-2" />
                 Driver
@@ -104,7 +104,7 @@ const Register = () => {
                 <input
                   type="text"
                   id="name"
-                  {...register("name", { required: "Name is required" })}
+                  {...register('name', { required: 'Name is required' })}
                   placeholder="Enter Your Name"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
@@ -119,7 +119,7 @@ const Register = () => {
                 <input
                   type="email"
                   id="email"
-                  {...register("email", { required: "Email is required" })}
+                  {...register('email', { required: 'Email is required' })}
                   placeholder="Enter Your Email"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
@@ -133,11 +133,11 @@ const Register = () => {
                 </label>
                 <div className="relative">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: { value: 6, message: "Minimum 6 characters" },
+                    {...register('password', {
+                      required: 'Password is required',
+                      minLength: { value: 6, message: 'Minimum 6 characters' },
                       // maxLength: { value: 20, message: "Maximum 20 characters" },
                       // pattern: {
                       //   value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
@@ -172,10 +172,10 @@ const Register = () => {
                 </label>
                 <div className="relative">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={e => setConfirmPassword(e.target.value)}
                     placeholder="Confirm Your Password"
                     className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                   />
@@ -201,12 +201,12 @@ const Register = () => {
                 type="submit"
                 className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
                   loading
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:bg-[#f5b754ef]"
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'hover:bg-[#f5b754ef]'
                 }`}
                 disabled={loading}
               >
-                {loading ? "Registering..." : "Register"}
+                {loading ? 'Registering...' : 'Register'}
               </button>
             </div>
           </form>

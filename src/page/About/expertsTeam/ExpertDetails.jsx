@@ -5,37 +5,33 @@ import {
   FaFacebookF,
   FaInstagram,
   FaWhatsapp,
-} from "react-icons/fa"; // Updated icons
+} from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 // Social media icons component
 const SocialIcon = ({ icon: Icon }) => (
   <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white">
-    <Icon className="text-sm" /> {/* Render the icon component */}
+    <Icon className="text-sm" />
   </div>
 );
 
 const ExpertDetails = () => {
+  const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   const [expert, setExpert] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("Biography"); // State for active tab
+  const [activeTab, setActiveTab] = useState("Biography");
 
   useEffect(() => {
-    const fetchExpert = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/about");
-        const data = await res.json();
-        const selected = data.find((item) => item._id === id);
+    axiosPublic
+      .get("/about")
+      .then((res) => {
+        const selected = res.data.find((item) => item._id === id);
         setExpert(selected);
-      } catch (err) {
-        console.error("Error fetching expert:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExpert();
-  }, [id]);
+      })
+      .catch((err) => console.error("Error fetching expert:", err))
+      .finally(() => setLoading(false));
+  }, [axiosPublic, id]);
 
   if (loading)
     return <p className="text-center mt-10 text-white">Loading...</p>;
@@ -59,7 +55,7 @@ const ExpertDetails = () => {
             <SocialIcon icon={FaInstagram} />
             <SocialIcon icon={FaWhatsapp} />
           </div>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm tBlack">
             My e-mail address:{" "}
             <span className="font-semibold">{expert.email}</span>
           </p>
@@ -72,14 +68,12 @@ const ExpertDetails = () => {
             Hello, I’m {expert.name}. I work as your sales consultant at{" "}
             <span className="orange">{expert.role}</span>.
           </h1>
+          <p className="mb-5 text-sm tBlack">{expert.jobResponsibility}</p>
 
           {/* Qualifications */}
-          <ul className="list-none mb-6">
+          <ul className="list-none mb-14 ">
             {expert.qualifications.map((qualification, index) => (
-              <li
-                key={index}
-                className="flex items-center gap-2 text-gray-400 mb-3"
-              >
+              <li key={index} className="flex items-center gap-2 tBlack mb-3">
                 <span className="orange">✓</span> {qualification}
               </li>
             ))}
@@ -94,7 +88,7 @@ const ExpertDetails = () => {
                 className={`text-sm font-semibold pb-1 ${
                   activeTab === tab
                     ? "orange border-b-2 border-orange"
-                    : "text-gray-400"
+                    : "tBlack"
                 }`}
               >
                 {tab.toUpperCase()}
@@ -103,7 +97,7 @@ const ExpertDetails = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="text-gray-400 ">
+          <div className="tBlack ">
             {activeTab === "Biography" && <p>{expert.bio}</p>}
             {activeTab === "Education" && (
               <ul className="list-disc list-inside ">

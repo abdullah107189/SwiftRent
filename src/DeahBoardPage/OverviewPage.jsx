@@ -1,12 +1,32 @@
-import Header from "../components/common/Header";
+import { useEffect, useState } from 'react'; // Import useState and useEffect
+import Header from '../components/common/Header';
+import { motion } from 'framer-motion';
+import StatCard from '../components/common/StatCard';
+import { BarChart, ShoppingCart, Users, Zap } from 'lucide-react';
+import SalesOverviewChart from '../components/common/SalesOverviewChart';
+import CategoryDistributionChart from '../components/common/CategroyDistributionChart';
+import SalesChannelChart from '../components/common/SalesChannelChart';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
-import { motion } from "framer-motion";
-import StatCard from "../components/common/StatCard";
-import { BarChart, ShoppingCart, Users, Zap } from "lucide-react";
-import SalesOverviewChart from "../components/common/SalesOverviewChart";
-import CategoryDistributionChart from "../components/common/CategroyDistributionChart";
-import SalesChannelChart from "../components/common/SalesChannelChart";
 const OverviewPage = () => {
+  const axiosSecure = useAxiosSecure();
+
+  // Define state for storing all users
+  const [allUser, setAllUser] = useState([]);
+
+  const fetchAllUsers = async () => {
+    try {
+      const response = await axiosSecure.get('/all-user');
+      setAllUser(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllUsers();
+  }, []);
+
   return (
     <div className="">
       <Header title="Overview" />
@@ -24,13 +44,13 @@ const OverviewPage = () => {
             color="#6366F1"
           />
           <StatCard
-            name="New Users"
+            name=" Users"
             icon={Users}
-            value="1234"
+            value={allUser.length}
             color="#BB5CF6"
           />
           <StatCard
-            name="Total Sales"
+            name="Total Orders"
             icon={ShoppingCart}
             value="54223"
             color="#EC4899"
@@ -42,8 +62,8 @@ const OverviewPage = () => {
             color="#10B981"
           />
         </motion.div>
-        {/* CHARTS */}
 
+        {/* CHARTS */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <SalesOverviewChart />
           <CategoryDistributionChart />

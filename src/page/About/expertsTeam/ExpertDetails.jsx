@@ -6,6 +6,7 @@ import {
   FaInstagram,
   FaWhatsapp,
 } from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 // Social media icons component
 const SocialIcon = ({ icon: Icon }) => (
@@ -15,27 +16,22 @@ const SocialIcon = ({ icon: Icon }) => (
 );
 
 const ExpertDetails = () => {
+  const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   const [expert, setExpert] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("Biography");
 
   useEffect(() => {
-    const fetchExpert = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/about");
-        const data = await res.json();
-        const selected = data.find((item) => item._id === id);
+    axiosPublic
+      .get("/about")
+      .then((res) => {
+        const selected = res.data.find((item) => item._id === id);
         setExpert(selected);
-      } catch (err) {
-        console.error("Error fetching expert:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExpert();
-  }, [id]);
+      })
+      .catch((err) => console.error("Error fetching expert:", err))
+      .finally(() => setLoading(false));
+  }, [axiosPublic, id]);
 
   if (loading)
     return <p className="text-center mt-10 text-white">Loading...</p>;

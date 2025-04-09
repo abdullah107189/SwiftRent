@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { setUser } from "../../redux/auth/authSlice";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
-const GoogleLogIn = () => {
+const GoogleLogIn = ({ toggle = "" }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const axiosPublic = useAxiosPublic();
@@ -24,23 +24,45 @@ const GoogleLogIn = () => {
         email: user.email,
         name: user.displayName,
         photoURL: user.photoURL,
+        role: toggle,
       };
 
-      // Sending user data to the server
-      await axiosPublic.post("/add-user", userData);
+      // Check if user exists, if not add them, then update last login
+      const existingUserResponse = await axiosPublic.post(
+        "/add-user",
+        userData
+      );
+      if (existingUserResponse.data.message !== "User already exists") {
+        console.log("New user added:", existingUserResponse.data);
+      }
 
+      // Update last login time
+      if (toggle === "") {
+        await axiosPublic.patch("/update-last-login", { email: user?.email });
+      }
       // Setting up users in Redux
       dispatch(setUser(userData));
 
       // Notification of successful login
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Login successful!",
-        text: `Welcome ${user.displayName}`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      if (toggle) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Register successful!",
+          text: `Welcome ${user.displayName}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Login successful!",
+          text: `Welcome ${user.displayName}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
 
       // Redirect to home page
       navigate("/");

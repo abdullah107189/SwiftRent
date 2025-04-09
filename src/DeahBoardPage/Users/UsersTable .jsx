@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useSelector } from 'react-redux';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import Spinner from '../../components/Spinner';
-import Swal from 'sweetalert2';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Search } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useSelector } from "react-redux";
+import { FaRegTrashAlt } from "react-icons/fa";
+import Spinner from "../../components/Spinner";
+import Swal from "sweetalert2";
 const UsersTable = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const axiosSecure = useAxiosSecure();
 
   // Fetch users data using React Query
@@ -19,7 +19,7 @@ const UsersTable = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['users', user?.email],
+    queryKey: ["users", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure(`/all-user/${user?.email}`);
       return data;
@@ -32,42 +32,42 @@ const UsersTable = () => {
   }, [users]);
 
   // Search Functionality
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     const filtered = users.filter(
-      u =>
+      (u) =>
         u.name.toLowerCase().includes(term) ||
         u.email.toLowerCase().includes(term)
     );
     setFilteredUsers(filtered);
   };
 
-  const handelUserDelete = async id => {
+  const handelUserDelete = async (id) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'User  will be deleted',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "User  will be deleted",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then(async result => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await axiosSecure.delete(`/user-delete/${id}`);
           refetch();
           Swal.fire({
-            title: 'Deleted!',
-            text: 'User has been deleted.',
-            icon: 'success',
+            title: "Deleted!",
+            text: "User has been deleted.",
+            icon: "success",
           });
         } catch (error) {
           console.error(error);
           Swal.fire({
-            title: 'Error!',
-            text: 'Something went wrong.',
-            icon: 'error',
+            title: "Error!",
+            text: "Something went wrong.",
+            icon: "error",
           });
         }
       }
@@ -101,7 +101,7 @@ const UsersTable = () => {
         <table className="min-w-full divide-y divide-gray-700">
           <thead>
             <tr>
-              {['Name', 'Email', 'Role', 'Status', 'Actions'].map(heading => (
+              {["Name", "Email", "Role", "Status", "Actions"].map((heading) => (
                 <th
                   key={heading}
                   className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
@@ -113,7 +113,7 @@ const UsersTable = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-700">
-            {filteredUsers.map(u => (
+            {filteredUsers.map((u) => (
               <motion.tr
                 key={u._id}
                 initial={{ opacity: 0 }}
@@ -147,11 +147,11 @@ const UsersTable = () => {
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                       u.isActive
-                        ? 'bg-green-800 text-green-100'
-                        : 'bg-red-800 text-red-100'
+                        ? "bg-green-800 text-green-100"
+                        : "bg-red-800 text-red-100"
                     }`}
                   >
-                    {u.isActive ? 'Active' : 'Inactive'}
+                    {u.isActive ? "Active" : "Inactive"}
                   </span>
                 </td>
 

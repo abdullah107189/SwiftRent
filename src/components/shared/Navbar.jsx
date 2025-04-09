@@ -55,7 +55,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {["About", "Services", "Contact"].map((item, index) => (
+      {["Services", "About", "Contact"].map((item, index) => (
         <li key={index} onClick={() => setIsMenuOpen(false)}>
           <NavLink
             to={`/${item.toLowerCase()}`}
@@ -80,6 +80,7 @@ const Navbar = () => {
               <div tabIndex={0} role="button" className="cursor-pointer avatar">
                 <div className="w-8 rounded-full">
                   <img
+                    referrerPolicy="no-referrer"
                     alt="Tailwind CSS Navbar component"
                     src={user?.photoURL || avatar}
                   />
@@ -156,7 +157,7 @@ const Navbar = () => {
       className={`w-full fixed top-0 z-50 transition-all duration-500 
       ${isScrolled ? "sBgBlack bg-opacity-90 shadow-lg" : "bg-transparent"}`}
     >
-      <div className="mxw flex justify-between items-center py-3">
+      <div className="mxw flex justify-between items-center">
         <NavLink to="/" className="flex items-center">
           <span className="text-3xl font-black text-white">
             <span className="text-[#f5b754]">S</span>wift

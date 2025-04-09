@@ -97,16 +97,19 @@ const Login = () => {
                 )}
               </div>
               <div className="text-right">
-                <a href="#" className="text-sm hover:underline text-[#f5b754]">
+                <Link
+                  to="/forget-password"
+                  className="text-sm hover:underline text-[#f5b754]"
+                >
                   Forgot password?
-                </a>
+                </Link>
               </div>
             </div>
 
             <div>
               <button
                 type="submit"
-                className={`bg-[#f5b754] w-full rounded-md py-3 text-white ${
+                className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
                   loading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-[#f5b754ef]"
@@ -117,7 +120,7 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <div className="flex items-center py-10 space-x-1 w-full max-w-sm">
+          <div className="flex items-center pt-4 space-x-1 w-full max-w-sm">
             <div className="flex-1 h-px bg-gray-500"></div>
             <p className="px-3 text-sm text-gray-300">
               Login with social accounts
@@ -126,7 +129,7 @@ const Login = () => {
           </div>
           <GoogleLogIn />
           <p className="pt-5 text-sm text-center text-gray-200">
-            Don't have an account yet?{" "}
+            Don't have an account yet?
             <Link to="/register" className="underline orange hover:text-white">
               Create an account.
             </Link>

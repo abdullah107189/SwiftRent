@@ -1,12 +1,21 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import registerImg from "../../assets/Sign up.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import GoogleLogIn from "./GoogleLogIn";
 import useAuthForm from "../../hooks/useAuthForm";
 import { registerUser } from "../../redux/auth/authSlice";
+import { AiOutlineUser } from "react-icons/ai";
 
 const Register = () => {
+  const [toggle, setToggle] = useState("customer");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const handleToggle = (value) => {
+    setToggle(value);
+  };
+
   const {
     register,
     handleSubmit,
@@ -14,21 +23,30 @@ const Register = () => {
     loading,
     showPassword,
     togglePasswordVisibility,
-    onSubmit,
-  } = useAuthForm((data) =>
-    registerUser({
+    onSubmit: authOnSubmit,
+  } = useAuthForm(registerUser);
+
+  const onSubmit = (data) => {
+    if (data.password !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+    setPasswordError("");
+    authOnSubmit({
       email: data.email,
       password: data.password,
       userInfo: {
         name: data.name,
         email: data.email,
+        role: toggle,
       },
-    })
-  );
+    });
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex w-full max-w-7xl rounded-md overflow-hidden gap-10">
+        {/* Left side */}
         <div className="md:block hidden md:w-2/3 h-screen">
           <img
             src={registerImg}
@@ -36,55 +54,81 @@ const Register = () => {
             className="w-full h-full object-cover"
           />
         </div>
+
+        {/* Right side */}
         <div className="flex flex-col md:w-1/3 w-full p-6 text-gray-200 items-center justify-center mx-auto md:bg-transparent">
-          <div className="mb-8 text-center">
-            <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
-            <p className="text-sm text-gray-200">
-              Welcome to{" "}
+          <div className="mb-6 text-center">
+            <h1 className="my-3 text-4xl font-bold">
               <span className="font-black text-white">
                 <span className="text-[#f5b754]">S</span>wift
                 <span className="text-[#f5b754]">R</span>ent
               </span>
-            </p>
+            </h1>
+            <p className="text-gray-200">Create your account!</p>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="flex justify-center items-center w-full mb-2">
+            <div className="flex items-center bg-gray-100 rounded-xl p-2 w-full">
+              <button
+                className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
+                  toggle === "customer"
+                    ? "bg-[#f5b754] text-white"
+                    : "bg-gray-100 text-gray-600"
+                }`}
+                onClick={() => handleToggle("customer")}
+              >
+                <AiOutlineUser size={20} className="mr-2" />
+                Customer
+              </button>
+              <button
+                className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
+                  toggle === "driver"
+                    ? "bg-[#f5b754] text-white"
+                    : "bg-gray-100 text-gray-600"
+                }`}
+                onClick={() => handleToggle("driver")}
+              >
+                <AiOutlineUser size={20} className="mr-2" />
+                Driver
+              </button>
+            </div>
+          </div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-4 w-full max-w-sm"
+          >
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block mb-2 text-sm">
+                <label htmlFor="name" className="block mb-1 text-sm">
                   Name
                 </label>
                 <input
                   type="text"
                   id="name"
                   {...register("name", { required: "Name is required" })}
-                  placeholder="Enter Your Name Here"
-                  className="w-[300px] px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                  placeholder="Enter Your Name"
+                  className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.name.message}
-                  </p>
+                  <p className="text-red-500 text-sm">{errors.name.message}</p>
                 )}
               </div>
               <div>
-                <label htmlFor="email" className="block mb-2 text-sm">
+                <label htmlFor="email" className="block mb-1 text-sm">
                   Email address
                 </label>
                 <input
                   type="email"
                   id="email"
                   {...register("email", { required: "Email is required" })}
-                  placeholder="Enter Your Email Here"
+                  placeholder="Enter Your Email"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.email.message}
-                  </p>
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
                 )}
               </div>
               <div>
-                <label htmlFor="password" className="text-sm mb-2 block">
+                <label htmlFor="password" className="text-sm mb-1 block">
                   Password
                 </label>
                 <div className="relative">
@@ -117,16 +161,45 @@ const Register = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-red-500 text-sm">
                     {errors.password.message}
                   </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="confirmPassword" className="text-sm mb-1 block">
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm Your Password"
+                    className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
+                  >
+                    {showPassword ? (
+                      <AiOutlineEyeInvisible size={20} />
+                    ) : (
+                      <AiOutlineEye size={20} />
+                    )}
+                  </button>
+                </div>
+                {passwordError && (
+                  <p className="text-red-500 text-sm">{passwordError}</p>
                 )}
               </div>
             </div>
             <div>
               <button
                 type="submit"
-                className={`w-full py-2 mt-4 rounded-md bg-[#f5b754] text-white ${
+                className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
                   loading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-[#f5b754ef]"
@@ -137,21 +210,21 @@ const Register = () => {
               </button>
             </div>
           </form>
-          <div className="flex items-center pt-4 space-x-1">
-            <div className="flex-1 h-px sm:w-16 dark:bg-gray-500"></div>
-            <p className="px-3 text-sm dark:text-gray-300">
+          <div className="flex items-center pt-4 space-x-1 w-full max-w-sm">
+            <div className="flex-1 h-px bg-gray-500"></div>
+            <p className="px-3 text-sm text-gray-300">
               Register with social accounts
             </p>
-            <div className="flex-1 h-px sm:w-7 dark:bg-gray-500"></div>
+            <div className="flex-1 h-px bg-gray-500"></div>
           </div>
-          <GoogleLogIn />
-          <p className="px-6 text-sm text-center text-gray-200">
-            Already have an account?{" "}
+          <GoogleLogIn toggle={toggle} />
+          <p className="pt-5 text-sm text-center text-gray-200">
+            Already have an account?
             <Link
               to="/login"
-              className="underline text-[#f5b754ef] hover:text-gray-200"
+              className="underline text-[#f5b754] hover:text-white"
             >
-              Login.
+              Login here.
             </Link>
           </p>
         </div>

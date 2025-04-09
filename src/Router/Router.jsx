@@ -1,71 +1,111 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import MainLayout from '../layout/MainLayout';
-import Home from '../page/Home';
-import Services from '../page/services/Services';
-import About from '../page/About/About';
-import Contact from '../page/Contact/Contact';
-import LogIn from '../page/Authentication/LogIn';
-import Register from '../page/Authentication/Register';
-import Dashboard from '../layout/Dashboard/Dashboard';
-import OverviewPage from '../DeahBoardPage/OverviewPage';
-import AddToCar from '../DeahBoardPage/AddToCar';
-import CarProducatPage from '../DeahBoardPage/CarProducatPage';
-import UsersPage from '../DeahBoardPage/Users/UsersPage';
-import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
-import Analytics from '../DeahBoardPage/Analytics/Analytics';
-import SettingsPage from '../DeahBoardPage/SettingsPage/SettingsPage';
-import Profile from '../DeahBoardPage/SettingsPage/Profile ';
-import CarDetails from '../components/common/CarDetails/CarDetails';
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import MainLayout from "../layout/MainLayout";
+import Home from "../page/Home";
+import Services from "../page/services/Services";
+import About from "../page/About/About";
+import Contact from "../page/Contact/Contact";
+import LogIn from "../page/Authentication/LogIn";
+import Register from "../page/Authentication/Register";
+import Dashboard from "../layout/Dashboard/Dashboard";
+import OverviewPage from "../DeahBoardPage/OverviewPage";
+import AddToCar from "../DeahBoardPage/AddToCar";
+import CarProducatPage from "../DeahBoardPage/CarProducatPage";
+import UsersPage from "../DeahBoardPage/Users/UsersPage";
+import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
+import Analytics from "../DeahBoardPage/Analytics/Analytics";
+import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
+
+import BrowseCars from "../DeahBoardPage/Customer/Browse Cars/BrowseCars";
+import MyBookings from "../DeahBoardPage/Customer/MyBookings/MyBookings";
+import PaymentHistory from "../DeahBoardPage/Customer/Payment History/PaymentHistory";
+import UpdateProfile from "../DeahBoardPage/UpdateProfile/UpdateProfile";
+import CarDetails from "../components/common/CarDetails/CarDetails";
+import NumberCard from "../components/shared/card/NumberCard";
+import BookAuto from "../page/services/BookAuto";
+import ForgetPassword from "../page/Authentication/ForgetPassword";
+import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
+import ExpertDetails from "../page/About/expertsTeam/ExpertDetails";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home></Home>,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <About></About>,
       },
       {
-        path: '/contact',
+        path: "/contact",
         element: <Contact />,
       },
       {
-        path: '/services',
+        path: "/services",
         element: <Services />,
       },
       {
-        path: '/car-details',
+        path: "/car-details/:id",
         element: <CarDetails />,
+      },
+
+      {
+        path: "/number-card",
+        element: <NumberCard />,
+      },
+      {
+        path: "/book-auto",
+        element: <BookAuto />,
+      },
+      {
+        path: "/expert/:id",
+        element: <ExpertDetails />,
       },
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <Dashboard />,
     children: [
       { index: true, element: <Navigate to="overview" /> },
-      { path: 'overview', element: <OverviewPage /> },
-      { path: 'addcar', element: <AddToCar /> },
+      { path: "overview", element: <OverviewPage /> },
+      { path: "addcar", element: <AddToCar /> },
 
-      { path: 'car-product', element: <CarProducatPage /> },
-      { path: 'users', element: <UsersPage /> },
-      { path: 'order', element: <OrdersPage /> },
-      { path: 'analytics', element: <Analytics /> },
+      { path: "car-product", element: <CarProducatPage /> },
+      { path: "users", element: <UsersPage /> },
+      { path: "order", element: <OrdersPage /> },
+      { path: "analytics", element: <Analytics /> },
 
-      { path: 'settings', element: <SettingsPage /> },
+      { path: "settings", element: <SettingsPage /> },
+      { path: "overview", element: <OverviewPage /> },
+      { path: "add-car", element: <AddToCar /> },
+
+      { path: "manage-bookings", element: <CarProducatPage /> },
+      { path: "manage-users", element: <UsersPage /> },
+      { path: "order", element: <OrdersPage /> },
+      { path: "analytics", element: <Analytics /> },
+      // customer
+      { path: "browse-cars", element: <BrowseCars /> },
+      { path: "my-bookings", element: <MyBookings /> },
+      { path: "payments", element: <PaymentHistory /> },
+      { path: "profile", element: <UpdateProfile /> },
+      { path: "settings", element: <SettingsPage /> },
+      { path: "change-password", element: <ChangePassword /> },
     ],
   },
   {
-    path: '/register',
+    path: "/register",
     element: <Register />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <LogIn />,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword />,
   },
 ]);

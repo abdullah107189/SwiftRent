@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -13,20 +15,16 @@ const axiosPublic = useAxiosPublic();
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password, userInfo }, { rejectWithValue }) => {
-    // console.log(userInfo);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      const newUser = {
+      const response = await axiosPublic.post("/add-user", {
+        ...userInfo,
         uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        name: userInfo.name,
-      };
-      const response = await axiosPublic.post("/add-user", newUser);
-
+      });
       return response.data.user;
     } catch (error) {
       return rejectWithValue(
@@ -62,6 +60,20 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   await signOut(auth);
 });
+
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async ({ newPassword }, { rejectWithValue }) => {
+    try {
+      const user = auth.currentUser;
+      if (!user) throw new Error("No user is currently logged in");
+      await updatePassword(user, newPassword);
+      return "Password updated successfully";
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -109,6 +121,18 @@ const authSlice = createSlice({
       // logout
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
+      })
+      // change password
+      .addCase(changePassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

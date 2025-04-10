@@ -13,7 +13,7 @@ export default function ExpertsTeam() {
 
   useEffect(() => {
     axiosPublic
-      .get("/about")
+      .get("/expert-teammate")
       .then((res) => setExperts(res.data))
       .catch((err) => console.error("Error fetching experts:", err));
   }, [axiosPublic]);

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -15,10 +16,11 @@ const CarDetails = () => {
   const [car, setCar] = useState(null);
   const [selectedImg, setSelectedImg] = useState("");
   const [startDate, setStartDate] = useState(new Date());
+
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // car api
+  // Fetch Car
   useEffect(() => {
     const fetchCar = async () => {
       setLoading(true);
@@ -27,18 +29,37 @@ const CarDetails = () => {
         setCar(res.data);
         setSelectedImg(res.data?.image?.[0] || "");
         setLoading(false);
+
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchCar();
   }, [id, axiosSecure]);
 
+  // Fetch Reviews
+  const {
+    data: reviews = [],
+    isLoading: reviewsLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['carReviews', id],
+    queryFn: async () => {
+      const res = await axiosSecure.get('/car/review');
+      return res.data;
+    },
+    enabled: !!id,
+  });
+
+  if (loading || reviewsLoading) return <Spinner />;
+
   if (!car)
-    return <p className=" flex just text-center text-red-600">Car not found</p>;
-  if (loading) {
-    return <Spinner />;
-  }
+    return (
+      <p className="text-center text-red-600 font-semibold">Car not found</p>
+    );
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
       {/* Left: Images */}
@@ -50,7 +71,6 @@ const CarDetails = () => {
             className="w-full h-[400px] object-cover cursor-zoom-in transform transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
         </div>
-
         <div className="flex flex-wrap gap-3 mt-4">
           {car.image?.map((img, idx) => (
             <img
@@ -64,53 +84,52 @@ const CarDetails = () => {
             />
           ))}
         </div>
-        <div className="hidden md:block mt-8 ">
-          <h3 className="font-semibold text-xl mb-4 border-b pb-2 ">
+
+        <div className="hidden md:block mt-8">
+          <h3 className="font-semibold text-xl mb-4 border-b pb-2">
             Customer Feedback
           </h3>
-
-          {/* Customer Feedback List */}
-          <CustomerFeedback />
+          <CustomerFeedback reviews={reviews} />
         </div>
       </div>
 
-      {/* Right: Info */}
+      {/* Right: Car Info */}
       <div className="space-y-6 p-6 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold ">{car.name}</h2>
-
+        <h2 className="text-3xl font-bold">{car.name}</h2>
         <div className="flex items-center gap-1 text-[#f5b754]">
           {Array(5)
             .fill()
             .map((_, i) => (
               <FaStar key={i} />
             ))}
-          <span className="text-sm  ml-2">(120+ reviews)</span>
+          <span className="text-sm ml-2">(120+ reviews)</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <p>
-            <span className="font-semibold">Brand:</span> {car.brand}
+            <strong>Brand:</strong> {car.brand}
           </p>
           <p>
-            <span className="font-semibold">Type:</span> {car.type}
+            <strong>Type:</strong> {car.type}
           </p>
           <p>
-            <span className="font-semibold">Year:</span> {car.year}
+            <strong>Year:</strong> {car.year}
           </p>
           <p>
             <span className="font-semibold">Transmission:</span>{" "}
             {car.transmission}
+
           </p>
           <p>
-            <span className="font-semibold">Seats:</span> {car.seats}
+            <strong>Seats:</strong> {car.seats}
           </p>
           <p>
-            <span className="font-semibold">Fuel:</span> {car.fuel}
+            <strong>Fuel:</strong> {car.fuel}
           </p>
           <p className="flex items-center gap-2">
             <FaMapMarkerAlt className="text-[#f5b754]" />
             <span>
-              <span className="font-semibold">City:</span> {car.location?.city}
+              <strong>City:</strong> {car.location?.city}
             </span>
           </p>
           <p>
@@ -169,17 +188,11 @@ const CarDetails = () => {
           </div>
         </div>
 
-        {/* Feedback Section */}
-        <div>
-          <CustomerReviews />
-        </div>
-        <div className="block md:hidden mt-8 ">
-          <h3 className="font-semibold text-xl mb-4 border-b pb-2 ">
+        <div className="block md:hidden mt-8">
+          <h3 className="font-semibold text-xl mb-4 border-b pb-2">
             Customer Feedback
           </h3>
-
-          {/* Customer Feedback List */}
-          <CustomerFeedback />
+          <CustomerFeedback reviews={reviews} />
         </div>
       </div>
 

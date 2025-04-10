@@ -9,10 +9,15 @@ import {
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 // Social media icons component
-const SocialIcon = ({ icon: Icon }) => (
-  <div className="w-[40px] h-[40px] leading-[60px] border border-[#F5B754] bg-transparent rounded-full overflow-hidden text-white font-bold text-[14px] text-center flex items-center justify-center transition-all duration-300 hover:bg-[#F5B754] hover:text-[#1b1b1b]">
+const SocialIcon = ({ icon: Icon, link }) => (
+  <a
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-[40px] h-[40px] border border-[#F5B754] bg-transparent rounded-full overflow-hidden text-white font-bold text-[14px] text-center flex items-center justify-center transition-all duration-300 hover:bg-[#F5B754] hover:text-[#1b1b1b]"
+  >
     <Icon className="text-sm" />
-  </div>
+  </a>
 );
 
 const ExpertDetails = () => {
@@ -40,20 +45,23 @@ const ExpertDetails = () => {
     return <p className="text-center mt-10 orange">Expert not found</p>;
 
   return (
-    <div className="min-h-screen  text-white flex items-center justify-center py-10">
+    <div className="min-h-screen text-white flex items-center justify-center py-10">
       <div className="mxw w-full flex flex-col md:flex-row gap-8 px-4">
         {/* Left Section: Image and Contact */}
         <div className="flex flex-col items-center md:w-1/2">
           <img
             src={expert.image}
             alt={expert.name}
-            className="w-96 h-96 object-cover rounded-xl shadow-md mb-6"
+            className="w-[476px] h-[476px] object-cover rounded-xl shadow-md mb-6"
           />
           <div className="flex gap-4 mb-4 cursor-pointer">
-            <SocialIcon icon={FaLinkedinIn} />
-            <SocialIcon icon={FaFacebookF} />
-            <SocialIcon icon={FaInstagram} />
-            <SocialIcon icon={FaWhatsapp} />
+            <SocialIcon icon={FaLinkedinIn} link={expert.linkedin} />
+            <SocialIcon icon={FaFacebookF} link={expert.facebook} />
+            <SocialIcon icon={FaInstagram} link={expert.instagram} />
+            <SocialIcon
+              icon={FaWhatsapp}
+              link={`https://wa.me/${expert.phone}`}
+            />
           </div>
           <p className="text-sm tBlack">
             My e-mail address:{" "}
@@ -63,7 +71,6 @@ const ExpertDetails = () => {
 
         {/* Right Section: Details */}
         <div className="md:w-1/2">
-          {/* Name and Role */}
           <h1 className="text-2xl font-bold mb-2">
             Hello, I’m {expert.name}. I work as your sales consultant at{" "}
             <span className="orange">{expert.role}</span>.
@@ -74,7 +81,10 @@ const ExpertDetails = () => {
           <ul className="list-none mb-14 ">
             {expert.qualifications.map((qualification, index) => (
               <li key={index} className="flex items-center gap-2 tBlack mb-3">
-                <span className="orange">✓</span> {qualification}
+                <span className="orange sBgBlack w-[40px] h-[40px]  rounded-full flex items-center justify-center">
+                  ✓
+                </span>{" "}
+                {qualification}
               </li>
             ))}
           </ul>

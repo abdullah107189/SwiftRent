@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useSelector } from "react-redux";
 
@@ -24,7 +23,9 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         reset({
           fullName: response.data.name || user?.name || "",
           email: user?.email || "",
-          carType: car?.type || "",
+          carName: car?.name || "",
+          carBrand: car?.brand || "",
+          price: car?.price || "",
         });
       });
     }
@@ -39,7 +40,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         carId: car._id,
         carName: data.carName,
         carBrand: data.carBrand,
-        carType: data.carType,
+        price: data.price,
         pickUpLocation: data.pickUpLocation,
         dropOffLocation: data.dropOffLocation,
         pickUpDate: data.pickUpDate,
@@ -89,7 +90,6 @@ const BookingModal = ({ isOpen, onClose, car }) => {
                 type="text"
                 {...register("fullName", { required: "Full Name is required" })}
                 readOnly
-                value={userInfo?.name || user?.name || ""}
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
               />
               {errors.fullName && (
@@ -170,17 +170,36 @@ const BookingModal = ({ isOpen, onClose, car }) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-300">
-                Choose Car Type
+                Car Name
               </label>
-              <select
-                {...register("carType")}
+              <input
+                type="text"
+                {...register("carName")}
+                readOnly
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-              >
-                <option value="">Select Car Type</option>
-                <option value="SUV">SUV</option>
-                <option value="Sedan">Sedan</option>
-                <option value="Hatchback">Hatchback</option>
-              </select>
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-300">
+                Car Brand
+              </label>
+              <input
+                type="text"
+                {...register("carBrand")}
+                readOnly
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-300">
+                Price
+              </label>
+              <input
+                type="text"
+                {...register("price")}
+                readOnly
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-300">

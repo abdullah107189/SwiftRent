@@ -39,7 +39,7 @@ const ExpertDetails = () => {
 
   useEffect(() => {
     axiosPublic
-      .get("/about")
+      .get("/expert-teammate")
       .then((res) => {
         setExperts(res.data);
         const selected = res.data.find((item) => item._id === id);
@@ -184,8 +184,8 @@ const ExpertDetails = () => {
                     <div className="flex items-center justify-center w-[40px] h-[40px] bg-[#F5B754] rounded-full text-black font-semibold">
                       <FaInfo className="text-lg" />
                     </div>
-                    <div className="ml-3">
-                      <h1 className="text-xl font-semibold text-white">
+                    <div className="ml-3 text-left">
+                      <h1 className="text-md font-semibold text-white">
                         {expert.name}
                       </h1>
                       <p className="text-sm text-[#F5B754]">{expert.role}</p>

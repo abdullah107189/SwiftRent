@@ -2,8 +2,19 @@ import { NavLink, Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import useUserRole from "../../hooks/useUserRole";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { authStateListener } from "../../redux/auth/authListener";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authStateListener(dispatch);
+  }, [dispatch]);
+  const userRole = useUserRole();
+
   return (
     <div className="drawer lg:drawer-open ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -39,7 +50,7 @@ const Dashboard = () => {
               <IoClose className="text-xl" />
             </label>
           </div>
-          <Sidebar />
+          <Sidebar userRole={userRole[0]} />
         </ul>
       </div>
     </div>

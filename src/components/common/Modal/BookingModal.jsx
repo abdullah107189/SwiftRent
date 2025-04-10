@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useSelector } from "react-redux";
+import moment from "moment"; 
 
 const BookingModal = ({ isOpen, onClose, car }) => {
   const { user } = useSelector((state) => state.auth);
   const axiosSecure = useAxiosSecure();
   const [userInfo, setUserInfo] = useState(null);
+  const [calculatedPrice, setCalculatedPrice] = useState(car?.price || 0);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm();
+
+  
+  const pickUpDate = watch("pickUpDate");
+  const returnDate = watch("returnDate");
+
 
   useEffect(() => {
     if (isOpen && user?.email) {
@@ -24,12 +31,29 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         reset({
           fullName: response.data.name || user?.name || "",
           email: user?.email || "",
-          carType: car?.type || "",
+          carName: car?.name || "",
+          carBrand: car?.brand || "",
+          price: car?.price || "",
         });
       });
     }
   }, [isOpen, user, axiosSecure, reset, car]);
 
+  
+  useEffect(() => {
+    if (pickUpDate && returnDate) {
+      const start = moment(pickUpDate);
+      const end = moment(returnDate);
+      const days = end.diff(start, "days") + 1; 
+      if (days > 0) {
+        setCalculatedPrice(car.price * days); 
+      } else {
+        setCalculatedPrice(car.price); 
+      }
+    }
+  }, [pickUpDate, returnDate, car.price]);
+
+  
   const onSubmit = async (data) => {
     try {
       const bookingData = {
@@ -39,7 +63,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         carId: car._id,
         carName: data.carName,
         carBrand: data.carBrand,
-        carType: data.carType,
+        price: calculatedPrice,
         pickUpLocation: data.pickUpLocation,
         dropOffLocation: data.dropOffLocation,
         pickUpDate: data.pickUpDate,
@@ -89,7 +113,6 @@ const BookingModal = ({ isOpen, onClose, car }) => {
                 type="text"
                 {...register("fullName", { required: "Full Name is required" })}
                 readOnly
-                value={userInfo?.name || user?.name || ""}
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
               />
               {errors.fullName && (
@@ -117,27 +140,21 @@ const BookingModal = ({ isOpen, onClose, car }) => {
               <label className="block text-sm font-medium text-gray-300">
                 Pick Up Location
               </label>
-              <select
+              <input
+                type="text"
                 {...register("pickUpLocation")}
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-              >
-                <option value="">Select Pick Up Location</option>
-                <option value="Location1">Location1</option>
-                <option value="Location2">Location2</option>
-              </select>
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-300">
                 Drop Off Location
               </label>
-              <select
+              <input
+                type="text"
                 {...register("dropOffLocation")}
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-              >
-                <option value="">Select Drop Off Location</option>
-                <option value="Location1">Location1</option>
-                <option value="Location2">Location2</option>
-              </select>
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-300">
@@ -170,17 +187,36 @@ const BookingModal = ({ isOpen, onClose, car }) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-300">
-                Choose Car Type
+                Car Name
               </label>
-              <select
-                {...register("carType")}
+              <input
+                type="text"
+                {...register("carName")}
+                readOnly
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
-              >
-                <option value="">Select Car Type</option>
-                <option value="SUV">SUV</option>
-                <option value="Sedan">Sedan</option>
-                <option value="Hatchback">Hatchback</option>
-              </select>
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-300">
+                Car Brand
+              </label>
+              <input
+                type="text"
+                {...register("carBrand")}
+                readOnly
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-300">
+                Price
+              </label>
+              <input
+                type="text"
+                value={calculatedPrice}
+                readOnly
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-300">
@@ -188,9 +224,16 @@ const BookingModal = ({ isOpen, onClose, car }) => {
               </label>
               <input
                 type="date"
-                {...register("pickUpDate")}
+                {...register("pickUpDate", {
+                  required: "Pick Up Date is required",
+                })}
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
               />
+              {errors.pickUpDate && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.pickUpDate.message}
+                </p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-300">
@@ -198,9 +241,16 @@ const BookingModal = ({ isOpen, onClose, car }) => {
               </label>
               <input
                 type="date"
-                {...register("returnDate")}
+                {...register("returnDate", {
+                  required: "Return Date is required",
+                })}
                 className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
               />
+              {errors.returnDate && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.returnDate.message}
+                </p>
+              )}
             </div>
           </div>
 

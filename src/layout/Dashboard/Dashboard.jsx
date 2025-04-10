@@ -1,7 +1,7 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import Sidebar from './Sidebar';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { IoClose } from 'react-icons/io5';
+import { NavLink, Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 
 const Dashboard = () => {
   return (

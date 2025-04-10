@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import Spinner from '../../Spinner';
-import { FaMapMarkerAlt, FaStar } from 'react-icons/fa';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import CustomerReviews from './CustomerReviews';
-import CustomerFeedback from './CustomerFeedback';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Spinner from "../../Spinner";
+import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import CustomerReviews from "./CustomerReviews";
+import CustomerFeedback from "./CustomerFeedback";
+import BookingModal from "../Modal/BookingModal";
 
 const CarDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [car, setCar] = useState(null);
-  const [selectedImg, setSelectedImg] = useState('');
+  const [selectedImg, setSelectedImg] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // car api
   useEffect(() => {
@@ -23,7 +25,7 @@ const CarDetails = () => {
       try {
         const res = await axiosSecure.get(`/cars/${id}`);
         setCar(res.data);
-        setSelectedImg(res.data?.image?.[0] || '');
+        setSelectedImg(res.data?.image?.[0] || "");
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -57,7 +59,7 @@ const CarDetails = () => {
               onClick={() => setSelectedImg(img)}
               alt={`Thumbnail ${idx + 1}`}
               className={`w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${
-                selectedImg === img ? 'border-[#f5b754]' : 'border-gray-300'
+                selectedImg === img ? "border-[#f5b754]" : "border-gray-300"
               }`}
             />
           ))}
@@ -96,7 +98,7 @@ const CarDetails = () => {
             <span className="font-semibold">Year:</span> {car.year}
           </p>
           <p>
-            <span className="font-semibold">Transmission:</span>{' '}
+            <span className="font-semibold">Transmission:</span>{" "}
             {car.transmission}
           </p>
           <p>
@@ -112,25 +114,28 @@ const CarDetails = () => {
             </span>
           </p>
           <p>
-            <span className="font-semibold">Pickup Point:</span>{' '}
+            <span className="font-semibold">Pickup Point:</span>{" "}
             {car.location?.pickupPoint}
           </p>
           <p>
-            <span className="font-semibold">Drop-off:</span>{' '}
+            <span className="font-semibold">Drop-off:</span>{" "}
             {car.location?.dropOffPoint}
           </p>
           <p>
-            <span className="font-semibold">Availability:</span>{' '}
+            <span className="font-semibold">Availability:</span>{" "}
             {car.availability}
           </p>
         </div>
 
         <div className="pt-4 border-t flex justify-between items-center">
           <p className="text-2xl font-bold text-green-600">
-            ${car.price}{' '}
+            ${car.price}{" "}
             <span className="text-sm font-normal text-gray-500">/day</span>
           </p>
-          <button className="px-5 py-2 rounded-full bg-[#f5b754] hover:bg-[#f5b754] text-white font-semibold shadow-md transition duration-300">
+          <button
+            onClick={() => setIsModalOpen(true)} // Open modal on click
+            className="px-5 py-2 rounded-full bg-[#f5b754] hover:bg-[#e0a33d] text-white font-semibold shadow-md transition duration-300"
+          >
             Book Now
           </button>
         </div>
@@ -142,7 +147,7 @@ const CarDetails = () => {
           </label>
           <DatePicker
             selected={startDate}
-            onChange={date => setStartDate(date)}
+            onChange={(date) => setStartDate(date)}
             className="border px-4 py-2 rounded-md w-full"
           />
         </div>
@@ -177,6 +182,13 @@ const CarDetails = () => {
           <CustomerFeedback />
         </div>
       </div>
+
+      {/* Booking Modal */}
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        car={car}
+      />
     </div>
   );
 };

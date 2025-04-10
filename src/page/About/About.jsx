@@ -20,8 +20,6 @@ const About = () => {
       <div>
         <RentalCarCompany />
 
-        <CarPromoVideo />
-
         {/* <ClientsSay /> */}
         <ExpertsTeam />
         <InterestedRenting />

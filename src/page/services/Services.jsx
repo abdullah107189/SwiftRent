@@ -46,7 +46,7 @@ const Services = () => {
   // get data for show filter menu
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axiosPublic.get("/cars");
+      const { data } = await axiosPublic.get("/carsFilter");
       setCarsFilterData(data);
     };
     fetchData();
@@ -60,18 +60,24 @@ const Services = () => {
     }));
   };
 
-  const getUniqueValues = (data, key) => {
-    return [...new Set(data.map((item) => item[key]))];
+  const getUniqueValues = (data = [], key) => {
+    try {
+      return [...new Set(data.map((item) => item[key]))];
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const uniqueBrands = useMemo(
     () => getUniqueValues(carsFilterData, "brand"),
     [carsFilterData]
   );
+
   const uniqueCarTypes = useMemo(
     () => getUniqueValues(carsFilterData, "type"),
     [carsFilterData]
   );
+
   const uniqueFuelTypes = useMemo(
     () => getUniqueValues(carsFilterData, "fuel"),
     [carsFilterData]
@@ -132,8 +138,8 @@ const Services = () => {
                 setSortOption(selected);
               }}
             >
-              <option value="default">Sort By</option>
-              <option value="priceAsc ">Price: Low to High</option>
+              <option value="default">Default</option>
+              <option value="priceAsc">Price: Low to High</option>
               <option value="priceDesc">Price: High to Low</option>
               <option value="nameAsc">Name: A to Z</option>
               <option value="nameDesc">Name: Z to A</option>
@@ -158,7 +164,7 @@ const Services = () => {
               showFilter ? "translate-x-0" : "-translate-x-full"
             } md:translate-x-0 z-0`}
           >
-            <div className="sBgBlack  p-6 rounded-3xl ">
+            <div className="sBgBlack md:p-6 p-3 rounded-3xl ">
               {/* Close Button (Only for small screens) */}
               <button
                 onClick={() => setShowFilter(false)}
@@ -184,62 +190,70 @@ const Services = () => {
               </div>
 
               {/* Brand Filter */}
-              <div className="mb-4 text-white">
+              <div className="mb-4 text-white ">
                 <h4 className="mb-2 text-xl font-semibold">Select Brand</h4>
-                {uniqueBrands.map((brand) => (
-                  <label
-                    key={brand}
-                    className="flex items-center gap-2 mb-2 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={filterBrand.includes(brand)}
-                      onChange={() =>
-                        handleChange(brand, filterBrand, setFilterBrand)
-                      }
-                      className="accent-[#F5B754] cursor-pointer"
-                    />
-                    {brand}
-                  </label>
-                ))}
+                <div className="max-h-[150px] overflow-y-scroll">
+                  {uniqueBrands?.map((brand) => (
+                    <label
+                      key={brand}
+                      className="flex items-center gap-2 mb-2 cursor-pointer "
+                    >
+                      <input
+                        type="checkbox"
+                        checked={filterBrand.includes(brand)}
+                        onChange={() =>
+                          handleChange(brand, filterBrand, setFilterBrand)
+                        }
+                        className="accent-[#F5B754] cursor-pointer"
+                      />
+                      {brand}
+                    </label>
+                  ))}
+                </div>
               </div>
 
               {/* Car Type Filter */}
               <div className="mb-4 text-white">
                 <h4 className="mb-2 text-xl font-semibold">Select Car Type</h4>
-                {uniqueCarTypes.map((type) => (
-                  <label
-                    key={type}
-                    className="flex items-center gap-2 mb-2 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={carType.includes(type)}
-                      onChange={() => handleChange(type, carType, setCarType)}
-                      className="accent-[#F5B754] cursor-pointer"
-                    />
-                    {type}
-                  </label>
-                ))}
+                <div className="max-h-[150px] overflow-y-scroll">
+                  {uniqueCarTypes?.map((type) => (
+                    <label
+                      key={type}
+                      className="flex items-center gap-2 mb-2 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={carType.includes(type)}
+                        onChange={() => handleChange(type, carType, setCarType)}
+                        className="accent-[#F5B754] cursor-pointer"
+                      />
+                      {type}
+                    </label>
+                  ))}
+                </div>
               </div>
 
               {/* Fuel Type Filter */}
               <div className="mb-4 text-white">
                 <h4 className="mb-2 text-xl font-semibold">Select Fuel Type</h4>
-                {uniqueFuelTypes.map((fuel) => (
-                  <label
-                    key={fuel}
-                    className="flex items-center gap-2 mb-2 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={fuelType.includes(fuel)}
-                      onChange={() => handleChange(fuel, fuelType, setFuelType)}
-                      className="accent-[#F5B754] cursor-pointer"
-                    />
-                    {fuel}
-                  </label>
-                ))}
+                <div className="max-h-[150px] overflow-y-scroll">
+                  {uniqueFuelTypes?.map((fuel) => (
+                    <label
+                      key={fuel}
+                      className="flex items-center gap-2 mb-2 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={fuelType.includes(fuel)}
+                        onChange={() =>
+                          handleChange(fuel, fuelType, setFuelType)
+                        }
+                        className="accent-[#F5B754] cursor-pointer"
+                      />
+                      {fuel}
+                    </label>
+                  ))}
+                </div>
               </div>
 
               {/* Price Range Type Filter */}
@@ -286,95 +300,99 @@ const Services = () => {
           </div>
 
           {/* Car Cards */}
-          <div className="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
-            {isFetching ? (
-              <>
-                {Array.from({ length: 6 }, (_, index) => (
-                  <div
-                    key={index}
-                    className="relative w-full h-[420px] rounded-3xl overflow-hidden group border border-gray-700 shadow-lg shadow-gray-900"
-                  >
-                    {/* Image Section */}
-                    <div className="relative w-full h-[65%] rounded-t-3xl overflow-hidden transition-transform duration-300 hover:scale-100 animate-pulse">
-                      <div className="bg-gray-700 w-full h-full"></div>
-                    </div>
+          <div className=" md:col-span-4">
+            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-center">
+              {isFetching ? (
+                <>
+                  {Array.from({ length: 6 }, (_, index) => (
+                    <div
+                      key={index}
+                      className="relative w-full h-[420px] rounded-3xl overflow-hidden group border border-gray-700 shadow-lg shadow-gray-900"
+                    >
+                      {/* Image Section */}
+                      <div className="relative w-full h-[65%] rounded-t-3xl overflow-hidden transition-transform duration-300 hover:scale-100 animate-pulse">
+                        <div className="bg-gray-700 w-full h-full"></div>
+                      </div>
 
-                    {/* Bottom Dark Gradient Overlay */}
-                    <div className="absolute bottom-[35%] left-0 w-full h-[35%] bg-gradient-to-t from-black/95 via-black/60 to-transparent"></div>
+                      {/* Bottom Dark Gradient Overlay */}
+                      <div className="absolute bottom-[35%] left-0 w-full h-[35%] bg-gradient-to-t from-black/95 via-black/60 to-transparent"></div>
 
-                    <div className="flex items-center absolute bottom-[35%] left-0 animate-pulse">
-                      <div className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b]">
-                        <div className="w-[60px] h-[60px] leading-[60px] border border-[#F5B754] bg-gray-700 rounded-full overflow-hidden text-transparent font-bold text-[14px] text-center">
-                          {/* Placeholder for number */}
+                      <div className="flex items-center absolute bottom-[35%] left-0 animate-pulse">
+                        <div className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b]">
+                          <div className="w-[60px] h-[60px] leading-[60px] border border-[#F5B754] bg-gray-700 rounded-full overflow-hidden text-transparent font-bold text-[14px] text-center">
+                            {/* Placeholder for number */}
+                          </div>
+                          <div className="absolute -top-[19px] -left-[4px] rotate-[-90deg]">
+                            <svg
+                              viewBox="0 0 11 11"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="w-6 h-5"
+                            >
+                              <path
+                                d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
+                                fill="#1b1b1b"
+                              ></path>
+                            </svg>
+                          </div>
+                          <div className="absolute -bottom-[2px] -right-[22px] rotate-[-90deg]">
+                            <svg
+                              viewBox="0 0 11 11"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="w-6 h-6"
+                            >
+                              <path
+                                d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
+                                fill="#1b1b1b"
+                              ></path>
+                            </svg>
+                          </div>
                         </div>
-                        <div className="absolute -top-[19px] -left-[4px] rotate-[-90deg]">
-                          <svg
-                            viewBox="0 0 11 11"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-6 h-5"
-                          >
-                            <path
-                              d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                              fill="#1b1b1b"
-                            ></path>
-                          </svg>
+                      </div>
+
+                      {/* Content Section */}
+                      <div className="p-4 pb-7 text-white relative bg-[#1b1b1b] rounded-b-3xl animate-pulse">
+                        <div className="bg-gray-700 h-6 w-3/4 rounded mb-2"></div>
+                        <div className="flex justify-between text-sm text-gray-400 mt-2">
+                          <div className="bg-gray-700 h-4 w-1/3 rounded"></div>
+                          <div className="bg-gray-700 h-4 w-1/3 rounded"></div>
                         </div>
-                        <div className="absolute -bottom-[2px] -right-[22px] rotate-[-90deg]">
-                          <svg
-                            viewBox="0 0 11 11"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-6 h-6"
-                          >
-                            <path
-                              d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                              fill="#1b1b1b"
-                            ></path>
-                          </svg>
+
+                        {/* Buttons */}
+                        <div className="mt-3 flex gap-4 justify-center">
+                          <div className="bg-gray-700 h-10 w-1/3 rounded"></div>
+                          <div className="bg-gray-700 h-10 w-1/3 rounded"></div>
                         </div>
                       </div>
                     </div>
-
-                    {/* Content Section */}
-                    <div className="p-4 pb-7 text-white relative bg-[#1b1b1b] rounded-b-3xl animate-pulse">
-                      <div className="bg-gray-700 h-6 w-3/4 rounded mb-2"></div>
-                      <div className="flex justify-between text-sm text-gray-400 mt-2">
-                        <div className="bg-gray-700 h-4 w-1/3 rounded"></div>
-                        <div className="bg-gray-700 h-4 w-1/3 rounded"></div>
-                      </div>
-
-                      {/* Buttons */}
-                      <div className="mt-3 flex gap-4 justify-center">
-                        <div className="bg-gray-700 h-10 w-1/3 rounded"></div>
-                        <div className="bg-gray-700 h-10 w-1/3 rounded"></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <>
-                {cars.length > 0 ? (
-                  cars.map((car, index) => (
-                    <NumberCard
-                      key={car._id}
-                      image={car.image[0] || "https://via.placeholder.com/300"}
-                      name={car.name}
-                      number={(index + 1).toString().padStart(2, "0")}
-                      brand={car.brand}
-                      price={car.price}
-                      _id={car._id}
-                      // --------------------------
-                    />
-                  ))
-                ) : (
-                  <p className="text-white text-center col-span-full text-2xl">
-                    No car available
-                  </p>
-                )}
-              </>
-            )}
+                  ))}
+                </>
+              ) : (
+                <>
+                  {cars.length > 0 ? (
+                    cars.map((car, index) => (
+                      <NumberCard
+                        key={car._id}
+                        image={
+                          car.image[0] || "https://via.placeholder.com/300"
+                        }
+                        name={car.name}
+                        number={(index + 1).toString().padStart(2, "0")}
+                        brand={car.brand}
+                        price={car.price}
+                        _id={car._id}
+                        // --------------------------
+                      />
+                    ))
+                  ) : (
+                    <p className="text-white text-center col-span-full text-2xl">
+                      No car available
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

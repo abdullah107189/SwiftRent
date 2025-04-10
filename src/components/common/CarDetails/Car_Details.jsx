@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomerReviews from "./CustomerReviews";
 import CustomerFeedback from "./CustomerFeedback";
 import BookingModal from "../Modal/BookingModal";
+import { useQuery } from "@tanstack/react-query";
 
 const CarDetails = () => {
   const { id } = useParams();

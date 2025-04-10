@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 const BookingModal = ({ isOpen, onClose, car }) => {
   const { user } = useSelector((state) => state.auth);
@@ -69,9 +70,23 @@ const BookingModal = ({ isOpen, onClose, car }) => {
 
       const response = await axiosSecure.post("/book-auto", bookingData);
       console.log("Booking successful:", response.data);
-      onClose();
+
+      Swal.fire({
+        icon: "success",
+        title: "Booking Successful",
+        text: "Your booking has been confirmed!",
+        confirmButtonText: "OK",
+      }).then(() => {
+        onClose();
+      });
     } catch (error) {
       console.error("Failed to book:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Booking Failed",
+        text: "There was an error processing your booking. Please try again.",
+        confirmButtonText: "OK",
+      });
     }
   };
 
@@ -211,6 +226,11 @@ const BookingModal = ({ isOpen, onClose, car }) => {
               type="date"
               {...register("pickUpDate", {
                 required: "Pick Up Date is required",
+                validate: {
+                  notPastDate: (value) =>
+                    moment(value).isSameOrAfter(moment().startOf("day")) ||
+                    "Pick Up Date cannot be in the past",
+                },
               })}
               className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
             />
@@ -228,6 +248,13 @@ const BookingModal = ({ isOpen, onClose, car }) => {
               type="date"
               {...register("returnDate", {
                 required: "Return Date is required",
+                validate: {
+                  notBeforePickUp: (value) =>
+                    pickUpDate
+                      ? moment(value).isSameOrAfter(moment(pickUpDate)) ||
+                        "Return Date cannot be before Pick Up Date"
+                      : true,
+                },
               })}
               className="mt-1 block w-full px-3 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f5b754]"
             />
@@ -276,7 +303,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
             )}
           </div>
 
-          {/* Row 6: Additional Note (পুরো প্রস্থ জুড়ে) */}
+          {/* Row 6: Additional Note */}
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-300">
               Additional Note

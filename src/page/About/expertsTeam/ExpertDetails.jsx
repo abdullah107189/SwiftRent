@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -24,7 +25,7 @@ const ExpertDetails = () => {
 
   useEffect(() => {
     axiosPublic
-      .get("/about")
+      .get("/expert-teammate")
       .then((res) => {
         const selected = res.data.find((item) => item._id === id);
         setExpert(selected);
@@ -36,12 +37,12 @@ const ExpertDetails = () => {
   if (loading)
     return <p className="text-center mt-10 text-white">Loading...</p>;
 
-  if (!expert)
-    return <p className="text-center mt-10 orange">Expert not found</p>;
+  // if (!expert)
+  //   return <p className="text-center mt-10 orange">Expert not found</p>;
 
   return (
     <div className="min-h-screen  text-white flex items-center justify-center py-10">
-      <div className="max-w-5xl w-full flex flex-col md:flex-row gap-8 px-4">
+      <div className="mxw w-full flex flex-col md:flex-row gap-8 px-4">
         {/* Left Section: Image and Contact */}
         <div className="flex flex-col items-center md:w-1/3">
           <img

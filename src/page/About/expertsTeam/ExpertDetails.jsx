@@ -10,7 +10,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 // Social media icons component
 const SocialIcon = ({ icon: Icon }) => (
-  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white">
+  <div className="w-[40px] h-[40px] leading-[60px] border border-[#F5B754] bg-transparent rounded-full overflow-hidden text-white font-bold text-[14px] text-center flex items-center justify-center transition-all duration-300 hover:bg-[#F5B754] hover:text-[#1b1b1b]">
     <Icon className="text-sm" />
   </div>
 );
@@ -41,13 +41,13 @@ const ExpertDetails = () => {
 
   return (
     <div className="min-h-screen  text-white flex items-center justify-center py-10">
-      <div className="max-w-5xl w-full flex flex-col md:flex-row gap-8 px-4">
+      <div className="mxw w-full flex flex-col md:flex-row gap-8 px-4">
         {/* Left Section: Image and Contact */}
-        <div className="flex flex-col items-center md:w-1/3">
+        <div className="flex flex-col items-center md:w-1/2">
           <img
             src={expert.image}
             alt={expert.name}
-            className="w-64 h-80 object-cover rounded-xl shadow-md mb-6"
+            className="w-96 h-96 object-cover rounded-xl shadow-md mb-6"
           />
           <div className="flex gap-4 mb-4 cursor-pointer">
             <SocialIcon icon={FaLinkedinIn} />
@@ -62,7 +62,7 @@ const ExpertDetails = () => {
         </div>
 
         {/* Right Section: Details */}
-        <div className="md:w-2/3">
+        <div className="md:w-1/2">
           {/* Name and Role */}
           <h1 className="text-2xl font-bold mb-2">
             Hello, I’m {expert.name}. I work as your sales consultant at{" "}

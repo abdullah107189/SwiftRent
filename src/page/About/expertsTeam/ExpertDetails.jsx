@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
@@ -52,12 +53,13 @@ const ExpertDetails = () => {
   if (loading)
     return <p className="text-center mt-10 text-white">Loading...</p>;
 
-  if (!expert)
-    return <p className="text-center mt-10 orange">Expert not found</p>;
+  // if (!expert)
+  //   return <p className="text-center mt-10 orange">Expert not found</p>;
 
   const otherExperts = experts.filter((e) => e._id !== expert._id);
 
   return (
+
     <div className="my-16">
       <div className="min-h-screen text-white flex items-center justify-center py-10">
         <div className="mxw w-full flex flex-col md:flex-row gap-8 px-4">

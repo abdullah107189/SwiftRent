@@ -13,7 +13,7 @@ const OverviewPage = () => {
 
   // Define state for storing all users
   const [allUser, setAllUser] = useState([]);
-
+  console.log(allUser);
   const fetchAllUsers = async () => {
     try {
       const response = await axiosSecure.get('/all-user');

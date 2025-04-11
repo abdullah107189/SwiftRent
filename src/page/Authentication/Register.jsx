@@ -70,11 +70,11 @@ const Register = () => {
             <div className="flex items-center bg-gray-100 rounded-xl p-2 w-full">
               <button
                 className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
-                  toggle === 'customer'
+                  toggle === 'Admin'
                     ? 'bg-[#f5b754] text-white'
                     : 'bg-gray-100 text-gray-600'
                 }`}
-                onClick={() => handleToggle('customer')}
+                onClick={() => handleToggle('Admin')}
               >
                 <AiOutlineUser size={20} className="mr-2" />
                 Customer

@@ -12,7 +12,8 @@ import {
   FaUser,
   FaRoute,
 } from 'react-icons/fa';
-import { Car, LogOut, Settings, ShoppingCart } from 'lucide-react';
+import { FaTaxi } from 'react-icons/fa6';
+import { Car, LogOut, Settings } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authSlice';
@@ -25,26 +26,25 @@ const menuItems = {
     { name: 'Add Car', path: 'add-car', icon: Car },
     { name: 'Manage Cars', path: 'manage-cars', icon: FaCar },
     { name: 'Manage Bookings', path: 'manage-bookings', icon: FaClipboardList },
-    { name: 'Manage Orders', path: 'orders', icon: ShoppingCart },
-    { name: 'User Management', path: 'manage-users', icon: FaUsers },
-    { name: 'Manage Drivers', path: 'manage-drivers', icon: FaUserCog },
+    { name: 'Customers Management', path: 'manage-users', icon: FaUsers },
+    { name: 'Manage Drivers', path: 'manage-drivers', icon: FaTaxi },
     { name: 'Billing & Payments', path: 'billing', icon: FaMoneyBill },
-    { name: 'Reviews & Reports', path: 'manage-reviews', icon: FaStar },
     { name: 'Settings', path: 'settings', icon: Settings },
   ],
   customer: [
     { name: 'Dashboard', path: 'overview', icon: FaTachometerAlt },
     { name: 'Browse Cars', path: 'browse-cars', icon: FaCar },
     { name: 'My Bookings', path: 'my-bookings', icon: FaShoppingCart },
+    { name: 'Booking Details', path: 'booking', icon: FaUser },
     { name: 'Payment History', path: 'payments', icon: FaMoneyBill },
-    { name: 'Update Profile', path: 'profile', icon: FaUser },
+
     { name: 'Settings', path: 'settings', icon: Settings },
   ],
   driver: [
+    { name: 'Dashboard', path: 'overview', icon: FaTachometerAlt },
     { name: 'Start Trip', path: 'start-trip', icon: FaRoute },
+    { name: 'Manage Availability', path: 'availability', icon: FaRoute },
     { name: 'Trip History', path: 'trip-history', icon: FaClipboardList },
-    { name: 'Customer Reviews', path: 'customer-reviews', icon: FaStar },
-    { name: 'Update Profile', path: 'profile', icon: FaUser },
     { name: 'Earnings', path: 'earnings', icon: FaMoneyBill },
     { name: 'Settings', path: 'settings', icon: Settings },
   ],
@@ -66,7 +66,7 @@ const Sidebar = () => {
       .catch(error => console.error('Logout failed:', error));
   };
 
-  // if (isRoleLoading) return <Spinner />;
+  // if (isRoleLoading) return <p></p>;
 
   const items = menuItems[userRole];
   return (

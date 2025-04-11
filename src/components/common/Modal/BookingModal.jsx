@@ -96,7 +96,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+    <div className="fixed inset-0  bg-opacity-70 flex justify-center items-center z-50">
       <div className="bg-[#1a1a1a] p-6 rounded-lg shadow-lg w-full max-w-2xl">
         {/* Header */}
         <div className="bg-[#f5b754] text-white p-4 rounded-t-lg flex justify-between items-center">

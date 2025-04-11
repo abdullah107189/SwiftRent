@@ -35,11 +35,14 @@ const UsersTable = () => {
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = users.filter(
-      (u) =>
-        u.name.toLowerCase().includes(term) ||
-        u.email.toLowerCase().includes(term)
-    );
+    const filtered = users
+      .filter((u) => u.name && u.email)
+      .filter(
+        (u) =>
+          u.name.toLowerCase().includes(term) ||
+          u.email.toLowerCase().includes(term)
+      );
+
     setFilteredUsers(filtered);
   };
 
@@ -124,7 +127,7 @@ const UsersTable = () => {
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-10 w-10">
                       <div className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-blue-500 flex items-center justify-center text-white font-semibold">
-                        {u.name.charAt(0)}
+                        {u.name?.charAt(0) || "?"}
                       </div>
                     </div>
                     <div className="ml-4">

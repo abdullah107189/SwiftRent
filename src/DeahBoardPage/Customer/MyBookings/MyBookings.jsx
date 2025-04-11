@@ -27,6 +27,7 @@ const MyBookings = () => {
   };
 
   const handlePayment = async (bookingId) => {
+    console.log("Initiating payment for booking ID:", bookingId);
     setPayLoadingId(bookingId);
     try {
       const { data } = await axiosSecure.post(`/create-payment/${bookingId}`);
@@ -53,7 +54,6 @@ const MyBookings = () => {
         <h1 className="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center gap-2">
           <FaShoppingCart className="text-white" /> My Bookings
         </h1>
-
         {bookings.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full shadow-lg rounded-lg">
@@ -62,6 +62,7 @@ const MyBookings = () => {
                   <th className="p-3 text-left">Car Name</th>
                   <th className="p-3 text-left">Booking Date</th>
                   <th className="p-3 text-left">Price</th>
+                  <th className="p-3 text-center">Payment</th>
                   <th className="p-3 text-center">Action</th>
                 </tr>
               </thead>
@@ -76,6 +77,27 @@ const MyBookings = () => {
                       {moment(booking.pickUpDate).format("YYYY-MM-DD")}
                     </td>
                     <td className="p-3">${booking.price}</td>
+                    <td className="p-3 text-center">
+                      <button
+                        onClick={() => handlePayment(booking._id)}
+                        disabled={
+                          booking.paymentStatus === "Success" ||
+                          payLoadingId === booking._id
+                        }
+                        className={`px-4 py-1 rounded ${
+                          booking.paymentStatus === "Success"
+                            ? "bg-green-500 text-white cursor-not-allowed"
+                            : "bg-[#f5b754] text-black hover:bg-[#e0a33d]"
+                        } ${payLoadingId === booking._id ? "opacity-50" : ""}`}
+                      >
+                        {booking.paymentStatus === "Success"
+                          ? "Paid"
+                          : payLoadingId === booking._id
+                          ? "Processing…"
+                          : "Pay Now"}
+                      </button>
+                    </td>
+
                     <td className="p-3 text-center gap-4 flex justify-center items-center">
                       <button className="fillBtn px-2">Cancel</button>
                       <button
@@ -83,15 +105,6 @@ const MyBookings = () => {
                         className="text-red-500 hover:text-red-700"
                       >
                         <FaTrash />
-                      </button>
-                      <button
-                        onClick={() => handlePayment(booking._id)}
-                        disabled={payLoadingId === booking._id}
-                        className="px-4 py-2 bg-[#f5b754] text-black rounded hover:bg-[#e0a33d] disabled:opacity-50"
-                      >
-                        {payLoadingId === booking._id
-                          ? "Processing…"
-                          : "Pay Now"}
                       </button>
                     </td>
                   </tr>

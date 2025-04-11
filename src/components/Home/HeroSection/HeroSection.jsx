@@ -16,6 +16,7 @@ import {
   FaSuitcaseRolling,
   FaUser,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const specs1 = [
@@ -94,18 +95,20 @@ const HeroSection = () => {
               /DAY
             </p>
             <div className="flex gap-5 justify-center">
-              <button
-                data-aos="fade-up"
-                data-aos-delay="500"
-                className="fillBtn"
-                style={{
-                  transform: "transition",
-                  animationDuration: "1s",
-                }}
-              >
-                View Details
-                <span className="ml-2 -rotate-45">&#8594;</span>
-              </button>
+              <Link to="/Services">
+                <button
+                  data-aos="fade-up"
+                  data-aos-delay="500"
+                  className="fillBtn"
+                  style={{
+                    transform: "transition",
+                    animationDuration: "1s",
+                  }}
+                >
+                  View Details
+                  <span className="ml-2 -rotate-45">&#8594;</span>
+                </button>
+              </Link>
 
               <button
                 data-aos="fade-up"

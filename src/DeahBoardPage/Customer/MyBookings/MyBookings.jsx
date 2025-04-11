@@ -27,6 +27,7 @@ const MyBookings = () => {
   };
 
   const handlePayment = async (bookingId) => {
+    console.log("Initiating payment for booking ID:", bookingId);
     setPayLoadingId(bookingId);
     try {
       const { data } = await axiosSecure.post(`/create-payment/${bookingId}`);
@@ -53,7 +54,6 @@ const MyBookings = () => {
         <h1 className="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center gap-2">
           <FaShoppingCart className="text-white" /> My Bookings
         </h1>
-
         {bookings.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full shadow-lg rounded-lg">

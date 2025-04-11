@@ -150,6 +150,15 @@ const Login = () => {
               </Link>
             </p>
           </div>
+
+          <GoogleLogIn toggle="customer" page="login"/>
+          <p className="pt-5 text-sm text-center text-gray-200">z
+            Don't have an account yet?
+            <Link to="/register" className="underline orange hover:text-white">
+              Create an account.
+            </Link>
+          </p>
+
         </div>
       </div>
     </>

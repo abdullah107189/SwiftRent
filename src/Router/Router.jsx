@@ -41,7 +41,6 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    // errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

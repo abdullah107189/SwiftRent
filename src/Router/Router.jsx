@@ -90,18 +90,12 @@ export const router = createBrowserRouter([
       { path: 'manage-cars', element: <ManageCars /> },
       { path: 'manage-bookings', element: <ManageBookings /> },
       // { path: 'car-product', element: <CarProducatPage /> },
-      { path: 'manage-users', element: <UsersPage /> },
+      { path: 'customers-manage', element: <UsersPage /> },
       { path: 'manage-drivers', element: <ManageDrivers /> },
       { path: 'billing', element: <BillingPage /> },
-
       { path: 'order', element: <OrdersPage /> },
-
       { path: 'settings', element: <SettingsPage /> },
-      { path: 'overview', element: <OverviewPage /> },
-
       { path: 'manage-bookings', element: <CarProducatPage /> },
-
-      { path: 'order', element: <OrdersPage /> },
 
       // customer
       { path: 'browse-cars', element: <BrowseCars /> },

@@ -1,17 +1,11 @@
 import React from "react";
 import { FaInfo } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ExpertCard = ({ expert }) => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/expert/${expert._id}`);
-  };
-
   return (
-    <div
-      onClick={handleClick}
+    <Link
+      to={`/expert/${expert._id}`}
       className="relative h-[300px] w-full md:h-[450px] rounded-3xl overflow-hidden group cursor-pointer"
     >
       {/* Content */}
@@ -54,7 +48,7 @@ const ExpertCard = ({ expert }) => {
           <p className="text-sm tBlack">{expert?.role}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

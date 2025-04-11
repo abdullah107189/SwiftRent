@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { FaUser, FaSave, FaUpload, FaTrash } from 'react-icons/fa';
-import Header from '../../components/common/Header';
 
 const UpdateProfile = () => {
   const [user, setUser] = useState({
@@ -65,7 +64,6 @@ const UpdateProfile = () => {
 
   return (
     <>
-      <Header title="Update Profile" />
       <div className="min-h-screen flex items-center justify-center p-6 ">
         <div className="shadow-xl rounded-lg p-6 w-full max-w-3xl ">
           <h1 className="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center gap-2">

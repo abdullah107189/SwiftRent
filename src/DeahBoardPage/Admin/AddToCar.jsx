@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import Header from '../components/common/Header';
-import { imageUpload } from '../components/CarImageUploade/imageUpload';
-import useAxiosePublic from '../hooks/useAxiosPublic';
-
 import Swal from 'sweetalert2';
+import Header from '../../components/common/Header';
+import imageUploade from '../../components/CarImageUploade/ImageChanges';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AddToCar = () => {
-  const axiosPublic = useAxiosePublic();
+  const axiosSecure = useAxiosSecure();
   const [carData, setCarData] = useState({
     name: '',
     brand: '',
@@ -48,7 +47,7 @@ const AddToCar = () => {
 
     if (!imageCarUpload) return;
 
-    const uploadedUrl = await imageUpload(imageCarUpload);
+    const uploadedUrl = await imageUploade(imageCarUpload);
     if (uploadedUrl) {
       setCarData(prevData => {
         const updatedImages = [...prevData.image];
@@ -63,7 +62,7 @@ const AddToCar = () => {
     console.log(carData);
 
     try {
-      const car = await axiosPublic.post('/add-car', carData);
+      const car = await axiosSecure.post('/add-car', carData);
 
       console.log(car);
 

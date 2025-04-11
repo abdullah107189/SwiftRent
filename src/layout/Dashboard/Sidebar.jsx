@@ -46,6 +46,7 @@ const menuItems = {
     { name: "Update Profile", path: "profile", icon: FaUser },
     { name: "Earnings", path: "earnings", icon: FaMoneyBill },
     { name: "Settings", path: "settings", icon: Settings },
+
   ],
 };
 
@@ -60,7 +61,6 @@ const Sidebar = ({ userRole }) => {
       .catch((error) => console.error("Logout failed:", error));
   };
 
-  // if (isRoleLoading) return <Spinner />;
   const items = menuItems[userRole];
   return (
     <div className="">

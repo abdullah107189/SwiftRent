@@ -1,3 +1,4 @@
+
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Home from "../page/Home";
@@ -78,21 +79,16 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="overview" /> },
       { path: "overview", element: <OverviewPage /> },
-      { path: "addcar", element: <AddToCar /> },
-
       { path: "car-product", element: <CarProducatPage /> },
       { path: "users", element: <UsersPage /> },
       { path: "order", element: <OrdersPage /> },
-      { path: "analytics", element: <Analytics /> },
 
       { path: "settings", element: <SettingsPage /> },
-      { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
 
       { path: "manage-bookings", element: <CarProducatPage /> },
       { path: "manage-users", element: <UsersPage /> },
-      { path: "order", element: <OrdersPage /> },
-      { path: "analytics", element: <Analytics /> },
+
       // customer
       { path: "browse-cars", element: <BrowseCars /> },
       { path: "my-bookings", element: <MyBookings /> },

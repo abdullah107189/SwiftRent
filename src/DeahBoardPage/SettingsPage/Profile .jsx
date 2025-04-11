@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import imageUploade from '../../components/CarImageUploade/ImageChanges';
 import Header from '../../components/common/Header';
+import UpdateProfile from '../UpdateProfile/UpdateProfile';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
@@ -11,6 +12,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(user?.photoURL || '');
   const [imageFile, setImageFile] = useState(null);
+  const [updateProfile, setUpadteProfile] = useState(false);
   console.log(image, imageFile);
   const handleImageChange = async e => {
     const file = e.target.files[0];
@@ -24,7 +26,9 @@ const Profile = () => {
       }
     }
   };
-  const handelEditProfile = () => {};
+  const handelEditProfile = () => {
+    setUpadteProfile(!updateProfile);
+  };
   return (
     <>
       <SettingSection icon={User} title={'Profile'}>
@@ -62,6 +66,7 @@ const Profile = () => {
         >
           Edit Profile
         </button>
+        {updateProfile && <UpdateProfile />}
       </SettingSection>
     </>
   );

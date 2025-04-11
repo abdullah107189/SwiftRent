@@ -1,24 +1,24 @@
-import { FaCar } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-import Header from '../../../components/common/Header';
-import toast from 'react-hot-toast';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { Search } from 'lucide-react';
-import Spinner from '../../../components/Spinner';
+import { FaCar } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import Header from "../../../components/common/Header";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Search } from "lucide-react";
+import Spinner from "../../../components/Spinner";
 
 const ManageCars = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const {
     data: cars = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['cars'],
+    queryKey: ["cars"],
     queryFn: async () => {
-      const res = await axiosSecure.get('/manage-cars');
+      const res = await axiosSecure.get("/manage-cars");
       return res.data;
     },
   });
@@ -29,15 +29,15 @@ const ManageCars = () => {
     setFilteredCars(cars);
   }, [cars]);
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
 
-    if (term === '') {
+    if (term === "") {
       setFilteredCars(cars);
     } else {
       const filtered = cars.filter(
-        car =>
+        (car) =>
           car.name.toLowerCase().includes(term) ||
           (car.model && car.model.toLowerCase().includes(term))
       );
@@ -45,10 +45,10 @@ const ManageCars = () => {
     }
   };
 
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     try {
       await axiosSecure.delete(`/cars/${id}`);
-      toast.success('Car deleted successfully!');
+      toast.success("Car deleted successfully!");
       refetch();
     } catch (err) {
       toast.error(err.message);
@@ -114,8 +114,8 @@ const ManageCars = () => {
                 <tr>
                   <td colSpan="5" className="text-center py-6 text-gray-500">
                     {cars.length === 0
-                      ? 'No cars available.'
-                      : 'No matching cars found.'}
+                      ? "No cars available."
+                      : "No matching cars found."}
                   </td>
                 </tr>
               )}

@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
-import Spinner from '../../Spinner';
-import { FaMapMarkerAlt, FaStar } from 'react-icons/fa';
-import 'react-datepicker/dist/react-datepicker.css';
-import CustomerFeedback from './CustomerFeedback';
-import CustomerReviews from './CustomerReviews';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../Spinner";
+import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
+import "react-datepicker/dist/react-datepicker.css";
+import CustomerFeedback from "./CustomerFeedback";
+import CustomerReviews from "./CustomerReviews";
+import BookingModal from "../Modal/BookingModal";
 
 const CarDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [car, setCar] = useState(null);
-  const [selectedImg, setSelectedImg] = useState('');
+  const [selectedImg, setSelectedImg] = useState("");
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   // Fetch Car
@@ -22,7 +23,7 @@ const CarDetails = () => {
       try {
         const res = await axiosSecure.get(`/cars/${id}`);
         setCar(res.data);
-        setSelectedImg(res.data?.image?.[0] || '');
+        setSelectedImg(res.data?.image?.[0] || "");
       } catch (err) {
         console.error(err);
       } finally {
@@ -38,9 +39,9 @@ const CarDetails = () => {
     isLoading: reviewsLoading,
     refetch,
   } = useQuery({
-    queryKey: ['carReviews', id],
+    queryKey: ["carReviews", id],
     queryFn: async () => {
-      const res = await axiosSecure.get('/car/review');
+      const res = await axiosSecure.get("/car/review");
       return res.data;
     },
     enabled: !!id,
@@ -72,7 +73,7 @@ const CarDetails = () => {
               onClick={() => setSelectedImg(img)}
               alt={`Thumbnail ${idx + 1}`}
               className={`w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${
-                selectedImg === img ? 'border-[#f5b754]' : 'border-gray-300'
+                selectedImg === img ? "border-[#f5b754]" : "border-gray-300"
               }`}
             />
           ))}
@@ -136,7 +137,7 @@ const CarDetails = () => {
 
         <div className="pt-4 border-t flex justify-between items-center">
           <p className="text-2xl font-bold text-green-600">
-            ${car.price}{' '}
+            ${car.price}{" "}
             <span className="text-sm font-normal text-gray-500">/day</span>
           </p>
           <button

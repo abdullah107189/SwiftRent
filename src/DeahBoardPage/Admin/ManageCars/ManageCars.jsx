@@ -18,7 +18,7 @@ const ManageCars = () => {
   } = useQuery({
     queryKey: ['cars'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/cars');
+      const res = await axiosSecure.get('/manage-cars');
       return res.data;
     },
   });

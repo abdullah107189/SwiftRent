@@ -8,13 +8,12 @@ import LogIn from "../page/Authentication/LogIn";
 import Register from "../page/Authentication/Register";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import OverviewPage from "../DeahBoardPage/OverviewPage";
-import AddToCar from "../DeahBoardPage/AddToCar";
+import AddToCar from "../DeahBoardPage/Admin/AddToCar";
 import CarProducatPage from "../DeahBoardPage/CarProducatPage";
-import UsersPage from "../DeahBoardPage/Users/UsersPage";
-import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
-import Analytics from "../DeahBoardPage/Analytics/Analytics";
-import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
+import UsersPage from "../DeahBoardPage/Admin/Users/UsersPage";
 
+import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
+import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
 import BrowseCars from "../DeahBoardPage/Customer/Browse Cars/BrowseCars";
 import MyBookings from "../DeahBoardPage/Customer/MyBookings/MyBookings";
 import PaymentHistory from "../DeahBoardPage/Customer/Payment History/PaymentHistory";
@@ -25,6 +24,16 @@ import BookAuto from "../page/services/BookAuto";
 import ForgetPassword from "../page/Authentication/ForgetPassword";
 import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
 import ExpertDetails from "../page/About/expertsTeam/ExpertDetails";
+import ErrorPage from "../components/shared/ErrorPage";
+import StartTrip from "../DeahBoardPage/Driver/StartTrip";
+import TripHistory from "../DeahBoardPage/Driver/TripHistory";
+import CustomerReviews from "../DeahBoardPage/Driver/CustomerReviews";
+import Earnings from "../DeahBoardPage/Driver/Earnings";
+import SingleBooking from "../TextDelet/SingleBooking";
+import ManageCars from "../DeahBoardPage/Admin/ManageCars/ManageCars";
+import ManageBookings from "../DeahBoardPage/Admin/ManageBookings";
+import ManageDrivers from "../DeahBoardPage/Admin/ManageDrivers";
+import BillingPage from "../DeahBoardPage/Admin/BillingPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/singlebooking",
+        element: <SingleBooking></SingleBooking>,
       },
       {
         path: "/about",
@@ -72,21 +85,17 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="overview" /> },
       { path: "overview", element: <OverviewPage /> },
-      { path: "addcar", element: <AddToCar /> },
-
-      { path: "car-product", element: <CarProducatPage /> },
-      { path: "users", element: <UsersPage /> },
-      { path: "order", element: <OrdersPage /> },
-      { path: "analytics", element: <Analytics /> },
-
-      { path: "settings", element: <SettingsPage /> },
-      { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
-
-      { path: "manage-bookings", element: <CarProducatPage /> },
-      { path: "manage-users", element: <UsersPage /> },
+      { path: "manage-cars", element: <ManageCars /> },
+      { path: "manage-bookings", element: <ManageBookings /> },
+      // { path: 'car-product', element: <CarProducatPage /> },
+      { path: "customers-manage", element: <UsersPage /> },
+      { path: "manage-drivers", element: <ManageDrivers /> },
+      { path: "billing", element: <BillingPage /> },
       { path: "order", element: <OrdersPage /> },
-      { path: "analytics", element: <Analytics /> },
+      { path: "settings", element: <SettingsPage /> },
+      { path: "manage-bookings", element: <CarProducatPage /> },
+
       // customer
       { path: "browse-cars", element: <BrowseCars /> },
       { path: "my-bookings", element: <MyBookings /> },
@@ -94,6 +103,12 @@ export const router = createBrowserRouter([
       { path: "profile", element: <UpdateProfile /> },
       { path: "settings", element: <SettingsPage /> },
       { path: "change-password", element: <ChangePassword /> },
+
+      //driver
+      { path: "start-trip", element: <StartTrip /> },
+      { path: "trip-history", element: <TripHistory /> },
+      { path: "customer-reviews", element: <CustomerReviews /> },
+      { path: "earnings", element: <Earnings /> },
     ],
   },
   {
@@ -107,5 +122,9 @@ export const router = createBrowserRouter([
   {
     path: "/forget-password",
     element: <ForgetPassword />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);

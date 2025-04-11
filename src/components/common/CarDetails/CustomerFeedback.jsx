@@ -1,30 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import Spinner from '../../Spinner';
 import { FaStar } from 'react-icons/fa';
 
-const CustomerFeedback = () => {
-  const axiosSecure = useAxiosSecure();
-
-  const {
-    data: reviews = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ['carReviews'],
-    queryFn: async () => {
-      const res = await axiosSecure.get('/car/review');
-
-      return res.data;
-    },
-  });
-
-  if (isLoading) {
-    return <Spinner />;
-  }
-  refetch();
+const CustomerFeedback = ({ reviews }) => {
   return (
-    <div className="grid grid-cols-1 overflow-y-auto gap-6">
+    <div className="grid grid-cols-1 overflow-scroll h-[450px] gap-6">
       {reviews.map(review => (
         <div
           key={review._id}
@@ -38,7 +16,7 @@ const CustomerFeedback = () => {
             />
             <div>
               <h4 className="font-semibold text-gray-100">{review.username}</h4>
-              <div className="flex items-center text-yellow-500">
+              <div className="flex items-center">
                 {Array(5)
                   .fill()
                   .map((_, i) => (

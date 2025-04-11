@@ -1,45 +1,24 @@
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-import DetailsCard from './DetailsCard';
-// import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import DetailsContent from "./DetailsContent";
+import Car_Details from "./Car_Details";
+import { Helmet } from "react-helmet-async";
 
 const CarDetails = () => {
-  // const axiosSecure = useAxiosSecure();
-  // const { id } = useParams();
-  // const [car, setCar] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const fetchCarDetails = async () => {
-  //     try {
-  //       const response = await axiosSecure(`/cars/${id}`);
-  //       const data = response.data;
-  //       console.log('Fetched Car Data:', data);
-  //       setCar(data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching car details:', error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchCarDetails();
-  // }, [id, axiosSecure]);
-
-  // if (loading) {
-  //   return <p className="text-center text-white">Loading...</p>;
-  // }
-
-  // if (!car) {
-  //   return <p className="text-center text-red-500">Car not found!</p>;
-  // }
-
   return (
-    <div>
-      <div className="mxw">
-        <DetailsCard />
+    <>
+      <div>
+        <Helmet>
+          <title>Car Details | SwiftRent</title>
+          <meta
+            name="description"
+            content="View detailed information about cars available for rent on SwiftRent. Get the best car options tailored to your needs."
+          />
+        </Helmet>
       </div>
-    </div>
+      <div className="mt-10">
+        <Car_Details />
+        <DetailsContent />
+      </div>
+    </>
   );
 };
 

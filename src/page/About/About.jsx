@@ -8,19 +8,25 @@ import RentalCarCompany from "../Home/rantalCarCompany/RantalCarCompany";
 import InterestedRenting from "./interestedRenting/InterestedRenting";
 import AboutContact from "./aboutContact/AboutContact";
 import AboutFlag from "./aboutFlag/AboutFlag";
+import { Helmet } from "react-helmet-async";
 const About = () => {
   return (
     <div>
+      <Helmet>
+        <title>About Us | SwiftRent</title>
+        <meta
+          name="description"
+          content="Learn more about SwiftRent, our expert car rental team, and our mission to provide the best car booking experience. Meet the team, watch our promo, and get in touch!"
+        />
+      </Helmet>
       <PageHeader
         image={aboutBanner}
-        subTitle={"Rentax"}
+        subTitle={"SwiftRent"}
         titleWhite={"About"}
         titleOrange={"Us"}
       ></PageHeader>
       <div>
         <RentalCarCompany />
-
-        <CarPromoVideo />
 
         {/* <ClientsSay /> */}
         <ExpertsTeam />

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
@@ -53,8 +54,8 @@ const ExpertDetails = () => {
   if (loading)
     return <p className="text-center mt-10 text-white">Loading...</p>;
 
-  if (!expert)
-    return <p className="text-center mt-10 orange">Expert not found</p>;
+  // if (!expert)
+  //   return <p className="text-center mt-10 orange">Expert not found</p>;
 
   const otherExperts = experts.filter((e) => e._id !== expert._id);
 
@@ -77,6 +78,26 @@ const ExpertDetails = () => {
                 src={expert.image}
                 alt={expert.name}
                 className="w-[476px] h-[476px] object-cover rounded-xl shadow-md mb-6"
+
+
+    <div className="my-16">
+      <div className="min-h-screen text-white flex items-center justify-center py-10">
+        <div className="mxw w-full flex flex-col md:flex-row gap-8 px-4">
+          {/* Left Section: Image and Contact */}
+          <div className="flex flex-col items-center md:w-1/2">
+            <img
+              src={expert.image}
+              alt={expert.name}
+              className="w-[476px] h-[476px] object-cover rounded-xl shadow-md mb-6"
+            />
+            <div className="flex gap-4 mb-4 cursor-pointer">
+              <SocialIcon icon={FaLinkedinIn} link={expert.linkedin} />
+              <SocialIcon icon={FaFacebookF} link={expert.facebook} />
+              <SocialIcon icon={FaInstagram} link={expert.instagram} />
+              <SocialIcon
+                icon={FaWhatsapp}
+                link={`https://wa.me/${expert.phone}`}
+
               />
               <div className="flex gap-4 mb-4 cursor-pointer">
                 <SocialIcon icon={FaLinkedinIn} link={expert.linkedin} />

@@ -65,6 +65,7 @@ const Register = () => {
             />
           </div>
 
+
           {/* Right side */}
           <div className="flex flex-col md:w-1/3 w-full p-6 text-gray-200 items-center justify-center mx-auto md:bg-transparent">
             <div className="mb-6 text-center">
@@ -75,6 +76,32 @@ const Register = () => {
                 </span>
               </h1>
               <p className="text-gray-200">Create your account!</p>
+=======
+          <div className="flex justify-center items-center w-full mb-2">
+            <div className="flex items-center bg-gray-100 rounded-xl p-2 w-full">
+              <button
+                className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
+                  toggle === 'Admin'
+                    ? 'bg-[#f5b754] text-white'
+                    : 'bg-gray-100 text-gray-600'
+                }`}
+                onClick={() => handleToggle('Admin')}
+              >
+                <AiOutlineUser size={20} className="mr-2" />
+                Customer
+              </button>
+              <button
+                className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
+                  toggle === 'driver'
+                    ? 'bg-[#f5b754] text-white'
+                    : 'bg-gray-100 text-gray-600'
+                }`}
+                onClick={() => handleToggle('driver')}
+              >
+                <AiOutlineUser size={20} className="mr-2" />
+                Driver
+              </button>
+
             </div>
             <div className="flex justify-center items-center w-full mb-2">
               <div className="flex items-center bg-gray-100 rounded-xl p-2 w-full">

@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { setUser } from "../../redux/auth/authSlice";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
-const GoogleLogIn = ({ toggle = "" }) => {
+const GoogleLogIn = ({ toggle = "", page = "" }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const axiosPublic = useAxiosPublic();
@@ -36,15 +36,11 @@ const GoogleLogIn = ({ toggle = "" }) => {
         console.log("New user added:", existingUserResponse.data);
       }
 
-      // Update last login time
-      if (toggle === "") {
-        await axiosPublic.patch("/update-last-login", { email: user?.email });
-      }
       // Setting up users in Redux
       dispatch(setUser(userData));
 
       // Notification of successful login
-      if (toggle) {
+      if (page !== "login") {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -62,6 +58,9 @@ const GoogleLogIn = ({ toggle = "" }) => {
           showConfirmButton: false,
           timer: 1500,
         });
+
+        // Update last login time
+        await axiosPublic.patch("/update-last-login", { email: user?.email });
       }
 
       // Redirect to home page

@@ -15,8 +15,8 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
+          <Toaster position="top right" />
           <RouterProvider router={router} />
-          <Toaster position="left bottom" />
         </HelmetProvider>
       </QueryClientProvider>
     </Provider>

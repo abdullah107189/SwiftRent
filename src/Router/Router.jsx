@@ -39,7 +39,6 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -123,5 +122,9 @@ export const router = createBrowserRouter([
   {
     path: "/forget-password",
     element: <ForgetPassword />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);

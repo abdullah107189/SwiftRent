@@ -2,9 +2,12 @@ import { FaCar, FaClock, FaMapMarkedAlt, FaRoute } from "react-icons/fa";
 import Header from "../../components/common/Header";
 import { useState, useEffect } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const StartTrip = () => {
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const trip = {
     carName: "Toyota Corolla",
     carImage:
@@ -19,17 +22,55 @@ const StartTrip = () => {
   useEffect(() => {
     const fetchAvailableTrips = async () => {
       try {
-        const response = await axiosSecure.get("/available-trips");
+        const response = await axiosPublic.get("/available-trips");
         setAvailableTrips(response.data);
       } catch (error) {
         console.error("Failed to fetch available trips:", error);
       }
     };
     fetchAvailableTrips();
-  }, []);
+  }, [axiosPublic]);
 
   const handleStartTrip = () => {
-    alert("Trip Started! 🚗");
+    Swal.fire({
+      title: "Trip Started!",
+      text: "Your trip has been started successfully. 🚗",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  };
+
+  // Confirmation for picking a trip
+  const confirmPickTrip = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to pick this trip?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handlePickTrip(id);
+      }
+    });
+  };
+
+  // Confirmation for canceling a trip
+  const confirmCancelTrip = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to cancel this trip?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleCancelTrip(id);
+      }
+    });
   };
 
   // Pick Trip
@@ -38,10 +79,20 @@ const StartTrip = () => {
       await axiosSecure.post(`/pick-trip/${id}`);
       const response = await axiosSecure.get("/available-trips");
       setAvailableTrips(response.data);
-      alert("Trip Picked Successfully!");
+      Swal.fire({
+        title: "Success!",
+        text: "Trip Picked Successfully!",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
     } catch (error) {
       console.error("Failed to pick trip:", error);
-      alert("Failed to pick trip!");
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to pick trip!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   };
 
@@ -51,10 +102,20 @@ const StartTrip = () => {
       await axiosSecure.post(`/cancel-trip/${id}`);
       const response = await axiosSecure.get("/available-trips");
       setAvailableTrips(response.data);
-      alert("Trip Cancelled Successfully!");
+      Swal.fire({
+        title: "Success!",
+        text: "Trip Cancelled Successfully!",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
     } catch (error) {
       console.error("Failed to cancel trip:", error);
-      alert("Failed to cancel trip!");
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to cancel trip!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   };
 
@@ -101,7 +162,7 @@ const StartTrip = () => {
       {/* Available Trips Section */}
       <div className="mt-8">
         <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2 pt-4">
-        <FaMapMarkedAlt /> Available Trips
+          <FaMapMarkedAlt /> Available Trips
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {availableTrips.map((trip) => (
@@ -117,13 +178,13 @@ const StartTrip = () => {
               {/* Pick And Cancel button added */}
               <div className="flex justify-between mt-4">
                 <button
-                  onClick={() => handlePickTrip(trip._id)}
+                  onClick={() => confirmPickTrip(trip._id)}
                   className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
                 >
                   Pick
                 </button>
                 <button
-                  onClick={() => handleCancelTrip(trip._id)}
+                  onClick={() => confirmCancelTrip(trip._id)}
                   className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
                 >
                   Cancel

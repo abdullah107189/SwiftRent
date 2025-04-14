@@ -1,0 +1,128 @@
+[33mfb01794[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mPurnendu[m[33m, [m[1;31morigin/Purnendu[m[33m)[m Start Week 4
+[33m3321a50[m Solve error
+[33m9762572[m Solve Team Error.
+[33ma89097c[m Error Solve
+[33m7a504de[m Merge pull request #204 from abdullah107189/Purnendu
+[33m60f0f46[m Error Solve.
+[33mb95821b[m Merge pull request #188 from abdullah107189/abdullah
+[33m090e20a[m Merge branch 'development' into abdullah
+[33m92eaf00[m Merge pull request #202 from abdullah107189/Purnendu
+[33m247770c[m Add PaymentHistory Page to Show User's Payment Records
+[33m5c20c6c[m Merge pull request #201 from abdullah107189/Purnendu
+[33mfe10870[m Added payment status check and updated payment button UI in MyBookings page
+[33m87b5355[m fixed login page create account using social login then save role as a customer
+[33me02a8c6[m[33m ([m[1;31morigin/rahul[m[33m)[m Merge pull request #200 from abdullah107189/Purnendu
+[33mdcf46ce[m Minor change.
+[33ma96cec2[m Merge pull request #199 from abdullah107189/khalid
+[33m9c2644c[m View Details link with services
+[33m9b8acfe[m Merge pull request #198 from abdullah107189/Purnendu
+[33mee2550d[m Add payment button to MyBookings page
+[33m83f2748[m Merge pull request #197 from abdullah107189/Purnendu
+[33m67b79b4[m Add payment integration to SingleBooking component
+[33ma68e8a4[m Merge pull request #196 from abdullah107189/khalid
+[33mefddaa0[m car promo video video remove from about
+[33m5501953[m Merge pull request #195 from abdullah107189/Purnendu
+[33m95ac421[m Add SingleBooking component to show user bookings
+[33m7f7a729[m Merge pull request #194 from abdullah107189/Purnendu
+[33m305eed4[m Add date validation and success/error alerts
+[33me6344c7[m Merge pull request #193 from abdullah107189/khalid
+[33m351287f[m Other Team Members section added in expert details page
+[33mac9f4ef[m Merge pull request #192 from abdullah107189/Purnendu
+[33mfaa9bba[m Refactor BookingModal layout and add field validations for improved UX
+[33mf98c9c0[m Merge pull request #191 from abdullah107189/khalid
+[33mc9fea4b[m socialmedia icon make clickable and qualifications icon make rounded
+[33mdb729a5[m Merge pull request #190 from abdullah107189/Purnendu
+[33m568ceb2[m Auto-calculate booking price based on selected date range in BookingModal
+[33me285a63[m Add car name, brand, and price fields to BookingModal form with auto-filled default values
+[33m2c679b8[m Merge pull request #189 from abdullah107189/khalid
+[33mc3a929b[m ui updated in expert details page
+[33m3498f28[m update basics code
+[33m9f15f79[m solve dashboard relode problem
+[33m6ced7b6[m Merge pull request #187 from abdullah107189/Purnendu
+[33m52cc80f[m Merge branch 'development' into Purnendu
+[33m12cef41[m Added Booking Modal.
+[33mef69758[m Merge pull request #186 from abdullah107189/abdullah
+[33m0faf8a7[m complete sort,  filter, and searching using query param
+[33m2e9986f[m Merge pull request #185 from abdullah107189/ibrahim
+[33m231023d[m  driver all router page complete
+[33m4265959[m Merge branch 'development' of https://github.com/abdullah107189/SwiftRent into ibrahim
+[33m6d178ed[m today ,  the deshboard role-base work is finished
+[33m2d5b00a[m Merge pull request #183 from abdullah107189/Purnendu
+[33mb004282[m Minor improvements in ErrorPage
+[33m5105c88[m Merge pull request #181 from abdullah107189/Purnendu
+[33mb9211cb[m Enhance 404 Error Page with better layout, responsiveness, and styling
+[33m51138c4[m Merge pull request #180 from abdullah107189/Purnendu
+[33mfa2354a[m Add custom 404 ErrorPage with Lottie animation and navigation
+[33m2fa2b13[m Merge pull request #179 from abdullah107189/khalid
+[33m900781d[m remove localhost and added axiosPublic
+[33m9843954[m Merge pull request #178 from abdullah107189/khalid
+[33m815f887[m jobResponsibility added in expartDetails page and text colore changed
+[33mb3e055c[m set filter data to the server side
+[33m03c124d[m Merge pull request #177 from abdullah107189/abdullah
+[33m4c94b30[m get cars data for filtter
+[33m0d99529[m Merge pull request #176 from abdullah107189/khalid
+[33mbff91fd[m ExpertDetails page ui designe updated
+[33m8ca4e80[m Merge pull request #175 from abdullah107189/abdullah
+[33m7c927c4[m best create best ui for better exprience
+[33mab00f36[m Merge pull request #174 from abdullah107189/khalid
+[33mfc2d9bc[m ExpertDetails page added
+[33m6ac0668[m Merge pull request #173 from abdullah107189/Purnendu
+[33m968b215[m Add confirm password field with validation on Register page
+[33mafd83a4[m Merge pull request #172 from abdullah107189/abdullah
+[33m2c8bffd[m set best loading effect for cards on othe services page
+[33m217dae6[m delete right side content
+[33m7d04f8e[m Merge pull request #171 from abdullah107189/khalid
+[33m1d18cbc[m Experts Team added
+[33mab3f22f[m Merge pull request #170 from abdullah107189/ibrahim
+[33m0af3092[m today i desgin detais part and responsive
+[33m663c15b[m Merge pull request #169 from abdullah107189/Purnendu
+[33mb63ae7e[m Implement Change Password functionality with Firebase and Redux integration.
+[33m1fed3eb[m Merge pull request #168 from abdullah107189/Purnendu
+[33m4b7155e[m Add forget password functionality with reset email form and routing
+[33m8069306[m Merge pull request #167 from abdullah107189/abdullah
+[33mab1b4d5[m crate role base access using gmail
+[33m4e1746a[m Merge pull request #166 from abdullah107189/abdullah
+[33m602e571[m when regiter user thne role access for identify role base
+[33m85981bc[m Merge pull request #165 from abdullah107189/abdullah
+[33m610bf1b[m Merge branch 'abdullah' of https://github.com/abdullah107189/SwiftRent into abdullah
+[33m810fc41[m delete .env file
+[33m30b6a54[m Merge pull request #164 from abdullah107189/abdullah
+[33mff6783b[m Merge branch 'development' into abdullah
+[33mc8fb8d1[m error solve and restart work
+[33m9c0a82b[m Merge pull request #163 from abdullah107189/khalid
+[33mecb4bfa[m remove eid countdown forom hero section
+[33m8a9dcf0[m Merge pull request #162 from abdullah107189/ibrahim
+[33m06ecc0e[m cersole error solve
+[33m364fce9[m Merge pull request #161 from abdullah107189/khalid
+[33m3776505[m book now button fundhonality added
+[33md4fe2d8[m Merge pull request #160 from abdullah107189/khalid
+[33m29fd055[m toastify added in booking
+[33mb8f2c37[m Merge pull request #159 from abdullah107189/khalid
+[33m35ec5ab[m booking added
+[33m7337fd3[m Merge pull request #158 from abdullah107189/abdullah
+[33mf3eec33[m create services products sticky
+[33m9a3bd64[m Merge pull request #157 from abdullah107189/rahul
+[33m19b42fc[m about page full design complete
+[33mb9e101c[m Merge pull request #156 from abdullah107189/rahul
+[33m96040c0[m about page 2section add
+[33m5d4302d[m Merge pull request #155 from abdullah107189/khalid
+[33m8beeb79[m Merge branch 'development' into khalid
+[33m84babfe[m eid countdown added
+[33m50d96e9[m Merge pull request #154 from abdullah107189/rahul
+[33mf4dadb8[m what client say section add
+[33mc8bfd7e[m delete old details page, and update details page change
+[33m092b71b[m Merge branch 'development' of https://github.com/abdullah107189/SwiftRent into abdullah
+[33m8eb138d[m Merge pull request #153 from abdullah107189/rahul
+[33m213621a[m details page daynamic data load
+[33mffa41f3[m Merge branch 'development' of https://github.com/abdullah107189/SwiftRent into abdullah
+[33m057eac8[m Merge branch 'development' of https://github.com/abdullah107189/SwiftRent into abdullah
+[33mca1141f[m Merge pull request #152 from abdullah107189/Purnendu
+[33m65c18aa[m Add last login update for Google login
+[33m31459e0[m Merge pull request #151 from abdullah107189/Purnendu
+[33mbd58dc7[m Improve Register page UI and error handling.
+[33m1f0be26[m Merge pull request #150 from abdullah107189/Purnendu
+[33mf7794dc[m car details
+[33m437007f[m Merge branch 'development' of https://github.com/abdullah107189/SwiftRent into abdullah
+[33m8cd199e[m Merge pull request #149 from abdullah107189/rahul
+[33m062488c[m Merge branch 'development' into rahul
+

@@ -16,7 +16,7 @@ const StartTrip = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto  pb-10">
+    <div className="  pb-10">
       <Header title="Trip Started! 🚗" />
       <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2 pt-4">
         <FaRoute /> Start Your Trip

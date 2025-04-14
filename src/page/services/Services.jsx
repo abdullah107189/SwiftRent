@@ -12,6 +12,7 @@ import useGetCars from "../../hooks/useGetCars";
 import { FaSearch } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Services = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -113,6 +114,14 @@ const Services = () => {
 
   return (
     <div className="relative bg-[#1B1B1B]">
+      <Helmet>
+        <title>Services | Our Cars</title>
+        <meta
+          name="description"
+          content="Explore our wide selection of cars available for booking. Filter by brand, type, fuel, and price range."
+        />
+      </Helmet>
+
       {/* Page Header */}
       <PageHeader
         subTitle="Available Cars"

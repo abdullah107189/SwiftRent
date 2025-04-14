@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import loginImage from "../../assets/login.png";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import GoogleLogIn from "./GoogleLogIn";
-import useAuthForm from "../../hooks/useAuthForm";
-import { loginUser } from "../../redux/auth/authSlice";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import loginImage from '../../assets/login.png';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import GoogleLogIn from './GoogleLogIn';
+import useAuthForm from '../../hooks/useAuthForm';
+import { loginUser } from '../../redux/auth/authSlice';
 
 const Login = () => {
   const {
@@ -52,7 +52,7 @@ const Login = () => {
                 <input
                   type="email"
                   id="email"
-                  {...register("email", { required: "Email is required" })}
+                  {...register('email', { required: 'Email is required' })}
                   placeholder="Enter Your Email"
                   className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
                 />
@@ -66,13 +66,13 @@ const Login = () => {
                 </label>
                 <div className="relative">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
-                    {...register("password", {
-                      required: "Password is required",
+                    {...register('password', {
+                      required: 'Password is required',
                       minLength: {
                         value: 6,
-                        message: "Password must be at least 6 characters",
+                        message: 'Password must be at least 6 characters',
                       },
                     })}
                     placeholder="Enter Your Password Here"
@@ -111,12 +111,12 @@ const Login = () => {
                 type="submit"
                 className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
                   loading
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:bg-[#f5b754ef]"
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'hover:bg-[#f5b754ef]'
                 }`}
                 disabled={loading}
               >
-                {loading ? "Loading..." : "Login"}
+                {loading ? 'Loading...' : 'Login'}
               </button>
             </div>
           </form>
@@ -127,8 +127,8 @@ const Login = () => {
             </p>
             <div className="flex-1 h-px bg-gray-500"></div>
           </div>
-          <GoogleLogIn toggle="customer" page="login"/>
-          <p className="pt-5 text-sm text-center text-gray-200">z
+          <GoogleLogIn toggle="customer" page="login" />
+          <p className="pt-5 text-sm text-center text-gray-200">
             Don't have an account yet?
             <Link to="/register" className="underline orange hover:text-white">
               Create an account.

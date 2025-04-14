@@ -66,6 +66,9 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         pickUpDate: data.pickUpDate,
         returnDate: data.returnDate,
         additionalNote: data.additionalNote,
+        paymentStatus: "Pending",
+        tripStatus: "Pending",
+        driver: "Not Assigned",
       };
 
       const response = await axiosSecure.post("/book-auto", bookingData);

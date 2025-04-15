@@ -1,43 +1,21 @@
-import React from "react";
-import Lottie from "lottie-react";
-import carAnimation from "../../assets/car-animation.json";
-import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { FaCarCrash } from 'react-icons/fa';
 
 const ErrorPage = () => {
-  const navigate = useNavigate();
-
-  const handleGoHome = () => {
-    navigate("/");
-  };
-
   return (
-    <div
-      className="
-        flex flex-col items-center justify-center
-        w-full min-h-screen bg-[#222222]
-        p-4 text-white
-      "
-    >
-      <h1 className="mt-8 text-5xl orange text-center font-bold md:text-6xl lg:text-7xl">
-        Page Not Found
-      </h1>
-      {/* Lottie car animation */}
-      <div className="w-full max-w-sm">
-        <Lottie animationData={carAnimation} loop className="w-full h-auto" />
-      </div>
-
-      {/* Headline */}
-
-      <p className="mt-4 text-center text-lg md:text-xl lg:text-2xl">
-        Our cars couldn’t find this page either.
-        <br />
-        Maybe it’s time to rent one and explore!
+    <div className="min-h-screen bg-[#1e1e1e] flex flex-col items-center justify-center text-white px-4 text-center">
+      <FaCarCrash className="text-red-500 text-6xl mb-4 animate-bounce" />
+      <h1 className="text-5xl font-bold mb-2">404</h1>
+      <h2 className="text-2xl font-semibold mb-4">Oops! Page Not Found</h2>
+      <p className="mb-6 text-gray-400">
+        The page you're looking for doesn't exist or has been moved.
       </p>
-
-      {/* Go Home button */}
-      <button onClick={handleGoHome} className="fillBtn mt-8">
-        Go Back Home
-      </button>
+      <Link
+        to="/"
+        className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-full transition duration-300"
+      >
+        Go Home
+      </Link>
     </div>
   );
 };

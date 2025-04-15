@@ -1,24 +1,26 @@
-import { FaCar } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import Header from "../../../components/common/Header";
-import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Search } from "lucide-react";
-import Spinner from "../../../components/Spinner";
-import { FaTrashAlt,FaEdit  } from "react-icons/fa";
+import { FaCar } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import Header from '../../../components/common/Header';
+import toast from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Search } from 'lucide-react';
+import Spinner from '../../../components/Spinner';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
 const ManageCars = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const {
     data: cars = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["cars"],
+    queryKey: ['cars'],
     queryFn: async () => {
-      const res = await axiosSecure.get("/manage-cars");
+      const res = await axiosSecure.get('/manage-cars');
       return res.data;
     },
   });
@@ -29,15 +31,15 @@ const ManageCars = () => {
     setFilteredCars(cars);
   }, [cars]);
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
 
-    if (term === "") {
+    if (term === '') {
       setFilteredCars(cars);
     } else {
       const filtered = cars.filter(
-        (car) =>
+        car =>
           car.name.toLowerCase().includes(term) ||
           (car.model && car.model.toLowerCase().includes(term))
       );
@@ -45,10 +47,10 @@ const ManageCars = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     try {
       await axiosSecure.delete(`/cars/${id}`);
-      toast.success("Car deleted successfully!");
+      toast.success('Car deleted successfully!');
       refetch();
     } catch (err) {
       toast.error(err.message);
@@ -57,9 +59,28 @@ const ManageCars = () => {
 
   // car status changes
 
-  const handleCarStatusChanges=(id)=>{
-    console.log(id)
-  }
+  const handleCarStatusChanges = async (currentStatus, status) => {
+    console.log(status);
+    const newStatus =
+      currentStatus === 'Available' ? 'Unavailable' : 'Available';
+    console.log(newStatus);
+    try {
+      const response = await axiosSecure.patch(
+        `/car-status/${status}/availability`,
+        {
+          availability: newStatus,
+        }
+      );
+
+      if (response.data.modifiedCount > 0) {
+        toast.success(`Status changed to ${newStatus}`);
+        refetch();
+      }
+    } catch (error) {
+      toast.error('Failed to update status');
+      console.error(error);
+    }
+  };
 
   if (isLoading) return <Spinner />;
 
@@ -93,8 +114,7 @@ const ManageCars = () => {
                 <th className="py-3 px-4 text-left">#</th>
                 <th className="py-3 px-4 text-left">Name</th>
                 <th className="py-3 px-4 text-left">Brand</th>
-            
-              
+
                 <th className="py-3 px-4 text-left">Price</th>
                 <th className="py-3 px-4 text-left">City</th>
                 <th className="py-3 px-4 text-left">Status</th>
@@ -104,34 +124,42 @@ const ManageCars = () => {
             <tbody>
               {filteredCar.length > 0 ? (
                 filteredCar.map((car, index) => (
-                  <tr key={car._id} className="border-b hover:bg-[#302a20] orange text-white">
+                  <tr
+                    key={car._id}
+                    className="border-b hover:bg-[#302a20] orange text-white"
+                  >
                     <td className="py-3 px-4">{index + 1}</td>
                     <td className="py-3 px-4 font-medium">{car.name}</td>
                     <td className="py-3 px-4">{car.brand}</td>
-                  
-                    
+
                     <td className="py-3 px-4">${car.price}</td>
                     <td className="py-3 px-4">{car.city}</td>
                     <td className="py-3 px-4">
-                      <span onClick={()=>handleCarStatusChanges(car.availability)}
+                      <span
+                        onClick={() =>
+                          handleCarStatusChanges(car.availability, car._id)
+                        }
                         className={`px-2 py-1 rounded-full text-xs font-semibold cursor-pointer ${
-                          car.availability === "Available"
-                            ? "bg-green-600 text-white"
-                            : "bg-red-600 text-white"
+                          car.availability === 'Available'
+                            ? 'bg-green-600 text-white'
+                            : 'bg-red-600 text-white'
                         }`}
                       >
                         {car.availability}
                       </span>
                     </td>
                     <td className="flex py-3  space-x-4 ">
-                      <button className=" text-gren-600  py-1  hover:text-yellow-500">
-                       <FaEdit />
-                      </button>
+                      <Link
+                        to={`/dashboard/update-car/${car._id}`}
+                        className=" text-gren-600  py-1  hover:text-yellow-500"
+                      >
+                        <FaEdit />
+                      </Link>
                       <button
                         className=" text-white  hover:text-red-600"
                         onClick={() => handleDelete(car._id)}
                       >
-                       <FaTrashAlt />
+                        <FaTrashAlt />
                       </button>
                     </td>
                   </tr>
@@ -140,8 +168,8 @@ const ManageCars = () => {
                 <tr>
                   <td colSpan="9" className="text-center py-6 text-gray-500">
                     {cars.length === 0
-                      ? "No cars available."
-                      : "No matching cars found."}
+                      ? 'No cars available.'
+                      : 'No matching cars found.'}
                   </td>
                 </tr>
               )}

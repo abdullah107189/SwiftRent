@@ -86,7 +86,9 @@ const StartTrip = () => {
         throw new Error("Driver email not found. Please log in again.");
       }
       await axiosSecure.post(`/pick-trip/${id}`, { driverEmail });
-      const response = await axiosPublic.get("/available-trips");
+      const response = await axiosPublic.get(
+        `/available-trips?email=${driverEmail}`
+      );
       setAvailableTrips(response.data);
       Swal.fire({
         title: "Success!",

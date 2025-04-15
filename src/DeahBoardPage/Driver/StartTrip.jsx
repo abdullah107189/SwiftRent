@@ -1,6 +1,7 @@
 import { FaClock, FaMapMarkedAlt, FaRoute } from "react-icons/fa";
 import Header from "../../components/common/Header";
 import { useState, useEffect } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
@@ -8,6 +9,7 @@ import { useSelector } from "react-redux";
 const StartTrip = () => {
   const currentUser = useSelector((state) => state.auth.user);
   const driverEmail = currentUser?.email;
+  const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const [assignedTrips, setAssignedTrips] = useState([]);
 
@@ -26,14 +28,52 @@ const StartTrip = () => {
     fetchAssignedTrips();
   }, [axiosPublic, driverEmail]);
 
-  const handleStartTrip = () => {
-    Swal.fire({
-      title: "Trip Started!",
-      text: "Your trip has been started successfully. 🚗",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 2000,
-    });
+  const handleStartTrip = async (id) => {
+    try {
+      await axiosSecure.post(`/start-trip/${id}`, { driverEmail });
+      Swal.fire({
+        title: "Trip Started!",
+        text: "Your trip has been started successfully. 🚗",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      const response = await axiosPublic.get(
+        `/driver-assignments/${driverEmail}`
+      );
+      setAssignedTrips(response.data);
+    } catch (error) {
+      console.error("Failed to start trip:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Failed to start trip!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  const handleFinishTrip = async (id) => {
+    try {
+      await axiosSecure.post(`/finish-trip/${id}`, { driverEmail });
+      Swal.fire({
+        title: "Trip Finished!",
+        text: "Your trip has been completed successfully. 🎉",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      const response = await axiosPublic.get(
+        `/driver-assignments/${driverEmail}`
+      );
+      setAssignedTrips(response.data);
+    } catch (error) {
+      console.error("Failed to finish trip:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Failed to finish trip!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   return (
@@ -82,12 +122,25 @@ const StartTrip = () => {
                     <FaRoute className="text-[#f5b754]" /> Route:{" "}
                     {trip.pickUpLocation} → {trip.dropOffLocation}
                   </p>
-                  <button
-                    onClick={() => handleStartTrip(trip._id)}
-                    className="mt-6 w-full bg-[#f5b754] hover:bg-yellow-500 text-white font-semibold py-3 rounded-lg transition duration-300"
-                  >
-                    Confirm & Start Trip
-                  </button>
+                  {trip.tripStatus === "Booked" ? (
+                    <button
+                      onClick={() => handleStartTrip(trip.bookingId)}
+                      className="mt-6 w-full bg-[#f5b754] hover:bg-yellow-500 text-white font-semibold py-3 rounded-lg transition duration-300"
+                    >
+                      Confirm & Start Trip
+                    </button>
+                  ) : trip.tripStatus === "Started" ? (
+                    <button
+                      onClick={() => handleFinishTrip(trip.bookingId)}
+                      className="mt-6 w-full bg-[#28a745] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+                    >
+                      Finish Trip
+                    </button>
+                  ) : (
+                    <p className="mt-6 text-center text-gray-400">
+                      Trip Completed
+                    </p>
+                  )}
                 </div>
               </div>
             ))}

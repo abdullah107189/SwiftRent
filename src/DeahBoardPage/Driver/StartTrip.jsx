@@ -26,14 +26,16 @@ const StartTrip = () => {
   useEffect(() => {
     const fetchAvailableTrips = async () => {
       try {
-        const response = await axiosPublic.get("/available-trips");
+        const response = await axiosPublic.get(
+          `/available-trips?email=${driverEmail}`
+        );
         setAvailableTrips(response.data);
       } catch (error) {
         console.error("Failed to fetch available trips:", error);
       }
     };
     fetchAvailableTrips();
-  }, [axiosPublic]);
+  }, [axiosPublic, driverEmail]);
 
   const handleStartTrip = () => {
     Swal.fire({
@@ -65,7 +67,7 @@ const StartTrip = () => {
   const confirmCancelTrip = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Do you want to cancel this trip?",
+      text: "Do you want to cancel this trip? It will no longer be visible to you.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes",
@@ -110,20 +112,29 @@ const StartTrip = () => {
   // Cancel Trip
   const handleCancelTrip = async (id) => {
     try {
-      await axiosSecure.post(`/cancel-trip/${id}`);
-      const response = await axiosSecure.get("/available-trips");
+      if (!driverEmail) {
+        throw new Error("Driver email not found. Please log in again.");
+      }
+      await axiosSecure.post(`/cancel-trip/${id}`, { driverEmail });
+      const response = await axiosPublic.get(
+        `/available-trips?email=${driverEmail}`
+      );
       setAvailableTrips(response.data);
       Swal.fire({
         title: "Success!",
-        text: "Trip Cancelled Successfully!",
+        text: "Trip canceled successfully!",
         icon: "success",
         confirmButtonText: "OK",
       });
     } catch (error) {
       console.error("Failed to cancel trip:", error);
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to cancel trip!";
       Swal.fire({
         title: "Error!",
-        text: "Failed to cancel trip!",
+        text: message,
         icon: "error",
         confirmButtonText: "OK",
       });

@@ -34,6 +34,7 @@ import ManageCars from "../DeahBoardPage/Admin/ManageCars/ManageCars";
 import ManageBookings from "../DeahBoardPage/Admin/ManageBookings";
 import ManageDrivers from "../DeahBoardPage/Admin/ManageDrivers";
 import BillingPage from "../DeahBoardPage/Admin/BillingPage";
+import AvailableTrips from "../DeahBoardPage/Driver/AvailableTrips";
 
 export const router = createBrowserRouter([
   {
@@ -106,6 +107,7 @@ export const router = createBrowserRouter([
 
       //driver
       { path: "start-trip", element: <StartTrip /> },
+      { path: "available-trips", element: <AvailableTrips /> },
       { path: "trip-history", element: <TripHistory /> },
       { path: "customer-reviews", element: <CustomerReviews /> },
       { path: "earnings", element: <Earnings /> },

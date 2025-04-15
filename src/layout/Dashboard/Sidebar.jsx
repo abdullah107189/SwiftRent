@@ -39,6 +39,7 @@ const menuItems = {
   ],
   driver: [
     { name: 'Start Trip', path: 'start-trip', icon: FaRoute },
+    { name: 'Available Trips', path: 'available-trips', icon: FaRoute },
     { name: 'Trip History', path: 'trip-history', icon: FaClipboardList },
     { name: 'Customer Reviews', path: 'customer-reviews', icon: FaStar },
     // { name: 'Update Profile', path: 'profile', icon: FaUser },

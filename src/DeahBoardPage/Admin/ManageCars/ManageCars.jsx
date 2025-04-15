@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Search } from "lucide-react";
 import Spinner from "../../../components/Spinner";
-
+import { FaTrashAlt,FaEdit  } from "react-icons/fa";
 const ManageCars = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,14 +55,22 @@ const ManageCars = () => {
     }
   };
 
+  // car status changes
+
+  const handleCarStatusChanges=(id)=>{
+    console.log(id)
+  }
+
   if (isLoading) return <Spinner />;
 
   return (
     <>
       <Header title="Manage Car" />
-      <div className="max-w-6xl mx-auto px-4 py-10">
+      <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-gray-100">Cars List</h2>
+          <h2 className="text-xl font-semibold text-gray-100 flex items-center gap-2">
+            <FaCar className="text-yellow-400" /> Cars List
+          </h2>
           <div className="relative">
             <input
               type="text"
@@ -83,36 +91,54 @@ const ManageCars = () => {
             <thead className="bg-[#f5b754]/10 text-white">
               <tr>
                 <th className="py-3 px-4 text-left">#</th>
-                <th className="py-3 px-4 text-left">Car Name</th>
-                <th className="py-3 px-4 text-left">Model</th>
-                <th className="py-3 px-4 text-left">Price/Day</th>
+                <th className="py-3 px-4 text-left">Name</th>
+                <th className="py-3 px-4 text-left">Brand</th>
+            
+              
+                <th className="py-3 px-4 text-left">Price</th>
+                <th className="py-3 px-4 text-left">City</th>
+                <th className="py-3 px-4 text-left">Status</th>
                 <th className="py-3 px-4 text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredCar.length > 0 ? (
                 filteredCar.map((car, index) => (
-                  <tr key={car._id} className="border-b hover:bg-gray-800">
+                  <tr key={car._id} className="border-b hover:bg-[#302a20] orange text-white">
                     <td className="py-3 px-4">{index + 1}</td>
                     <td className="py-3 px-4 font-medium">{car.name}</td>
-                    <td className="py-3 px-4">{car.model || car.type}</td>
+                    <td className="py-3 px-4">{car.brand}</td>
+                  
+                    
                     <td className="py-3 px-4">${car.price}</td>
-                    <td className="py-3 px-4 space-x-2">
-                      <button className="bg-yellow-400 text-white px-4 py-1 rounded hover:bg-yellow-500">
-                        Edit
+                    <td className="py-3 px-4">{car.city}</td>
+                    <td className="py-3 px-4">
+                      <span onClick={()=>handleCarStatusChanges(car.availability)}
+                        className={`px-2 py-1 rounded-full text-xs font-semibold cursor-pointer ${
+                          car.availability === "Available"
+                            ? "bg-green-600 text-white"
+                            : "bg-red-600 text-white"
+                        }`}
+                      >
+                        {car.availability}
+                      </span>
+                    </td>
+                    <td className="flex py-3  space-x-4 ">
+                      <button className=" text-gren-600  py-1  hover:text-yellow-500">
+                       <FaEdit />
                       </button>
                       <button
-                        className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+                        className=" text-white  hover:text-red-600"
                         onClick={() => handleDelete(car._id)}
                       >
-                        Delete
+                       <FaTrashAlt />
                       </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="text-center py-6 text-gray-500">
+                  <td colSpan="9" className="text-center py-6 text-gray-500">
                     {cars.length === 0
                       ? "No cars available."
                       : "No matching cars found."}

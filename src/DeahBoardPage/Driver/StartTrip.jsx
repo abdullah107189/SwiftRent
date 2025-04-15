@@ -4,8 +4,12 @@ import { useState, useEffect } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 
 const StartTrip = () => {
+  const currentUser = useSelector((state) => state.auth.user);
+  // const { user } = useSelector((state) => state.auth);
+  const driverEmail = currentUser?.email;
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const trip = {
@@ -76,8 +80,11 @@ const StartTrip = () => {
   // Pick Trip
   const handlePickTrip = async (id) => {
     try {
-      await axiosSecure.post(`/pick-trip/${id}`);
-      const response = await axiosSecure.get("/available-trips");
+      if (!driverEmail) {
+        throw new Error("Driver email not found. Please log in again.");
+      }
+      await axiosSecure.post(`/pick-trip/${id}`, { driverEmail });
+      const response = await axiosPublic.get("/available-trips");
       setAvailableTrips(response.data);
       Swal.fire({
         title: "Success!",
@@ -87,9 +94,13 @@ const StartTrip = () => {
       });
     } catch (error) {
       console.error("Failed to pick trip:", error);
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to pick trip!";
       Swal.fire({
         title: "Error!",
-        text: "Failed to pick trip!",
+        text: message,
         icon: "error",
         confirmButtonText: "OK",
       });

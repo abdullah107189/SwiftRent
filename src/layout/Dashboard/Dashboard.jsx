@@ -16,7 +16,7 @@ const Dashboard = () => {
   const userRole = useUserRole();
 
   return (
-    <div className="my-auto">
+    <div className="mxw my-auto">
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">

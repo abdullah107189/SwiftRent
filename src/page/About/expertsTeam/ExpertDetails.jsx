@@ -93,7 +93,7 @@ const ExpertDetails = () => {
                   link={`https://wa.me/${expert.phone}`}
                 />
               </div>
-              <p className="text-sm text-black">
+              <p className="text-sm ">
                 My e-mail address:{' '}
                 <span className="font-semibold">{expert.email}</span>
               </p>
@@ -107,7 +107,7 @@ const ExpertDetails = () => {
                 <span className="text-orange-500">{expert.role}</span>.
               </h1>
 
-              <p className="mb-5 text-sm text-black">
+              <p className="mb-5 text-sm ">
                 {expert.jobResponsibility}
               </p>
 
@@ -117,7 +117,7 @@ const ExpertDetails = () => {
                   <li
                     key={index}
 
-                    className="flex items-center gap-2 text-black mb-3"
+                    className="flex items-center gap-2  mb-3"
                   >
                     <span className="text-orange-500 bg-black w-[40px] h-[40px] rounded-full flex items-center justify-center">
                       ✓
@@ -137,7 +137,7 @@ const ExpertDetails = () => {
                       activeTab === tab
                         ? 'text-orange-500 border-b-2 border-orange-500'
 
-                        : 'text-black'
+                        : ''
                     }`}
                   >
                     {tab.toUpperCase()}
@@ -147,7 +147,7 @@ const ExpertDetails = () => {
 
               {/* Tab Content */}
 
-              <div className="text-black">
+              <div className="">
 
                 {activeTab === 'Biography' && <p>{expert.bio}</p>}
                 {activeTab === 'Education' && (

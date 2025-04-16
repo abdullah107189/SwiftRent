@@ -1,36 +1,36 @@
-import { useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
-import Swal from 'sweetalert2';
-import Header from '../../components/common/Header';
-import imageUploade from '../../components/CarImageUploade/ImageChanges';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import Swal from "sweetalert2";
+import Header from "../../components/common/Header";
+import imageUploade from "../../components/CarImageUploade/ImageChanges";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddToCar = () => {
   const axiosSecure = useAxiosSecure();
   const [carData, setCarData] = useState({
-    name: '',
-    brand: '',
-    type: '',
-    year: '',
-    transmission: '',
-    seats: '',
-    fuel: '',
+    name: "",
+    brand: "",
+    type: "",
+    year: "",
+    transmission: "",
+    seats: "",
+    fuel: "",
     location: {
-      city: '',
-      pickupPoint: '',
-      dropOffPoint: '',
+      city: "",
+      pickupPoint: "",
+      dropOffPoint: "",
     },
-    availability: 'Available',
+    availability: "Available",
     features: [],
-    price: '',
-    image: ['', '', ''],
+    price: "",
+    image: ["", "", ""],
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name.includes('location')) {
-      const locationField = name.split('.')[1];
-      setCarData(prevState => ({
+    if (name.includes("location")) {
+      const locationField = name.split(".")[1];
+      setCarData((prevState) => ({
         ...prevState,
         location: {
           ...prevState.location,
@@ -38,7 +38,7 @@ const AddToCar = () => {
         },
       }));
     } else {
-      setCarData(prevState => ({ ...prevState, [name]: value }));
+      setCarData((prevState) => ({ ...prevState, [name]: value }));
     }
   };
 
@@ -49,7 +49,7 @@ const AddToCar = () => {
 
     const uploadedUrl = await imageUploade(imageCarUpload);
     if (uploadedUrl) {
-      setCarData(prevData => {
+      setCarData((prevData) => {
         const updatedImages = [...prevData.image];
         updatedImages[index] = uploadedUrl;
         return { ...prevData, image: updatedImages };
@@ -57,33 +57,33 @@ const AddToCar = () => {
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(carData);
 
     try {
-      const car = await axiosSecure.post('/add-car', carData);
+      const car = await axiosSecure.post("/add-car", carData);
 
       console.log(car);
 
       // Success Alert
       Swal.fire({
-        title: 'Success!',
-        text: 'Car added successfully!',
-        icon: 'success',
-        confirmButtonText: 'OK',
+        title: "Success!",
+        text: "Car added successfully!",
+        icon: "success",
+        confirmButtonText: "OK",
       });
     } catch (error) {
       console.log(error);
 
       // Error Alert
       Swal.fire({
-        title: 'Error!',
-        text: 'Failed to add car. Please try again.',
-        icon: 'error',
-        confirmButtonText: 'OK',
+        title: "Error!",
+        text: "Failed to add car. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
       });
-      setCarData('');
+      setCarData("");
     }
   };
 
@@ -124,13 +124,14 @@ const AddToCar = () => {
 
           {/* Image Upload */}
           <div className="w-full flex flex-col md:flex-row gap-4">
-            {carData.image.map((_, index) => (
+            {carData?.image.map((_, index) => (
               <div key={index} className="w-full">
                 <label className="block text-sm font-medium pb-1.5">
                   Image {index + 1}
                 </label>
                 <input
                   type="file"
+
                   onChange={e => handleImageChange(e, index)}
                    className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white "
                    

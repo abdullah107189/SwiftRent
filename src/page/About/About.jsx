@@ -9,6 +9,7 @@ import InterestedRenting from "./interestedRenting/InterestedRenting";
 import AboutContact from "./aboutContact/AboutContact";
 import AboutFlag from "./aboutFlag/AboutFlag";
 import { Helmet } from "react-helmet-async";
+
 const About = () => {
   return (
     <div>

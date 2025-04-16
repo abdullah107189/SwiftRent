@@ -69,7 +69,7 @@ const CustomerReviews = ({ onReviewSubmit }) => {
             {message.text}
           </p>
         )}
-
+<br/>
         <button
           onClick={handleReviewSubmit}
           className="mt-3 px-4 py-2 bg-[#f5b754] hover:bg-yellow-500 text-white rounded-md transition duration-300"

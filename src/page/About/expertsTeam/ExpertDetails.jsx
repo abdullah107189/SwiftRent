@@ -106,6 +106,7 @@ const ExpertDetails = () => {
                 Hello, I’m {expert.name}. I work as your sales consultant at{" "}
                 <span className="text-orange-500">{expert.role}</span>.
               </h1>
+
               <p className="mb-5 text-sm text-black">
                 {expert.jobResponsibility}
               </p>
@@ -143,6 +144,7 @@ const ExpertDetails = () => {
               </div>
 
               {/* Tab Content */}
+
               <div className="text-black">
                 {activeTab === "Biography" && <p>{expert.bio}</p>}
                 {activeTab === "Education" && (
@@ -202,7 +204,7 @@ const ExpertDetails = () => {
 
                     {/* Bottom Info */}
                     <div className="flex items-center absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#1b1b1b] to-transparent rounded-b-xl">
-                      <div className="flex items-center justify-center w-[40px] h-[40px] bg-[#F5B754] rounded-full text-black font-semibold">
+                      <div className="flex items-center justify-center w-[40px] h-[40px] bg-[#F5B754] rounded-full font-semibold">
                         <FaInfo className="text-lg" />
                       </div>
                       <div className="ml-3 text-left">

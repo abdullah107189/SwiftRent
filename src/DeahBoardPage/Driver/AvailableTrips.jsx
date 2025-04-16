@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaMapMarkedAlt } from "react-icons/fa";
+import { FaMapMarkedAlt, FaCheck, FaTimes } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
@@ -133,29 +133,41 @@ const AvailableTrips = () => {
           No available trips at the moment.
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
           {availableTrips.map((trip) => (
             <div
               key={trip._id}
-              className="bg-[#1B1B1B] rounded-lg shadow-lg p-4"
+              className="bg-[#1B1B1B] border border-amber-300 rounded-lg shadow-lg p-4"
             >
-              <h3 className="text-xl font-semibold">{trip.carName}</h3>
-              <p>Pickup: {trip.pickUpLocation}</p>
-              <p>Dropoff: {trip.dropOffLocation}</p>
-              <p>Start Date: {trip.pickUpDate}</p>
-              <p>Return Date: {trip.returnDate}</p>
-              <div className="flex justify-between mt-4">
+              <p>
+                <strong>Customer:</strong> {trip.fullName} ({trip.email},{" "}
+                {trip.phone})
+              </p>
+              <p>
+                <strong>Route:</strong> {trip.pickUpLocation} →{" "}
+                {trip.dropOffLocation}
+              </p>
+              <p>
+                <strong>Dates:</strong> {trip.pickUpDate} → {trip.returnDate}
+              </p>
+              <p>
+                <strong>Price:</strong> ${trip.price}
+              </p>
+              <p>
+                <strong>Customer Say:</strong> {trip.additionalNote || "N/A"}
+              </p>
+              <div className="flex justify-start gap-5 mt-4">
                 <button
                   onClick={() => confirmPickTrip(trip._id)}
-                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded flex items-center gap-2"
                 >
-                  Pick
+                  <FaCheck /> Pick
                 </button>
                 <button
                   onClick={() => confirmCancelTrip(trip._id)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded flex items-center gap-2"
                 >
-                  Cancel
+                  <FaTimes /> Cancel
                 </button>
               </div>
             </div>

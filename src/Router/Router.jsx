@@ -1,16 +1,42 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import MainLayout from '../layout/MainLayout';
-import Home from '../page/Home';
-import Services from '../page/services/Services';
-import About from '../page/About/About';
-import Contact from '../page/Contact/Contact';
-import LogIn from '../page/Authentication/LogIn';
-import Register from '../page/Authentication/Register';
-import Dashboard from '../layout/Dashboard/Dashboard';
-import OverviewPage from '../DeahBoardPage/OverviewPage';
-import AddToCar from '../DeahBoardPage/Admin/AddToCar';
-import CarProducatPage from '../DeahBoardPage/CarProducatPage';
-import UsersPage from '../DeahBoardPage/Admin/Users/UsersPage';
+
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import MainLayout from "../layout/MainLayout";
+import Home from "../page/Home";
+import Services from "../page/services/Services";
+import About from "../page/About/About";
+import Contact from "../page/Contact/Contact";
+import LogIn from "../page/Authentication/LogIn";
+import Register from "../page/Authentication/Register";
+import Dashboard from "../layout/Dashboard/Dashboard";
+import OverviewPage from "../DeahBoardPage/OverviewPage";
+import AddToCar from "../DeahBoardPage/Admin/AddToCar";
+import CarProducatPage from "../DeahBoardPage/CarProducatPage";
+import UsersPage from "../DeahBoardPage/Admin/Users/UsersPage";
+
+import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
+import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
+import BrowseCars from "../DeahBoardPage/Customer/Browse Cars/BrowseCars";
+import MyBookings from "../DeahBoardPage/Customer/MyBookings/MyBookings";
+import PaymentHistory from "../DeahBoardPage/Customer/Payment History/PaymentHistory";
+import UpdateProfile from "../DeahBoardPage/UpdateProfile/UpdateProfile";
+import CarDetails from "../components/common/CarDetails/CarDetails";
+import NumberCard from "../components/shared/card/NumberCard";
+import BookAuto from "../page/services/BookAuto";
+import ForgetPassword from "../page/Authentication/ForgetPassword";
+import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
+import ExpertDetails from "../page/About/expertsTeam/ExpertDetails";
+import ErrorPage from "../components/shared/ErrorPage";
+import StartTrip from "../DeahBoardPage/Driver/StartTrip";
+import TripHistory from "../DeahBoardPage/Driver/TripHistory";
+import CustomerReviews from "../DeahBoardPage/Driver/CustomerReviews";
+import Earnings from "../DeahBoardPage/Driver/Earnings";
+import SingleBooking from "../TextDelet/SingleBooking";
+import ManageCars from "../DeahBoardPage/Admin/ManageCars/ManageCars";
+import ManageBookings from "../DeahBoardPage/Admin/ManageBookings";
+import ManageDrivers from "../DeahBoardPage/Admin/ManageDrivers";
+import BillingPage from "../DeahBoardPage/Admin/BillingPage";
+import AvailableTrips from "../DeahBoardPage/Driver/AvailableTrips";
+
 
 import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
 import SettingsPage from '../DeahBoardPage/SettingsPage/SettingsPage';
@@ -105,11 +131,13 @@ export const router = createBrowserRouter([
       { path: 'settings', element: <SettingsPage /> },
       { path: 'change-password', element: <ChangePassword /> },
 
-      //driver
-      { path: 'start-trip', element: <StartTrip /> },
-      { path: 'trip-history', element: <TripHistory /> },
-      { path: 'customer-reviews', element: <CustomerReviews /> },
-      { path: 'earnings', element: <Earnings /> },
+
+      { path: "start-trip", element: <StartTrip /> },
+      { path: "available-trips", element: <AvailableTrips /> },
+      { path: "trip-history", element: <TripHistory /> },
+      { path: "customer-reviews", element: <CustomerReviews /> },
+      { path: "earnings", element: <Earnings /> },
+
     ],
   },
   {

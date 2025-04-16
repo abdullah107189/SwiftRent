@@ -1,4 +1,4 @@
-import { FaCar, FaClock, FaMapMarkedAlt, FaRoute } from "react-icons/fa";
+import { FaClock, FaMapMarkedAlt, FaRoute } from "react-icons/fa";
 import Header from "../../components/common/Header";
 import { useState, useEffect } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -8,122 +8,68 @@ import { useSelector } from "react-redux";
 
 const StartTrip = () => {
   const currentUser = useSelector((state) => state.auth.user);
-  // const { user } = useSelector((state) => state.auth);
   const driverEmail = currentUser?.email;
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
-  const trip = {
-    carName: "Toyota Corolla",
-    carImage:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROywEwo4S2_bitDGhl3NArx4qrbpUjtiYPMw&s",
-    pickupLocation: "Dhaka City Center",
-    startTime: "2025-04-10 10:00 AM",
-    route: "Dhaka → Chattogram",
-  };
+  const [assignedTrips, setAssignedTrips] = useState([]);
 
-  const [availableTrips, setAvailableTrips] = useState([]);
-
+  // Fetch assigned trips
   useEffect(() => {
-    const fetchAvailableTrips = async () => {
+    const fetchAssignedTrips = async () => {
       try {
-        const response = await axiosPublic.get("/available-trips");
-        setAvailableTrips(response.data);
+        const response = await axiosPublic.get(
+          `/driver-assignments/${driverEmail}`
+        );
+        setAssignedTrips(response.data);
       } catch (error) {
-        console.error("Failed to fetch available trips:", error);
+        console.error("Failed to fetch assigned trips:", error);
       }
     };
-    fetchAvailableTrips();
-  }, [axiosPublic]);
+    fetchAssignedTrips();
+  }, [axiosPublic, driverEmail]);
 
-  const handleStartTrip = () => {
-    Swal.fire({
-      title: "Trip Started!",
-      text: "Your trip has been started successfully. 🚗",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-  };
-
-  // Confirmation for picking a trip
-  const confirmPickTrip = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to pick this trip?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handlePickTrip(id);
-      }
-    });
-  };
-
-  // Confirmation for canceling a trip
-  const confirmCancelTrip = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to cancel this trip?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handleCancelTrip(id);
-      }
-    });
-  };
-
-  // Pick Trip
-  const handlePickTrip = async (id) => {
+  const handleStartTrip = async (id) => {
     try {
-      if (!driverEmail) {
-        throw new Error("Driver email not found. Please log in again.");
-      }
-      await axiosSecure.post(`/pick-trip/${id}`, { driverEmail });
-      const response = await axiosPublic.get("/available-trips");
-      setAvailableTrips(response.data);
+      await axiosSecure.post(`/start-trip/${id}`, { driverEmail });
       Swal.fire({
-        title: "Success!",
-        text: "Trip Picked Successfully!",
+        title: "Trip Started!",
+        text: "Your trip has been started successfully. 🚗",
         icon: "success",
         confirmButtonText: "OK",
       });
+      const response = await axiosPublic.get(
+        `/driver-assignments/${driverEmail}`
+      );
+      setAssignedTrips(response.data);
     } catch (error) {
-      console.error("Failed to pick trip:", error);
-      const message =
-        error.response?.data?.message ||
-        error.message ||
-        "Failed to pick trip!";
+      console.error("Failed to start trip:", error);
       Swal.fire({
         title: "Error!",
-        text: message,
+        text: error.message || "Failed to start trip!",
         icon: "error",
         confirmButtonText: "OK",
       });
     }
   };
 
-  // Cancel Trip
-  const handleCancelTrip = async (id) => {
+  const handleFinishTrip = async (id) => {
     try {
-      await axiosSecure.post(`/cancel-trip/${id}`);
-      const response = await axiosSecure.get("/available-trips");
-      setAvailableTrips(response.data);
+      await axiosSecure.post(`/finish-trip/${id}`, { driverEmail });
       Swal.fire({
-        title: "Success!",
-        text: "Trip Cancelled Successfully!",
+        title: "Trip Finished!",
+        text: "Your trip has been completed successfully. 🎉",
         icon: "success",
         confirmButtonText: "OK",
       });
+      const response = await axiosPublic.get(
+        `/driver-assignments/${driverEmail}`
+      );
+      setAssignedTrips(response.data);
     } catch (error) {
-      console.error("Failed to cancel trip:", error);
+      console.error("Failed to finish trip:", error);
       Swal.fire({
         title: "Error!",
-        text: "Failed to cancel trip!",
+        text: error.message || "Failed to finish trip!",
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -133,77 +79,73 @@ const StartTrip = () => {
   return (
     <div className="pb-10">
       <Header title="Trip Started! 🚗" />
-      <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2 pt-4">
-        <FaRoute /> Start Your Trip
-      </h2>
 
-      <div className="bg-[#1B1B1B] rounded-lg shadow-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
-        {/* Car Image */}
-        <div>
-          <img
-            src={trip.carImage}
-            alt={trip.carName}
-            className="w-full h-60 object-cover rounded-xl"
-          />
-        </div>
-
-        {/* Trip Info */}
-        <div className="space-y-4">
-          <h3 className="text-2xl font-semibold">{trip.carName}</h3>
-          <p className="flex items-center gap-2">
-            <FaClock className="text-[#f5b754]" /> Start Time: {trip.startTime}
-          </p>
-          <p className="flex items-center gap-2">
-            <FaMapMarkedAlt className="text-[#f5b754]" /> Pickup:{" "}
-            {trip.pickupLocation}
-          </p>
-          <p className="flex items-center gap-2">
-            <FaRoute className="text-[#f5b754]" /> Route: {trip.route}
-          </p>
-
-          <button
-            onClick={handleStartTrip}
-            className="mt-6 w-full bg-[#f5b754] hover:bg-yellow-500 text-white font-semibold py-3 rounded-lg transition duration-300"
-          >
-            Confirm & Start Trip
-          </button>
-        </div>
-      </div>
-
-      {/* Available Trips Section */}
+      {/* Assigned Trips Section */}
       <div className="mt-8">
         <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2 pt-4">
-          <FaMapMarkedAlt /> Available Trips
+          <FaRoute /> Your Assigned Trips
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {availableTrips.map((trip) => (
-            <div
-              key={trip._id}
-              className="bg-[#1B1B1B] rounded-lg shadow-lg p-4"
-            >
-              <h3 className="text-xl font-semibold">{trip.carName}</h3>
-              <p>Pickup: {trip.pickUpLocation}</p>
-              <p>Dropoff: {trip.dropOffLocation}</p>
-              <p>Start Date: {trip.pickUpDate}</p>
-              <p>Return Date: {trip.returnDate}</p>
-              {/* Pick And Cancel button added */}
-              <div className="flex justify-between mt-4">
-                <button
-                  onClick={() => confirmPickTrip(trip._id)}
-                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
-                >
-                  Pick
-                </button>
-                <button
-                  onClick={() => confirmCancelTrip(trip._id)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
-                >
-                  Cancel
-                </button>
+        {assignedTrips.length === 0 ? (
+          <p className="text-center text-gray-500">
+            You have no assigned trips.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {assignedTrips.map((trip) => (
+              <div
+                key={trip._id}
+                className="bg-[#1B1B1B] rounded-lg shadow-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-8"
+              >
+                {/* Car Image */}
+                <div>
+                  <img
+                    src={
+                      trip.carImage ||
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROywEwo4S2_bitDGhl3NArx4qrbpUjtiYPMw&s"
+                    }
+                    alt={trip.carName}
+                    className="w-full h-60 object-cover rounded-xl"
+                  />
+                </div>
+                {/* Trip Info */}
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold">{trip.carName}</h3>
+                  <p className="flex items-center gap-2">
+                    <FaClock className="text-[#f5b754]" /> Start Time:{" "}
+                    {trip.pickUpDate}
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <FaMapMarkedAlt className="text-[#f5b754]" /> Pickup:{" "}
+                    {trip.pickUpLocation}
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <FaRoute className="text-[#f5b754]" /> Route:{" "}
+                    {trip.pickUpLocation} → {trip.dropOffLocation}
+                  </p>
+                  {trip.tripStatus === "Booked" ? (
+                    <button
+                      onClick={() => handleStartTrip(trip.bookingId)}
+                      className="mt-6 w-full bg-[#f5b754] hover:bg-yellow-500 text-white font-semibold py-3 rounded-lg transition duration-300"
+                    >
+                      Confirm & Start Trip
+                    </button>
+                  ) : trip.tripStatus === "Started" ? (
+                    <button
+                      onClick={() => handleFinishTrip(trip.bookingId)}
+                      className="mt-6 w-full bg-[#28a745] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+                    >
+                      Finish Trip
+                    </button>
+                  ) : (
+                    <p className="mt-6 text-center text-gray-400">
+                      Trip Completed
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

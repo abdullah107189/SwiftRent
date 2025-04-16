@@ -11,7 +11,7 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 const OverviewPage = () => {
   const axiosSecure = useAxiosSecure();
 
-  //  all users
+  // Define state for storing all users
   const [allUser, setAllUser] = useState([]);
 
   const fetchAllUsers = async () => {

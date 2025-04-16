@@ -91,20 +91,20 @@ const AddToCar = () => {
     <div className="min-h-screen text-white">
       <Header title="Add to Car" />
       <div className="px-4 pb-4">
-        <h1 className="text-xl font-bold py-6 text-center">Add Car list</h1>
+        <h1 className="text-xl font-bold py-6 text-center">
+          Add Car list
+        </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Car Name and Brand */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium pb-1.5">
-                Car Name
-              </label>
+              <label className="block text-sm font-medium pb-1.5">Car Name</label>
               <input
                 type="text"
                 name="name"
                 value={carData.name}
                 onChange={handleChange}
-                placeholder="Car Name"
+             placeholder='Car Name'
                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
               />
@@ -114,9 +114,8 @@ const AddToCar = () => {
               <input
                 type="text"
                 name="brand"
-                placeholder="Brand"
+                  placeholder='Brand'
                 value={carData.brand}
-                onChange={handleChange}
                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
               />
@@ -134,7 +133,8 @@ const AddToCar = () => {
                   type="file"
 
                   onChange={e => handleImageChange(e, index)}
-                  className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white "
+                   className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white "
+                   
                 />
               </div>
             ))}
@@ -143,16 +143,14 @@ const AddToCar = () => {
           {/* Type and Year */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium pb-1.5">
-                Car Type
-              </label>
+              <label className="block text-sm font-medium pb-1.5">Car Type</label>
               <input
                 type="text"
                 name="type"
                 value={carData.type}
                 onChange={handleChange}
                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
-                placeholder="Car Type"
+                placeholder='Car Type'
                 required
               />
             </div>
@@ -163,8 +161,8 @@ const AddToCar = () => {
                 name="year"
                 value={carData.year}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
-                placeholder="Year"
+                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                 placeholder='Year'
                 required
               />
             </div>
@@ -181,9 +179,9 @@ const AddToCar = () => {
                 name="transmission"
                 value={carData.transmission}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
-                placeholder=" Transmission"
+                placeholder=' Transmission'
               />
             </div>
             <div>
@@ -193,8 +191,8 @@ const AddToCar = () => {
                 name="seats"
                 value={carData.seats}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
-                placeholder="Seats"
+                  className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                  placeholder='Seats'
                 required
               />
             </div>
@@ -211,8 +209,8 @@ const AddToCar = () => {
                 name="fuel"
                 value={carData.fuel}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
-                placeholder="Fuel Type"
+                   className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                   placeholder='Fuel Type'
                 required
               />
             </div>
@@ -223,8 +221,8 @@ const AddToCar = () => {
                 name="price"
                 value={carData.price}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
-                placeholder="Price"
+               className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+               placeholder='Price'
                 required
               />
             </div>
@@ -239,8 +237,8 @@ const AddToCar = () => {
                 name="location.city"
                 value={carData.location.city}
                 onChange={handleChange}
-                placeholder="City"
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                placeholder='City'
+               className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
               />
             </div>
@@ -253,8 +251,8 @@ const AddToCar = () => {
                 name="location.pickupPoint"
                 value={carData.location.pickupPoint}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
-                placeholder=" Pickup Point"
+                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                 placeholder=' Pickup Point'
                 required
               />
             </div>
@@ -268,7 +266,7 @@ const AddToCar = () => {
               placeholder="Drop-off Point"
               value={carData.location.dropOffPoint}
               onChange={handleChange}
-              className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
             />
           </div>
 

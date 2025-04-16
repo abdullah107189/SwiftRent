@@ -52,6 +52,7 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About></About>,
       },
+
       {
         path: "/contact",
         element: <Contact />,
@@ -60,6 +61,7 @@ export const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
       },
+
       {
         path: "/car-details/:id",
         element: <CarDetails />,
@@ -123,6 +125,7 @@ export const router = createBrowserRouter([
     path: "/forget-password",
     element: <ForgetPassword />,
   },
+
   {
     path: "*",
     element: <ErrorPage />,

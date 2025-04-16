@@ -1,17 +1,20 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import Header from '../../components/common/Header';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
-import { FaRegTrashAlt, FaTrashAlt } from 'react-icons/fa';
+import { FaRegTrashAlt } from 'react-icons/fa';
 import { Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Spinner from '../../components/Spinner';
+
 const ManageDrivers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const axiosSecure = useAxiosSecure();
   const role = 'driver';
+
   const {
     data: users = [],
     isLoading,
@@ -28,14 +31,13 @@ const ManageDrivers = () => {
     setFilteredUsers(users);
   }, [users]);
 
-  // Search Functionality
   const handleSearch = e => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     const filtered = users.filter(
       u =>
-        u.name.toLowerCase().includes(term) ||
-        u.email.toLowerCase().includes(term)
+        u.name?.toLowerCase().includes(term) ||
+        u.email?.toLowerCase().includes(term)
     );
     setFilteredUsers(filtered);
   };
@@ -43,7 +45,7 @@ const ManageDrivers = () => {
   const handelUserDelete = async id => {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'User  will be deleted',
+      text: 'User will be deleted',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -56,7 +58,7 @@ const ManageDrivers = () => {
           refetch();
           Swal.fire({
             title: 'Deleted!',
-            text: 'Customers has been deleted.',
+            text: 'Customer has been deleted.',
             icon: 'success',
           });
         } catch (error) {
@@ -77,7 +79,7 @@ const ManageDrivers = () => {
     <>
       <Header title="Manage Drivers" />
       <motion.div
-        className="  shadow-lg rounded-xl p-6 border border-gray-700 p"
+        className="shadow-lg rounded-xl p-6 border border-gray-700"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -115,7 +117,6 @@ const ManageDrivers = () => {
                 )}
               </tr>
             </thead>
-
             <tbody className="divide-y divide-gray-700">
               {filteredUsers.map(u => (
                 <motion.tr
@@ -126,27 +127,24 @@ const ManageDrivers = () => {
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-100">
-                          <img
-                            src={u?.userInfo?.photoURL}
-                            alt="user"
-                            className="w-10 h-10 rounded-full border border-yellow-800"
-                          />
-                          {u?.userInfo?.name}
-                        </div>
+                      <img
+                        src={u?.userInfo?.photoURL}
+                        alt="user"
+                        className="w-10 h-10 rounded-full border border-yellow-800 mr-4"
+                      />
+                      <div className="text-sm font-medium text-gray-100">
+                        {u?.userInfo?.name}
                       </div>
                     </div>
                   </td>
-
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-300">
                       {u?.userInfo?.email}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-[#f5b754] text-whaite cursor-pointer">
-                      {'+8801703500000'}
+                    <span className="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-[#f5b754] text-white cursor-pointer">
+                      +8801703500000
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -160,7 +158,6 @@ const ManageDrivers = () => {
                       {u.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </td>
-
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     <button
                       onClick={() => handelUserDelete(u._id)}

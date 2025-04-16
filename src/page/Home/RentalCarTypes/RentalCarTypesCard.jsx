@@ -1,5 +1,5 @@
-import React from "react";
-import { MdArrowOutward } from "react-icons/md";
+import React from 'react';
+import { MdArrowOutward } from 'react-icons/md';
 
 export default function RentalCarTypesCard({ car }) {
   return (

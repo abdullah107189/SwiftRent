@@ -4,6 +4,7 @@ import RentalCarSection from "./Home/RentalCarSection";
 import CarRentalProcessSection from "./Home/RentalCarTypes/CarRentalProcessSection.jsx/CarRentalProcessSection";
 import RentalCarCompany from "./Home/rantalCarCompany/RantalCarCompany";
 import { Helmet } from "react-helmet-async";
+import ChatLauncher from "../components/ChatLauncher";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
         <RentalCarCompany />
         <RentalCarSection />
         <CarRentalProcessSection />
+        <ChatLauncher />
       </div>
     </div>
   );

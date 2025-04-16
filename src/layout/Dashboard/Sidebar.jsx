@@ -12,6 +12,7 @@ import {
   FaShoppingCart,
   FaUser,
   FaRoute,
+  FaMapMarkedAlt,
 } from 'react-icons/fa';
 import { Car, LogOut, Settings, ShoppingCart } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -39,7 +40,7 @@ const menuItems = {
   ],
   driver: [
     { name: 'Start Trip', path: 'start-trip', icon: FaRoute },
-    { name: 'Available Trips', path: 'available-trips', icon: FaRoute },
+    { name: 'Available Trips', path: 'available-trips', icon: FaMapMarkedAlt },
     { name: 'Trip History', path: 'trip-history', icon: FaClipboardList },
     { name: 'Customer Reviews', path: 'customer-reviews', icon: FaStar },
     // { name: 'Update Profile', path: 'profile', icon: FaUser },

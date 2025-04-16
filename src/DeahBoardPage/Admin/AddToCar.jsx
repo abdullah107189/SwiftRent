@@ -104,7 +104,7 @@ const AddToCar = () => {
                 name="name"
                 value={carData.name}
                 onChange={handleChange}
-             
+             placeholder='Car Name'
                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
               />
@@ -114,6 +114,7 @@ const AddToCar = () => {
               <input
                 type="text"
                 name="brand"
+                  placeholder='Brand'
                 value={carData.brand}
                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
@@ -131,7 +132,8 @@ const AddToCar = () => {
                 <input
                   type="file"
                   onChange={e => handleImageChange(e, index)}
-                   className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                   className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white "
+                   
                 />
               </div>
             ))}
@@ -147,6 +149,7 @@ const AddToCar = () => {
                 value={carData.type}
                 onChange={handleChange}
                 className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                placeholder='Car Type'
                 required
               />
             </div>
@@ -158,6 +161,7 @@ const AddToCar = () => {
                 value={carData.year}
                 onChange={handleChange}
                  className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                 placeholder='Year'
                 required
               />
             </div>
@@ -176,6 +180,7 @@ const AddToCar = () => {
                 onChange={handleChange}
                  className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
+                placeholder=' Transmission'
               />
             </div>
             <div>
@@ -186,6 +191,7 @@ const AddToCar = () => {
                 value={carData.seats}
                 onChange={handleChange}
                   className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                  placeholder='Seats'
                 required
               />
             </div>
@@ -203,6 +209,7 @@ const AddToCar = () => {
                 value={carData.fuel}
                 onChange={handleChange}
                    className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                   placeholder='Fuel Type'
                 required
               />
             </div>
@@ -214,6 +221,7 @@ const AddToCar = () => {
                 value={carData.price}
                 onChange={handleChange}
                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+               placeholder='Price'
                 required
               />
             </div>
@@ -228,6 +236,7 @@ const AddToCar = () => {
                 name="location.city"
                 value={carData.location.city}
                 onChange={handleChange}
+                placeholder='City'
                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
                 required
               />
@@ -242,6 +251,7 @@ const AddToCar = () => {
                 value={carData.location.pickupPoint}
                 onChange={handleChange}
                  className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                 placeholder=' Pickup Point'
                 required
               />
             </div>

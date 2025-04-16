@@ -5,6 +5,9 @@ import StatCard from '../../components/common/StatCard';
 import DailyOrders from './DailyOrders';
 import OrderDistribution from './OrderDistribution';
 import OrdersTable from './OrdersTable';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import { useEffect } from 'react';
+import { useState } from 'react';
 const orderStats = {
   totalOrders: '1,234',
   pendingOrders: '56',
@@ -12,6 +15,23 @@ const orderStats = {
   totalRevenue: '$98,765',
 };
 const OrdersPage = () => {
+    const [loading, setLoading] = useState(true);
+  
+  const axiosPublic = useAxiosPublic();
+  const [user, setUser]=useState([])
+  
+  useEffect(() => {
+        axiosPublic
+          .get("/all-user")
+          .then((res) => {
+            setUser(res.data);
+            // const selected = res.data.find(item => item._id === id);
+            // setExpert(selected);
+          })
+          .catch((err) => console.error("Error fetching expert:", err))
+          .finally(() => setLoading(false));
+      }, [axiosPublic]);
+  
   return (
     <div className="flex-1 relative z-10 overflow-auto">
       <Header title={'Orders'} />

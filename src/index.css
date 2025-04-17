@@ -46,10 +46,10 @@ body {
   }
   /* action btn  */
   .fillBtn {
-    @apply bg-[#f5b754] hover:bg-white text-black  py-2 px-6 rounded-full flex items-center transform duration-300 cursor-pointer;
+    @apply bg-[#f5b754] hover:bg-white text-black  lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transform duration-300 cursor-pointer;
   }
   /* hover btn using for outline  */
   .outlineBtn {
-    @apply border hover:border-[#f5b754] border-white hover:bg-[#f5b754] hover:text-black py-2 px-6 rounded-full flex items-center transition-all duration-300 cursor-pointer;
+    @apply border hover:border-[#f5b754] border-white hover:bg-[#f5b754] hover:text-black lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transition-all duration-300 cursor-pointer;
   }
 }

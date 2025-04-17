@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import {
   PieChart,
   Pie,
@@ -8,49 +7,18 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-// const categoryData = [
-//   { name: 'Sedan', value: 5000 },
-//   { name: 'SUV', value: 6500 },
-//   { name: 'Truck', value: 4000 },
-//   { name: 'Electric', value: 3000 },
-//   { name: 'Sports Car', value: 2500 },
-// ];
+const categoryData = [
+  { name: 'Sedan', value: 5000 },
+  { name: 'SUV', value: 6500 },
+  { name: 'Truck', value: 4000 },
+  { name: 'Electric', value: 3000 },
+  { name: 'Sports Car', value: 2500 },
+];
 
 const COLORS = ['#6366F1', '#8B5CF6', '#EC4899', '#10B981', '#F59E0B'];
 
 const CategoryDistributionChart = () => {
-    const [categoryData, setCategoryData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const axiosSecure = useAxiosSecure();
-
- 
-
-  useEffect(() => {
-    const fetchSalesData = async () => {
-      try {
-        const response = await axiosSecure.get("/category-distribution");
-
-        const grouped = response.data.reduce((acc, curr) => {
-          const found = acc.find((item) => item.name === curr.name);
-          if (found) {
-            found.value += curr.value;
-          } else {
-            acc.push({ ...curr });
-          }
-          return acc;
-        }, []);
-
-        setCategoryData(grouped);
-      } catch (error) {
-        console.error("Error fetching sales data:", error);
-      }
-    };
-
-    fetchSalesData();
-  }, []);
-
   return (
     <motion.div
       className="sBgBlack backdrop-blur-md shadow-lg rounded-3xl md:p-6 p-3"

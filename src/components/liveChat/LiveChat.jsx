@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { useSelector } from "react-redux";
 import useUserRole from "../../hooks/useUserRole";
 import axios from "axios";
-import { FaBars } from "react-icons/fa";
+import { MdOutlineSms } from "react-icons/md";
 
 const socket = io(import.meta.env.VITE_BASEURL);
 
@@ -138,28 +138,43 @@ const LiveChat = () => {
     <div className="mxw  text-white rounded   h-[550px] flex overflow-hidden relative">
       {/* Sidebar for Admin - Large devices */}
       {role === "Admin" && (
-        <div className="hidden sm:block w-1/4 bg-[#1f1f1f] p-6 border-r border-gray-700 overflow-y-auto">
-          <h3 className="text-lg font-bold mb-4">👤 Customers</h3>
-          {customers.map((c) => (
-            <div
-              key={c.uid}
-              className={`flex items-center gap-3 p-4 rounded-lg mb-4 cursor-pointer ${
-                selectedCustomer?.uid === c.uid
-                  ? "bg-blue-600"
-                  : "hover:bg-[#333]"
-              }`}
-              onClick={() => setSelectedCustomer(c)}
-            >
-              <img
-                src={c.photo}
-                alt={c.name}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <p className="text-sm font-medium">{c.name}</p>
+        <div className="hidden sm:block w-1/4 bg-[#1f1f1f] p-2 border-r border-gray-700 overflow-y-auto custom-scrollbar">
+          <h3 className="text-lg font-semibold mb-3 text-center text-white">
+            Customers
+          </h3>
+          {customers.map((c) => {
+            const lastMessage = messages
+              .filter(
+                (msg) => msg.senderUid === c.uid || msg.receiverUid === c.uid
+              )
+              .slice(-1)[0];
+
+            return (
+              <div
+                key={c.uid}
+                className={`flex items-center gap-2 px-2 py-2 rounded-lg cursor-pointer transition-colors duration-200 ${
+                  selectedCustomer?.uid === c.uid
+                    ? "bg-blue-700"
+                    : "hover:bg-[#2c2c2c]"
+                }`}
+                onClick={() => setSelectedCustomer(c)}
+              >
+                <img
+                  src={c.photo}
+                  alt={c.name}
+                  className="w-9 h-9 rounded-full object-cover border border-gray-500"
+                />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-white truncate">
+                    {c.name}
+                  </p>
+                  <p className="text-xs text-gray-400 truncate max-w-[160px]">
+                    {lastMessage?.message || "No messages yet"}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
@@ -168,9 +183,9 @@ const LiveChat = () => {
         <>
           <button
             onClick={() => setShowDrawer(true)}
-            className="absolute top-3 left-3 z-50 sm:hidden bg-[#1f1f1f] p-4 rounded"
+            className="absolute top-3 right-3 z-50 sm:hidden bg-[#1f1f1f] p-2 rounded"
           >
-            <FaBars size={20} />
+            <MdOutlineSms size={18} color="#fff" />
           </button>
 
           {showDrawer && (
@@ -181,34 +196,49 @@ const LiveChat = () => {
           )}
 
           <div
-            className={`fixed top-0 left-0 h-full w-64 bg-[#1f1f1f] p-6 z-50 transition-transform duration-300 sm:hidden ${
+            className={`fixed top-0 left-0 h-full w-64 bg-[#1f1f1f] p-2 z-50 transition-transform duration-300 sm:hidden overflow-y-auto custom-scrollbar ${
               showDrawer ? "translate-x-0" : "-translate-x-full"
             }`}
           >
-            <h3 className="text-lg font-bold mb-4">👤 Customers</h3>
-            {customers.map((c) => (
-              <div
-                key={c.uid}
-                className={`flex items-center gap-3 p-4 rounded-lg mb-4 cursor-pointer ${
-                  selectedCustomer?.uid === c.uid
-                    ? "bg-blue-600"
-                    : "hover:bg-[#333]"
-                }`}
-                onClick={() => {
-                  setSelectedCustomer(c);
-                  setShowDrawer(false);
-                }}
-              >
-                <img
-                  src={c.photo}
-                  alt={c.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
-                  <p className="text-sm font-medium">{c.name}</p>
+            <h3 className="text-lg font-semibold mb-3 text-center text-white">
+              Customers
+            </h3>
+            {customers.map((c) => {
+              const lastMessage = messages
+                .filter(
+                  (msg) => msg.senderUid === c.uid || msg.receiverUid === c.uid
+                )
+                .slice(-1)[0];
+
+              return (
+                <div
+                  key={c.uid}
+                  className={`flex items-center gap-2 px-2 py-2 rounded-lg cursor-pointer transition-colors duration-200 ${
+                    selectedCustomer?.uid === c.uid
+                      ? "bg-blue-700"
+                      : "hover:bg-[#2c2c2c]"
+                  }`}
+                  onClick={() => {
+                    setSelectedCustomer(c);
+                    setShowDrawer(false);
+                  }}
+                >
+                  <img
+                    src={c.photo}
+                    alt={c.name}
+                    className="w-9 h-9 rounded-full object-cover border border-gray-500"
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-white truncate">
+                      {c.name}
+                    </p>
+                    <p className="text-xs text-gray-400 truncate max-w-[140px]">
+                      {lastMessage?.message || "No messages yet"}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </>
       )}

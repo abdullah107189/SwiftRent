@@ -33,11 +33,13 @@ const UsersTable = () => {
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = users.filter(
+
+    const filtered = users?.filter(
       (u) =>
-        u.name.toLowerCase().includes(term) ||
-        u.email.toLowerCase().includes(term)
+        u.userInfo?.name.toLowerCase().includes(term) ||
+        u.userInfo?.email.toLowerCase().includes(term)
     );
+    console.log(filtered);
     setFilteredUsers(filtered);
   };
 

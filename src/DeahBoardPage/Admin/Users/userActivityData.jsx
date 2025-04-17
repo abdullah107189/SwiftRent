@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Bar,
   BarChart,
@@ -70,7 +71,7 @@ const UserActivityHeatmap = () => {
       transition={{ delay: 0.4 }}
     >
       <h2 className="text-xl font-semibold text-gray-100 mb-4">
-        User Activity Heatmap
+        Customer Activity Heatmap
       </h2>
       <div style={{ width: '100%', height: 300 }}>
         <ResponsiveContainer>

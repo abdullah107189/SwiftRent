@@ -8,9 +8,7 @@ import {
   FaStar,
   FaMoneyBill,
   FaUserCog,
-  FaTags,
   FaShoppingCart,
-  FaUser,
   FaRoute,
 } from "react-icons/fa";
 import { Car, LogOut, Settings, ShoppingCart } from "lucide-react";

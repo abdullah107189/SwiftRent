@@ -100,22 +100,30 @@ const LiveChat = () => {
     });
   }, [messages]);
 
-  const customers = [
-    ...new Map(
-      messages
-        .filter((msg) => msg.role === "customer")
-        .map((msg) => [
-          msg.senderUid,
-          {
-            uid: msg.senderUid,
-            name: msg.senderName,
-            photo:
-              msg.senderPhoto ||
-              "https://i.ibb.co.com/ZzZWppmV/blank-profile-picture-973460-1280.webp",
-          },
-        ])
-    ).values(),
-  ];
+  const customersMap = {};
+
+  messages.forEach((msg) => {
+    if (msg.role === "customer") {
+      const uid = msg.senderUid;
+      if (
+        !customersMap[uid] ||
+        new Date(msg.time) > new Date(customersMap[uid].time)
+      ) {
+        customersMap[uid] = {
+          uid,
+          name: msg.senderName,
+          photo:
+            msg.senderPhoto ||
+            "https://i.ibb.co.com/ZzZWppmV/blank-profile-picture-973460-1280.webp",
+          time: msg.time,
+        };
+      }
+    }
+  });
+
+  const customers = Object.values(customersMap).sort(
+    (a, b) => new Date(b.time) - new Date(a.time)
+  );
 
   const visibleMessages = messages.filter((msg) =>
     role === "Admin"

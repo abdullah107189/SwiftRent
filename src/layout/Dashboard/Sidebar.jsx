@@ -8,9 +8,7 @@ import {
   FaStar,
   FaMoneyBill,
   FaUserCog,
-  FaTags,
   FaShoppingCart,
-  FaUser,
   FaRoute,
 } from "react-icons/fa";
 import { Car, LogOut, Settings, ShoppingCart } from "lucide-react";
@@ -26,8 +24,8 @@ const menuItems = {
     { name: "Manage Bookings", path: "manage-bookings", icon: FaClipboardList },
     { name: "Customers Management", path: "customers-manage", icon: FaUsers },
     { name: "Manage Drivers", path: "manage-drivers", icon: FaUserCog },
+    { name: "Customer Message", path: "live-chat", icon: FaUserCog },
     { name: "Billing & Payments", path: "billing", icon: FaMoneyBill },
-    { name: "Live Chat", path: "live-chat", icon: Settings },
     { name: "Settings", path: "settings", icon: Settings },
   ],
   customer: [

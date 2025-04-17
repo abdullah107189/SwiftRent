@@ -96,6 +96,7 @@ export const router = createBrowserRouter([
 
       { path: "customers-manage", element: <UsersPage /> },
       { path: "manage-drivers", element: <ManageDrivers /> },
+      { path: "live-chat", element: <LiveChat /> },
       { path: "billing", element: <BillingPage /> },
       { path: "order", element: <OrdersPage /> },
       { path: "live-chat", element: <LiveChat /> },

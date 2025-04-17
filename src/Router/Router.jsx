@@ -34,7 +34,9 @@ import ManageCars from "../DeahBoardPage/Admin/ManageCars/ManageCars";
 import ManageBookings from "../DeahBoardPage/Admin/ManageBookings";
 import ManageDrivers from "../DeahBoardPage/Admin/ManageDrivers";
 import BillingPage from "../DeahBoardPage/Admin/BillingPage";
-
+import Updatecar from "../DeahBoardPage/Admin/ManageCars/Updatecar";
+import AvailableTrips from "../DeahBoardPage/Driver/AvailableTrips";
+import LiveChat from "../components/liveChat/LiveChat";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -52,6 +54,7 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About></About>,
       },
+
       {
         path: "/contact",
         element: <Contact />,
@@ -60,6 +63,7 @@ export const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
       },
+
       {
         path: "/car-details/:id",
         element: <CarDetails />,
@@ -87,12 +91,15 @@ export const router = createBrowserRouter([
       { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
       { path: "manage-cars", element: <ManageCars /> },
+      { path: "update-car/:id", element: <Updatecar /> },
       { path: "manage-bookings", element: <ManageBookings /> },
-      // { path: 'car-product', element: <CarProducatPage /> },
+
       { path: "customers-manage", element: <UsersPage /> },
       { path: "manage-drivers", element: <ManageDrivers /> },
+      { path: "live-chat", element: <LiveChat /> },
       { path: "billing", element: <BillingPage /> },
       { path: "order", element: <OrdersPage /> },
+      { path: "live-chat", element: <LiveChat /> },
       { path: "settings", element: <SettingsPage /> },
       { path: "manage-bookings", element: <CarProducatPage /> },
 
@@ -104,8 +111,8 @@ export const router = createBrowserRouter([
       { path: "settings", element: <SettingsPage /> },
       { path: "change-password", element: <ChangePassword /> },
 
-      //driver
       { path: "start-trip", element: <StartTrip /> },
+      { path: "available-trips", element: <AvailableTrips /> },
       { path: "trip-history", element: <TripHistory /> },
       { path: "customer-reviews", element: <CustomerReviews /> },
       { path: "earnings", element: <Earnings /> },
@@ -123,6 +130,7 @@ export const router = createBrowserRouter([
     path: "/forget-password",
     element: <ForgetPassword />,
   },
+
   {
     path: "*",
     element: <ErrorPage />,

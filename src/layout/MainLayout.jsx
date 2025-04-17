@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import AOS from "aos";
@@ -23,6 +23,7 @@ const MainLayout = () => {
   }, []);
   return (
     <div>
+      <ScrollRestoration />
       <Navbar></Navbar>
       <div>
         <Outlet></Outlet>

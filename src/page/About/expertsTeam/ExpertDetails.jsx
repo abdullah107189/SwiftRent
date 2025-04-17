@@ -1,23 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import {
   FaLinkedinIn,
   FaFacebookF,
   FaInstagram,
   FaWhatsapp,
   FaInfo,
-} from 'react-icons/fa';
-import useAxiosPublic from '../../../hooks/useAxiosPublic';
-import SectionHeader from '../../../components/shared/SectionHeader';
+} from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import SectionHeader from "../../../components/shared/SectionHeader";
 
 // Swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Helmet } from 'react-helmet-async';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Helmet } from "react-helmet-async";
 
 // Social media icons component
 const SocialIcon = ({ icon: Icon, link }) => (
@@ -37,17 +37,17 @@ const ExpertDetails = () => {
   const [expert, setExpert] = useState(null);
   const [experts, setExperts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('Biography');
+  const [activeTab, setActiveTab] = useState("Biography");
 
   useEffect(() => {
     axiosPublic
-      .get('/expert-teammate')
-      .then(res => {
+      .get("/expert-teammate")
+      .then((res) => {
         setExperts(res.data);
-        const selected = res.data.find(item => item._id === id);
+        const selected = res.data.find((item) => item._id === id);
         setExpert(selected);
       })
-      .catch(err => console.error('Error fetching expert:', err))
+      .catch((err) => console.error("Error fetching expert:", err))
       .finally(() => setLoading(false));
   }, [axiosPublic, id]);
 
@@ -63,7 +63,7 @@ const ExpertDetails = () => {
     );
   }
 
-  const otherExperts = experts.filter(e => e._id !== expert._id);
+  const otherExperts = experts.filter((e) => e._id !== expert._id);
 
   return (
     <>
@@ -93,7 +93,8 @@ const ExpertDetails = () => {
                   link={`https://wa.me/${expert.phone}`}
                 />
               </div>
-              <p className="text-sm text-black">
+
+              <p className="text-sm ">
                 My e-mail address:{' '}
                 <span className="font-semibold">{expert.email}</span>
               </p>
@@ -103,10 +104,11 @@ const ExpertDetails = () => {
             <div className="md:w-1/2">
               {/* Name and Role */}
               <h1 className="text-2xl font-bold mb-2">
-                Hello, I’m {expert.name}. I work as your sales consultant at{' '}
+                Hello, I’m {expert.name}. I work as your sales consultant at{" "}
                 <span className="text-orange-500">{expert.role}</span>.
               </h1>
-              <p className="mb-5 text-sm text-black">
+
+              <p className="mb-5 text-sm ">
                 {expert.jobResponsibility}
               </p>
 
@@ -115,11 +117,13 @@ const ExpertDetails = () => {
                 {expert.qualifications.map((qualification, index) => (
                   <li
                     key={index}
-                    className="flex items-center gap-2 text-black mb-3"
+
+                    className="flex items-center gap-2  mb-3"
+
                   >
                     <span className="text-orange-500 bg-black w-[40px] h-[40px] rounded-full flex items-center justify-center">
                       ✓
-                    </span>{' '}
+                    </span>{" "}
                     {qualification}
                   </li>
                 ))}
@@ -127,14 +131,17 @@ const ExpertDetails = () => {
 
               {/* Tabs */}
               <div className="flex gap-4 mb-4">
-                {['Biography', 'Education', 'Awards'].map(tab => (
+                {["Biography", "Education", "Awards"].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
                     className={`text-sm font-semibold pb-1 ${
                       activeTab === tab
+
                         ? 'text-orange-500 border-b-2 border-orange-500'
-                        : 'text-black'
+
+                        : ''
+
                     }`}
                   >
                     {tab.toUpperCase()}
@@ -143,16 +150,20 @@ const ExpertDetails = () => {
               </div>
 
               {/* Tab Content */}
-              <div className="text-black">
+
+
+              <div className="">
+
                 {activeTab === 'Biography' && <p>{expert.bio}</p>}
                 {activeTab === 'Education' && (
+
                   <ul className="list-disc list-inside">
                     {expert.education.map((edu, index) => (
                       <li key={index}>{edu}</li>
                     ))}
                   </ul>
                 )}
-                {activeTab === 'Awards' && (
+                {activeTab === "Awards" && (
                   <ul className="list-disc list-inside">
                     {expert.awards.map((award, index) => (
                       <li key={index}>{award}</li>
@@ -184,7 +195,7 @@ const ExpertDetails = () => {
               },
             }}
           >
-            {otherExperts.map(expert => (
+            {otherExperts.map((expert) => (
               <SwiperSlide key={expert._id}>
                 <div className="flex justify-center">
                   <Link
@@ -202,7 +213,7 @@ const ExpertDetails = () => {
 
                     {/* Bottom Info */}
                     <div className="flex items-center absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#1b1b1b] to-transparent rounded-b-xl">
-                      <div className="flex items-center justify-center w-[40px] h-[40px] bg-[#F5B754] rounded-full text-black font-semibold">
+                      <div className="flex items-center justify-center w-[40px] h-[40px] bg-[#F5B754] rounded-full font-semibold">
                         <FaInfo className="text-lg" />
                       </div>
                       <div className="ml-3 text-left">

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Header from "../components/common/Header";
 import { motion } from "framer-motion";
 import StatCard from "../components/common/StatCard";

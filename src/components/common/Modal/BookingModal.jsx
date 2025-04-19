@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const BookingModal = ({ isOpen, onClose, car }) => {
   const { user } = useSelector((state) => state.auth);
@@ -21,7 +22,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
 
   const pickUpDate = watch("pickUpDate");
   const returnDate = watch("returnDate");
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (isOpen && user?.email) {
       axiosSecure.get(`/user-info/${user.email}`).then((response) => {
@@ -81,6 +82,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         confirmButtonText: "OK",
       }).then(() => {
         onClose();
+        navigate("/dashboard/my-bookings");
       });
     } catch (error) {
       console.error("Failed to book:", error);

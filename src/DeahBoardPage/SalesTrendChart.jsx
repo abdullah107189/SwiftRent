@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -10,34 +9,17 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import useAxiosSecure from '../hooks/useAxiosSecure';
 
-// const salesData = [
-//   { month: 'Jan', sales: 4000 },
-//   { month: 'Feb', sales: 3000 },
-//   { month: 'Mar', sales: 5000 },
-//   { month: 'Apr', sales: 4500 },
-//   { month: 'May', sales: 6000 },
-//   { month: 'Jun', sales: 5500 },
-// ];
+const salesData = [
+  { month: 'Jan', sales: 4000 },
+  { month: 'Feb', sales: 3000 },
+  { month: 'Mar', sales: 5000 },
+  { month: 'Apr', sales: 4500 },
+  { month: 'May', sales: 6000 },
+  { month: 'Jun', sales: 5500 },
+];
 
 const SalesTrendChart = () => {
-const axiosSecure = useAxiosSecure();
-const [salesData, setSalesData] = useState([]);
-
-useEffect(() => {
-  const fetchSalesData = async () => {
-    try {
-      const response = await axiosSecure.get("/monthly-sales");
-      setSalesData(response.data);
-    } catch (error) {
-      console.error("Error fetching sales data:", error);
-    }
-  };
-
-  fetchSalesData();
-}, []);
-
   return (
     <motion.div
       className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700"

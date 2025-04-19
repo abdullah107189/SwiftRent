@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { FaCommentDots } from "react-icons/fa";
 import LiveChat from "./liveChat/LiveChat";
 import useUserRole from "../hooks/useUserRole";
+
 const ChatLauncher = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [role] = useUserRole();
 
-  if (role === "Admin") {
+  if (role !== "customer") {
     return null;
   }
 

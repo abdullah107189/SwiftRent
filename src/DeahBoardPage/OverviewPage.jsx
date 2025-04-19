@@ -1,56 +1,23 @@
-import { useEffect, useState } from "react"; // Import useState and useEffect
-import Header from "../components/common/Header";
-import { motion } from "framer-motion";
-import StatCard from "../components/common/StatCard";
-import { BarChart, ShoppingCart, Users, Zap } from "lucide-react";
-import SalesOverviewChart from "../components/common/SalesOverviewChart";
-import CategoryDistributionChart from "../components/common/CategroyDistributionChart";
-import SalesChannelChart from "../components/common/SalesChannelChart";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useEffect, useState } from 'react'; // Import useState and useEffect
+import Header from '../components/common/Header';
+import { motion } from 'framer-motion';
+import StatCard from '../components/common/StatCard';
+import { BarChart, ShoppingCart, Users, Zap } from 'lucide-react';
+import SalesOverviewChart from '../components/common/SalesOverviewChart';
+import CategoryDistributionChart from '../components/common/CategroyDistributionChart';
+import SalesChannelChart from '../components/common/SalesChannelChart';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const OverviewPage = () => {
   const axiosSecure = useAxiosSecure();
 
   // Define state for storing all users
   const [allUser, setAllUser] = useState([]);
-  const [cars, setCars] = useState([]);
-  const [bookings, setBookings] = useState([]);
-  const [conversion, setConversion] = useState([]);
 
   const fetchAllUsers = async () => {
     try {
-      const response = await axiosSecure.get("/all-user");
+      const response = await axiosSecure.get('/all-user');
       setAllUser(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // all cars
-  const fetchAllCsers = async () => {
-    try {
-      const response = await axiosSecure.get("/all-cars");
-      setCars(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // all booking
-  const fetchAllBookings = async () => {
-    try {
-      const response = await axiosSecure.get("/all-booking");
-      setBookings(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // conversion-rate
-  const fetchConversionRate = async () => {
-    try {
-      const response = await axiosSecure.get("/conversion-rate");
-      setConversion(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -58,9 +25,6 @@ const OverviewPage = () => {
 
   useEffect(() => {
     fetchAllUsers();
-    fetchAllCsers();
-    fetchAllBookings();
-    fetchConversionRate();
   }, []);
 
   return (
@@ -74,9 +38,9 @@ const OverviewPage = () => {
           transition={{ duration: 1 }}
         >
           <StatCard
-            name="Total Cars"
+            name="Total Sales"
             icon={Zap}
-            value={cars.length}
+            value="$12,345"
             color="#6366F1"
           />
           <StatCard
@@ -86,15 +50,15 @@ const OverviewPage = () => {
             color="#BB5CF6"
           />
           <StatCard
-            name="Total Booking"
+            name="Total Orders"
             icon={ShoppingCart}
-            value={bookings?.length}
+            value="54223"
             color="#EC4899"
           />
           <StatCard
             name="Conversion Rate"
             icon={BarChart}
-            value={`${conversion.conversionRate}`}
+            value="12.34%"
             color="#10B981"
           />
         </motion.div>

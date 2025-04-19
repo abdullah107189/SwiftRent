@@ -1,86 +1,48 @@
-import { FaCar } from 'react-icons/fa';
-import Header from '../../../components/common/Header';
-import { useEffect, useState } from 'react';
-import useAxiosPublic from '../../../hooks/useAxiosPublic';
-import { Link, useNavigate } from 'react-router-dom';
-import BookingModal from '../../../components/common/Modal/BookingModal';
-
-
-// const cars = [
-//   {
-//     id: 1,
-//     name: 'Toyota Corolla',
-//     price: '$50/day',
-//     img: 'https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8Y2FyfGVufDB8fDB8fHww',
-//   },
-//   {
-//     id: 2,
-//     name: 'Honda Civic',
-//     price: '$55/day',
-//     img: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FyfGVufDB8fDB8fHww',
-//   },
-//   {
-//     id: 3,
-//     name: 'BMW X5',
-//     price: '$120/day',
-//     img: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNhcnxlbnwwfHwwfHx8MA%3D%3D',
-//   },
-//   {
-//     id: 4,
-//     name: 'Tesla Model 3',
-//     price: '$100/day',
-//     img: 'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNhcnxlbnwwfHwwfHx8MA%3D%3D',
-//   },
-// ];
-
+/* eslint-disable no-unused-vars */
+import { FaCar } from "react-icons/fa";
+import Header from "../../../components/common/Header";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { Link, useNavigate } from "react-router-dom";
+import BookingModal from "../../../components/common/Modal/BookingModal";
 
 const BrowseCars = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
   const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedCar, setSelectedCar] = useState(null);
-
+  const [selectedCar, setSelectedCar] = useState(null);
 
   const navigate = useNavigate();
-  
-  const {_id,
-       name,
-       image,
-       brand,
-       price}=cars
 
-
-   const handleBookNow = (car) => {
+  const handleBookNow = (car) => {
     setSelectedCar(car);
     setIsModalOpen(true);
-   };
-  
-   
+  };
 
-    useEffect(() => {
-      axiosPublic
-        .get("/all-cars")
-        .then((res) => {
-          setCars(res.data);
-          // const selected = res.data.find(item => item._id === id);
-          // setExpert(selected);
-        })
-        .catch((err) => console.error("Error fetching expert:", err))
-        .finally(() => setLoading(false));
-    }, [axiosPublic]);
-  
-    if (loading)
-      return <p className="text-center mt-10 text-white">Loading...</p>;
-  
-    // Fallback if expert is not found
-    if (!cars) {
-      return (
-        <p className="text-center mt-10 text-orange-500 font-semibold">
-          Expert not found.
-        </p>
-      );
-    }
+  useEffect(() => {
+    axiosPublic
+      .get("/all-cars")
+      .then((res) => {
+        setCars(res.data);
+        // const selected = res.data.find(item => item._id === id);
+        // setExpert(selected);
+      })
+      .catch((err) => console.error("Error fetching expert:", err))
+      .finally(() => setLoading(false));
+  }, [axiosPublic]);
+
+  if (loading)
+    return <p className="text-center mt-10 text-white">Loading...</p>;
+
+  // Fallback if expert is not found
+  if (!cars) {
+    return (
+      <p className="text-center mt-10 text-orange-500 font-semibold">
+        Expert not found.
+      </p>
+    );
+  }
   return (
     <>
       <Header title="Browse Cars" />
@@ -88,7 +50,7 @@ const BrowseCars = () => {
         <h1 className="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center gap-2">
           <FaCar className="text-white" /> Browse Cars
         </h1>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {cars.map((car) => (
             <div
               key={car.id}
@@ -104,7 +66,7 @@ const BrowseCars = () => {
                 <p className="text-white">{car.price}</p>
                 <div className="md:flex md:justify-between">
                   <Link
-                    to={`/car-details/${cars._id}`}
+                    to={`/car-details/${car._id}`}
                     className="mt-3 px-4 py-2 fillBtn"
                   >
                     View Details

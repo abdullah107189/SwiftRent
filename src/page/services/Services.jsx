@@ -13,6 +13,7 @@ import { FaSearch } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import ChatLauncher from "../../components/ChatLauncher";
 
 const Services = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -410,6 +411,7 @@ const Services = () => {
       <BookAuto />
       <OtherServices />
       <CarPromoVideo />
+      <ChatLauncher />
     </div>
   );
 };

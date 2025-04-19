@@ -9,6 +9,7 @@ import InterestedRenting from "./interestedRenting/InterestedRenting";
 import AboutContact from "./aboutContact/AboutContact";
 import AboutFlag from "./aboutFlag/AboutFlag";
 import { Helmet } from "react-helmet-async";
+import ChatLauncher from "../../components/ChatLauncher";
 
 const About = () => {
   return (
@@ -34,6 +35,7 @@ const About = () => {
         <InterestedRenting />
         <AboutFlag />
         <AboutContact />
+        <ChatLauncher />
       </div>
     </div>
   );

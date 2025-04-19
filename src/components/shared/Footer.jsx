@@ -1,7 +1,7 @@
 // import React from "react";
-import { CiFacebook, CiTwitter } from 'react-icons/ci';
-import { FaLinkedin, FaWhatsapp } from 'react-icons/fa';
-import { RiLinkedinLine } from 'react-icons/ri';
+import { CiFacebook, CiTwitter } from "react-icons/ci";
+import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { RiLinkedinLine } from "react-icons/ri";
 
 const Footer = () => {
   return (
@@ -109,9 +109,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="text-left text-[12px] mt-10 border-t border-[#222222] pt-4">
+        <div className="text-center text-[12px] mt-10 border-t border-[#222222] pt-4">
           <p className="mt-8 text-[#999]">
-            © {new Date().getFullYear()} RENAX. All rights reserved.
+            © {new Date().getFullYear()} SwiftRent. All rights reserved.
           </p>
         </div>
       </footer>

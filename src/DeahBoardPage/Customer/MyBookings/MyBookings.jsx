@@ -81,17 +81,24 @@ const MyBookings = () => {
                       <button
                         onClick={() => handlePayment(booking._id)}
                         disabled={
+                          booking.tripStatus !== "Started" ||
                           booking.paymentStatus === "Success" ||
                           payLoadingId === booking._id
                         }
                         className={`px-4 py-1 rounded ${
                           booking.paymentStatus === "Success"
                             ? "bg-green-500 text-white cursor-not-allowed"
+                            : booking.tripStatus !== "Started"
+                            ? "bg-gray-400 text-white cursor-not-allowed"
                             : "bg-[#f5b754] text-black hover:bg-[#e0a33d]"
                         } ${payLoadingId === booking._id ? "opacity-50" : ""}`}
                       >
                         {booking.paymentStatus === "Success"
                           ? "Paid"
+                          : booking.driver === "Not Assigned"
+                          ? "Driver Not Assigned"
+                          : booking.tripStatus !== "Started"
+                          ? "Waiting for Trip to Start"
                           : payLoadingId === booking._id
                           ? "Processing…"
                           : "Pay Now"}

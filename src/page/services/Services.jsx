@@ -17,7 +17,6 @@ import ChatLauncher from "../../components/ChatLauncher";
 
 const Services = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
 
   const [filterBrand, setFilterBrand] = useState([]);
   const [carType, setCarType] = useState([]);
@@ -32,7 +31,7 @@ const Services = () => {
   const axiosPublic = useAxiosPublic();
 
   const { cars, isFetching } = useGetCars({
-    search: searchQuery,
+    search: searchInput,
     filter: allFilter,
     sortOption: sortOption,
   });
@@ -191,12 +190,6 @@ const Services = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   className="w-full p-2 mb-2 block bg-[#222222] text-gray-400 border border-gray-600 rounded-full focus:outline-none focus:ring-0"
                 />
-                <button
-                  onClick={() => setSearchQuery(searchInput)}
-                  className="cursor-pointer hover:bg-white/10 p-[10px] rounded-full absolute right-1  sBgBlack top-1/2 transform -translate-y-1/2 orange"
-                >
-                  <FaSearch />
-                </button>
               </div>
 
               {/* Brand Filter */}

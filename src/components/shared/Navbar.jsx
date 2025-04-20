@@ -1,5 +1,5 @@
 import { Menu, ChevronRight } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/default-avatar.png";
@@ -14,18 +14,32 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const location = useLocation();
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 50 || location.pathname.includes("expert")) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    switch (location.pathname.includes) {
+      case "car-details":
+        setIsScrolled(true);
+        break;
+      case "expert":
+        setIsScrolled(true);
+        break;
+
+      default:
+        setIsScrolled(false);
+    }
+  }, [location.pathname]);
 
   const handleLogout = () => {
     dispatch(logoutUser())
@@ -188,7 +202,7 @@ const Navbar = () => {
           </span>
         </NavLink>
         <div className="hidden md:flex items-center my-3 gap-4">
-          <ul className="px-1 flex gap-4">{navOptions}</ul>
+          <ul className="px-1 flex items-center gap-4">{navOptions}</ul>
         </div>
         <div className="md:hidden flex items-center gap-4">
           <button

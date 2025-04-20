@@ -20,7 +20,7 @@ const NameCard = ({ name, image, number }) => {
       </h2>
       {/* under number and rounded style  */}
       <div className="flex items-center absolute bottom-0 left-0">
-        <div className="relative p-4 rounded-[0_40px_0_0] fBgBlack bg-[#f8f9fa]">
+        <div className="relative p-4 rounded-[0_40px_0_0] fBgBlack">
           <div className="w-[60px] h-[60px] leading-[60px] border-1 border-[#F5B754] bg-transparent rounded-full overflow-hidden  dark:text-white font-bold text-[14px] text-center group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
             {number ? (
               number

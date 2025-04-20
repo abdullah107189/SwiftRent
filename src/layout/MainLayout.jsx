@@ -23,7 +23,7 @@ const MainLayout = () => {
   }, []);
   return (
     <div>
-      <ScrollRestoration />
+      {/* <ScrollRestoration /> */}
       <Navbar></Navbar>
       <div>
         <Outlet></Outlet>

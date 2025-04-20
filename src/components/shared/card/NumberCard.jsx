@@ -17,7 +17,7 @@ const NumberCard = ({ _id, name, image, number, brand, price }) => {
   };
 
   return (
-    <div className="relative w-full h-[420px] rounded-3xl overflow-hidden group dark:border border-[#222222] shadow-lg dark:shadow-gray-900">
+    <div className="relative w-full h-[420px] rounded-3xl overflow-hidden group dark:border border-[#999]/20 shadow-lg dark:shadow-gray-900">
       {/* Image Section */}
       <div className="relative w-full h-[65%] rounded-t-3xl overflow-hidden transition-transform duration-300 hover:scale-100">
         <img

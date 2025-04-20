@@ -251,7 +251,7 @@ const Services = () => {
                         onChange={() =>
                           handleChange(fuel, fuelType, setFuelType)
                         }
-                        className="accent-[#F5B754] cursor-pointer"
+                        className="accent-[#F5B754] cursor-pointer p-3"
                       />
                       {fuel}
                     </label>
@@ -280,7 +280,7 @@ const Services = () => {
                     placeholder="Max Price"
                     value={priceRange.max}
                     onChange={handlePriceChange}
-                    className="p-2 w-full dark:border border-gray-300 rounded focus:outline-none focus:ring-2 focus:text-[#f5b754]"
+                    className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:text-[#f5b754]"
                   />
                 </div>
               </div>

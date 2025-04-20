@@ -73,7 +73,7 @@ const ExpertDetails = () => {
           content={`Learn more about ${expert?.name}, a skilled expert at SwiftRent. Discover their qualifications, experience, and expertise in the field.`}
         />
       </Helmet>
-      <div className="">
+      <div className="pt-5">
         <div className="min-h-screen flex items-center justify-center py-10">
           <div className="mxw w-full flex flex-col md:flex-row gap-8 px-4">
             {/* Left Section: Image and Contact */}

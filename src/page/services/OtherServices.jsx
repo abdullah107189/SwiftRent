@@ -32,7 +32,7 @@ const OtherServices = () => {
   return (
     <div className="mb-15">
       <div className="flex flex-col justify-center items-center mt-24 ">
-        <p className="text-[12px] text-[#F5B754] uppercase tracking-wide">
+        <p className="text-[12px] orange uppercase tracking-wide">
           {letters}
         </p>
         <h2 className="text-3xl font-bold text-[42px] mt-4">Other Services</h2>

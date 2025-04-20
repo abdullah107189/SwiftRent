@@ -34,8 +34,8 @@ const Login = () => {
           <div className="mb-6 text-center">
             <h1 className="my-3 text-4xl font-bold">
               <span className="font-black text-white">
-                <span className="text-[#f5b754]">S</span>wift
-                <span className="text-[#f5b754]">R</span>ent
+                <span className="orange">S</span>wift
+                <span className="orange">R</span>ent
               </span>
             </h1>
             <p className="text-gray-200">Welcome back!</p>
@@ -99,7 +99,7 @@ const Login = () => {
               <div className="text-right">
                 <Link
                   to="/forget-password"
-                  className="text-sm hover:underline text-[#f5b754]"
+                  className="text-sm hover:underline orange"
                 >
                   Forgot password?
                 </Link>

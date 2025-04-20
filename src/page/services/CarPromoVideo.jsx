@@ -12,11 +12,11 @@ function CarPromoVideo() {
         style={{ backgroundImage: `url(${CarPromo})` }}
       ></div>
       <div className="relative z-10 text-center text-white flex flex-col items-center justify-center">
-        <p className="text-[#F5B754] text-[10px] uppercase tracking-wide">
+        <p className="orange text-[10px] uppercase tracking-wide">
           E x p l o r e
         </p>
         <h1 className="text-3xl font-bold">
-          Car <span className="text-[#F5B754]">Promo</span> Video
+          Car <span className="orange">Promo</span> Video
         </h1>
         <div
           className="mt-6 w-16 h-16 flex items-center justify-center border-1 border-[#F5B754] rounded-full cursor-pointer hover:scale-110 transition-transform"

@@ -7,7 +7,7 @@ export default function AboutCard({ review }) {
     <div className="relative max-w-[380px]  p-[60px_40px_0_40px] rounded-[20px_20px_20px_0] sBgBlack ">
       {/* content  */}
       <div>
-        <div className=" absolute top-0 right-0  bg-[#1b1b1b] w-25 h-12  rounded-bl-2xl items-center justify-center flex">
+        <div className=" absolute top-0 right-0  fBgBlack w-25 h-12  rounded-bl-2xl items-center justify-center flex">
           <h1 className="orange text-md flex " >
             {[...Array(3)].map((_, index) => (
               <FaStar key={index} className="orange text-md" />
@@ -22,7 +22,7 @@ export default function AboutCard({ review }) {
 
       {/* under number and rounded style  */}
       <div className="flex items-center  -ml-10">
-        <div className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b]">
+        <div className="relative p-4 rounded-[0_40px_0_0] fBgBlack">
           <div className="w-[60px] h-[60px] leading-[60px] rounded-full overflow-hidden bg-[#222]  text-white font-bold text-[14px] text-center border border-[#222]">
             <img
               src="https://i.ibb.co.com/8nk54NXD/a96c092f-1297-4e93-8376-6c8bc2d16222.jpg"

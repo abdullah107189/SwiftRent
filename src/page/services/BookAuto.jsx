@@ -76,7 +76,7 @@ function BookAuto() {
       ></div>
       <div className="absolute inset-0 bg-black/70"></div>
       <div className="relative z-10 text-center text-white px-4">
-        <p className="text-[#F5B754] text-xs uppercase tracking-wide mb-2">
+        <p className="orange text-xs uppercase tracking-wide mb-2">
           R e n t N o w
         </p>
         <h1 className="text-4xl font-extrabold drop-shadow-lg">
@@ -119,7 +119,7 @@ function BookAuto() {
               className="bg-transparent text-white px-4 py-2 border border-white/30 rounded-full focus:outline-none w-full"
             />
             <span
-              className="absolute right-3 top-3 cursor-pointer text-[#F5B754]"
+              className="absolute right-3 top-3 cursor-pointer orange"
               onClick={handlePickUpClick}
             >
               <FaCalendarAlt />
@@ -161,7 +161,7 @@ function BookAuto() {
               className="bg-transparent text-white px-4 py-2 border border-white/30 rounded-full focus:outline-none w-full"
             />
             <span
-              className="absolute right-3 top-3 cursor-pointer text-[#F5B754]"
+              className="absolute right-3 top-3 cursor-pointer orange"
               onClick={handleReturnClick}
             >
               <FaCalendarAlt />

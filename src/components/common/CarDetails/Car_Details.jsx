@@ -90,7 +90,7 @@ const CarDetails = () => {
       {/* Right: Car Info */}
       <div className="space-y-6 p-6 rounded-xl shadow-lg">
         <h2 className="text-3xl font-bold">{car.name}</h2>
-        <div className="flex items-center gap-1 text-[#f5b754]">
+        <div className="flex items-center gap-1 orange">
           {Array(5)
             .fill()
             .map((_, i) => (
@@ -119,7 +119,7 @@ const CarDetails = () => {
             <strong>Fuel:</strong> {car.fuel}
           </p>
           <p className="flex items-center gap-2">
-            <FaMapMarkerAlt className="text-[#f5b754]" />
+            <FaMapMarkerAlt className="orange" />
             <span>
               <strong>City:</strong> {car.location?.city}
             </span>

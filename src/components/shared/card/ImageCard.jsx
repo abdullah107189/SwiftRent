@@ -20,25 +20,24 @@ const ImageCard = ({ name, image, number }) => {
       {/* Under number and rounded style */}
       <div className="flex items-center absolute bottom-0 left-0">
         <div
-          className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b] cursor-pointer"
+          className=" relative p-4 rounded-[0_40px_0_0] fBgBlack bg-[#f8f9fa] cursor-pointer"
           onClick={() => setIsVideoOpen(true)}
         >
-          <div className="w-[60px] h-[60px] flex items-center justify-center border border-[#F5B754] bg-transparent rounded-full text-white font-bold text-[14px] text-center group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
+          <div className="w-[60px] h-[60px] flex items-center justify-center border border-[#F5B754] bg-transparent rounded-full dark:text-white font-bold text-[14px] text-center group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
             {number ? number : <FaPlay className="text-lg" />}
           </div>
+
           <div className="absolute -top-[19px] -left-[4px] rotate-[-90deg]">
             <svg
               viewBox="0 0 11 11"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-5"
+              className="w-6 h-5 fill-current text-[#f8f9fa] dark:text-[#1b1b1b]"
             >
-              <path
-                d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                fill="#1b1b1b"
-              ></path>
+              <path d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"></path>
             </svg>
           </div>
+
           <div className="absolute -bottom-[2px] -right-[22px] rotate-[-90deg]">
             <svg
               viewBox="0 0 11 11"
@@ -48,7 +47,7 @@ const ImageCard = ({ name, image, number }) => {
             >
               <path
                 d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                fill="#1b1b1b"
+                className="w-6 h-5 fill-current text-[#f8f9fa] dark:text-[#1b1b1b]"
               ></path>
             </svg>
           </div>

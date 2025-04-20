@@ -39,8 +39,8 @@ const Dashboard = () => {
             <div className="flex justify-between items-center mb-5">
               <NavLink to="/" className="">
                 <span className="text-3xl font-black text-white">
-                  <span className="text-[#f5b754]">S</span>wift
-                  <span className="text-[#f5b754]">R</span>ent
+                  <span className="orange">S</span>wift
+                  <span className="orange">R</span>ent
                 </span>
               </NavLink>
               {/* closing button for small devices  */}

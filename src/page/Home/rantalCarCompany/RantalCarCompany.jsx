@@ -11,7 +11,7 @@ const car = [
 
 export default function RentalCarCompany() {
   return (
-    <div className="text-white py-5 md:py-15 lg:py-20">
+    <div className="dark:text-white py-5 md:py-15 lg:py-20">
       <div className="grid grid-cols-1 md:grid-cols-2 items-center max-w-7xl mx-auto gap-12 lg:gap-28">
         {/* Left Content Section */}
         <div className="space-y-6 text-center md:text-left">
@@ -22,7 +22,7 @@ export default function RentalCarCompany() {
             We Are More Than <br />
             <span className="text-[#E8A743]">A Car Rental Company</span>
           </h1>
-          <p className="text-gray-400 leading-relaxed text-sm md:text-base">
+          <p className="tBlack leading-relaxed text-sm md:text-base">
             Car repair quisuqe sodales dui ut varius vestibulum drana tortor
             turpis portition tellus.
           </p>
@@ -39,7 +39,6 @@ export default function RentalCarCompany() {
                 <IoMdCheckmark />
               </span>
               Economy Cars
-              
             </li>
           </ul>
           <div className="flex justify-center md:justify-start">
@@ -47,7 +46,7 @@ export default function RentalCarCompany() {
               className="fillBtn transition-all  duration-300 
   hover:-translate-y-1.5 "
             >
-              Read  More →
+              Read More →
             </button>
           </div>
         </div>

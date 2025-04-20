@@ -69,7 +69,7 @@ const Sidebar = ({ userRole }) => {
             className={({ isActive }) =>
               `flex items-center gap-3 p-3 rounded-lg transition my-2 ${
                 isActive
-                  ? "text-[#f5b754] bg-[#f5b754]/10"
+                  ? "orange bg-[#f5b754]/10"
                   : "hover:bg-[#f5b754]/10"
               }`
             }

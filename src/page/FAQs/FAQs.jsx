@@ -29,14 +29,14 @@ const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-[#222222] p-5 rounded-xl shadow-md transition-all duration-300">
+    <div className="sBgBlack p-5 rounded-xl shadow-md transition-all duration-300">
       <div
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-between items-center cursor-pointer"
       >
         <h3 className="text-lg font-medium orange">{question}</h3>
         <FaChevronDown
-          className={`text-[#f5b754] transition-transform duration-300 ${
+          className={`orange transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/default-avatar.png";
 import { logoutUser } from "../../redux/auth/authSlice";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
@@ -44,10 +45,14 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+            `font-bold hover:orange hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
               isActive
-                ? "text-[#f5b754] bg-transparent"
-                : "text-white bg-transparent"
+                ? "orange bg-transparent"
+                : `${
+                    isScrolled
+                      ? "dark:text-white bg-transparent"
+                      : "dark:text-white text-white bg-transparent"
+                  }`
             }`
           }
           onClick={() => setIsMenuOpen(false)}
@@ -60,10 +65,14 @@ const Navbar = () => {
           <NavLink
             to={`/${item.toLowerCase()}`}
             className={({ isActive }) =>
-              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+              `font-bold hover:orange hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
                 isActive
-                  ? "text-[#f5b754] bg-transparent"
-                  : "text-white bg-transparent"
+                  ? "orange bg-transparent"
+                  : `${
+                      isScrolled
+                        ? "dark:text-white bg-transparent"
+                        : "dark:text-white text-white bg-transparent"
+                    }`
               }`
             }
           >
@@ -76,7 +85,7 @@ const Navbar = () => {
           {/* Dropdown on desktop, direct menu on mobile */}
           <li className="relative md:block hidden">
             {/* using daisy ui  */}
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end relative">
               <div tabIndex={0} role="button" className="cursor-pointer avatar">
                 <div className="w-8 rounded-full">
                   <img
@@ -88,7 +97,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content border-[#f5b754]/10 border fBgBlack rounded-box z-1 mt-3 w-40 p-2 shadow"
+                className="menu menu-sm dropdown-content border-[#f5b754]/10 border sBgBlack rounded-box z-1 mt-3 w-40 p-2 shadow"
               >
                 <li>
                   <NavLink
@@ -109,6 +118,9 @@ const Navbar = () => {
                     Logout
                   </button>
                 </li>
+                <li>
+                  <ThemeToggle></ThemeToggle>
+                </li>
               </ul>
             </div>
           </li>
@@ -117,10 +129,14 @@ const Navbar = () => {
             <NavLink
               to="/dashboard"
               className={({ isActive }) =>
-                `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                `font-bold hover:orange hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
                   isActive
-                    ? "text-[#f5b754] bg-transparent"
-                    : "text-white bg-transparent"
+                    ? "orange bg-transparent"
+                    : `${
+                        isScrolled
+                          ? "dark:text-white bg-transparent"
+                          : "dark:text-white text-white bg-transparent"
+                      }`
                 }`
               }
             >
@@ -128,9 +144,12 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="md:hidden" onClick={handleLogout}>
-            <button className="font-bold text-white hover:text-[#f5b754] px-3 py-2 bg-transparent w-full text-center">
+            <button className="font-bold text-white hover:orange px-3 py-2 bg-transparent w-full text-center">
               Logout
             </button>
+          </li>
+          <li className="md:hidden">
+            <ThemeToggle></ThemeToggle>
           </li>
         </>
       ) : (
@@ -138,10 +157,14 @@ const Navbar = () => {
           <NavLink
             to="/login"
             className={({ isActive }) =>
-              `font-bold hover:text-[#f5b754] hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+              `font-bold hover:orange hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
                 isActive
-                  ? "text-[#f5b754] bg-transparent"
-                  : "text-white bg-transparent"
+                  ? "orange bg-transparent"
+                  : `${
+                      isScrolled
+                        ? "dark:text-white bg-transparent"
+                        : "dark:text-white text-white bg-transparent"
+                    }`
               }`
             }
           >
@@ -159,9 +182,9 @@ const Navbar = () => {
     >
       <div className="mxw flex justify-between items-center">
         <NavLink to="/" className="flex items-center">
-          <span className="text-3xl font-black text-white">
-            <span className="text-[#f5b754]">S</span>wift
-            <span className="text-[#f5b754]">R</span>ent
+          <span className="text-3xl font-black dark:text-white">
+            <span className="orange">S</span>wift
+            <span className="orange">R</span>ent
           </span>
         </NavLink>
         <div className="hidden md:flex items-center my-3 gap-4">
@@ -172,14 +195,14 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(true)}
             className="p-2 rounded-full hover:bg-[#f5b754] transition duration-300"
           >
-            <Menu className="h-6 w-6 text-white" />
+            <Menu className="h-6 w-6 dark:text-white" />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed top-0 md:hidden right-0 h-full w-1/2 bg-[#1b1b1b] bg-opacity-95 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-transform duration-300 transform translate-x-0">
+        <div className="fixed top-0 md:hidden right-0 h-full w-1/2 fBgBlack bg-opacity-95 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-transform duration-300 transform translate-x-0">
           <button
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-6 left-6 p-2 rounded-full bg-white hover:bg-[#f5b754] transition duration-300"

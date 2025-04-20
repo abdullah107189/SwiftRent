@@ -3,14 +3,14 @@ const ContactForm = () => {
     <section className="mxw mx-auto px-4 pb-16 grid grid-cols-1 md:grid-cols-2 gap-14 mb-10">
       {/* Left Side - Get in Touch */}
       <div className="space-y-6">
-        <h2 className=" text-xl pb-4 sm:text-3xl text-center  text-[#FFFFFF] font-bold">
+        <h2 className=" text-xl pb-4 sm:text-3xl text-center  dark:text-[#FFFFFF] text-black font-bold">
           Get in Touch
         </h2>
         <form className="space-y-6 ">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 pb-2">
             <input
               type="text"
-              className="w-full  p-4 block bg-[#222222] text-gray-400 border-none rounded-full focus:outline-none focus:ring-0"
+              className="w-full  p-4 block bg-[#222222]  text-gray-400  border-none rounded-full focus:outline-none focus:ring-0"
               placeholder="Your Name *"
               required
             />
@@ -59,7 +59,7 @@ const ContactForm = () => {
       <div className=" py-2">
         <div className="h-[350px] sm:h-[420px]">
           <h2 className=" text-xl pb-4 sm:text-3xl text-center  text-[#FFFFFF] font-bold">
-            {' '}
+            {" "}
             Location
           </h2>
           <iframe

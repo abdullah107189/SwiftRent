@@ -19,7 +19,7 @@ export default function RentalCarTypesCard({ car }) {
 
       {/* Bottom Left Icon Button (Black Circle with Golden Border) */}
       <div className="absolute bottom-3 left-4 flex items-center justify-center w-12 h-12 bg-black border-2 border-[#F5B754] rounded-full shadow-lg">
-        <MdArrowOutward size={24} className="text-[#F5B754]" />
+        <MdArrowOutward size={24} className="orange" />
       </div>
 
       {/* Custom Rounded Bottom Right Corner */}

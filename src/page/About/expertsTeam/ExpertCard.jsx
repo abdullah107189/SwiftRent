@@ -20,32 +20,36 @@ const ExpertCard = ({ expert }) => {
 
       {/* Bottom Info */}
       <div className="flex items-center absolute bottom-0 left-0">
-        <div className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b]">
-          <div className="w-[60px] h-[60px] flex items-center justify-center border border-[#F5B754] bg-transparent rounded-full text-white font-bold text-[14px] text-center group-hover:bg-[#F5B754] group-hover:text-[#1b1b1b]">
+        <div className="relative p-4 rounded-[0_40px_0_0] fBgBlack">
+          <div className="w-[60px] h-[60px] flex items-center justify-center border border-[#F5B754] bg-transparent rounded-full dark:text-white font-bold text-[14px] text-center group-hover:bg-[#F5B754] dark:group-hover:text-[#1b1b1b] group-hover:text-[#f8f9fa]">
             <FaInfo className="text-lg" />
           </div>
-          <div className="absolute -top-[19px] -left-[4px] rotate-[-90deg]">
+          <div className="absolute -top-[20px] -left-[4px] rotate-[-90deg]">
             <svg
               viewBox="0 0 11 11"
-              className="w-6 h-5"
+              className="w-6 h-5 fill-current text-[#f8f9fa] dark:text-[#1b1b1b]"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M11 0L0 0L0 11C0 4.92 4.92 0 11 0Z" fill="#1b1b1b" />
+              <path d="M11 0L0 0L0 11C0 4.92 4.92 0 11 0Z" />
             </svg>
           </div>
-          <div className="absolute -bottom-[2px] -right-[22px] rotate-[-90deg]">
+          <div className="absolute -bottom-[0px] -right-[22px] rotate-[-90deg]">
             <svg
               viewBox="0 0 11 11"
-              className="w-6 h-6"
+              className="w-6 h-5 fill-current text-[#f8f9fa] dark:text-[#1b1b1b]"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M11 0L0 0L0 11C0 4.92 4.92 0 11 0Z" fill="#1b1b1b" />
+              <path d="M11 0L0 0L0 11C0 4.92 4.92 0 11 0Z" />
             </svg>
           </div>
         </div>
         <div className="ml-4">
-          <h1 className="text-xl font-semibold">{expert?.name}</h1>
-          <p className="text-sm tBlack">{expert?.role}</p>
+          <h1 className="text-xl text-[#f8f9fa]/90 font-semibold">
+            {expert?.name}
+          </h1>
+          <p className="text-sm dark:tBlack text-[#f8f9fa]/60">
+            {expert?.role}
+          </p>
         </div>
       </div>
     </Link>

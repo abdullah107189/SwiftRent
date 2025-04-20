@@ -17,7 +17,7 @@ const CarParallax = () => {
         <div className=" w-96 mx-auto">
           <div className="space-y-2 text-center">
             {/* Title */}
-            <p className="text-xl text-[#F5B754] uppercase tracking-wide text-center">
+            <p className="text-xl orange uppercase tracking-wide text-center">
               {letters}
             </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold text-center">

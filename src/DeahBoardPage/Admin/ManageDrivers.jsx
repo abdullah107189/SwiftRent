@@ -164,7 +164,7 @@ const ManageDrivers = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     <button
                       onClick={() => handelUserDelete(u._id)}
-                      className="text-[#f5b754] hover:text-red-300 cursor-pointer"
+                      className="orange hover:text-red-300 cursor-pointer"
                     >
                       <FaRegTrashAlt />
                     </button>

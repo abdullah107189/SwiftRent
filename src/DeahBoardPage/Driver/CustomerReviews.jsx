@@ -29,7 +29,7 @@ const CustomerReviews = () => {
     <>
       <Header title="Customer Reviews" />
       <div className="max-w-5xl mx-auto px-4 py-10">
-        <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2">
+        <h2 className="text-3xl font-bold text-center orange mb-8 flex items-center justify-center gap-2">
           <FaStar /> Customer Reviews
         </h2>
 

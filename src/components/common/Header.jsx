@@ -17,7 +17,7 @@ const Header = ({ title }) => {
               class="relative inline-flex items-center justify-center w-10 h-10  text-white rounded-full bg-[#f5b754]"
             >
               <IoIosNotificationsOutline className="text-2xl sm:text-3xl text-white" />
-              <span class="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-[#f5b754] bg-[#222121] px-1.5 text-sm text-[#f5b754]">
+              <span class="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-[#f5b754] bg-[#222121] px-1.5 text-sm orange">
                 7
               </span>
             </a>

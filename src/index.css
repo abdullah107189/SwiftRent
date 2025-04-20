@@ -81,7 +81,7 @@ body {
   }
 
   .fillBtn {
-    @apply bg-[#f5b754] hover:bg-[#212529] text-white  lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transform duration-300 cursor-pointer;
+    @apply bg-[#f5b754] hover:bg-[#212529] text-[#f8f9fa]   lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transform duration-300 cursor-pointer;
   }
 
   .outlineBtn {

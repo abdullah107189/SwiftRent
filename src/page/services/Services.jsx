@@ -133,14 +133,14 @@ const Services = () => {
       <div className="relative">
         {/* cars count and sort */}
         <div className=" mxw flex justify-between items-center rounded-lg mt-16 md:sticky fBgBlack md:top-12 md:z-10">
-          <h2 className="dark:text-white text-2xl my-2 font-bold">
+          <h2 className="dark: text-2xl my-2 font-bold">
             {cars.length || 0} Results for Cars
           </h2>
 
           <div className="flex items-center gap-4 text-[12px] px-2">
             {/* Sorting Dropdown */}
             <select
-              className="sBgBlack dark:text-white p-2 rounded-3xl cursor-pointer "
+              className="sBgBlack dark: p-2 rounded-3xl cursor-pointer "
               onChange={(e) => {
                 const selected = e.target.value;
                 if (selected === sortOption) return;
@@ -156,7 +156,7 @@ const Services = () => {
             {/* Filter */}
             <button
               onClick={() => setShowFilter(true)}
-              className="md:hidden flex items-center gap-2 sBgBlack dark:text-white px-3 py-2 rounded cursor-pointer"
+              className="md:hidden flex items-center gap-2 sBgBlack dark: px-3 py-2 rounded cursor-pointer"
             >
               <IoFilter size={20} />
               Filter
@@ -177,7 +177,7 @@ const Services = () => {
               {/* Close Button (Only for small screens) */}
               <button
                 onClick={() => setShowFilter(false)}
-                className="absolute top-4 right-4 dark:text-white md:hidden cursor-pointer"
+                className="absolute top-4 right-4 dark: md:hidden cursor-pointer"
               >
                 <X size={24} />
               </button>
@@ -383,7 +383,7 @@ const Services = () => {
                       />
                     ))
                   ) : (
-                    <p className="dark:text-white text-center col-span-full text-2xl">
+                    <p className="dark: text-center col-span-full text-2xl">
                       No car available
                     </p>
                   )}

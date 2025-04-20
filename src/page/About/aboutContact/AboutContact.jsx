@@ -4,7 +4,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 export default function AboutContact() {
   return (
     <div className="sBgBlack py-10 flex justify-center px-4">
-      <div className="dark:text-white border rounded-lg flex flex-col md:flex-row border-[#1b1b1b] w-full mxw">
+      <div className="dark:border rounded-lg flex flex-col md:flex-row border-[#1b1b1b] w-full mxw">
         {/* Call Us */}
         <div className="flex items-center gap-4 py-6 border-b md:border-b-0 md:border-r border-[#1b1b1b] w-full px-6">
           <div className="bgOrange p-4 rounded-full">

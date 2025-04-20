@@ -21,7 +21,7 @@ const ExpertCard = ({ expert }) => {
       {/* Bottom Info */}
       <div className="flex items-center absolute bottom-0 left-0">
         <div className="relative p-4 rounded-[0_40px_0_0] fBgBlack">
-          <div className="w-[60px] h-[60px] flex items-center justify-center border border-[#F5B754] bg-transparent rounded-full dark:text-white font-bold text-[14px] text-center group-hover:bg-[#F5B754] dark:group-hover:text-[#1b1b1b] group-hover:text-[#f8f9fa]">
+          <div className="w-[60px] h-[60px] flex items-center justify-center border border-[#F5B754] bg-transparent rounded-full dark: font-bold text-[14px] text-center group-hover:bg-[#F5B754] dark:group-hover:text-[#1b1b1b] group-hover:text-[#f8f9fa]">
             <FaInfo className="text-lg" />
           </div>
           <div className="absolute -top-[20px] -left-[4px] rotate-[-90deg]">

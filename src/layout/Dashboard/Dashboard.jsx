@@ -38,7 +38,7 @@ const Dashboard = () => {
           <ul className="menu sBgBlack min-h-full md:w-80 w-60 p-4 ">
             <div className="flex justify-between items-center mb-5">
               <NavLink to="/" className="">
-                <span className="text-3xl font-black text-white">
+                <span className="text-3xl font-black">
                   <span className="orange">S</span>wift
                   <span className="orange">R</span>ent
                 </span>

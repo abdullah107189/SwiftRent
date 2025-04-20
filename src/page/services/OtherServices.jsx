@@ -38,7 +38,7 @@ const OtherServices = () => {
         <h2 className="text-3xl font-bold text-[42px] mt-4">Other Services</h2>
       </div>
       <div className="relative ">
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center z-10  "></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center  text-center z-10  "></div>
         <div className="mxw px-4 py-12 ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (

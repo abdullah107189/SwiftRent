@@ -167,24 +167,29 @@ const Navbar = () => {
           </li>
         </>
       ) : (
-        <li onClick={() => setIsMenuOpen(false)}>
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              `font-bold hover:orange hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
-                isActive
-                  ? "orange bg-transparent"
-                  : `${
-                      isScrolled
-                        ? "dark:text-white bg-transparent"
-                        : "dark:text-white text-white bg-transparent"
-                    }`
-              }`
-            }
-          >
-            Login
-          </NavLink>
-        </li>
+        <>
+          <li onClick={() => setIsMenuOpen(false)}>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `font-bold hover:orange hover:bg-transparent focus:bg-transparent active:bg-transparent px-3 py-2 ${
+                  isActive
+                    ? "orange bg-transparent"
+                    : `${
+                        isScrolled
+                          ? "dark:text-white bg-transparent"
+                          : "dark:text-white text-white bg-transparent"
+                      }`
+                }`
+              }
+            >
+              Login
+            </NavLink>
+          </li>
+          <li>
+            <ThemeToggle></ThemeToggle>
+          </li>
+        </>
       )}
     </>
   );

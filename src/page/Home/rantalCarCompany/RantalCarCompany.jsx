@@ -11,8 +11,8 @@ const car = [
 
 export default function RentalCarCompany() {
   return (
-    <div className="dark:text-white py-5 md:py-15 lg:py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center max-w-7xl mx-auto gap-12 lg:gap-28">
+    <div className="dark: py-5 md:py-15 lg:py-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center mxwgap-12 lg:gap-28">
         {/* Left Content Section */}
         <div className="space-y-6 text-center md:text-left">
           <p className="uppercase text-sm mb-2 tracking-[1rem] flex gap-5 items-center orange">

@@ -20,10 +20,10 @@ const CarParallax = () => {
             <p className="text-xl orange uppercase tracking-wide text-center">
               {letters}
             </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl text-white font-bold text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl  font-bold text-center">
               Interested in Renting?
             </h2>
-            <p className="text-sm text-white py-2">
+            <p className="text-sm  py-2">
               Don't hesitate and send us a message.
             </p>
 

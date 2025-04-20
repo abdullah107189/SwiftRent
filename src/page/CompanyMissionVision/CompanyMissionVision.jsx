@@ -6,7 +6,7 @@ const CompanyMission = () => {
     <div className="">
       <div className="mxw ">
         <SectionHeader title="Our Mission & Vision" subtitle="What Drives Us" />
-        <div className="text-center dark:text-white space-y-8">
+        <div className="text-center dark: space-y-8">
           <p className="text-left tBlack ">
             At SwiftRent, we are driven by a passion to provide the best car
             rental experience to our customers. Our mission is to offer

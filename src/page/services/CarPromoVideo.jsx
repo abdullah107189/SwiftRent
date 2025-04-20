@@ -11,7 +11,7 @@ function CarPromoVideo() {
         className="absolute top-0 left-0 w-full h-full bg-fixed bg-center bg-cover"
         style={{ backgroundImage: `url(${CarPromo})` }}
       ></div>
-      <div className="relative z-10 text-center text-white flex flex-col items-center justify-center">
+      <div className="relative z-10 text-center  flex flex-col items-center justify-center">
         <p className="orange text-[10px] uppercase tracking-wide">
           E x p l o r e
         </p>
@@ -22,7 +22,7 @@ function CarPromoVideo() {
           className="mt-6 w-16 h-16 flex items-center justify-center border-1 border-[#F5B754] rounded-full cursor-pointer hover:scale-110 transition-transform"
           onClick={() => setIsVideoOpen(true)}
         >
-          <FaPlay className="text-white text-lg" />
+          <FaPlay className=" text-lg" />
         </div>
       </div>
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>

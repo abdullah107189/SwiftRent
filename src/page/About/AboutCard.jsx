@@ -23,7 +23,7 @@ export default function AboutCard({ review }) {
       {/* under number and rounded style  */}
       <div className="flex items-center  -ml-10">
         <div className="relative p-4 rounded-[0_40px_0_0] fBgBlack">
-          <div className="w-[60px] h-[60px] leading-[60px] rounded-full overflow-hidden bg-[#222]  text-white font-bold text-[14px] text-center border border-[#222]">
+          <div className="w-[60px] h-[60px] leading-[60px] rounded-full overflow-hidden bg-[#222]   font-bold text-[14px] text-center border border-[#222]">
             <img
               src="https://i.ibb.co.com/8nk54NXD/a96c092f-1297-4e93-8376-6c8bc2d16222.jpg"
               alt=""

@@ -11,7 +11,7 @@ export default function RentalCarTypesCard({ car }) {
           alt={car.title}
           className="w-full h-full object-cover rounded-xl transition-transform duration-300 hover:scale-110"
         />
-        <h2 className="absolute top-4 left-4 text-white font-bold text-lg">
+        <h2 className="absolute top-4 left-4  font-bold text-lg">
           {car.title}
         </h2>
       </div>

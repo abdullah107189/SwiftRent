@@ -17,7 +17,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="block w-full text-[16px] text-left px-4 py-2 hover:bg-[#f5b754] hover:text-black"
+      className="block w-full text-[16px] text-left px-4 py-2 hover:bg-[#f5b754] rounded-full border border-[#f5b754] hover:text-black"
     >
       {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
     </button>

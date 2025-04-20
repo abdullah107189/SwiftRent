@@ -16,12 +16,7 @@ const Security = () => {
       />
       <div className="mt-4">
         <Link to="../change-password">
-          <button
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded 
-            transition duration-200"
-          >
-            Change Password
-          </button>
+          <button className="fillBtn">Change Password</button>
         </Link>
       </div>
     </SettingSection>

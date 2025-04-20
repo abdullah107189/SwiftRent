@@ -50,15 +50,15 @@ const MyBookings = () => {
   return (
     <>
       <Header title="My Bookings" />
-      <div className="min-h-screen p-6">
-        <h1 className="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center gap-2">
-          <FaShoppingCart className="text-white" /> My Bookings
+      <div className="min-h-screen md:p-6 p-3">
+        <h1 className="text-3xl font-bold text-center  mb-6 flex items-center justify-center gap-2">
+          <FaShoppingCart className="" /> My Bookings
         </h1>
         {bookings.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full shadow-lg rounded-lg">
               <thead>
-                <tr className="text-white">
+                <tr className="">
                   <th className="p-3 text-left">Car Name</th>
                   <th className="p-3 text-left">Booking Date</th>
                   <th className="p-3 text-left">Price</th>
@@ -70,7 +70,7 @@ const MyBookings = () => {
                 {bookings.map((booking) => (
                   <tr
                     key={booking._id}
-                    className="border-b text-white orange bg-[#f5b754]/10 hover:bg-[#f5b754]/10"
+                    className="border-b dark:border-white/20 border-black/20 hover:bg-[#f5b754]/10"
                   >
                     <td className="p-3">{`${booking.carBrand} ${booking.carName}`}</td>
                     <td className="p-3">
@@ -87,9 +87,9 @@ const MyBookings = () => {
                         }
                         className={`px-4 py-1 rounded ${
                           booking.paymentStatus === "Success"
-                            ? "bg-green-500 text-white cursor-not-allowed"
+                            ? "bg-green-500  cursor-not-allowed"
                             : booking.tripStatus !== "Started"
-                            ? "bg-gray-400 text-white cursor-not-allowed"
+                            ? "bg-gray-400  cursor-not-allowed"
                             : "bg-[#f5b754] text-black hover:bg-[#e0a33d]"
                         } ${payLoadingId === booking._id ? "opacity-50" : ""}`}
                       >

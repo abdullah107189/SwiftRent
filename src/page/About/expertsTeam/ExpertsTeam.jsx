@@ -19,7 +19,7 @@ export default function ExpertsTeam() {
   }, [axiosPublic]);
 
   return (
-    <div className="mxw md:pb-30 pb-10">
+    <div className="mxw md:pb-20 pb-10">
       <SectionHeader title="Certified Team" subtitle="Our Experts Team" />
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

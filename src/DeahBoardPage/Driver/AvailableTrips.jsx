@@ -128,7 +128,7 @@ const AvailableTrips = () => {
     <div className="pb-10">
       <Header title="Available Your Trips! 🚗" />
       <div className="mt-8">
-        <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2 pt-4">
+        <h2 className="text-3xl font-bold text-center orange mb-8 flex items-center justify-center gap-2 pt-4">
           <FaMapMarkedAlt /> Available Trips
         </h2>
         {availableTrips.length === 0 ? (

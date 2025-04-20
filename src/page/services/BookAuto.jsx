@@ -75,8 +75,8 @@ function BookAuto() {
         style={{ backgroundImage: `url(${book_Auto})` }}
       ></div>
       <div className="absolute inset-0 bg-black/70"></div>
-      <div className="relative z-10 text-center text-white px-4">
-        <p className="text-[#F5B754] text-xs uppercase tracking-wide mb-2">
+      <div className="relative z-10 text-center  px-4">
+        <p className="orange text-xs uppercase tracking-wide mb-2">
           R e n t N o w
         </p>
         <h1 className="text-4xl font-extrabold drop-shadow-lg">
@@ -85,7 +85,7 @@ function BookAuto() {
         <div className="mt-8 bg-black/40 backdrop-blur-lg rounded-2xl md:rounded-full p-4 shadow-lg flex flex-col gap-3 sm:flex-wrap sm:justify-center md:flex-row md:flex-wrap lg:flex-nowrap">
           <select
             onChange={(e) => setCarType(e.target.value)}
-            className="bg-transparent text-white px-4 py-2 border border-white/30 rounded-full focus:outline-none focus:bg-[#222222]"
+            className="bg-transparent  px-4 py-2 border border-white/30 rounded-full focus:outline-none focus:bg-[#222222]"
           >
             <option>Choose Car Type</option>
             <option>All</option>
@@ -96,7 +96,7 @@ function BookAuto() {
           </select>
           <select
             onChange={(e) => setPickUpLocation(e.target.value)}
-            className="bg-transparent text-white px-4 py-2 border border-white/30 rounded-full focus:outline-none focus:bg-[#222222]"
+            className="bg-transparent  px-4 py-2 border border-white/30 rounded-full focus:outline-none focus:bg-[#222222]"
           >
             <option>Pick Up Location</option>
             <option>Mymensingh</option>
@@ -116,10 +116,10 @@ function BookAuto() {
               type="text"
               value={pickUpDate ? pickUpDate.toLocaleDateString() : ""}
               readOnly
-              className="bg-transparent text-white px-4 py-2 border border-white/30 rounded-full focus:outline-none w-full"
+              className="bg-transparent  px-4 py-2 border border-white/30 rounded-full focus:outline-none w-full"
             />
             <span
-              className="absolute right-3 top-3 cursor-pointer text-[#F5B754]"
+              className="absolute right-3 top-3 cursor-pointer orange"
               onClick={handlePickUpClick}
             >
               <FaCalendarAlt />
@@ -138,7 +138,7 @@ function BookAuto() {
           </div>
           <select
             onChange={(e) => setDropOffLocation(e.target.value)}
-            className="bg-transparent text-white px-4 py-2 border border-white/30 rounded-full focus:outline-none focus:bg-[#222222]"
+            className="bg-transparent  px-4 py-2 border border-white/30 rounded-full focus:outline-none focus:bg-[#222222]"
           >
             <option>Drop Off Location</option>
             <option>Comilla</option>
@@ -158,10 +158,10 @@ function BookAuto() {
               type="text"
               value={returnDate ? returnDate.toLocaleDateString() : ""}
               readOnly
-              className="bg-transparent text-white px-4 py-2 border border-white/30 rounded-full focus:outline-none w-full"
+              className="bg-transparent  px-4 py-2 border border-white/30 rounded-full focus:outline-none w-full"
             />
             <span
-              className="absolute right-3 top-3 cursor-pointer text-[#F5B754]"
+              className="absolute right-3 top-3 cursor-pointer orange"
               onClick={handleReturnClick}
             >
               <FaCalendarAlt />

@@ -135,7 +135,7 @@ const LiveChat = () => {
   );
 
   return (
-    <div className="mxw  text-white rounded   h-[550px] flex overflow-hidden relative">
+    <div className="mxw rounded h-[550px] flex overflow-hidden relative">
       {/* Sidebar for Admin - Large devices */}
       {role === "Admin" && (
         <div className="hidden sm:block w-1/4 bg-[#1f1f1f] p-2 border-r border-gray-700 overflow-y-auto custom-scrollbar">
@@ -249,7 +249,7 @@ const LiveChat = () => {
           role !== "Admin" ? "lg:w-full" : ""
         }`}
       >
-        <div className="bg-black  py-4 border-b border-gray-700 flex items-center">
+        <div className="sBgBlack  py-4 border-b border-gray-700 flex items-center">
           <h2 className="text-lg font-semibold ml-8 md:ml-0">
             {role === "Admin"
               ? selectedCustomer?.name || "Select a Customer"
@@ -297,14 +297,11 @@ const LiveChat = () => {
           })}
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center mb-1  bg-black"
-        >
+        <form onSubmit={handleSubmit} className="flex items-center mb-1">
           <input
             type="text"
             placeholder="Type your message..."
-            className="flex-1 px-3 py-2  rounded-full bg-[#2c2c2c] text-white border border-gray-600 focus:outline-none text-sm"
+            className="flex-1 px-3 py-2  rounded-full sBgBlack border border-gray-600 focus:outline-none text-sm"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />

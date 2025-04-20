@@ -30,15 +30,15 @@ const Login = () => {
         </div>
 
         {/* Right side */}
-        <div className="flex flex-col md:w-1/3 w-full p-6 text-gray-200 items-center justify-center mx-auto md:bg-transparent">
+        <div className="flex flex-col md:w-1/3 w-full p-6 items-center justify-center mx-auto md:bg-transparent">
           <div className="mb-6 text-center">
             <h1 className="my-3 text-4xl font-bold">
-              <span className="font-black text-white">
-                <span className="text-[#f5b754]">S</span>wift
-                <span className="text-[#f5b754]">R</span>ent
-              </span>
+              <Link to={'/'} className="font-black ">
+                <span className="orange">S</span>wift
+                <span className="orange">R</span>ent
+              </Link>
             </h1>
-            <p className="text-gray-200">Welcome back!</p>
+            <p className="">Welcome back!</p>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -54,7 +54,7 @@ const Login = () => {
                   id="email"
                   {...register("email", { required: "Email is required" })}
                   placeholder="Enter Your Email"
-                  className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                  className="w-full px-3 py-2 border-2 rounded-md dark:border-white/20 border-black/10 focus:border-[#f5b754] focus:outline-none sBgBlack"
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -76,12 +76,12 @@ const Login = () => {
                       },
                     })}
                     placeholder="Enter Your Password Here"
-                    className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                    className="w-full px-3 py-2 border-2 rounded-md dark:border-white/20 border-black/10 focus:border-[#f5b754] focus:outline-none sBgBlack"
                   />
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                   >
                     {showPassword ? (
                       <AiOutlineEyeInvisible size={20} />
@@ -99,7 +99,7 @@ const Login = () => {
               <div className="text-right">
                 <Link
                   to="/forget-password"
-                  className="text-sm hover:underline text-[#f5b754]"
+                  className="text-sm hover:underline orange"
                 >
                   Forgot password?
                 </Link>
@@ -109,7 +109,7 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
+                className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3  ${
                   loading
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-[#f5b754ef]"
@@ -122,15 +122,13 @@ const Login = () => {
           </form>
           <div className="flex items-center pt-4 space-x-1 w-full max-w-sm">
             <div className="flex-1 h-px bg-gray-500"></div>
-            <p className="px-3 text-sm text-gray-300">
-              Login with social accounts
-            </p>
+            <p className="px-3 text-sm tBlack">Login with social accounts</p>
             <div className="flex-1 h-px bg-gray-500"></div>
           </div>
           <GoogleLogIn toggle="customer" page="login" />
-          <p className="pt-5 text-sm text-center text-gray-200">
+          <p className="pt-5 text-sm text-center ">
             Don't have an account yet?
-            <Link to="/register" className="underline orange hover:text-white">
+            <Link to="/register" className="underline orange ml-2">
               Create an account.
             </Link>
           </p>

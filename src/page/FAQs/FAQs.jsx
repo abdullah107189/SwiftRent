@@ -4,6 +4,10 @@ import { FaChevronDown } from "react-icons/fa";
 
 const faqs = [
   {
+    question: "How old do you have to be to rent a car?",
+    answer: "You must be at least 21 years old to rent a car.",
+  },
+  {
     question: "How do I rent a car from SwiftRent?",
     answer:
       "To rent a car, browse our available listings, select your preferred vehicle, choose your rental dates, and proceed to checkout.",

@@ -96,7 +96,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="overview" /> },
       { path: "overview", element: <OverviewPage /> },
-      // { path: "add-car", element: <AddToCar /> },
+      { path: "add-car", element: <AddToCar /> },
       // { path: "add-blog", element: <WriteBlog /> },
       { path: "manage-cars", element: <ManageCars /> },
       { path: "update-car/:id", element: <Updatecar /> },

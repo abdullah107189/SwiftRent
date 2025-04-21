@@ -1,20 +1,18 @@
-
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import registerImg from '../../assets/Sign up.png';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import GoogleLogIn from './GoogleLogIn';
-import useAuthForm from '../../hooks/useAuthForm';
-import { registerUser } from '../../redux/auth/authSlice';
-import { AiOutlineUser } from 'react-icons/ai';
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import registerImg from "../../assets/Sign up.png";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import GoogleLogIn from "./GoogleLogIn";
+import useAuthForm from "../../hooks/useAuthForm";
+import { registerUser } from "../../redux/auth/authSlice";
+import { AiOutlineUser } from "react-icons/ai";
 
 const Register = () => {
-  const [toggle, setToggle] = useState('customer');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [toggle, setToggle] = useState("customer");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  const handleToggle = value => {
+  const handleToggle = (value) => {
     setToggle(value);
   };
 
@@ -28,12 +26,12 @@ const Register = () => {
     onSubmit: authOnSubmit,
   } = useAuthForm(registerUser);
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     if (data.password !== confirmPassword) {
-      setPasswordError('Passwords do not match');
+      setPasswordError("Passwords do not match");
       return;
     }
-    setPasswordError('');
+    setPasswordError("");
     authOnSubmit({
       email: data.email,
       password: data.password,
@@ -58,36 +56,30 @@ const Register = () => {
         </div>
 
         {/* Right side */}
-        <div className="flex flex-col md:w-1/3 w-full p-6 text-gray-200 items-center justify-center mx-auto md:bg-transparent">
+        <div className="flex flex-col md:w-1/3 w-full p-6  items-center justify-center mx-auto md:bg-transparent">
           <div className="mb-6 text-center">
             <h1 className="my-3 text-4xl font-bold">
-              <span className="font-black text-white">
-                <span className="text-[#f5b754]">S</span>wift
-                <span className="text-[#f5b754]">R</span>ent
-              </span>
+              <Link to={'/'} className="font-black ">
+                <span className="orange">S</span>wift
+                <span className="orange">R</span>ent
+              </Link>
             </h1>
-            <p className="text-gray-200">Create your account!</p>
+            <p className="">Create your account!</p>
           </div>
           <div className="flex justify-center items-center w-full mb-2">
-            <div className="flex items-center bg-gray-100 rounded-xl p-2 w-full">
+            <div className="flex items-center sBgBlack rounded-xl p-2 w-full">
               <button
                 className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
-
-                  toggle === 'customer'
-                    ? 'bg-[#f5b754] text-white'
-                    : 'bg-gray-100 text-gray-600'
+                  toggle === "customer" ? "bg-[#f5b754] " : "sBgBlack"
                 }`}
-                onClick={() => handleToggle('customer')}
-
+                onClick={() => handleToggle("customer")}
               >
                 <AiOutlineUser size={20} className="mr-2" />
                 Customer
               </button>
               <button
                 className={`cursor-pointer flex items-center justify-center w-1/2 py-2 rounded-lg ${
-                  toggle === "driver"
-                    ? "bg-[#f5b754] text-white"
-                    : "bg-gray-100 text-gray-600"
+                  toggle === "driver" ? "bg-[#f5b754] " : "sBgBlack "
                 }`}
                 onClick={() => handleToggle("driver")}
               >
@@ -108,11 +100,9 @@ const Register = () => {
                 <input
                   type="text"
                   id="name"
-
-                  {...register('name', { required: 'Name is required' })}
-
+                  {...register("name", { required: "Name is required" })}
                   placeholder="Enter Your Name"
-                  className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                  className="w-full px-3 py-2 border-2 rounded-md dark:border-white/10 border-black/20 focus:border-[#f5b754] focus:outline-none sBgBlack "
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm">{errors.name.message}</p>
@@ -125,11 +115,9 @@ const Register = () => {
                 <input
                   type="email"
                   id="email"
-
-                  {...register('email', { required: 'Email is required' })}
-
+                  {...register("email", { required: "Email is required" })}
                   placeholder="Enter Your Email"
-                  className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                  className="w-full px-3 py-2 border-2 rounded-md dark:border-white/10 border-black/20 focus:border-[#f5b754] focus:outline-none sBgBlack "
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -141,12 +129,11 @@ const Register = () => {
                 </label>
                 <div className="relative">
                   <input
-
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     id="password"
-                    {...register('password', {
-                      required: 'Password is required',
-                      minLength: { value: 6, message: 'Minimum 6 characters' },
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: { value: 6, message: "Minimum 6 characters" },
                       // maxLength: { value: 20, message: "Maximum 20 characters" },
                       // pattern: {
                       //   value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
@@ -156,12 +143,12 @@ const Register = () => {
                       // },
                     })}
                     placeholder="Enter Your Password Here"
-                    className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                    className="w-full px-3 py-2 border-2 rounded-md dark:border-white/10 border-black/20 focus:border-[#f5b754] focus:outline-none sBgBlack "
                   />
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                   >
                     {showPassword ? (
                       <AiOutlineEyeInvisible size={20} />
@@ -182,19 +169,17 @@ const Register = () => {
                 </label>
                 <div className="relative">
                   <input
-
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     id="confirmPassword"
                     value={confirmPassword}
-                    onChange={e => setConfirmPassword(e.target.value)}
-
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm Your Password"
-                    className="w-full px-3 py-2 border-2 rounded-md border-gray-300 focus:border-[#f5b754] focus:outline-none bg-gray-200 text-gray-900"
+                    className="w-full px-3 py-2 border-2 rounded-md dark:border-white/10 border-black/20 focus:border-[#f5b754] focus:outline-none sBgBlack "
                   />
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                   >
                     {showPassword ? (
                       <AiOutlineEyeInvisible size={20} />
@@ -211,16 +196,12 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                className={`cursor-pointer bg-[#f5b754] w-full rounded-md py-3 text-white ${
-                  loading
-
-                    ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:bg-[#f5b754ef]'
+                className={`fillBtn w-full items-center flex justify-center  ${
+                  loading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={loading}
               >
-                {loading ? 'Registering...' : 'Register'}
-
+                {loading ? "Registering..." : "Register"}
               </button>
             </div>
           </form>
@@ -232,12 +213,9 @@ const Register = () => {
             <div className="flex-1 h-px bg-gray-500"></div>
           </div>
           <GoogleLogIn toggle={toggle} />
-          <p className="pt-5 text-sm text-center text-gray-200">
+          <p className="pt-5 text-sm text-center ">
             Already have an account?
-            <Link
-              to="/login"
-              className="underline text-[#f5b754] hover:text-white"
-            >
+            <Link to="/login" className="underline orange ml-2">
               Login here.
             </Link>
           </p>

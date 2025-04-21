@@ -1,15 +1,20 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "daisyui";
-/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap'); */
+@custom-variant dark (&:where(.dark, .dark *));
 
 #root {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
-body {
+.dark body {
   background-color: #1b1b1b;
   color: white;
 }
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
 @layer components {
   /* orange text color  */
   .orange {
@@ -21,19 +26,20 @@ body {
     @apply bg-[#f5b754];
   }
 
-  .fBgBlack {
-    @apply bg-[#1b1b1b];
+  .dark .fBgBlack {
+    background-color: #1b1b1b;
   }
-  .sBlack {
+
+  .dark .sBlack {
     color: #222222;
   }
-  .sBgBlack {
+  .dark .sBgBlack {
     background-color: #222222;
   }
-  .tBlack {
+  .dark .tBlack {
     @apply text-[#999];
   }
-  .tBgBlack {
+  .dark .tBgBlack {
     @apply bg-[#999];
   }
   .mxw {
@@ -41,15 +47,44 @@ body {
   }
 
   .fontOutfit > {
-    font-family: 'Outfit', sans-serif;
+    font-family: "Outfit", sans-serif;
     font-optical-sizing: auto;
   }
   /* action btn  */
-  .fillBtn {
+  .dark .fillBtn {
     @apply bg-[#f5b754] hover:bg-white text-black  lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transform duration-300 cursor-pointer;
   }
   /* hover btn using for outline  */
-  .outlineBtn {
+  .dark .outlineBtn {
     @apply border hover:border-[#f5b754] border-white hover:bg-[#f5b754] hover:text-black lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transition-all duration-300 cursor-pointer;
+  }
+}
+
+/* Dark Mode Override (If needed) */
+@layer components {
+  .sBlack {
+    color: #e9ecef;
+  }
+  .fBgBlack {
+    background-color: #f8f9fa;
+  }
+  .sBgBlack {
+    background-color: #e9ecef;
+  }
+
+  .tBlack {
+    @apply text-[#495057];
+  }
+
+  .tBgBlack {
+    @apply bg-[#DEE2E6];
+  }
+
+  .fillBtn {
+    @apply bg-[#f5b754] hover:bg-[#212529] text-[#f8f9fa]   lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transform duration-300 cursor-pointer;
+  }
+
+  .outlineBtn {
+    @apply dark:border hover:border-[#f5b754] border-white shadow hover:bg-[#212529] hover:text-white lg:py-2 py-1 lg:px-6 px-4 rounded-full flex items-center transition-all duration-300 cursor-pointer;
   }
 }

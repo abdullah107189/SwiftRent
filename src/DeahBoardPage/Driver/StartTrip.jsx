@@ -135,7 +135,7 @@ const StartTrip = () => {
       <div className="container mx-auto px-4">
         {/* Assigned Trips Section */}
         <div className="mt-8">
-          <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2 pt-4">
+          <h2 className="text-3xl font-bold text-center orange mb-8 flex items-center justify-center gap-2 pt-4">
             <FaRoute /> Your Assigned Trips
           </h2>
           {assignedTrips.length === 0 ? (
@@ -147,7 +147,7 @@ const StartTrip = () => {
               {assignedTrips.map((trip) => (
                 <div
                   key={trip._id}
-                  className="bg-[#1B1B1B] rounded-lg shadow-lg p-6 grid grid-cols-1 gap-8"
+                  className="fBgBlack rounded-lg shadow-lg p-6 grid grid-cols-1 gap-8"
                 >
                   {/* Car Image */}
                   <div>
@@ -164,23 +164,23 @@ const StartTrip = () => {
                   <div className="space-y-4">
                     <h3 className="text-2xl font-semibold">{trip.carName}</h3>
                     <p className="flex items-center gap-2">
-                      <FaUser className="text-[#f5b754]" /> Customer:{" "}
+                      <FaUser className="orange" /> Customer:{" "}
                       {trip.customerName}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaPhone className="text-[#f5b754]" /> Phone:{" "}
+                      <FaPhone className="orange" /> Phone:{" "}
                       {trip.customerPhone}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaCalendarAlt className="text-[#f5b754]" /> Trip Dates:{" "}
+                      <FaCalendarAlt className="orange" /> Trip Dates:{" "}
                       {trip.pickUpDate} to {trip.returnDate}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaRoute className="text-[#f5b754]" /> Route:{" "}
+                      <FaRoute className="orange" /> Route:{" "}
                       {trip.pickUpLocation} → {trip.dropOffLocation}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaDollarSign className="text-[#f5b754]" /> Price: $
+                      <FaDollarSign className="orange" /> Price: $
                       {trip.price}
                     </p>
                     {trip.tripStatus === "Booked" ? (

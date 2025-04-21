@@ -25,7 +25,7 @@ const SocialIcon = ({ icon: Icon, link }) => (
     href={link}
     target="_blank"
     rel="noopener noreferrer"
-    className="w-[40px] h-[40px] border border-[#F5B754] bg-transparent rounded-full overflow-hidden text-white font-bold text-[14px] text-center flex items-center justify-center transition-all duration-300 hover:bg-[#F5B754] hover:text-[#1b1b1b]"
+    className="w-[40px] h-[40px] border border-[#F5B754] bg-transparent rounded-full overflow-hidden  font-bold text-[14px] text-center flex items-center justify-center transition-all duration-300 hover:bg-[#F5B754] hover:text-[#1b1b1b]"
   >
     <Icon className="text-sm" />
   </a>
@@ -51,13 +51,12 @@ const ExpertDetails = () => {
       .finally(() => setLoading(false));
   }, [axiosPublic, id]);
 
-  if (loading)
-    return <p className="text-center mt-10 text-white">Loading...</p>;
+  if (loading) return <p className="text-center mt-10 ">Loading...</p>;
 
   // Fallback if expert is not found
   if (!expert) {
     return (
-      <p className="text-center mt-10 text-orange-500 font-semibold">
+      <p className="text-center mt-10 orange font-semibold">
         Expert not found.
       </p>
     );
@@ -74,8 +73,8 @@ const ExpertDetails = () => {
           content={`Learn more about ${expert?.name}, a skilled expert at SwiftRent. Discover their qualifications, experience, and expertise in the field.`}
         />
       </Helmet>
-      <div className="my-16">
-        <div className="min-h-screen text-white flex items-center justify-center py-10">
+      <div className="pt-5">
+        <div className="min-h-screen flex items-center justify-center py-10">
           <div className="mxw w-full flex flex-col md:flex-row gap-8 px-4">
             {/* Left Section: Image and Contact */}
             <div className="flex flex-col items-center md:w-1/2">
@@ -95,7 +94,7 @@ const ExpertDetails = () => {
               </div>
 
               <p className="text-sm ">
-                My e-mail address:{' '}
+                My e-mail address:{" "}
                 <span className="font-semibold">{expert.email}</span>
               </p>
             </div>
@@ -105,23 +104,16 @@ const ExpertDetails = () => {
               {/* Name and Role */}
               <h1 className="text-2xl font-bold mb-2">
                 Hello, I’m {expert.name}. I work as your sales consultant at{" "}
-                <span className="text-orange-500">{expert.role}</span>.
+                <span className="orange">{expert.role}</span>.
               </h1>
 
-              <p className="mb-5 text-sm ">
-                {expert.jobResponsibility}
-              </p>
+              <p className="mb-5 text-sm ">{expert.jobResponsibility}</p>
 
               {/* Qualifications */}
               <ul className="list-none mb-14">
                 {expert.qualifications.map((qualification, index) => (
-                  <li
-                    key={index}
-
-                    className="flex items-center gap-2  mb-3"
-
-                  >
-                    <span className="text-orange-500 bg-black w-[40px] h-[40px] rounded-full flex items-center justify-center">
+                  <li key={index} className="flex items-center gap-2  mb-3">
+                    <span className="orange bg-black w-[40px] h-[40px] rounded-full flex items-center justify-center">
                       ✓
                     </span>{" "}
                     {qualification}
@@ -137,11 +129,8 @@ const ExpertDetails = () => {
                     onClick={() => setActiveTab(tab)}
                     className={`text-sm font-semibold pb-1 ${
                       activeTab === tab
-
-                        ? 'text-orange-500 border-b-2 border-orange-500'
-
-                        : ''
-
+                        ? "orange border-b-2 border-[#f5b754]"
+                        : ""
                     }`}
                   >
                     {tab.toUpperCase()}
@@ -151,12 +140,9 @@ const ExpertDetails = () => {
 
               {/* Tab Content */}
 
-
               <div className="">
-
-                {activeTab === 'Biography' && <p>{expert.bio}</p>}
-                {activeTab === 'Education' && (
-
+                {activeTab === "Biography" && <p>{expert.bio}</p>}
+                {activeTab === "Education" && (
                   <ul className="list-disc list-inside">
                     {expert.education.map((edu, index) => (
                       <li key={index}>{edu}</li>
@@ -217,10 +203,12 @@ const ExpertDetails = () => {
                         <FaInfo className="text-lg" />
                       </div>
                       <div className="ml-3 text-left">
-                        <h1 className="text-md font-semibold text-white">
+                        <h1 className="text-md text-[#f8f9fa]/90 font-semibold ">
                           {expert.name}
                         </h1>
-                        <p className="text-sm text-[#F5B754]">{expert.role}</p>
+                        <p className="text-sm text-[#f8f9fa]/80 orange">
+                          {expert.role}
+                        </p>
                       </div>
                     </div>
                   </Link>

@@ -22,7 +22,7 @@ const menuItems = {
   Admin: [
     { name: "Dashboard", path: "overview", icon: FaTachometerAlt },
     { name: "Add Car", path: "add-car", icon: Car },
-    { name: "Add Blog", path: "add-blog", icon: HiOutlineDocumentText },
+    // { name: "Add Blog", path: "add-blog", icon: HiOutlineDocumentText },
     { name: "Manage Cars", path: "manage-cars", icon: FaCar },
     { name: "Manage Bookings", path: "manage-bookings", icon: FaClipboardList },
     { name: "Customers Management", path: "customers-manage", icon: FaUsers },

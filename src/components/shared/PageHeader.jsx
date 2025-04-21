@@ -33,7 +33,7 @@ const PageHeader = ({
             className="md:text-5xl text-3xl font-extrabold  text-white"
           >
             {title ? title : titleWhite}
-            <span className="text-[#F5B754]"> {titleOrange}</span>
+            <span className="orange"> {titleOrange}</span>
           </h1>
         </div>
       </div>

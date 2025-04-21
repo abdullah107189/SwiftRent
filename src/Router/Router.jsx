@@ -37,6 +37,9 @@ import BillingPage from "../DeahBoardPage/Admin/BillingPage";
 import Updatecar from "../DeahBoardPage/Admin/ManageCars/Updatecar";
 import AvailableTrips from "../DeahBoardPage/Driver/AvailableTrips";
 import LiveChat from "../components/liveChat/LiveChat";
+import WriteBlog from "../page/WriteBlog/WriteBlog";
+// import Blogs from "../page/blogs/Blogs";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +66,10 @@ export const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
       },
+      // {
+      //   path: "/blogs",
+      //   element: <Blogs />,
+      // },
 
       {
         path: "/car-details/:id",
@@ -90,6 +97,7 @@ export const router = createBrowserRouter([
       { index: true, element: <Navigate to="overview" /> },
       { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
+      // { path: "add-blog", element: <WriteBlog /> },
       { path: "manage-cars", element: <ManageCars /> },
       { path: "update-car/:id", element: <Updatecar /> },
       { path: "manage-bookings", element: <ManageBookings /> },

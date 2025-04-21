@@ -14,7 +14,7 @@ const CarDetails = () => {
           />
         </Helmet>
       </div>
-      <div className="mt-10">
+      <div className="">
         <Car_Details />
         <DetailsContent />
       </div>

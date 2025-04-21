@@ -11,7 +11,7 @@ export default function RentalCarTypesCard({ car }) {
           alt={car.title}
           className="w-full h-full object-cover rounded-xl transition-transform duration-300 hover:scale-110"
         />
-        <h2 className="absolute top-4 left-4 text-white font-bold text-lg">
+        <h2 className="absolute top-4 left-4  font-bold text-lg">
           {car.title}
         </h2>
       </div>
@@ -19,7 +19,7 @@ export default function RentalCarTypesCard({ car }) {
 
       {/* Bottom Left Icon Button (Black Circle with Golden Border) */}
       <div className="absolute bottom-3 left-4 flex items-center justify-center w-12 h-12 bg-black border-2 border-[#F5B754] rounded-full shadow-lg">
-        <MdArrowOutward size={24} className="text-[#F5B754]" />
+        <MdArrowOutward size={24} className="orange" />
       </div>
 
       {/* Custom Rounded Bottom Right Corner */}

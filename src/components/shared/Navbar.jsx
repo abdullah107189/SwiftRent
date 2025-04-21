@@ -49,7 +49,7 @@ const Navbar = () => {
         setIsMenuOpen(false);
       })
       .catch((error) => {
-        console.error("Logout failed:", error);
+        // console.error("Logout failed:", error);
       });
   };
 

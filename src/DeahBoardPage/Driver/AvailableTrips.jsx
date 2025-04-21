@@ -24,7 +24,7 @@ const AvailableTrips = () => {
         );
         setAvailableTrips(response.data);
       } catch (error) {
-        console.error("Failed to fetch available trips:", error);
+        // console.error("Failed to fetch available trips:", error);
       }
     };
     fetchAvailableTrips();
@@ -85,7 +85,7 @@ const AvailableTrips = () => {
         }
       });
     } catch (error) {
-      console.error("Failed to pick trip:", error);
+      // console.error("Failed to pick trip:", error);
       const message =
         error.response?.data?.message ||
         error.message ||
@@ -117,7 +117,7 @@ const AvailableTrips = () => {
         confirmButtonText: "OK",
       });
     } catch (error) {
-      console.error("Failed to cancel trip:", error);
+      // console.error("Failed to cancel trip:", error);
       const message =
         error.response?.data?.message ||
         error.message ||

@@ -59,7 +59,8 @@ const Sidebar = ({ userRole }) => {
     dispatch(logoutUser())
       .unwrap()
       .then(() => navigate("/login"))
-      .catch((error) => console.error("Logout failed:", error));
+      .catch((error) => error.message);
+      // .catch((error) => console.error("Logout failed:", error));
   };
 
   const items = menuItems[userRole];

@@ -60,10 +60,10 @@ const ManageCars = () => {
   // car status changes
 
   const handleCarStatusChanges = async (currentStatus, status) => {
-    console.log(status);
+    // console.log(status);
     const newStatus =
       currentStatus === "Available" ? "Unavailable" : "Available";
-    console.log(newStatus);
+    // console.log(newStatus);
     try {
       const response = await axiosSecure.patch(
         `/car-status/${status}/availability`,
@@ -78,7 +78,7 @@ const ManageCars = () => {
       }
     } catch (error) {
       toast.error("Failed to update status");
-      console.error(error);
+      // console.error(error);
     }
   };
 

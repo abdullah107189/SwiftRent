@@ -69,7 +69,7 @@ function WriteBlog() {
         toast.error("Failed to post blog.");
       }
     } catch (error) {
-      console.error("Error posting blog:", error);
+      // console.error("Error posting blog:", error);
       toast.error("Something went wrong while posting your blog.");
     } finally {
       setLoading(false);

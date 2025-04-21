@@ -6,7 +6,7 @@ const EditProfileModal = ({ user, onClose }) => {
 
   const handleSave = () => {
     // Implement the logic to save the updated profile data
-    console.log('Saving profile:', displayName, email);
+    // console.log('Saving profile:', displayName, email);
     onClose(); // Close the modal after saving
   };
 

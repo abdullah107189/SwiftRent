@@ -12,22 +12,22 @@ const PaymentHistory = () => {
 
   useEffect(() => {
     if (!user?.email) {
-      console.log("No user email found");
+      // console.log("No user email found");
       setLoading(false);
       return;
     }
 
-    console.log("Fetching payments for email:", user.email);
+    // console.log("Fetching payments for email:", user.email);
     setLoading(true);
     axiosSecure
       .get(`/payments/${user.email}`)
       .then((res) => {
         const data = Array.isArray(res.data) ? res.data : [];
-        console.log("Payments data:", data);
+        // console.log("Payments data:", data);
         setPayments(data);
       })
       .catch((err) => {
-        console.error("Error fetching payments:", err);
+        // console.error("Error fetching payments:", err);
         alert("Failed to load payment history.");
       })
       .finally(() => setLoading(false));

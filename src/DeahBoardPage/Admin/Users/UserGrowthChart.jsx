@@ -44,7 +44,7 @@ const UserGrowthChart = () => {
       const response = await axiosSecure.get('/all-user');
       setAllUser(response.data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

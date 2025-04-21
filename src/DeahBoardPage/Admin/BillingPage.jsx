@@ -1,5 +1,5 @@
-import { FaMoneyBill } from 'react-icons/fa';
-import Header from '../../components/common/Header';
+import { FaMoneyBill } from "react-icons/fa";
+import Header from "../../components/common/Header";
 
 const BillingPage = () => {
   return (
@@ -9,13 +9,11 @@ const BillingPage = () => {
         <h1 className="text-2xl font-bold text-yellow-400 flex items-center gap-2">
           <FaMoneyBill /> Billing & Payments
         </h1>
-        <p className="text-gray-300 mt-2">
-          View all user payments and transactions.
-        </p>
+        <p className="tBlack mt-2">View all user payments and transactions.</p>
 
         {/* 🔽 You can load payment data here */}
         <div className="mt-6">
-          <table className="min-w-full divide-y divide-gray-600 text-white">
+          <table className="min-w-full divide-y divide-gray-600 ">
             <thead className="bg-[#f5b754]/10">
               <tr>
                 <th className="px-4 py-2 text-left">User</th>

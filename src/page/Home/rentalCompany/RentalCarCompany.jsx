@@ -10,8 +10,8 @@ const car = [
 
 export default function RentalCarCompany() {
   return (
-    <div className="text-white py-12 px-6 md:px-12 lg:px-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center max-w-7xl mx-auto gap-12 lg:gap-28">
+    <div className=" py-12 px-6 md:px-12 lg:px-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center mxw gap-12 lg:gap-28">
         {/* Left Content Section */}
         <div className="space-y-6 text-center md:text-left">
           <p className="text-[#E8A743] uppercase tracking-widest text-sm md:text-base">

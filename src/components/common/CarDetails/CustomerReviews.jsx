@@ -44,7 +44,7 @@ const CustomerReviews = ({ onReviewSubmit }) => {
         <textarea
           value={review}
           onChange={(e) => setReview(e.target.value)}
-          className="w-full p-3 rounded-md border border-[#f5b754] bg-[#222222] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f5b754] transition duration-300"
+          className="w-full p-3 rounded-3xl border border-[#f5b754] sBgBlack placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f5b754] transition duration-300"
           rows={4}
           placeholder="Write your review..."
         ></textarea>
@@ -69,11 +69,8 @@ const CustomerReviews = ({ onReviewSubmit }) => {
             {message.text}
           </p>
         )}
-<br/>
-        <button
-          onClick={handleReviewSubmit}
-          className="mt-3 px-4 py-2 bg-[#f5b754] hover:bg-yellow-500 text-white rounded-md transition duration-300"
-        >
+        <br />
+        <button onClick={handleReviewSubmit} className="fillBtn">
           Submit Review
         </button>
       </div>

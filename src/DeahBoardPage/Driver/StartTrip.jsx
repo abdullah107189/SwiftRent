@@ -58,26 +58,73 @@ const StartTrip = () => {
     }
   };
 
-  const handleFinishTrip = async (id) => {
-    try {
-      await axiosSecure.post(`/finish-trip/${id}`, { driverEmail });
+  const handleFinishTrip = async (id, paymentStatus) => {
+    if (paymentStatus === "Success") {
+      try {
+        await axiosSecure.post(`/finish-trip/${id}`, { driverEmail });
+        Swal.fire({
+          title: "Trip Finished!",
+          text: "Your trip has been completed successfully. 🎉",
+          icon: "success",
+          confirmButtonText: "Okay.",
+        });
+        // Refreshing the trip list
+        const response = await axiosPublic.get(
+          `/driver-assignments/${driverEmail}`
+        );
+        setAssignedTrips(response.data);
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: error.message || "Failed to finish trip!",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      }
+    } else {
+      // Option to confirm hand cash if payment is pending
       Swal.fire({
-        title: "Trip Finished!",
-        text: "Your trip has been completed successfully. 🎉",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-      const response = await axiosPublic.get(
-        `/driver-assignments/${driverEmail}`
-      );
-      setAssignedTrips(response.data);
-    } catch (error) {
-      console.error("Failed to finish trip:", error);
-      Swal.fire({
-        title: "Error!",
-        text: error.message || "Failed to finish trip!",
-        icon: "error",
-        confirmButtonText: "OK",
+        title: "Payment Pending",
+        text: "Did the customer give cash in hand?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Make sure to hand cash.",
+        cancelButtonText: "NO",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // Confirming hand cash and ending the trip
+          try {
+            await axiosSecure.post(`/finish-trip-with-hand-cash/${id}`, {
+              driverEmail,
+            });
+            Swal.fire({
+              title: "The trip is over!",
+              text: "Hand cash confirmed, trip over.",
+              icon: "success",
+              confirmButtonText: "Okay",
+            });
+            // Refreshing trip list
+            const response = await axiosPublic.get(
+              `/driver-assignments/${driverEmail}`
+            );
+            setAssignedTrips(response.data);
+          } catch (error) {
+            Swal.fire({
+              title: "Opps!",
+              text: "Failed to confirm hand cash!",
+              icon: "error",
+              confirmButtonText: "Okay",
+            });
+          }
+        } else {
+          // Asking the customer to pay if cash is not given in hand
+          Swal.fire({
+            title: "Payment Needed",
+            text: "Ask the customer to make online payment.",
+            icon: "info",
+            confirmButtonText: "Okay",
+          });
+        }
       });
     }
   };
@@ -88,7 +135,7 @@ const StartTrip = () => {
       <div className="container mx-auto px-4">
         {/* Assigned Trips Section */}
         <div className="mt-8">
-          <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2 pt-4">
+          <h2 className="text-3xl font-bold text-center orange mb-8 flex items-center justify-center gap-2 pt-4">
             <FaRoute /> Your Assigned Trips
           </h2>
           {assignedTrips.length === 0 ? (
@@ -100,7 +147,7 @@ const StartTrip = () => {
               {assignedTrips.map((trip) => (
                 <div
                   key={trip._id}
-                  className="bg-[#1B1B1B] rounded-lg shadow-lg p-6 grid grid-cols-1 gap-8"
+                  className="fBgBlack rounded-lg shadow-lg p-6 grid grid-cols-1 gap-8"
                 >
                   {/* Car Image */}
                   <div>
@@ -117,23 +164,23 @@ const StartTrip = () => {
                   <div className="space-y-4">
                     <h3 className="text-2xl font-semibold">{trip.carName}</h3>
                     <p className="flex items-center gap-2">
-                      <FaUser className="text-[#f5b754]" /> Customer:{" "}
+                      <FaUser className="orange" /> Customer:{" "}
                       {trip.customerName}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaPhone className="text-[#f5b754]" /> Phone:{" "}
+                      <FaPhone className="orange" /> Phone:{" "}
                       {trip.customerPhone}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaCalendarAlt className="text-[#f5b754]" /> Trip Dates:{" "}
+                      <FaCalendarAlt className="orange" /> Trip Dates:{" "}
                       {trip.pickUpDate} to {trip.returnDate}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaRoute className="text-[#f5b754]" /> Route:{" "}
+                      <FaRoute className="orange" /> Route:{" "}
                       {trip.pickUpLocation} → {trip.dropOffLocation}
                     </p>
                     <p className="flex items-center gap-2">
-                      <FaDollarSign className="text-[#f5b754]" /> Price: $
+                      <FaDollarSign className="orange" /> Price: $
                       {trip.price}
                     </p>
                     {trip.tripStatus === "Booked" ? (
@@ -145,10 +192,21 @@ const StartTrip = () => {
                       </button>
                     ) : trip.tripStatus === "Started" ? (
                       <button
-                        onClick={() => handleFinishTrip(trip.bookingId)}
+                        onClick={() =>
+                          handleFinishTrip(trip.bookingId, trip.paymentStatus)
+                        }
                         className="mt-6 w-full bg-[#28a745] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition duration-300"
                       >
-                        Finish Trip
+                        {trip.paymentStatus === "Success"
+                          ? "Finish Trip"
+                          : "Confirm Hand Cash"}
+                      </button>
+                    ) : trip.tripStatus === "Booked" ? (
+                      <button
+                        onClick={() => handleStartTrip(trip.bookingId)}
+                        className="mt-6 w-full bg-[#f5b754] hover:bg-yellow-500 text-white font-semibold py-3 rounded-lg transition duration-300"
+                      >
+                        Confirm & Start Trip
                       </button>
                     ) : (
                       <p className="mt-6 text-center text-gray-400">

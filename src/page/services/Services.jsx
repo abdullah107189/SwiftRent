@@ -13,10 +13,10 @@ import { FaSearch } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import ChatLauncher from "../../components/ChatLauncher";
 
 const Services = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
 
   const [filterBrand, setFilterBrand] = useState([]);
   const [carType, setCarType] = useState([]);
@@ -31,7 +31,7 @@ const Services = () => {
   const axiosPublic = useAxiosPublic();
 
   const { cars, isFetching } = useGetCars({
-    search: searchQuery,
+    search: searchInput,
     filter: allFilter,
     sortOption: sortOption,
   });
@@ -113,7 +113,7 @@ const Services = () => {
   }, []);
 
   return (
-    <div className="relative bg-[#1B1B1B]">
+    <div className="relative fBgBlack">
       <Helmet>
         <title>Services | Our Cars</title>
         <meta
@@ -133,14 +133,14 @@ const Services = () => {
       <div className="relative">
         {/* cars count and sort */}
         <div className=" mxw flex justify-between items-center rounded-lg mt-16 md:sticky fBgBlack md:top-12 md:z-10">
-          <h2 className="text-white text-2xl my-2 font-bold">
+          <h2 className="dark: text-2xl my-2 font-bold">
             {cars.length || 0} Results for Cars
           </h2>
 
           <div className="flex items-center gap-4 text-[12px] px-2">
             {/* Sorting Dropdown */}
             <select
-              className="sBgBlack text-white p-2 rounded-3xl cursor-pointer "
+              className="sBgBlack dark: p-2 rounded-3xl cursor-pointer "
               onChange={(e) => {
                 const selected = e.target.value;
                 if (selected === sortOption) return;
@@ -156,7 +156,7 @@ const Services = () => {
             {/* Filter */}
             <button
               onClick={() => setShowFilter(true)}
-              className="md:hidden flex items-center gap-2 sBgBlack text-white px-3 py-2 rounded cursor-pointer"
+              className="md:hidden flex items-center gap-2 sBgBlack dark: px-3 py-2 rounded cursor-pointer"
             >
               <IoFilter size={20} />
               Filter
@@ -177,7 +177,7 @@ const Services = () => {
               {/* Close Button (Only for small screens) */}
               <button
                 onClick={() => setShowFilter(false)}
-                className="absolute top-4 right-4 text-white md:hidden cursor-pointer"
+                className="absolute top-4 right-4 dark: md:hidden cursor-pointer"
               >
                 <X size={24} />
               </button>
@@ -188,18 +188,12 @@ const Services = () => {
                   placeholder="Search cars..."
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  className="w-full p-2 mb-2 block bg-[#222222] text-gray-400 border border-gray-600 rounded-full focus:outline-none focus:ring-0"
+                  className="w-full p-2 mb-2 block tBgBlack dark:bg-[#222222]  dark:border border-gray-600 rounded-full focus:outline-none focus:ring-0"
                 />
-                <button
-                  onClick={() => setSearchQuery(searchInput)}
-                  className="cursor-pointer hover:bg-white/10 p-[10px] rounded-full absolute right-1  sBgBlack top-1/2 transform -translate-y-1/2 orange"
-                >
-                  <FaSearch />
-                </button>
               </div>
 
               {/* Brand Filter */}
-              <div className="mb-4 text-white ">
+              <div className="mb-4 ">
                 <h4 className="mb-2 text-xl font-semibold">Select Brand</h4>
                 <div className="max-h-[150px] overflow-y-scroll">
                   {uniqueBrands?.map((brand) => (
@@ -222,7 +216,7 @@ const Services = () => {
               </div>
 
               {/* Car Type Filter */}
-              <div className="mb-4 text-white">
+              <div className="mb-4">
                 <h4 className="mb-2 text-xl font-semibold">Select Car Type</h4>
                 <div className="max-h-[150px] overflow-y-scroll">
                   {uniqueCarTypes?.map((type) => (
@@ -243,7 +237,7 @@ const Services = () => {
               </div>
 
               {/* Fuel Type Filter */}
-              <div className="mb-4 text-white">
+              <div className="mb-4">
                 <h4 className="mb-2 text-xl font-semibold">Select Fuel Type</h4>
                 <div className="max-h-[150px] overflow-y-scroll">
                   {uniqueFuelTypes?.map((fuel) => (
@@ -257,7 +251,7 @@ const Services = () => {
                         onChange={() =>
                           handleChange(fuel, fuelType, setFuelType)
                         }
-                        className="accent-[#F5B754] cursor-pointer"
+                        className="accent-[#F5B754] cursor-pointer p-3"
                       />
                       {fuel}
                     </label>
@@ -278,7 +272,7 @@ const Services = () => {
                     min={1}
                     value={priceRange.min}
                     onChange={handlePriceChange}
-                    className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:text-[#f5b754]"
                   />
                   <input
                     type="number"
@@ -286,7 +280,7 @@ const Services = () => {
                     placeholder="Max Price"
                     value={priceRange.max}
                     onChange={handlePriceChange}
-                    className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:text-[#f5b754]"
                   />
                 </div>
               </div>
@@ -316,7 +310,7 @@ const Services = () => {
                   {Array.from({ length: 6 }, (_, index) => (
                     <div
                       key={index}
-                      className="relative w-full h-[420px] rounded-3xl overflow-hidden group border border-gray-700 shadow-lg shadow-gray-900"
+                      className="relative w-full h-[420px] rounded-3xl overflow-hidden group dark:border border-gray-700 shadow-lg dark:shadow-gray-900"
                     >
                       {/* Image Section */}
                       <div className="relative w-full h-[65%] rounded-t-3xl overflow-hidden transition-transform duration-300 hover:scale-100 animate-pulse">
@@ -327,41 +321,35 @@ const Services = () => {
                       <div className="absolute bottom-[35%] left-0 w-full h-[35%] bg-gradient-to-t from-black/95 via-black/60 to-transparent"></div>
 
                       <div className="flex items-center absolute bottom-[35%] left-0 animate-pulse">
-                        <div className="relative p-4 rounded-[0_40px_0_0] bg-[#1b1b1b]">
-                          <div className="w-[60px] h-[60px] leading-[60px] border border-[#F5B754] bg-gray-700 rounded-full overflow-hidden text-transparent font-bold text-[14px] text-center">
+                        <div className="relative p-4 rounded-[0_40px_0_0] fBgBlack">
+                          <div className="w-[60px] h-[60px] leading-[60px] dark:border border-[#F5B754] fBgBlack rounded-full overflow-hidden text-transparent font-bold text-[14px] text-center">
                             {/* Placeholder for number */}
                           </div>
-                          <div className="absolute -top-[19px] -left-[4px] rotate-[-90deg]">
+                          <div className="absolute -top-[20px] -left-[3px] rotate-[-90deg]">
                             <svg
                               viewBox="0 0 11 11"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="w-6 h-5"
+                              className="w-6 h-5 fill-current text-[#f8f9fa] dark:text-[#1b1b1b]"
                             >
-                              <path
-                                d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                                fill="#1b1b1b"
-                              ></path>
+                              <path d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"></path>
                             </svg>
                           </div>
-                          <div className="absolute -bottom-[2px] -right-[22px] rotate-[-90deg]">
+                          <div className="absolute -bottom-[0px] -right-[22px] rotate-[-90deg]">
                             <svg
                               viewBox="0 0 11 11"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="w-6 h-6"
+                              className="w-6 h-5 fill-current text-[#f8f9fa] dark:text-[#1b1b1b]"
                             >
-                              <path
-                                d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"
-                                fill="#1b1b1b"
-                              ></path>
+                              <path d="M11 1.55e-06L0 0L2.38e-07 11C1.66e-07 4.92 4.92 1.62e-06 11 1.55e-06Z"></path>
                             </svg>
                           </div>
                         </div>
                       </div>
 
                       {/* Content Section */}
-                      <div className="p-4 pb-7 text-white relative bg-[#1b1b1b] rounded-b-3xl animate-pulse">
+                      <div className="p-4 pb-7 relative fBgBlack rounded-b-3xl animate-pulse">
                         <div className="bg-gray-700 h-6 w-3/4 rounded mb-2"></div>
                         <div className="flex justify-between text-sm text-gray-400 mt-2">
                           <div className="bg-gray-700 h-4 w-1/3 rounded"></div>
@@ -395,7 +383,7 @@ const Services = () => {
                       />
                     ))
                   ) : (
-                    <p className="text-white text-center col-span-full text-2xl">
+                    <p className="dark: text-center col-span-full text-2xl">
                       No car available
                     </p>
                   )}
@@ -410,6 +398,7 @@ const Services = () => {
       <BookAuto />
       <OtherServices />
       <CarPromoVideo />
+      <ChatLauncher />
     </div>
   );
 };

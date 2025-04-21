@@ -13,7 +13,7 @@ export default function InterestedRenting() {
           backgroundImage: `url('https://i.ibb.co.com/237356Dh/3.jpg')`,
         }}
       ></div>
-      <div className="relative z-10 text-center text-white flex flex-col items-center justify-center">
+      <div className="relative z-10 text-center  flex flex-col items-center justify-center">
         <SectionHeader
           title="Rent Your Car"
           subtitle="Interested in Renting?"

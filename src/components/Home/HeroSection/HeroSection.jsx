@@ -60,7 +60,7 @@ const HeroSection = () => {
 
   const SlideContent = ({ backgroundImage, title, price }) => (
     <div
-      className="hFull bg-cover bg-center w-full"
+      className="hFull w-full bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="mxw flex items-center justify-between">
@@ -110,13 +110,15 @@ const HeroSection = () => {
                 </button>
               </Link>
 
-              <button
-                data-aos="fade-up"
-                data-aos-delay="600"
-                className="outlineBtn"
-              >
-                Rent Now <span className="ml-2 -rotate-45">&#8594;</span>
-              </button>
+              <Link to="/Services">
+                <button
+                  data-aos="fade-up"
+                  data-aos-delay="600"
+                  className="outlineBtn"
+                >
+                  Rent Now <span className="ml-2 -rotate-45">&#8594;</span>
+                </button>
+              </Link>
             </div>
           </div>
         </div>

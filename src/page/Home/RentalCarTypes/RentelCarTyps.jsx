@@ -29,6 +29,16 @@ export default function RentalCarTypes() {
          };
          fetchData();
        }, []);
+
+  // const [carTypes, setCarTypes] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axiosPublic.get("/rental-typs");
+      setCarTypes(data);
+    };
+    fetchData();
+  }, []);
   return (
     <div className="">
       <Swiper

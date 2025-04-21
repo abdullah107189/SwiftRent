@@ -16,7 +16,7 @@ const ChatLauncher = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsOpen(true)}
-          className="text-black p-4 rounded-full shadow-lg transition-transform duration-300 border border-gray-400 bg-[#f5b754]  cursor-pointer"
+          className="p-4 rounded-full shadow-lg transition-transform duration-300 border border-gray-400 bg-[#f5b754]  cursor-pointer"
         >
           <FaCommentDots size={24} />
         </button>
@@ -24,11 +24,11 @@ const ChatLauncher = () => {
 
       {/* Chat Panel Modal */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[360px] h-[600px] bg-black rounded-xl shadow-lg overflow-hidden border border-gray-600 flex flex-col">
+        <div className="fixed bottom-6 right-6 z-50 w-[360px] h-[600px] sBgBlack rounded-xl shadow-lg overflow-hidden  flex flex-col">
           <div className="flex justify-end p-2 border-b border-gray-600">
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white hover:text-red-500 text-xl font-bold"
+              className="dark:text-white hover:text-[#f5b754] text-xl font-bold"
             >
               ✕
             </button>

@@ -5,6 +5,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import Header from "../../components/common/Header";
+import { useNavigate } from "react-router-dom";
 
 const AvailableTrips = () => {
   const currentUser = useSelector((state) => state.auth.user);
@@ -12,6 +13,7 @@ const AvailableTrips = () => {
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const [availableTrips, setAvailableTrips] = useState([]);
+  const navigate = useNavigate();
 
   // Fetch available trips
   useEffect(() => {
@@ -61,6 +63,7 @@ const AvailableTrips = () => {
   };
 
   // Pick Trip
+
   const handlePickTrip = async (id) => {
     try {
       if (!driverEmail) {
@@ -76,6 +79,10 @@ const AvailableTrips = () => {
         text: "Trip Picked Successfully! Check your assigned trips to start.",
         icon: "success",
         confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/dashboard/start-trip");
+        }
       });
     } catch (error) {
       console.error("Failed to pick trip:", error);

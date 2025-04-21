@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 const StatCard = ({ name, icon: Icon, value, color }) => {
   return (
     <motion.div
+
+      
       className="sBgBlack backdrop-blur-md overflow-hidden shadow-lg rounded-3xl"
       whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.2)" }}
     >

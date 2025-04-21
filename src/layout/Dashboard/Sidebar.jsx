@@ -32,6 +32,8 @@ const menuItems = {
     { name: "Settings", path: "settings", icon: Settings },
   ],
   customer: [
+    { name: "Dashboard", path: "user-dashboard", icon: FaTachometerAlt },
+
     { name: "Browse Cars", path: "browse-cars", icon: FaCar },
     { name: "My Bookings", path: "my-bookings", icon: FaShoppingCart },
     { name: "Payment History", path: "payments", icon: FaMoneyBill },

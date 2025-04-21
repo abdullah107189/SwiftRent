@@ -20,6 +20,16 @@ const carTypes = [
 
 export default function RentalCarTypes() {
   const axiosPublic = useAxiosPublic();
+  const [carTypes, setCarTypes]=useState([])
+  
+      useEffect(() => {
+         const fetchData = async () => {
+           const { data } = await axiosPublic.get("/rental-typs");
+           setCarTypes(data);
+         };
+         fetchData();
+       }, []);
+
   // const [carTypes, setCarTypes] = useState([]);
 
   useEffect(() => {

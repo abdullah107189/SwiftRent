@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RentalCarTypesCard from "./RentalCarTypesCard";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,15 +8,6 @@ import "./rentel.css";
 import { Navigation, Pagination } from "swiper/modules";
 import NameCard from "../../../components/shared/card/NameCard";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-
-const carTypes = [
-  { title: "Luxury Cars", image: "https://i.ibb.co/Y7HgktqJ/download-45.jpg" },
-  { title: "Sport Cars", image: "https://i.ibb.co/Y7HgktqJ/download-45.jpg" },
-  { title: "SUV", image: "https://i.ibb.co/Y7HgktqJ/download-45.jpg" },
-  { title: "Luxury Cars", image: "https://i.ibb.co/Y7HgktqJ/download-45.jpg" },
-  { title: "Sport Cars", image: "https://i.ibb.co/Y7HgktqJ/download-45.jpg" },
-  { title: "SUV", image: "https://i.ibb.co/Y7HgktqJ/download-45.jpg" },
-];
 
 export default function RentalCarTypes() {
   const axiosPublic = useAxiosPublic();

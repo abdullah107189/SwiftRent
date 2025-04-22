@@ -12,35 +12,34 @@ import AddToCar from '../DeahBoardPage/Admin/AddToCar';
 import CarProducatPage from '../DeahBoardPage/CarProducatPage';
 import UsersPage from '../DeahBoardPage/Admin/Users/UsersPage';
 
-import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
-import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
-import BrowseCars from "../DeahBoardPage/Customer/Browse Cars/BrowseCars";
-import MyBookings from "../DeahBoardPage/Customer/MyBookings/MyBookings";
-import PaymentHistory from "../DeahBoardPage/Customer/Payment History/PaymentHistory";
-import UpdateProfile from "../DeahBoardPage/UpdateProfile/UpdateProfile";
-import CarDetails from "../components/common/CarDetails/CarDetails";
-import NumberCard from "../components/shared/card/NumberCard";
-import BookAuto from "../page/services/BookAuto";
-import ForgetPassword from "../page/Authentication/ForgetPassword";
-import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
-import ExpertDetails from "../page/About/expertsTeam/ExpertDetails";
-import ErrorPage from "../components/shared/ErrorPage";
-import StartTrip from "../DeahBoardPage/Driver/StartTrip";
-import TripHistory from "../DeahBoardPage/Driver/TripHistory";
-import CustomerReviews from "../DeahBoardPage/Driver/CustomerReviews";
-import Earnings from "../DeahBoardPage/Driver/Earnings";
-import SingleBooking from "../TextDelet/SingleBooking";
-import ManageCars from "../DeahBoardPage/Admin/ManageCars/ManageCars";
-import ManageBookings from "../DeahBoardPage/Admin/ManageBookings";
-import ManageDrivers from "../DeahBoardPage/Admin/ManageDrivers";
-import BillingPage from "../DeahBoardPage/Admin/BillingPage";
-import Updatecar from "../DeahBoardPage/Admin/ManageCars/Updatecar";
-import AvailableTrips from "../DeahBoardPage/Driver/AvailableTrips";
-import LiveChat from "../components/liveChat/LiveChat";
-import UserDashboard from "../DeahBoardPage/Customer/UserDashboard/UserDashboard";
-import WriteBlog from "../page/WriteBlog/WriteBlog";
+import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
+import SettingsPage from '../DeahBoardPage/SettingsPage/SettingsPage';
+import BrowseCars from '../DeahBoardPage/Customer/Browse Cars/BrowseCars';
+import MyBookings from '../DeahBoardPage/Customer/MyBookings/MyBookings';
+import PaymentHistory from '../DeahBoardPage/Customer/Payment History/PaymentHistory';
+import UpdateProfile from '../DeahBoardPage/UpdateProfile/UpdateProfile';
+import CarDetails from '../components/common/CarDetails/CarDetails';
+import NumberCard from '../components/shared/card/NumberCard';
+import BookAuto from '../page/services/BookAuto';
+import ForgetPassword from '../page/Authentication/ForgetPassword';
+import ChangePassword from '../DeahBoardPage/SettingsPage/ChangePassword';
+import ExpertDetails from '../page/About/expertsTeam/ExpertDetails';
+import ErrorPage from '../components/shared/ErrorPage';
+import StartTrip from '../DeahBoardPage/Driver/StartTrip';
+import TripHistory from '../DeahBoardPage/Driver/TripHistory';
+import CustomerReviews from '../DeahBoardPage/Driver/CustomerReviews';
+import Earnings from '../DeahBoardPage/Driver/Earnings';
+import SingleBooking from '../TextDelet/SingleBooking';
+import ManageCars from '../DeahBoardPage/Admin/ManageCars/ManageCars';
+import ManageBookings from '../DeahBoardPage/Admin/ManageBookings';
+import ManageDrivers from '../DeahBoardPage/Admin/ManageDrivers';
+import BillingPage from '../DeahBoardPage/Admin/BillingPage';
+import Updatecar from '../DeahBoardPage/Admin/ManageCars/Updatecar';
+import AvailableTrips from '../DeahBoardPage/Driver/AvailableTrips';
+import LiveChat from '../components/liveChat/LiveChat';
+import UserDashboard from '../DeahBoardPage/Customer/UserDashboard/UserDashboard';
+import WriteBlog from '../page/WriteBlog/WriteBlog';
 // import Blogs from "../page/blogs/Blogs";
-
 
 export const router = createBrowserRouter([
   {
@@ -97,7 +96,6 @@ export const router = createBrowserRouter([
     element: <Dashboard />,
     children: [
       { index: true, element: <Navigate to="overview" /> },
-
       { path: 'overview', element: <OverviewPage /> },
       { path: 'add-car', element: <AddToCar /> },
       { path: 'manage-cars', element: <ManageCars /> },
@@ -112,22 +110,19 @@ export const router = createBrowserRouter([
       { path: 'manage-bookings', element: <CarProducatPage /> },
 
       // customer
-
       { path: 'browse-cars', element: <BrowseCars /> },
       { path: 'my-bookings', element: <MyBookings /> },
       { path: 'payments', element: <PaymentHistory /> },
       { path: 'profile', element: <UpdateProfile /> },
       { path: 'settings', element: <SettingsPage /> },
       { path: 'change-password', element: <ChangePassword /> },
+
       //drivers
       { path: 'start-trip', element: <StartTrip /> },
       { path: 'available-trips', element: <AvailableTrips /> },
       { path: 'trip-history', element: <TripHistory /> },
       { path: 'customer-reviews', element: <CustomerReviews /> },
       { path: 'earnings', element: <Earnings /> },
-
-
-
     ],
   },
   {

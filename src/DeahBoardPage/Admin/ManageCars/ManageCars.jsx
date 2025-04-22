@@ -1,26 +1,26 @@
-import { FaCar } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import Header from "../../../components/common/Header";
-import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Search } from "lucide-react";
-import Spinner from "../../../components/Spinner";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaCar } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import Header from '../../../components/common/Header';
+import toast from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Search } from 'lucide-react';
+import Spinner from '../../../components/Spinner';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const ManageCars = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const {
     data: cars = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["cars"],
+    queryKey: ['cars'],
     queryFn: async () => {
-      const res = await axiosSecure.get("/manage-cars");
+      const res = await axiosSecure.get('/manage-cars');
       return res.data;
     },
   });
@@ -31,15 +31,15 @@ const ManageCars = () => {
     setFilteredCars(cars);
   }, [cars]);
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
 
-    if (term === "") {
+    if (term === '') {
       setFilteredCars(cars);
     } else {
       const filtered = cars.filter(
-        (car) =>
+        car =>
           car.name.toLowerCase().includes(term) ||
           (car.model && car.model.toLowerCase().includes(term))
       );
@@ -47,10 +47,10 @@ const ManageCars = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     try {
       await axiosSecure.delete(`/cars/${id}`);
-      toast.success("Car deleted successfully!");
+      toast.success('Car deleted successfully!');
       refetch();
     } catch (err) {
       toast.error(err.message);
@@ -62,7 +62,7 @@ const ManageCars = () => {
   const handleCarStatusChanges = async (currentStatus, status) => {
     // console.log(status);
     const newStatus =
-      currentStatus === "Available" ? "Unavailable" : "Available";
+      currentStatus === 'Available' ? 'Unavailable' : 'Available';
     // console.log(newStatus);
     try {
       const response = await axiosSecure.patch(
@@ -77,8 +77,8 @@ const ManageCars = () => {
         refetch();
       }
     } catch (error) {
-      toast.error("Failed to update status");
-      // console.error(error);
+      toast.error('Failed to update status');
+      console.error(error);
     }
   };
 
@@ -137,9 +137,9 @@ const ManageCars = () => {
                           handleCarStatusChanges(car.availability, car._id)
                         }
                         className={`px-2 py-1 rounded-full text-xs font-semibold cursor-pointer ${
-                          car.availability === "Available"
-                            ? "bg-green-600/20 text-green-600 "
-                            : "bg-red-600/20 text-red-600 "
+                          car.availability === 'Available'
+                            ? 'bg-green-600/20 text-green-600 '
+                            : 'bg-red-600/20 text-red-600 '
                         }`}
                       >
                         {car.availability}
@@ -165,8 +165,8 @@ const ManageCars = () => {
                 <tr>
                   <td colSpan="9" className="text-center py-6 tBlack">
                     {cars.length === 0
-                      ? "No cars available."
-                      : "No matching cars found."}
+                      ? 'No cars available.'
+                      : 'No matching cars found.'}
                   </td>
                 </tr>
               )}

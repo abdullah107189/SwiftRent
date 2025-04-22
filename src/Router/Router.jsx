@@ -37,9 +37,6 @@ import BillingPage from '../DeahBoardPage/Admin/BillingPage';
 import Updatecar from '../DeahBoardPage/Admin/ManageCars/Updatecar';
 import AvailableTrips from '../DeahBoardPage/Driver/AvailableTrips';
 import LiveChat from '../components/liveChat/LiveChat';
-import UserDashboard from '../DeahBoardPage/Customer/UserDashboard/UserDashboard';
-import WriteBlog from '../page/WriteBlog/WriteBlog';
-// import Blogs from "../page/blogs/Blogs";
 
 export const router = createBrowserRouter([
   {
@@ -67,10 +64,6 @@ export const router = createBrowserRouter([
         path: '/services',
         element: <Services />,
       },
-      // {
-      //   path: "/blogs",
-      //   element: <Blogs />,
-      // },
 
       {
         path: '/car-details/:id',
@@ -95,6 +88,7 @@ export const router = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />,
     children: [
+      //admin
       { index: true, element: <Navigate to="overview" /> },
       { path: 'overview', element: <OverviewPage /> },
       { path: 'add-car', element: <AddToCar /> },
@@ -110,6 +104,7 @@ export const router = createBrowserRouter([
       { path: 'manage-bookings', element: <CarProducatPage /> },
 
       // customer
+      { index: true, element: <Navigate to="browse-cars" /> },
       { path: 'browse-cars', element: <BrowseCars /> },
       { path: 'my-bookings', element: <MyBookings /> },
       { path: 'payments', element: <PaymentHistory /> },
@@ -118,6 +113,7 @@ export const router = createBrowserRouter([
       { path: 'change-password', element: <ChangePassword /> },
 
       //drivers
+      { index: true, element: <Navigate to="start-trip" /> },
       { path: 'start-trip', element: <StartTrip /> },
       { path: 'available-trips', element: <AvailableTrips /> },
       { path: 'trip-history', element: <TripHistory /> },

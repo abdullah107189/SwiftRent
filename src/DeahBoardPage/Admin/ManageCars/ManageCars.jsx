@@ -1,88 +1,56 @@
-import { FaCar } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { FaCar, FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { useEffect } from 'react';
 import Header from '../../../components/common/Header';
 import toast from 'react-hot-toast';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { Search } from 'lucide-react';
 import Spinner from '../../../components/Spinner';
-import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchCars,
+  deleteCar,
+  changeCarStatus,
+  setSearchTerm,
+} from '../../../redux/Slice/carSlice';
+
 const ManageCars = () => {
-  const axiosSecure = useAxiosSecure();
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const {
-    data: cars = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ['cars'],
-    queryFn: async () => {
-      const res = await axiosSecure.get('/manage-cars');
-      return res.data;
-    },
-  });
-
-  const [filteredCar, setFilteredCars] = useState([]);
+  const dispatch = useDispatch();
+  const { cars, loading, searchTerm } = useSelector(state => state.cars);
 
   useEffect(() => {
-    setFilteredCars(cars);
-  }, [cars]);
+    dispatch(fetchCars());
+  }, [dispatch]);
 
   const handleSearch = e => {
-    const term = e.target.value.toLowerCase();
-    setSearchTerm(term);
-
-    if (term === '') {
-      setFilteredCars(cars);
-    } else {
-      const filtered = cars.filter(
-        car =>
-          car.name.toLowerCase().includes(term) ||
-          (car.model && car.model.toLowerCase().includes(term))
-      );
-      setFilteredCars(filtered);
-    }
+    dispatch(setSearchTerm(e.target.value));
   };
 
   const handleDelete = async id => {
-    try {
-      await axiosSecure.delete(`/cars/${id}`);
+    const res = await dispatch(deleteCar(id));
+    if (res.meta.requestStatus === 'fulfilled') {
       toast.success('Car deleted successfully!');
-      refetch();
-    } catch (err) {
-      toast.error(err.message);
+    } else {
+      toast.error('Failed to delete car!');
     }
   };
 
-  // car status changes
-
-  const handleCarStatusChanges = async (currentStatus, status) => {
-    // console.log(status);
-    const newStatus =
-      currentStatus === 'Available' ? 'Unavailable' : 'Available';
-    // console.log(newStatus);
-    try {
-      const response = await axiosSecure.patch(
-        `/car-status/${status}/availability`,
-        {
-          availability: newStatus,
-        }
-      );
-
-      if (response.data.modifiedCount > 0) {
-        toast.success(`Status changed to ${newStatus}`);
-        refetch();
-      }
-    } catch (error) {
+  const handleCarStatusChanges = async (currentStatus, id) => {
+    const res = await dispatch(changeCarStatus({ currentStatus, id }));
+    if (res.meta.requestStatus === 'fulfilled') {
+      toast.success(`Status changed to ${res.payload.newStatus}`);
+    } else {
       toast.error('Failed to update status');
-      console.error(error);
     }
   };
 
-  if (isLoading) return <Spinner />;
+  const filteredCars = cars.filter(
+    car =>
+      car.name.toLowerCase().includes(searchTerm) ||
+      (car.model && car.model.toLowerCase().includes(searchTerm))
+  );
+
+  if (loading) return <Spinner />;
 
   return (
     <>
@@ -106,12 +74,11 @@ const ManageCars = () => {
 
         <div className="overflow-x-auto">
           <table className="min-w-full shadow-lg rounded-xl overflow-hidden">
-            <thead className="sBgBlack ">
+            <thead className="sBgBlack">
               <tr>
                 <th className="py-3 px-4 text-left">#</th>
                 <th className="py-3 px-4 text-left">Name</th>
                 <th className="py-3 px-4 text-left">Brand</th>
-
                 <th className="py-3 px-4 text-left">Price</th>
                 <th className="py-3 px-4 text-left">City</th>
                 <th className="py-3 px-4 text-left">Status</th>
@@ -119,8 +86,8 @@ const ManageCars = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredCar.length > 0 ? (
-                filteredCar.map((car, index) => (
+              {filteredCars.length > 0 ? (
+                filteredCars.map((car, index) => (
                   <tr
                     key={car._id}
                     className="border-b dark:border-white/20 border-black/20 hover:bg-[#f5b754]/10"
@@ -128,7 +95,6 @@ const ManageCars = () => {
                     <td className="py-3 px-4">{index + 1}</td>
                     <td className="py-3 px-4 font-medium">{car.name}</td>
                     <td className="py-3 px-4">{car.brand}</td>
-
                     <td className="py-3 px-4">${car.price}</td>
                     <td className="py-3 px-4">{car.city}</td>
                     <td className="py-3 px-4">
@@ -138,22 +104,22 @@ const ManageCars = () => {
                         }
                         className={`px-2 py-1 rounded-full text-xs font-semibold cursor-pointer ${
                           car.availability === 'Available'
-                            ? 'bg-green-600/20 text-green-600 '
-                            : 'bg-red-600/20 text-red-600 '
+                            ? 'bg-green-600/20 text-green-600'
+                            : 'bg-red-600/20 text-red-600'
                         }`}
                       >
                         {car.availability}
                       </span>
                     </td>
-                    <td className="flex py-3  space-x-4 ">
+                    <td className="flex py-3 space-x-4">
                       <Link
                         to={`/dashboard/update-car/${car._id}`}
-                        className=" text-green-600  py-1  hover:text-yellow-500"
+                        className="text-green-600 py-1 hover:text-yellow-500"
                       >
                         <FaEdit />
                       </Link>
                       <button
-                        className="   hover:text-red-600"
+                        className="hover:text-red-600"
                         onClick={() => handleDelete(car._id)}
                       >
                         <FaTrashAlt />
@@ -163,7 +129,7 @@ const ManageCars = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" className="text-center py-6 tBlack">
+                  <td colSpan="7" className="text-center py-6 tBlack">
                     {cars.length === 0
                       ? 'No cars available.'
                       : 'No matching cars found.'}
@@ -174,7 +140,6 @@ const ManageCars = () => {
           </table>
         </div>
 
-        {/* Optional Pagination UI */}
         <div className="join flex justify-end pt-6">
           <button className="join-item btn bg-[#f5b754]">1</button>
           <button className="join-item btn btn-active bg-[#f5b754]">2</button>

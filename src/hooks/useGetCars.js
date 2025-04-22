@@ -3,7 +3,13 @@ import React from "react";
 import useAxiosPublic from "./useAxiosPublic";
 import qs from "qs";
 
-const useGetCars = (searchInput = {}, filter = {}, sortOption = {}) => {
+const useGetCars = (
+  searchInput = {},
+  filter = {},
+  sortOption = {},
+  size,
+  page = 1
+) => {
   const axiosPublic = useAxiosPublic();
 
   const queryParams = qs.stringify({
@@ -22,7 +28,7 @@ const useGetCars = (searchInput = {}, filter = {}, sortOption = {}) => {
     isFetching,
     refetch,
   } = useQuery({
-    queryKey: ["cars", searchInput, filter, sortOption],
+    queryKey: ["cars", searchInput, filter, sortOption, size, page],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/cars?${queryParams}`);
       return data;

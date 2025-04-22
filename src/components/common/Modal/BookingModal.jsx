@@ -59,6 +59,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         email: data.email,
         phone: data.phone,
         carId: car._id,
+        carImage: car.image,
         carName: data.carName,
         carBrand: data.carBrand,
         price: calculatedPrice,

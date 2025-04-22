@@ -153,8 +153,7 @@ const StartTrip = () => {
                   <div>
                     <img
                       src={
-                        trip.carImage ||
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROywEwo4S2_bitDGhl3NArx4qrbpUjtiYPMw&s"
+                        trip.carImage
                       }
                       alt={trip.carName}
                       className="w-full h-60 object-cover rounded-xl"

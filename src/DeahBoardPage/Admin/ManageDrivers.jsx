@@ -7,6 +7,7 @@ import { FaRegTrashAlt, FaTrashAlt } from 'react-icons/fa';
 import { Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Spinner from '../../components/Spinner';
+
 const ManageDrivers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);

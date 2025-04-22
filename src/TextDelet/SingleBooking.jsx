@@ -31,7 +31,7 @@ const SingleBooking = () => {
         console.error("No GatewayPageURL:", data);
       }
     } catch (err) {
-      console.error("Payment error:", err);
+      // console.error("Payment error:", err);
       alert("Could not initiate payment.");
     } finally {
       setPayLoadingId(null);

@@ -28,7 +28,7 @@ const StartTrip = () => {
         );
         setAssignedTrips(response.data);
       } catch (error) {
-        console.error("Failed to fetch assigned trips:", error);
+        // console.error("Failed to fetch assigned trips:", error);
       }
     };
     fetchAssignedTrips();

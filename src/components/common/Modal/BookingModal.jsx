@@ -26,7 +26,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
   useEffect(() => {
     if (isOpen && user?.email) {
       axiosSecure.get(`/user-info/${user.email}`).then((response) => {
-        console.log("Fetched userInfo:", response.data);
+        // console.log("Fetched userInfo:", response.data);
         setUserInfo(response.data);
         reset({
           fullName: response.data.name || user?.name || "",
@@ -73,7 +73,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
       };
 
       const response = await axiosSecure.post("/book-auto", bookingData);
-      console.log("Booking successful:", response.data);
+      // console.log("Booking successful:", response.data);
 
       Swal.fire({
         icon: "success",
@@ -85,7 +85,7 @@ const BookingModal = ({ isOpen, onClose, car }) => {
         navigate("/dashboard/my-bookings");
       });
     } catch (error) {
-      console.error("Failed to book:", error);
+      // console.error("Failed to book:", error);
       Swal.fire({
         icon: "error",
         title: "Booking Failed",

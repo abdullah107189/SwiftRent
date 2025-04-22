@@ -1,7 +1,7 @@
 import axios from 'axios';
 export const imageUpload = async imageData => {
   if (!imageData) {
-    console.error('No image selected!');
+    // console.error('No image selected!');
     return null;
   }
 
@@ -18,10 +18,10 @@ export const imageUpload = async imageData => {
     );
     return response.data.secure_url;
   } catch (error) {
-    console.error(
-      'Error uploading image:',
-      error.response ? error.response.data : error.message
-    );
+    // console.error(
+    //   'Error uploading image:',
+    //   error.response ? error.response.data : error.message
+    // );
     return null;
   }
 };

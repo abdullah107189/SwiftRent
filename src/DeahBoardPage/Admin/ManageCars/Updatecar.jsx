@@ -35,7 +35,7 @@ const UpdateCar = () => {
         const response = await axiosSecure.get(`/cars/${id}`);
         setCarData(response.data);
       } catch (error) {
-        console.error("Error fetching car data:", error);
+        // console.error("Error fetching car data:", error);
         Swal.fire({
           title: "Error!",
           text: "Failed to fetch car data.",
@@ -97,7 +97,7 @@ const UpdateCar = () => {
         });
       }
     } catch (error) {
-      console.error("Error updating car data:", error);
+      // console.error("Error updating car data:", error);
       Swal.fire({
         title: "Error!",
         text: "Failed to update car data.",

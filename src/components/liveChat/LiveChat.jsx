@@ -31,7 +31,7 @@ const LiveChat = () => {
             setFallbackUserInfo(matchedUser.userInfo);
           }
         } catch (err) {
-          console.error("Failed to fetch user info:", err);
+          // console.error("Failed to fetch user info:", err);
         }
       }
     };

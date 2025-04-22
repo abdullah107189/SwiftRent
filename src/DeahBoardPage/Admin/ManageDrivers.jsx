@@ -61,7 +61,7 @@ const ManageDrivers = () => {
             icon: "success",
           });
         } catch (error) {
-          console.error(error);
+          // console.error(error);
           Swal.fire({
             title: "Error!",
             text: "Something went wrong.",

@@ -32,6 +32,8 @@ const menuItems = {
     { name: "Settings", path: "settings", icon: Settings },
   ],
   customer: [
+    { name: "Dashboard", path: "user-dashboard", icon: FaTachometerAlt },
+
     { name: "Browse Cars", path: "browse-cars", icon: FaCar },
     { name: "My Bookings", path: "my-bookings", icon: FaShoppingCart },
     { name: "Payment History", path: "payments", icon: FaMoneyBill },
@@ -57,7 +59,8 @@ const Sidebar = ({ userRole }) => {
     dispatch(logoutUser())
       .unwrap()
       .then(() => navigate("/login"))
-      .catch((error) => console.error("Logout failed:", error));
+      .catch((error) => error.message);
+      // .catch((error) => console.error("Logout failed:", error));
   };
 
   const items = menuItems[userRole];

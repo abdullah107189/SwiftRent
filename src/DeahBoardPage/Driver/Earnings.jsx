@@ -37,7 +37,7 @@ const Earnings = () => {
             setEarningsData({ total, tripsCompleted, lastTripEarnings });
           }
         } catch (error) {
-          console.error("Failed to fetch earnings:", error);
+          // console.error("Failed to fetch earnings:", error);
         }
       };
 

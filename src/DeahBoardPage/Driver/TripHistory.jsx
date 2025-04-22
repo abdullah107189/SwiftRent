@@ -26,7 +26,7 @@ const TripHistory = () => {
         const response = await axiosPublic.get(`/trip-history/${driverEmail}`);
         setTripHistory(response.data);
       } catch (error) {
-        console.error("Failed to fetch trip history:", error);
+        // console.error("Failed to fetch trip history:", error);
       }
     };
 

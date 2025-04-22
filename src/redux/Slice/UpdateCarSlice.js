@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Async thunk to fetch a car by ID
+// car by ID
 export const fetchCar = createAsyncThunk(
   'car/fetchCar',
   async (id, thunkAPI) => {
@@ -16,7 +16,7 @@ export const fetchCar = createAsyncThunk(
   }
 );
 
-// Async thunk to update car details
+//  update car details
 export const updateCar = createAsyncThunk(
   'car/updateCar',
   async ({ id, data }, thunkAPI) => {
@@ -87,8 +87,8 @@ const carSlice = createSlice({
         state.error = null;
       })
       .addCase(updateCar.fulfilled, (state, action) => {
-        state.loading = false;
         state.car = action.payload;
+        state.loading = false;
       })
       .addCase(updateCar.rejected, (state, action) => {
         state.loading = false;
@@ -97,7 +97,6 @@ const carSlice = createSlice({
   },
 });
 
-// Export actions and reducer
 export const { setCarField, setCarLocationField, setCarImage } =
   carSlice.actions;
 export default carSlice.reducer;

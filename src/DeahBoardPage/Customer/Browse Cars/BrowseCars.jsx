@@ -32,8 +32,7 @@ const BrowseCars = () => {
       .finally(() => setLoading(false));
   }, [axiosPublic]);
 
-  if (loading)
-    return <p className="text-center mt-10 text-white">Loading...</p>;
+  if (loading) return <p className="text-center mt-10 ">Loading...</p>;
 
   // Fallback if expert is not found
   if (!cars) {
@@ -46,15 +45,15 @@ const BrowseCars = () => {
   return (
     <>
       <Header title="Browse Cars" />
-      <div className="min-h-screen p-6">
-        <h1 className="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center gap-2">
-          <FaCar className="text-white" /> Browse Cars
+      <div className="min-h-screen md:p-6 p-3">
+        <h1 className="text-3xl font-bold text-center  mb-6 flex items-center justify-center gap-2">
+          <FaCar className="" /> Browse Cars
         </h1>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {cars.map((car) => (
             <div
               key={car.id}
-              className="orange bg-[#f5b754]/10 rounded-lg shadow-lg hover:shadow-2xl transition p-4 cursor-pointer"
+              className="sBgBlack rounded-lg shadow-lg hover:shadow-2xl transition p-4 cursor-pointer"
             >
               <img
                 src={car.image}
@@ -62,8 +61,8 @@ const BrowseCars = () => {
                 className="w-full h-40 object-cover rounded-md"
               />
               <div className="mt-4">
-                <h2 className="text-xl font-semibold text-white">{car.name}</h2>
-                <p className="text-white">{car.price}</p>
+                <h2 className="text-xl font-semibold ">{car.name}</h2>
+                <p className="">{car.price}</p>
                 <div className="md:flex md:justify-between">
                   <Link
                     to={`/car-details/${car._id}`}

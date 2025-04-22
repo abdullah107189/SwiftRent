@@ -4,6 +4,7 @@ import CarParallax from "./CarParallax";
 import ContactForm from "./ContactFrom";
 import contactBgPhoto from "../../assets/Bentley-Flying-Spur-car.jpg";
 import { Helmet } from "react-helmet-async";
+import ChatLauncher from "../../components/ChatLauncher";
 
 const Contact = () => {
   return (
@@ -28,6 +29,7 @@ const Contact = () => {
         <ContactForm />
       </div>
       <CarParallax />
+      <ChatLauncher />
     </div>
   );
 };

@@ -33,7 +33,7 @@ const GoogleLogIn = ({ toggle = "", page = "" }) => {
         userData
       );
       if (existingUserResponse.data.message !== "User already exists") {
-        console.log("New user added:", existingUserResponse.data);
+        // console.log("New user added:", existingUserResponse.data);
       }
 
       // Setting up users in Redux
@@ -66,7 +66,7 @@ const GoogleLogIn = ({ toggle = "", page = "" }) => {
       // Redirect to home page
       navigate("/");
     } catch (error) {
-      console.error("Google Login error:", error);
+      // console.error("Google Login error:", error);
       Swal.fire({
         icon: "error",
         title: "Login failed.",
@@ -79,7 +79,7 @@ const GoogleLogIn = ({ toggle = "", page = "" }) => {
   return (
     <div
       onClick={handleGoogleLogin}
-      className="flex justify-center items-center w-[220px]  rounded-md space-x-2 border m-3 p-2 border-[#b88d47ef] border-rounded cursor-pointer hover:bg-gray-800 transition-colors"
+      className="flex justify-center items-center w-[220px]  rounded-md space-x-2 border m-3 p-2 border-[#b88d47ef] border-rounded cursor-pointer dark:hover:bg-white/20 hover:bg-black/10 transition-colors"
     >
       <FcGoogle size={32} />
       <p>Continue with Google</p>

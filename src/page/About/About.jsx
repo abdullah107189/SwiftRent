@@ -9,6 +9,9 @@ import InterestedRenting from "./interestedRenting/InterestedRenting";
 import AboutContact from "./aboutContact/AboutContact";
 import AboutFlag from "./aboutFlag/AboutFlag";
 import { Helmet } from "react-helmet-async";
+import ChatLauncher from "../../components/ChatLauncher";
+import CompanyMission from "../CompanyMissionVision/CompanyMissionVision";
+import AwardsRecognition from "../AwardsRecognition/AwardsRecognition";
 
 const About = () => {
   return (
@@ -27,13 +30,14 @@ const About = () => {
         titleOrange={"Us"}
       ></PageHeader>
       <div>
-        <RentalCarCompany />
-
-        {/* <ClientsSay /> */}
         <ExpertsTeam />
+        <CompanyMission />
+        {/* <ClientsSay /> */}
+        <AwardsRecognition />
         <InterestedRenting />
         <AboutFlag />
         <AboutContact />
+        <ChatLauncher />
       </div>
     </div>
   );

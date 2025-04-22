@@ -59,12 +59,12 @@ const AddToCar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(carData);
+    // console.log(carData);
 
     try {
       const car = await axiosSecure.post("/add-car", carData);
 
-      console.log(car);
+      // console.log(car);
 
       // Success Alert
       Swal.fire({
@@ -74,7 +74,7 @@ const AddToCar = () => {
         confirmButtonText: "OK",
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       // Error Alert
       Swal.fire({
@@ -88,7 +88,7 @@ const AddToCar = () => {
   };
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen ">
       <Header title="Add to Car" />
       <div className="px-4 pb-4">
         <h1 className="text-xl font-bold py-6 text-center">Add Car list</h1>
@@ -104,7 +104,7 @@ const AddToCar = () => {
                 name="name"
                 onChange={handleChange}
                 placeholder="Car Name"
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 required
               />
             </div>
@@ -114,7 +114,7 @@ const AddToCar = () => {
                 type="text"
                 name="brand"
                 placeholder="Brand"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full p-4 sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 required
               />
             </div>
@@ -130,7 +130,7 @@ const AddToCar = () => {
                 <input
                   type="file"
                   onChange={(e) => handleImageChange(e, index)}
-                  className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white "
+                  className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white/20 "
                 />
               </div>
             ))}
@@ -146,7 +146,7 @@ const AddToCar = () => {
                 type="text"
                 name="type"
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 placeholder="Car Type"
                 required
               />
@@ -158,7 +158,7 @@ const AddToCar = () => {
                 name="year"
                 value={carData.year}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 placeholder="Year"
                 required
               />
@@ -176,7 +176,7 @@ const AddToCar = () => {
                 name="transmission"
                 value={carData.transmission}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 required
                 placeholder=" Transmission"
               />
@@ -188,7 +188,7 @@ const AddToCar = () => {
                 name="seats"
                 value={carData.seats}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 placeholder="Seats"
                 required
               />
@@ -206,7 +206,7 @@ const AddToCar = () => {
                 name="fuel"
                 value={carData.fuel}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 placeholder="Fuel Type"
                 required
               />
@@ -218,7 +218,7 @@ const AddToCar = () => {
                 name="price"
                 value={carData.price}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 placeholder="Price"
                 required
               />
@@ -235,7 +235,7 @@ const AddToCar = () => {
                 value={carData.location.city}
                 onChange={handleChange}
                 placeholder="City"
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 required
               />
             </div>
@@ -248,7 +248,7 @@ const AddToCar = () => {
                 name="location.pickupPoint"
                 value={carData.location.pickupPoint}
                 onChange={handleChange}
-                className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+                className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
                 placeholder=" Pickup Point"
                 required
               />
@@ -263,7 +263,7 @@ const AddToCar = () => {
               placeholder="Drop-off Point"
               value={carData.location.dropOffPoint}
               onChange={handleChange}
-              className="w-full  p-4  bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white "
+              className="w-full  p-4  sBgBlack tBlack rounded-full focus:outline-none focus:ring-0  "
             />
           </div>
 
@@ -271,7 +271,7 @@ const AddToCar = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="px-6 w-full py-3 bg-[#f5b754] text-white font-semibold rounded-lg hover:bg-[#d49343] transition"
+              className="fillBtn w-full flex justify-center"
             >
               Add Car
             </button>

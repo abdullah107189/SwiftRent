@@ -1,26 +1,26 @@
-import { FaCar } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-import Header from '../../../components/common/Header';
-import toast from 'react-hot-toast';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { Search } from 'lucide-react';
-import Spinner from '../../../components/Spinner';
-import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaCar } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import Header from "../../../components/common/Header";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Search } from "lucide-react";
+import Spinner from "../../../components/Spinner";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageCars = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const {
     data: cars = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['cars'],
+    queryKey: ["cars"],
     queryFn: async () => {
-      const res = await axiosSecure.get('/manage-cars');
+      const res = await axiosSecure.get("/manage-cars");
       return res.data;
     },
   });
@@ -31,15 +31,15 @@ const ManageCars = () => {
     setFilteredCars(cars);
   }, [cars]);
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
 
-    if (term === '') {
+    if (term === "") {
       setFilteredCars(cars);
     } else {
       const filtered = cars.filter(
-        car =>
+        (car) =>
           car.name.toLowerCase().includes(term) ||
           (car.model && car.model.toLowerCase().includes(term))
       );
@@ -47,10 +47,10 @@ const ManageCars = () => {
     }
   };
 
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     try {
       await axiosSecure.delete(`/cars/${id}`);
-      toast.success('Car deleted successfully!');
+      toast.success("Car deleted successfully!");
       refetch();
     } catch (err) {
       toast.error(err.message);
@@ -60,10 +60,10 @@ const ManageCars = () => {
   // car status changes
 
   const handleCarStatusChanges = async (currentStatus, status) => {
-    console.log(status);
+    // console.log(status);
     const newStatus =
-      currentStatus === 'Available' ? 'Unavailable' : 'Available';
-    console.log(newStatus);
+      currentStatus === "Available" ? "Unavailable" : "Available";
+    // console.log(newStatus);
     try {
       const response = await axiosSecure.patch(
         `/car-status/${status}/availability`,
@@ -77,8 +77,8 @@ const ManageCars = () => {
         refetch();
       }
     } catch (error) {
-      toast.error('Failed to update status');
-      console.error(error);
+      toast.error("Failed to update status");
+      // console.error(error);
     }
   };
 
@@ -87,29 +87,26 @@ const ManageCars = () => {
   return (
     <>
       <Header title="Manage Car" />
-      <div className="max-w-7xl mx-auto px-4 py-10">
+      <div className="mxw px-4 py-10">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-gray-100 flex items-center gap-2">
-            <FaCar className="text-yellow-400" /> Cars List
+          <h2 className="text-xl font-semibold tBlack flex items-center gap-2">
+            <FaCar className="orange" /> Cars List
           </h2>
           <div className="relative">
             <input
               type="text"
               placeholder="Search cars..."
-              className="bg-[#f5b754]/10 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="bg-[#f5b754]/10 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
               onChange={handleSearch}
               value={searchTerm}
             />
-            <Search
-              className="absolute left-3 top-2.5 text-gray-400"
-              size={18}
-            />
+            <Search className="absolute left-3 top-2.5 tBlack" size={18} />
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="min-w-full shadow-lg rounded-xl overflow-hidden">
-            <thead className="bg-[#f5b754]/10 text-white">
+            <thead className="sBgBlack ">
               <tr>
                 <th className="py-3 px-4 text-left">#</th>
                 <th className="py-3 px-4 text-left">Name</th>
@@ -126,7 +123,7 @@ const ManageCars = () => {
                 filteredCar.map((car, index) => (
                   <tr
                     key={car._id}
-                    className="border-b hover:bg-[#302a20] orange text-white"
+                    className="border-b dark:border-white/20 border-black/20 hover:bg-[#f5b754]/10"
                   >
                     <td className="py-3 px-4">{index + 1}</td>
                     <td className="py-3 px-4 font-medium">{car.name}</td>
@@ -140,9 +137,9 @@ const ManageCars = () => {
                           handleCarStatusChanges(car.availability, car._id)
                         }
                         className={`px-2 py-1 rounded-full text-xs font-semibold cursor-pointer ${
-                          car.availability === 'Available'
-                            ? 'bg-green-600 text-white'
-                            : 'bg-red-600 text-white'
+                          car.availability === "Available"
+                            ? "bg-green-600/20 text-green-600 "
+                            : "bg-red-600/20 text-red-600 "
                         }`}
                       >
                         {car.availability}
@@ -151,12 +148,12 @@ const ManageCars = () => {
                     <td className="flex py-3  space-x-4 ">
                       <Link
                         to={`/dashboard/update-car/${car._id}`}
-                        className=" text-gren-600  py-1  hover:text-yellow-500"
+                        className=" text-green-600  py-1  hover:text-yellow-500"
                       >
                         <FaEdit />
                       </Link>
                       <button
-                        className=" text-white  hover:text-red-600"
+                        className="   hover:text-red-600"
                         onClick={() => handleDelete(car._id)}
                       >
                         <FaTrashAlt />
@@ -166,10 +163,10 @@ const ManageCars = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" className="text-center py-6 text-gray-500">
+                  <td colSpan="9" className="text-center py-6 tBlack">
                     {cars.length === 0
-                      ? 'No cars available.'
-                      : 'No matching cars found.'}
+                      ? "No cars available."
+                      : "No matching cars found."}
                   </td>
                 </tr>
               )}

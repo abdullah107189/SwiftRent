@@ -25,7 +25,7 @@ const CarDetails = () => {
         setCar(res.data);
         setSelectedImg(res.data?.image?.[0] || "");
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       } finally {
         setLoading(false);
       }
@@ -55,10 +55,10 @@ const CarDetails = () => {
     );
 
   return (
-    <div className="mxw px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div className="mxw px-4 pt-18 grid grid-cols-1 md:grid-cols-2 gap-10">
       {/* Left: Images */}
       <div>
-        <div className="border rounded-xl overflow-hidden shadow-lg bg-white group relative">
+        <div className="border rounded-xl overflow-hidden shadow-lg group relative">
           <img
             src={selectedImg}
             alt="car"
@@ -88,9 +88,9 @@ const CarDetails = () => {
       </div>
 
       {/* Right: Car Info */}
-      <div className="space-y-6 p-6 rounded-xl shadow-lg">
+      <div className="space-y-6 p-6">
         <h2 className="text-3xl font-bold">{car.name}</h2>
-        <div className="flex items-center gap-1 text-[#f5b754]">
+        <div className="flex items-center gap-1 orange">
           {Array(5)
             .fill()
             .map((_, i) => (
@@ -119,7 +119,7 @@ const CarDetails = () => {
             <strong>Fuel:</strong> {car.fuel}
           </p>
           <p className="flex items-center gap-2">
-            <FaMapMarkerAlt className="text-[#f5b754]" />
+            <FaMapMarkerAlt className="orange" />
             <span>
               <strong>City:</strong> {car.location?.city}
             </span>
@@ -140,10 +140,7 @@ const CarDetails = () => {
             ${car.price}{" "}
             <span className="text-sm font-normal text-gray-500">/day</span>
           </p>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="px-5 py-2 rounded-full bg-[#f5b754] hover:bg-[#f5b754] text-white font-semibold shadow-md transition duration-300"
-          >
+          <button onClick={() => setIsModalOpen(true)} className="fillBtn">
             Book Now
           </button>
         </div>

@@ -10,23 +10,23 @@ const CarRentalProcessSection = () => {
         <SimpleCard
           title={"Choose A Car"}
           details={
-            "View our range of cars, find your perfect car for the coming days."
+            "Browse our wide selection of vehicles and pick the one that matches your travel needs. Whether it's a short trip or long vacation, we’ve got you covered."
           }
           number={"01"}
         ></SimpleCard>
         <SimpleCard
-          title={"Choose A Car"}
+          title={"Book Instantly"}
           details={
-            "View our range of cars, find your perfect car for the coming days."
+            "Fill in your details, select your rental period, and confirm your booking. Our instant reservation system makes it quick and easy for you to get started."
           }
-          number={"01"}
+          number={"02"}
         ></SimpleCard>
         <SimpleCard
-          title={"Choose A Car"}
+          title={"Enjoy Your Ride"}
           details={
-            "View our range of cars, find your perfect car for the coming days."
+            "Pick up your car at your selected time and location, then hit the road with confidence. Drive safely and enjoy a smooth, stress-free journey with us."
           }
-          number={"01"}
+          number={"03"}
         ></SimpleCard>
       </div>
     </div>

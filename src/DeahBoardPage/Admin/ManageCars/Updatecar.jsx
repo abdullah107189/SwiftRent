@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import Header from '../../../components/common/Header';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import imageUploade from '../../../components/CarImageUploade/ImageChanges';
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import Header from "../../../components/common/Header";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import imageUploade from "../../../components/CarImageUploade/ImageChanges";
 
 const UpdateCar = () => {
   const axiosSecure = useAxiosSecure();
@@ -11,22 +11,22 @@ const UpdateCar = () => {
   const navigate = useNavigate();
 
   const [carData, setCarData] = useState({
-    name: '',
-    brand: '',
-    type: '',
-    year: '',
-    transmission: '',
-    seats: '',
-    fuel: '',
+    name: "",
+    brand: "",
+    type: "",
+    year: "",
+    transmission: "",
+    seats: "",
+    fuel: "",
     location: {
-      city: '',
-      pickupPoint: '',
-      dropOffPoint: '',
+      city: "",
+      pickupPoint: "",
+      dropOffPoint: "",
     },
-    availability: 'Available',
+    availability: "Available",
     features: [],
-    price: '',
-    image: ['', '', ''],
+    price: "",
+    image: ["", "", ""],
   });
 
   useEffect(() => {
@@ -35,22 +35,22 @@ const UpdateCar = () => {
         const response = await axiosSecure.get(`/cars/${id}`);
         setCarData(response.data);
       } catch (error) {
-        console.error('Error fetching car data:', error);
+        // console.error("Error fetching car data:", error);
         Swal.fire({
-          title: 'Error!',
-          text: 'Failed to fetch car data.',
-          icon: 'error',
+          title: "Error!",
+          text: "Failed to fetch car data.",
+          icon: "error",
         });
       }
     };
     fetchCarData();
   }, [id, axiosSecure]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name.includes('location')) {
-      const locationField = name.split('.')[1];
-      setCarData(prevState => ({
+    if (name.includes("location")) {
+      const locationField = name.split(".")[1];
+      setCarData((prevState) => ({
         ...prevState,
         location: {
           ...prevState.location,
@@ -58,7 +58,7 @@ const UpdateCar = () => {
         },
       }));
     } else {
-      setCarData(prevState => ({ ...prevState, [name]: value }));
+      setCarData((prevState) => ({ ...prevState, [name]: value }));
     }
   };
 
@@ -68,7 +68,7 @@ const UpdateCar = () => {
 
     const uploadedUrl = await imageUploade(imageCarUpload);
     if (uploadedUrl) {
-      setCarData(prevData => {
+      setCarData((prevData) => {
         const updatedImages = [...prevData.image];
         updatedImages[index] = uploadedUrl;
         return { ...prevData, image: updatedImages };
@@ -76,33 +76,33 @@ const UpdateCar = () => {
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const car = await axiosSecure.patch(`/cars-update/${id}`, carData);
       if (car.data.modifiedCount > 0) {
         Swal.fire({
-          title: 'Success!',
-          text: 'Car updated successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK',
+          title: "Success!",
+          text: "Car updated successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
         });
-        navigate('/dashboard/manage-cars');
+        navigate("/dashboard/manage-cars");
       } else {
         Swal.fire({
-          title: 'No Changes',
-          text: 'No changes were made.',
-          icon: 'warning',
-          confirmButtonText: 'OK',
+          title: "No Changes",
+          text: "No changes were made.",
+          icon: "warning",
+          confirmButtonText: "OK",
         });
       }
     } catch (error) {
-      console.error('Error updating car data:', error);
+      // console.error("Error updating car data:", error);
       Swal.fire({
-        title: 'Error!',
-        text: 'Failed to update car data.',
-        icon: 'error',
-        confirmButtonText: 'OK',
+        title: "Error!",
+        text: "Failed to update car data.",
+        icon: "error",
+        confirmButtonText: "OK",
       });
     }
   };
@@ -154,7 +154,7 @@ const UpdateCar = () => {
                 </label>
                 <input
                   type="file"
-                  onChange={e => handleImageChange(e, index)}
+                  onChange={(e) => handleImageChange(e, index)}
                   className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white"
                 />
               </div>

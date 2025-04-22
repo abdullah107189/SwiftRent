@@ -161,7 +161,7 @@ const ManageCars = () => {
 
       {/* Modal for Delete Confirmation */}
       {isOpen && (
-        <div className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-opacity-50">
+        <div className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-[#222222]/60">
           <div className="relative p-4 w-full max-w-md">
             <div className="relative p-4 text-center  rounded-lg shadow bg-[#302a20] orange  sm:p-5">
               <button

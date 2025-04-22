@@ -51,7 +51,7 @@ const Services = () => {
       setCarsFilterData(data);
     };
     fetchData();
-  }, []);
+  }, [axiosPublic]);
 
   const handlePriceChange = (e) => {
     const { name, value } = e.target;

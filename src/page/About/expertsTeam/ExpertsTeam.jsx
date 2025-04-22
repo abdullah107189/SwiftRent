@@ -15,7 +15,7 @@ export default function ExpertsTeam() {
     axiosPublic
       .get("/expert-teammate")
       .then((res) => setExperts(res.data))
-      .catch((err) => console.error("Error fetching experts:", err));
+      .catch((err) => err.message);
   }, [axiosPublic]);
 
   return (

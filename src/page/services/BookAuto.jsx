@@ -61,9 +61,9 @@ function BookAuto() {
       const response = await axiosPublic.post("/book-auto", bookingData);
 
       // toast.success("Booking successful!");
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
-      console.error("Error booking car:", error);
+      // console.error("Error booking car:", error);
       // toast.error("Error booking the car.");
     }
   };

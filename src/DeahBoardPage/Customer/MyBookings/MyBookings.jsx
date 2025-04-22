@@ -27,7 +27,7 @@ const MyBookings = () => {
   };
 
   const handlePayment = async (bookingId) => {
-    console.log("Initiating payment for booking ID:", bookingId);
+    // console.log("Initiating payment for booking ID:", bookingId);
     setPayLoadingId(bookingId);
     try {
       const { data } = await axiosSecure.post(`/create-payment/${bookingId}`);
@@ -35,10 +35,10 @@ const MyBookings = () => {
         window.location.href = data.GatewayPageURL;
       } else {
         alert("Payment init failed. Please try again.");
-        console.error("No GatewayPageURL:", data);
+        // console.error("No GatewayPageURL:", data);
       }
     } catch (err) {
-      console.error("Payment error:", err);
+      // console.error("Payment error:", err);
       alert("Could not initiate payment.");
     } finally {
       setPayLoadingId(null);

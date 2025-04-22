@@ -17,7 +17,7 @@ const ChangePassword = () => {
   const navigate = useNavigate();
 
   const onSubmit = async data => {
-    console.log('Current user:', auth.currentUser);
+    // console.log('Current user:', auth.currentUser);
     if (data.newPassword !== data.confirmPassword) {
       Swal.fire({
         icon: 'error',

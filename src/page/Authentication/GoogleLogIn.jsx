@@ -33,7 +33,7 @@ const GoogleLogIn = ({ toggle = "", page = "" }) => {
         userData
       );
       if (existingUserResponse.data.message !== "User already exists") {
-        console.log("New user added:", existingUserResponse.data);
+        // console.log("New user added:", existingUserResponse.data);
       }
 
       // Setting up users in Redux
@@ -66,7 +66,7 @@ const GoogleLogIn = ({ toggle = "", page = "" }) => {
       // Redirect to home page
       navigate("/");
     } catch (error) {
-      console.error("Google Login error:", error);
+      // console.error("Google Login error:", error);
       Swal.fire({
         icon: "error",
         title: "Login failed.",

@@ -25,7 +25,7 @@ const CarDetails = () => {
         setCar(res.data);
         setSelectedImg(res.data?.image?.[0] || "");
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       } finally {
         setLoading(false);
       }

@@ -47,7 +47,7 @@ const ExpertDetails = () => {
         const selected = res.data.find((item) => item._id === id);
         setExpert(selected);
       })
-      .catch((err) => console.error("Error fetching expert:", err))
+      .catch((err) => err.message)
       .finally(() => setLoading(false));
   }, [axiosPublic, id]);
 

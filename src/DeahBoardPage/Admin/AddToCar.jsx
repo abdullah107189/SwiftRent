@@ -59,12 +59,12 @@ const AddToCar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(carData);
+    // console.log(carData);
 
     try {
       const car = await axiosSecure.post("/add-car", carData);
 
-      console.log(car);
+      // console.log(car);
 
       // Success Alert
       Swal.fire({
@@ -74,7 +74,7 @@ const AddToCar = () => {
         confirmButtonText: "OK",
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       // Error Alert
       Swal.fire({

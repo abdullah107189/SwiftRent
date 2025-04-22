@@ -9,12 +9,12 @@ import UpdateProfile from "../UpdateProfile/UpdateProfile";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log(user?.displayName);
+  // console.log(user?.displayName);
   const dispatch = useDispatch();
   const [image, setImage] = useState(user?.photoURL || "");
   const [imageFile, setImageFile] = useState(null);
   const [updateProfile, setUpadteProfile] = useState(false);
-  console.log(image, imageFile);
+  // console.log(image, imageFile);
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -23,7 +23,7 @@ const Profile = () => {
         setImage(uploadedImageUrl);
         setImageFile(file);
       } catch (error) {
-        console.error("Error uploading image:", error);
+        // console.error("Error uploading image:", error);
       }
     }
   };

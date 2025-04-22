@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import serviceBackgroundPhoto from "../../assets/heroSection/3.jpg";
+import { HiArrowNarrowLeft } from "react-icons/hi";
 import "./service.css";
 import PageHeader from "../../components/shared/PageHeader";
-import BookAuto from "./BookAuto";
 import OtherServices from "./OtherServices";
 import CarPromoVideo from "./CarPromoVideo";
 import NumberCard from "../../components/shared/card/NumberCard";
@@ -16,6 +16,7 @@ import { Helmet } from "react-helmet-async";
 import ChatLauncher from "../../components/ChatLauncher";
 
 const Services = () => {
+  const axiosPublic = useAxiosPublic();
   const [searchInput, setSearchInput] = useState("");
 
   const [filterBrand, setFilterBrand] = useState([]);
@@ -28,11 +29,35 @@ const Services = () => {
   // -----------------------------------
   const [showFilter, setShowFilter] = useState(false);
   const filterRef = useRef(null);
-  const axiosPublic = useAxiosPublic();
+  const [totalCarsCount, setTotalCarsCount] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalCountFunc = async () => {
+    const { data } = await axiosPublic.get("/carsCount");
+    setTotalCarsCount(data?.count);
+  };
+  totalCountFunc();
+  // pagination
+  const size = 9;
+  const pages = Math.ceil(totalCarsCount / size);
+  console.log(currentPage);
+  const increasePageNum = (num) => {
+    if (pages - 1 > num) {
+      console.log(num);
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  const dicreasePageNum = (num) => {
+    if (0 < num) {
+      console.log(num);
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   const { cars, isFetching } = useGetCars({
     search: searchInput,
     filter: allFilter,
+    page: currentPage,
+    size,
     sortOption: sortOption,
   });
   const [carsFilterData, setCarsFilterData] = useState([]);
@@ -390,12 +415,46 @@ const Services = () => {
                 </>
               )}
             </div>
+            {/* pagination button */}
+            <div className="flex justify-center items-center gap-5 md:my-10 my-5">
+              {/* left arrow */}
+              <div
+                onClick={() => {
+                  dicreasePageNum(currentPage);
+                }}
+                className=" hover:scale-110 scale-100 transition-all duration-200 cursor-pointer sBgBlack tBlack px-4 py-4 rounded-full"
+              >
+                <HiArrowNarrowLeft className="w-5 h-5 orange" />
+              </div>
+              <div className="flex justify-center items-center gap-2 ">
+                {[...Array(pages || 0).keys()].map((item) => (
+                  <a
+                    href="#result"
+                    onClick={() => {
+                      setCurrentPage(item);
+                    }}
+                    className={`cursor-pointer hover:scale-110 scale-100 transition-all duration-200 px-5 ${
+                      currentPage === item ? "fillBtn" : "sBgBlack tBlack"
+                    }  py-3 rounded-full`}
+                    key={item}
+                  >
+                    {item + 1}
+                  </a>
+                ))}
+              </div>
+              {/* right arrow */}
+              <div
+                onClick={() => {
+                  increasePageNum(currentPage);
+                }}
+                className="bg-gray-200 hover:scale-110 scale-100 transition-all duration-200 cursor-pointer hover:bg-zinc-100 px-4 py-4 rounded-full"
+              >
+                <HiArrowNarrowLeft className="w-5 h-5 orange rotate-180" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Additional Components */}
-      <BookAuto />
       <OtherServices />
       <CarPromoVideo />
       <ChatLauncher />

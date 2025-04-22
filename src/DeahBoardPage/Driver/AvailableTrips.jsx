@@ -147,25 +147,36 @@ const AvailableTrips = () => {
             {availableTrips.map((trip) => (
               <div
                 key={trip._id}
-                className="bg-[#1B1B1B] border border-amber-300 rounded-lg shadow-lg p-4"
+                className="bg-[#1B1B1B] border border-amber-300 rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105"
               >
-                <p>
-                  <strong>Customer:</strong> {trip.fullName} ({trip.email},{" "}
-                  {trip.phone})
-                </p>
-                <p>
-                  <strong>Route:</strong> {trip.pickUpLocation} →{" "}
-                  {trip.dropOffLocation}
-                </p>
-                <p>
-                  <strong>Dates:</strong> {trip.pickUpDate} → {trip.returnDate}
-                </p>
-                <p>
-                  <strong>Price:</strong> ${trip.price}
-                </p>
-                <p>
-                  <strong>Customer Say:</strong> {trip.additionalNote || "N/A"}
-                </p>
+                {trip.carImage && trip.carImage.length > 0 && (
+                  <img
+                    src={trip.carImage[0]}
+                    alt={trip.carName}
+                    className="w-full h-48 object-cover rounded-md mb-4"
+                  />
+                )}
+                <div className="space-y-2">
+                  <p className="text-gray-300">
+                    <strong>Customer:</strong> {trip.fullName} ({trip.email},{" "}
+                    {trip.phone})
+                  </p>
+                  <p className="text-gray-300">
+                    <strong>Route:</strong> {trip.pickUpLocation} →{" "}
+                    {trip.dropOffLocation}
+                  </p>
+                  <p className="text-gray-300">
+                    <strong>Dates:</strong> {trip.pickUpDate} →{" "}
+                    {trip.returnDate}
+                  </p>
+                  <p className="text-gray-300">
+                    <strong>Price:</strong> ${trip.price}
+                  </p>
+                  <p className="text-gray-300">
+                    <strong>Customer Say:</strong>{" "}
+                    {trip.additionalNote || "N/A"}
+                  </p>
+                </div>
                 <div className="flex justify-start gap-5 mt-4">
                   <button
                     onClick={() => confirmPickTrip(trip._id)}

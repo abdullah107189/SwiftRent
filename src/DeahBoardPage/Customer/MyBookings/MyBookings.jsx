@@ -4,6 +4,7 @@ import { FaShoppingCart, FaTrash } from "react-icons/fa";
 import Header from "../../../components/common/Header";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 const MyBookings = () => {
   const { user } = useSelector((state) => state.auth);
@@ -45,13 +46,54 @@ const MyBookings = () => {
     }
   };
 
+  // Add delete functionality
+  const handleDelete = async (id, driverStatus) => {
+    if (driverStatus === "Assigned") {
+      Swal.fire({
+        icon: "error",
+        title: "Cannot be deleted.",
+        text: "This booking cannot be deleted because a driver has already been assigned.",
+      });
+      return;
+    }
+
+    // Confirmation dialog
+    const confirmation = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this booking?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete!",
+      cancelButtonText: "No, keep it.",
+    });
+
+    if (confirmation.isConfirmed) {
+      try {
+        await axiosSecure.delete(`/bookings/${id}`);
+        removeBooking(id);
+        Swal.fire({
+          icon: "success",
+          title: "Delete completed!",
+          text: "Your booking has been successfully deleted.",
+        });
+      } catch (error) {
+        console.error("Failed to delete booking:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to delete booking. Please try again.",
+        });
+      }
+    }
+  };
+
   if (loading) return <div>Loading your bookings…</div>;
 
   return (
     <>
       <Header title="My Bookings" />
       <div className="min-h-screen md:p-6 p-3">
-        <h1 className="text-3xl font-bold text-center  mb-6 flex items-center justify-center gap-2">
+        <h1 className="text-3xl font-bold text-center mb-6 flex items-center justify-center gap-2">
           <FaShoppingCart className="" /> My Bookings
         </h1>
         {bookings.length > 0 ? (
@@ -87,9 +129,9 @@ const MyBookings = () => {
                         }
                         className={`px-4 py-1 rounded ${
                           booking.paymentStatus === "Success"
-                            ? "bg-green-500  cursor-not-allowed"
+                            ? "bg-green-500 cursor-not-allowed"
                             : booking.tripStatus !== "Started"
-                            ? "bg-gray-400  cursor-not-allowed"
+                            ? "bg-gray-400 cursor-not-allowed"
                             : "bg-[#f5b754] text-black hover:bg-[#e0a33d]"
                         } ${payLoadingId === booking._id ? "opacity-50" : ""}`}
                       >
@@ -104,12 +146,17 @@ const MyBookings = () => {
                           : "Pay Now"}
                       </button>
                     </td>
-
-                    <td className="p-3 text-center gap-4 flex justify-center items-center">
-                      <button className="fillBtn px-2">Cancel</button>
+                    <td className="p-3 text-center">
                       <button
-                        onClick={() => removeBooking(booking._id)}
-                        className="text-red-500 hover:text-red-700"
+                        onClick={() =>
+                          handleDelete(booking._id, booking.driver)
+                        }
+                        disabled={booking.driver === "Assigned"}
+                        className={`text-red-500 hover:text-red-700 ${
+                          booking.driver === "Assigned"
+                            ? "cursor-not-allowed opacity-50"
+                            : ""
+                        }`}
                       >
                         <FaTrash />
                       </button>

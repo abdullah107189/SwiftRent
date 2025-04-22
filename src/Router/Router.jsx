@@ -1,16 +1,16 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import MainLayout from "../layout/MainLayout";
-import Home from "../page/Home";
-import Services from "../page/services/Services";
-import About from "../page/About/About";
-import Contact from "../page/Contact/Contact";
-import LogIn from "../page/Authentication/LogIn";
-import Register from "../page/Authentication/Register";
-import Dashboard from "../layout/Dashboard/Dashboard";
-import OverviewPage from "../DeahBoardPage/OverviewPage";
-import AddToCar from "../DeahBoardPage/Admin/AddToCar";
-import CarProducatPage from "../DeahBoardPage/CarProducatPage";
-import UsersPage from "../DeahBoardPage/Admin/Users/UsersPage";
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import MainLayout from '../layout/MainLayout';
+import Home from '../page/Home';
+import Services from '../page/services/Services';
+import About from '../page/About/About';
+import Contact from '../page/Contact/Contact';
+import LogIn from '../page/Authentication/LogIn';
+import Register from '../page/Authentication/Register';
+import Dashboard from '../layout/Dashboard/Dashboard';
+import OverviewPage from '../DeahBoardPage/OverviewPage';
+import AddToCar from '../DeahBoardPage/Admin/AddToCar';
+import CarProducatPage from '../DeahBoardPage/CarProducatPage';
+import UsersPage from '../DeahBoardPage/Admin/Users/UsersPage';
 
 import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
 import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
@@ -41,30 +41,31 @@ import UserDashboard from "../DeahBoardPage/Customer/UserDashboard/UserDashboard
 import WriteBlog from "../page/WriteBlog/WriteBlog";
 // import Blogs from "../page/blogs/Blogs";
 
+
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home></Home>,
       },
       {
-        path: "/singlebooking",
+        path: '/singlebooking',
         element: <SingleBooking></SingleBooking>,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <About></About>,
       },
 
       {
-        path: "/contact",
+        path: '/contact',
         element: <Contact />,
       },
       {
-        path: "/services",
+        path: '/services',
         element: <Services />,
       },
       // {
@@ -73,77 +74,77 @@ export const router = createBrowserRouter([
       // },
 
       {
-        path: "/car-details/:id",
+        path: '/car-details/:id',
         element: <CarDetails />,
       },
 
       {
-        path: "/number-card",
+        path: '/number-card',
         element: <NumberCard />,
       },
       {
-        path: "/book-auto",
+        path: '/book-auto',
         element: <BookAuto />,
       },
       {
-        path: "/expert/:id",
+        path: '/expert/:id',
         element: <ExpertDetails />,
       },
     ],
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: <Dashboard />,
     children: [
       { index: true, element: <Navigate to="overview" /> },
-      { path: "overview", element: <OverviewPage /> },
-      { path: "add-car", element: <AddToCar /> },
-      // { path: "add-blog", element: <WriteBlog /> },
-      { path: "manage-cars", element: <ManageCars /> },
-      { path: "update-car/:id", element: <Updatecar /> },
-      { path: "manage-bookings", element: <ManageBookings /> },
 
-      { path: "customers-manage", element: <UsersPage /> },
-      { path: "manage-drivers", element: <ManageDrivers /> },
-      { path: "live-chat", element: <LiveChat /> },
-      { path: "billing", element: <BillingPage /> },
-      { path: "order", element: <OrdersPage /> },
-      { path: "live-chat", element: <LiveChat /> },
-      { path: "settings", element: <SettingsPage /> },
-      { path: "manage-bookings", element: <CarProducatPage /> },
+      { path: 'overview', element: <OverviewPage /> },
+      { path: 'add-car', element: <AddToCar /> },
+      { path: 'manage-cars', element: <ManageCars /> },
+      { path: 'update-car/:id', element: <Updatecar /> },
+      { path: 'manage-bookings', element: <ManageBookings /> },
+      { path: 'customers-manage', element: <UsersPage /> },
+      { path: 'manage-drivers', element: <ManageDrivers /> },
+      { path: 'billing', element: <BillingPage /> },
+      { path: 'order', element: <OrdersPage /> },
+      { path: 'live-chat', element: <LiveChat /> },
+      { path: 'settings', element: <SettingsPage /> },
+      { path: 'manage-bookings', element: <CarProducatPage /> },
 
       // customer
 
-      { path: "user-dashboard", element:  <UserDashboard/> },
-      { path: "browse-cars", element: <BrowseCars /> },
-      { path: "my-bookings", element: <MyBookings /> },
-      { path: "payments", element: <PaymentHistory /> },
-      { path: "profile", element: <UpdateProfile /> },
-      { path: "settings", element: <SettingsPage /> },
-      { path: "change-password", element: <ChangePassword /> },
+      { path: 'browse-cars', element: <BrowseCars /> },
+      { path: 'my-bookings', element: <MyBookings /> },
+      { path: 'payments', element: <PaymentHistory /> },
+      { path: 'profile', element: <UpdateProfile /> },
+      { path: 'settings', element: <SettingsPage /> },
+      { path: 'change-password', element: <ChangePassword /> },
+      //drivers
+      { path: 'start-trip', element: <StartTrip /> },
+      { path: 'available-trips', element: <AvailableTrips /> },
+      { path: 'trip-history', element: <TripHistory /> },
+      { path: 'customer-reviews', element: <CustomerReviews /> },
+      { path: 'earnings', element: <Earnings /> },
 
-      { path: "start-trip", element: <StartTrip /> },
-      { path: "available-trips", element: <AvailableTrips /> },
-      { path: "trip-history", element: <TripHistory /> },
-      { path: "customer-reviews", element: <CustomerReviews /> },
-      { path: "earnings", element: <Earnings /> },
+
+
     ],
   },
   {
-    path: "/register",
+    path: '/register',
     element: <Register />,
   },
   {
-    path: "/login",
+    path: '/login',
     element: <LogIn />,
   },
   {
-    path: "/forget-password",
+    path: '/forget-password',
     element: <ForgetPassword />,
   },
 
   {
-    path: "*",
+    path: '*',
     element: <ErrorPage />,
   },
 ]);

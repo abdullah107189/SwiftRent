@@ -98,7 +98,7 @@ const Sidebar = ({ userRole }) => {
         <div className="divider">OR</div>
         <button
           onClick={handleLogout}
-          className="mt-auto flex items-center gap-3 p-3 rounded-lg bg-red-500 hover:bg-red-700 w-full"
+          className="mt-auto flex items-center gap-3 p-3 rounded-lg bg-red-500 hover:bg-red-700 w-full cursor-pointer"
         >
           <LogOut size={20} />
           <span>Logout</span>

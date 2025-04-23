@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-// Sidebar.jsx
+
 import {
   FaTachometerAlt,
   FaCar,
@@ -12,17 +12,18 @@ import {
   FaRoute,
   FaMapMarkedAlt,
 } from "react-icons/fa";
-import { Car, LogOut, Settings, ShoppingCart } from "lucide-react";
+import { Car, LogOut, Settings } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/auth/authSlice";
 import { HiOutlineDocumentText } from "react-icons/hi";
+import { FiEdit } from "react-icons/fi";
 
 const menuItems = {
   Admin: [
     { name: "Dashboard", path: "overview", icon: FaTachometerAlt },
     { name: "Add Car", path: "add-car", icon: Car },
-    // { name: "Add Blog", path: "add-blog", icon: HiOutlineDocumentText },
+    { name: "Write Blog", path: "write-blog", icon: FiEdit },
     { name: "Manage Cars", path: "manage-cars", icon: FaCar },
     { name: "Manage Bookings", path: "manage-bookings", icon: FaClipboardList },
     { name: "Customers Management", path: "customers-manage", icon: FaUsers },
@@ -33,11 +34,9 @@ const menuItems = {
   ],
   customer: [
     { name: "Dashboard", path: "user-dashboard", icon: FaTachometerAlt },
-
     { name: "Browse Cars", path: "browse-cars", icon: FaCar },
     { name: "My Bookings", path: "my-bookings", icon: FaShoppingCart },
     { name: "Payment History", path: "payments", icon: FaMoneyBill },
-    // { name: 'Update Profile', path: 'profile', icon: FaUser },
     { name: "Settings", path: "settings", icon: Settings },
   ],
   driver: [
@@ -45,7 +44,6 @@ const menuItems = {
     { name: "Available Trips", path: "available-trips", icon: FaMapMarkedAlt },
     { name: "Trip History", path: "trip-history", icon: FaClipboardList },
     { name: "Customer Reviews", path: "customer-reviews", icon: FaStar },
-    // { name: 'Update Profile', path: 'profile', icon: FaUser },
     { name: "Earnings", path: "earnings", icon: FaMoneyBill },
     { name: "Settings", path: "settings", icon: Settings },
   ],
@@ -60,7 +58,7 @@ const Sidebar = ({ userRole }) => {
       .unwrap()
       .then(() => navigate("/login"))
       .catch((error) => error.message);
-      // .catch((error) => console.error("Logout failed:", error));
+    // .catch((error) => console.error("Logout failed:", error));
   };
 
   const items = menuItems[userRole];

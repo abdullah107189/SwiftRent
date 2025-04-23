@@ -1,24 +1,24 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Search } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Search } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
-import { FaRegTrashAlt } from "react-icons/fa";
-import Spinner from "../../../components/Spinner";
-import Swal from "sweetalert2";
+import { FaRegTrashAlt } from 'react-icons/fa';
+import Spinner from '../../../components/Spinner';
+import Swal from 'sweetalert2';
 const UsersTable = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const axiosSecure = useAxiosSecure();
-  const role = "customer";
+  const role = 'customer';
   const {
     data: users = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["users", role],
+    queryKey: ['users', role],
     queryFn: async () => {
       const { data } = await axiosSecure(`/customers/${role}`);
       return data;
@@ -30,43 +30,43 @@ const UsersTable = () => {
   }, [users]);
 
   // Search Functionality
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
 
     const filtered = users?.filter(
-      (u) =>
+      u =>
         u.userInfo?.name.toLowerCase().includes(term) ||
         u.userInfo?.email.toLowerCase().includes(term)
     );
     setFilteredUsers(filtered);
   };
 
-  const handelUserDelete = async (id) => {
+  const handelUserDelete = async id => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "User  will be deleted",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'User  will be deleted',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async result => {
       if (result.isConfirmed) {
         try {
           await axiosSecure.delete(`/user-delete/${id}`);
           refetch();
           Swal.fire({
-            title: "Deleted!",
-            text: "Customers has been deleted.",
-            icon: "success",
+            title: 'Deleted!',
+            text: 'Customers has been deleted.',
+            icon: 'success',
           });
         } catch (error) {
           // console.error(error);
           Swal.fire({
-            title: "Error!",
-            text: "Something went wrong.",
-            icon: "error",
+            title: 'Error!',
+            text: 'Something went wrong.',
+            icon: 'error',
           });
         }
       }
@@ -83,7 +83,10 @@ const UsersTable = () => {
       transition={{ delay: 0.2 }}
     >
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold ">Customers Lists</h2>
+        <div>
+          <h2 className="text-xl font-semibold ">Customers Management</h2>
+          <p className="text-sm mt-2">View and manage all customer accounts</p>
+        </div>
         <div className="relative">
           <input
             type="text"
@@ -96,25 +99,30 @@ const UsersTable = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overflow-y-auto">
         <table className="min-w-full divide-y ">
           <thead>
             <tr>
-              {["Name", "Email", "Phone", "Status", "Actions"].map(
-                (heading) => (
-                  <th
-                    key={heading}
-                    className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
-                  >
-                    {heading}
-                  </th>
-                )
-              )}
+              {[
+                'Customer',
+                'Contact Info',
+                'Joined Date',
+                'Rentals',
+                'Status',
+                'Actions',
+              ].map(heading => (
+                <th
+                  key={heading}
+                  className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+                >
+                  {heading}
+                </th>
+              ))}
             </tr>
           </thead>
 
           <tbody className="divide-y ">
-            {filteredUsers.map((u) => (
+            {filteredUsers.map(u => (
               <motion.tr
                 key={u._id}
                 initial={{ opacity: 0 }}
@@ -137,22 +145,33 @@ const UsersTable = () => {
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm ">{u?.userInfo?.email}</div>
+                  <div className="text-sm ">
+                    {u?.userInfo?.email}
+                    <br />
+                    <p className="px-2 pt-2  text-sm leading-5   cursor-pointer">
+                      {'+8801703500000'}
+                    </p>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className="px-2 text-sm  cursor-pointer">
+                    {u.creationDate}
+                  </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-[#f5b754]/20 cursor-pointer">
-                    {"+8801703500000"}
+                    1
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                       u.isActive
-                        ? "bg-green-800 text-green-100"
-                        : "bg-red-800 text-red-100"
+                        ? 'bg-green-800 text-green-100'
+                        : 'bg-red-800 text-red-100'
                     }`}
                   >
-                    {u.isActive ? "Active" : "Inactive"}
+                    {u.isActive ? 'Active' : 'Inactive'}
                   </span>
                 </td>
 

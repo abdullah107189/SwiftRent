@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Header from '../../components/common/Header';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
@@ -9,18 +8,17 @@ import { Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Spinner from '../../components/Spinner';
 
-
 const ManageDrivers = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const axiosSecure = useAxiosSecure();
-  const role = "driver";
+  const role = 'driver';
   const {
     data: users = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["users", role],
+    queryKey: ['users', role],
     queryFn: async () => {
       const { data } = await axiosSecure(`/drivers/${role}`);
       return data;
@@ -32,42 +30,42 @@ const ManageDrivers = () => {
   }, [users]);
 
   // Search Functionality
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     const filtered = users.filter(
-      (u) =>
+      u =>
         u.name.toLowerCase().includes(term) ||
         u.email.toLowerCase().includes(term)
     );
     setFilteredUsers(filtered);
   };
 
-  const handelUserDelete = async (id) => {
+  const handelUserDelete = async id => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "User  will be deleted",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'User  will be deleted',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async result => {
       if (result.isConfirmed) {
         try {
           await axiosSecure.delete(`/user-delete/${id}`);
           refetch();
           Swal.fire({
-            title: "Deleted!",
-            text: "Customers has been deleted.",
-            icon: "success",
+            title: 'Deleted!',
+            text: 'Customers has been deleted.',
+            icon: 'success',
           });
         } catch (error) {
           // console.error(error);
           Swal.fire({
-            title: "Error!",
-            text: "Something went wrong.",
-            icon: "error",
+            title: 'Error!',
+            text: 'Something went wrong.',
+            icon: 'error',
           });
         }
       }
@@ -78,7 +76,7 @@ const ManageDrivers = () => {
 
   return (
     <>
-      <Header title="Manage Drivers" />
+      <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
       <motion.div
         className="shadow-lg rounded-xl m-4 p-4 border dark:border-white/20 border-black/20"
         initial={{ opacity: 0, y: 20 }}
@@ -103,8 +101,8 @@ const ManageDrivers = () => {
           <table className="min-w-full divide-y ">
             <thead>
               <tr>
-                {["Name", "Email", "Phone", "Status", "Actions"].map(
-                  (heading) => (
+                {['Name', 'Email', 'Phone', 'Status', 'Actions'].map(
+                  heading => (
                     <th
                       key={heading}
                       className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
@@ -117,7 +115,7 @@ const ManageDrivers = () => {
             </thead>
 
             <tbody className="divide-y ">
-              {filteredUsers.map((u) => (
+              {filteredUsers.map(u => (
                 <motion.tr
                   key={u._id}
                   initial={{ opacity: 0 }}
@@ -144,18 +142,18 @@ const ManageDrivers = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-[#f5b754] text-whaite cursor-pointer">
-                      {"+8801703500000"}
+                      {'+8801703500000'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
                       className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                         u.isActive
-                          ? "bg-green-800 text-green-100"
-                          : "bg-red-800 text-red-100"
+                          ? 'bg-green-800 text-green-100'
+                          : 'bg-red-800 text-red-100'
                       }`}
                     >
-                      {u.isActive ? "Active" : "Inactive"}
+                      {u.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </td>
 

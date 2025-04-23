@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react"; // Import useState and useEffect
-import Header from "../components/common/Header";
-import { motion } from "framer-motion";
-import StatCard from "../components/common/StatCard";
-import { BarChart, ShoppingCart, Users, Zap } from "lucide-react";
-import SalesOverviewChart from "../components/common/SalesOverviewChart";
-import CategoryDistributionChart from "../components/common/CategroyDistributionChart";
-import SalesChannelChart from "../components/common/SalesChannelChart";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useEffect, useState } from 'react'; // Import useState and useEffect
+import Header from '../components/common/Header';
+import { motion } from 'framer-motion';
+import StatCard from '../components/common/StatCard';
+import { BarChart, ShoppingCart, Users, Zap } from 'lucide-react';
+import SalesOverviewChart from '../components/common/SalesOverviewChart';
+import CategoryDistributionChart from '../components/common/CategroyDistributionChart';
+import SalesChannelChart from '../components/common/SalesChannelChart';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const OverviewPage = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,7 +17,7 @@ const OverviewPage = () => {
 
   const fetchAllUsers = async () => {
     try {
-      const response = await axiosSecure.get("/all-user");
+      const response = await axiosSecure.get('/all-user');
       setAllUser(response.data);
     } catch (error) {
       // console.error(error);
@@ -30,7 +30,7 @@ const OverviewPage = () => {
 
   return (
     <div className="">
-      <Header title="Overview" />
+      <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
       <main className="w-full px-4 pb-4">
         <motion.div
           className="grid grid-cols-1 gap-4 dm:grid-cols-2 lg:grid-cols-4 mb-8 py-4"

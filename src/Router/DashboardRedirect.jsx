@@ -9,7 +9,7 @@ const DashboardRedirect = () => {
     return <Spinner />;
   }
 
-  if (userRole === 'admin') {
+  if (userRole === 'Admin') {
     return <Navigate to="/dashboard/overview" />;
   } else if (userRole === 'customer') {
     return <Navigate to="/dashboard/user-dashboard" />;

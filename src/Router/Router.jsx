@@ -133,7 +133,7 @@ export const router = createBrowserRouter([
       { path: 'earnings', element: <Earnings /> },
     ],
   },
-  //deshboard router Endg
+  //deshboard router End
   {
     path: '/register',
     element: <Register />,

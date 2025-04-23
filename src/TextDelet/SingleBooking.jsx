@@ -31,7 +31,7 @@ const SingleBooking = () => {
         console.error("No GatewayPageURL:", data);
       }
     } catch (err) {
-      console.error("Payment error:", err);
+      // console.error("Payment error:", err);
       alert("Could not initiate payment.");
     } finally {
       setPayLoadingId(null);
@@ -49,7 +49,7 @@ const SingleBooking = () => {
         bookings.map((b) => (
           <div
             key={b._id}
-            className="p-4 border rounded bg-gray-800 text-white flex justify-between items-center"
+            className="p-4 border rounded bg-gray-800  flex justify-between items-center"
           >
             <div>
               <p>

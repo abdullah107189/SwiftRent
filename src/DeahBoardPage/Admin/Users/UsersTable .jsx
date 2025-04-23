@@ -39,7 +39,6 @@ const UsersTable = () => {
         u.userInfo?.name.toLowerCase().includes(term) ||
         u.userInfo?.email.toLowerCase().includes(term)
     );
-    console.log(filtered);
     setFilteredUsers(filtered);
   };
 
@@ -63,7 +62,7 @@ const UsersTable = () => {
             icon: "success",
           });
         } catch (error) {
-          console.error(error);
+          // console.error(error);
           Swal.fire({
             title: "Error!",
             text: "Something went wrong.",
@@ -78,34 +77,34 @@ const UsersTable = () => {
 
   return (
     <motion.div
-      className="  shadow-lg rounded-xl p-6 border border-gray-700 p"
+      className="  shadow-lg rounded-xl p-6 border dark:border-white/20 border-black/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-100">Customers Lists</h2>
+        <h2 className="text-xl font-semibold ">Customers Lists</h2>
         <div className="relative">
           <input
             type="text"
             placeholder="Search users..."
-            className="bg-[#f5b754]/10 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="bg-[#f5b754]/10 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             value={searchTerm}
             onChange={handleSearch}
           />
-          <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+          <Search className="absolute left-3 top-2.5 " size={18} />
         </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-700">
+        <table className="min-w-full divide-y ">
           <thead>
             <tr>
               {["Name", "Email", "Phone", "Status", "Actions"].map(
                 (heading) => (
                   <th
                     key={heading}
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
                   >
                     {heading}
                   </th>
@@ -114,7 +113,7 @@ const UsersTable = () => {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-700">
+          <tbody className="divide-y ">
             {filteredUsers.map((u) => (
               <motion.tr
                 key={u._id}
@@ -125,11 +124,11 @@ const UsersTable = () => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-100">
+                      <div className="text-sm font-medium ">
                         <img
                           src={u?.userInfo?.photoURL}
                           alt="user"
-                          className="w-10 h-10 rounded-full border border-yellow-800"
+                          className="w-10 h-10 rounded-full border"
                         />
                         {u?.userInfo?.name}
                       </div>
@@ -138,12 +137,10 @@ const UsersTable = () => {
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-300">
-                    {u?.userInfo?.email}
-                  </div>
+                  <div className="text-sm ">{u?.userInfo?.email}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-[#f5b754] text-whaite cursor-pointer">
+                  <span className="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-[#f5b754]/20 cursor-pointer">
                     {"+8801703500000"}
                   </span>
                 </td>
@@ -159,10 +156,10 @@ const UsersTable = () => {
                   </span>
                 </td>
 
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                <td className="px-6 py-4 whitespace-nowrap text-sm ">
                   <button
                     onClick={() => handelUserDelete(u._id)}
-                    className="text-[#f5b754] hover:text-red-300 cursor-pointer"
+                    className="orange hover:text-red-300 cursor-pointer"
                   >
                     <FaRegTrashAlt />
                   </button>

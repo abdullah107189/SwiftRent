@@ -1,7 +1,7 @@
-import Header from '../../components/common/Header';
-import Notifications from './Notifications';
-import Profile from './Profile ';
-import Security from './Security';
+import Header from "../../components/common/Header";
+import Notifications from "./Notifications";
+import Profile from "./Profile ";
+import Security from "./Security";
 
 const SettingsPage = () => {
   return (

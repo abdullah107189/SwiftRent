@@ -26,7 +26,7 @@ const TripHistory = () => {
         const response = await axiosPublic.get(`/trip-history/${driverEmail}`);
         setTripHistory(response.data);
       } catch (error) {
-        console.error("Failed to fetch trip history:", error);
+        // console.error("Failed to fetch trip history:", error);
       }
     };
 
@@ -39,7 +39,7 @@ const TripHistory = () => {
     <>
       <Header title="Trip History" />
       <div className=" px-4 py-10">
-        <h2 className="text-3xl font-bold text-center text-[#f5b754] mb-8 flex items-center justify-center gap-2">
+        <h2 className="text-3xl font-bold text-center orange mb-8 flex items-center justify-center gap-2">
           <FaCheckCircle /> Trip History
         </h2>
 
@@ -59,38 +59,38 @@ const TripHistory = () => {
                     <td className="px-4 py-3">
                       <div className="flex flex-col gap-2">
                         <div className="flex items-center gap-2">
-                          <FaUser className="text-[#f5b754]" />
+                          <FaUser className="orange" />
                           {trip.customerName}
                         </div>
                         <div className="flex items-center gap-2">
-                          <FaPhone className="text-[#f5b754]" />
+                          <FaPhone className="orange" />
                           {trip.customerPhone}
                         </div>
                         <div className="flex items-center gap-2">
-                          <FaEnvelope className="text-[#f5b754]" />
+                          <FaEnvelope className="orange" />
                           {trip.customerEmail}
                         </div>
                         <div className="flex items-center gap-2">
-                          <FaMoneyBill className="text-[#f5b754]" />
+                          <FaMoneyBill className="orange" />
                           {trip.price}
                         </div>
                         <div className="flex items-center gap-2">
-                          <FaRoute className="text-[#f5b754]" />
+                          <FaRoute className="orange" />
                           {trip.pickUpLocation} → {trip.dropOffLocation}
                         </div>
                         <div className="flex items-center gap-2">
-                          <FaCalendarAlt className="text-[#f5b754]" />
+                          <FaCalendarAlt className="orange" />
                           {trip.pickUpDate} → {trip.returnDate}
                         </div>
                         <div className="flex items-center gap-2">
-                          <FaCreditCard className="text-[#f5b754]" />
+                          <FaCreditCard className="orange" />
                           {trip.paymentStatus}
                         </div>
                       </div>
                     </td>
                     <td className="px-4 py-3 gap-2">
                       <span className="flex items-center justify-center gap-2">
-                        <FaClock className="text-[#f5b754]" />
+                        <FaClock className="orange" />
                         {trip.assignmentTime}
                       </span>
                     </td>

@@ -59,7 +59,7 @@ const ForgetPassword = () => {
           <div>
             <button
               type="submit"
-              className="bg-[#f5b754] w-full rounded-md py-3 text-white hover:bg-[#f5b754ef]"
+              className="bg-[#f5b754] w-full rounded-md py-3  hover:bg-[#f5b754ef]"
             >
               Send Reset Email
             </button>

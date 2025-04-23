@@ -1,5 +1,6 @@
 // tailwind.config.js
 export default {
+
   theme: {
     screens: {
       sm: "640px",

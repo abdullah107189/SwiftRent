@@ -44,7 +44,7 @@ const UserGrowthChart = () => {
       const response = await axiosSecure.get('/all-user');
       setAllUser(response.data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -67,7 +67,7 @@ const UserGrowthChart = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <h2 className="text-xl font-semibold text-gray-100 mb-4">Customer Growth</h2>
+      <h2 className="text-xl font-semibold  mb-4">Customer Growth</h2>
       <div className="h-[320px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={userGrowthData}>

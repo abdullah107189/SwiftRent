@@ -12,22 +12,22 @@ const PaymentHistory = () => {
 
   useEffect(() => {
     if (!user?.email) {
-      console.log("No user email found");
+      // console.log("No user email found");
       setLoading(false);
       return;
     }
 
-    console.log("Fetching payments for email:", user.email);
+    // console.log("Fetching payments for email:", user.email);
     setLoading(true);
     axiosSecure
       .get(`/payments/${user.email}`)
       .then((res) => {
         const data = Array.isArray(res.data) ? res.data : [];
-        console.log("Payments data:", data);
+        // console.log("Payments data:", data);
         setPayments(data);
       })
       .catch((err) => {
-        console.error("Error fetching payments:", err);
+        // console.error("Error fetching payments:", err);
         alert("Failed to load payment history.");
       })
       .finally(() => setLoading(false));
@@ -38,15 +38,15 @@ const PaymentHistory = () => {
   return (
     <>
       <Header title="Payment History" />
-      <div className="min-h-screen p-6">
+      <div className="min-h-screen md:p-6 p-3">
         <h1 className="text-3xl font-bold text-center mb-6 flex items-center justify-center gap-2">
-          <FaMoneyBill className="text-[#f5b754]" /> Payment History
+          <FaMoneyBill className="orange" /> Payment History
         </h1>
         {payments.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="w-full bg-[#f5b754]/10 shadow-lg rounded-lg">
-              <thead>
-                <tr className="text-white bg-[#f5b754]">
+            <table className="w-full shadow-lg rounded-lg">
+              <thead className="sBgBlack">
+                <tr className=" ">
                   <th className="p-3 text-left">Amount</th>
                   <th className="p-3 text-left">Date & Time</th>
                   <th className="p-3 text-left">trxID</th>

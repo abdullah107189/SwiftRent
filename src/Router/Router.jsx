@@ -40,6 +40,7 @@ import LiveChat from "../components/liveChat/LiveChat";
 import WriteBlog from "../page/WriteBlog/WriteBlog";
 import Blogs from "../page/blogs/Blogs";
 import BlogDetails from "../page/blogs/BlogDetails";
+import UserDashboard from "../DeahBoardPage/Customer/UserDashboard/UserDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -69,7 +70,6 @@ export const router = createBrowserRouter([
       },
 
       {
-
         path: "/blogs",
         element: <Blogs />,
       },
@@ -119,7 +119,6 @@ export const router = createBrowserRouter([
 
       // customer
       { path: "user-dashboard", element: <UserDashboard /> },
-      { index: true, element: <Navigate to="browse-cars" /> },
       { path: "browse-cars", element: <BrowseCars /> },
       { path: "my-bookings", element: <MyBookings /> },
       { path: "payments", element: <PaymentHistory /> },

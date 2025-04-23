@@ -21,7 +21,8 @@ export default function UserDashboard() {
   const axiosSecure = useAxiosSecure();
 
   const [booking, setBokking] = useState([]);
-  const [payment, setPayment]=useState([])
+  const [payment, setPayment] = useState([]);
+  const [availAble, setAvailAble] = useState([]);
   const [userBooking, setUserBooking] = useState([]);
   const { user } = useSelector((state) => state.auth);
 
@@ -46,27 +47,38 @@ export default function UserDashboard() {
     }
   };
 
-   const fetchUserBookings = async () => {
-     try {
-       const userEmail = user ?.email;
-       const response = await axiosSecure.get(`/all-userBooking/${userEmail}`);
-       setUserBooking(response.data);
-     } catch (error) {
-       console.error(error);
-     }
+  // available car route
+  const fetchAvilableCar = async () => {
+    try {
+      const response = await axiosSecure.get(`/available-cars`);
+      setAvailAble(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
-   useEffect(() => {
-     if (!user?.email) return;
-     axiosSecure
-       .get(`/bookings/${user.email}`)
-       .then((res) => setUserBooking(res.data))
-       .catch((err) => console.error(err))
-   }, [user, axiosSecure]);
+
+  const fetchUserBookings = async () => {
+    try {
+      const userEmail = user?.email;
+      const response = await axiosSecure.get(`/all-userBooking/${userEmail}`);
+      setUserBooking(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    if (!user?.email) return;
+    axiosSecure
+      .get(`/bookings/${user.email}`)
+      .then((res) => setUserBooking(res.data))
+      .catch((err) => console.error(err));
+  }, [user, axiosSecure]);
 
   useEffect(() => {
     fetchBooking();
     fetchUserBookings();
     fetchPayment();
+    fetchAvilableCar();
   }, []);
   return (
     <div className="">
@@ -98,9 +110,9 @@ export default function UserDashboard() {
             color="#EC4899"
           />
           <StatCard
-            name="Conversion Rate"
+            name="Available Cars"
             icon={BarChart}
-            value="12.34%"
+            value={availAble?.length}
             color="#10B981"
           />
         </motion.div>
@@ -108,10 +120,10 @@ export default function UserDashboard() {
         {/* CHARTS */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <BookingOverview />
-          <UserCategoryCharty/>
-              {/* <CategoryDistributionChart />
+          <UserCategoryCharty />
+          {/* <CategoryDistributionChart />
               <SalesChannelChart /> */}
-            </div>
+        </div>
       </main>
     </div>
   );

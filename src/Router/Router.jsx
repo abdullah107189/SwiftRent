@@ -69,6 +69,7 @@ export const router = createBrowserRouter([
       },
 
       {
+
         path: "/blogs",
         element: <Blogs />,
       },
@@ -117,6 +118,7 @@ export const router = createBrowserRouter([
       { path: "manage-bookings", element: <CarProducatPage /> },
 
       // customer
+      { path: "user-dashboard", element: <UserDashboard /> },
       { index: true, element: <Navigate to="browse-cars" /> },
       { path: "browse-cars", element: <BrowseCars /> },
       { path: "my-bookings", element: <MyBookings /> },

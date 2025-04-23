@@ -39,6 +39,7 @@ import AvailableTrips from "../DeahBoardPage/Driver/AvailableTrips";
 import LiveChat from "../components/liveChat/LiveChat";
 import WriteBlog from "../page/WriteBlog/WriteBlog";
 import Blogs from "../page/blogs/Blogs";
+import BlogDetails from "../page/blogs/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />,
       },
 
       {

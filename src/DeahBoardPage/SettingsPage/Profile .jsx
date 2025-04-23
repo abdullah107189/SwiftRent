@@ -1,20 +1,20 @@
-import { User } from 'lucide-react';
-import SettingSection from './SettingSection';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import imageUploade from '../../components/CarImageUploade/ImageChanges';
-import Header from '../../components/common/Header';
-import UpdateProfile from '../UpdateProfile/UpdateProfile';
+import { User } from "lucide-react";
+import SettingSection from "./SettingSection";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import imageUploade from "../../components/CarImageUploade/ImageChanges";
+import Header from "../../components/common/Header";
+import UpdateProfile from "../UpdateProfile/UpdateProfile";
 
 const Profile = () => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
   console.log(user?.displayName);
   const dispatch = useDispatch();
-  const [image, setImage] = useState(user?.photoURL || '');
+  const [image, setImage] = useState(user?.photoURL || "");
   const [imageFile, setImageFile] = useState(null);
   const [updateProfile, setUpadteProfile] = useState(false);
   console.log(image, imageFile);
-  const handleImageChange = async e => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       try {
@@ -22,7 +22,7 @@ const Profile = () => {
         setImage(uploadedImageUrl);
         setImageFile(file);
       } catch (error) {
-        console.error('Error uploading image:', error);
+        console.error("Error uploading image:", error);
       }
     }
   };
@@ -31,7 +31,7 @@ const Profile = () => {
   };
   return (
     <>
-      <SettingSection icon={User} title={'Profile'}>
+      <SettingSection icon={User} title={"Profile"}>
         <div className="flex flex-col sm:flex-row items-center mb-6">
           {/* Profile Image */}
           <label htmlFor="file-upload" className="cursor-pointer">

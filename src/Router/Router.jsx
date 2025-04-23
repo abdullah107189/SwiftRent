@@ -12,31 +12,36 @@ import AddToCar from '../DeahBoardPage/Admin/AddToCar';
 import CarProducatPage from '../DeahBoardPage/CarProducatPage';
 import UsersPage from '../DeahBoardPage/Admin/Users/UsersPage';
 
-import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
-import SettingsPage from '../DeahBoardPage/SettingsPage/SettingsPage';
-import BrowseCars from '../DeahBoardPage/Customer/Browse Cars/BrowseCars';
-import MyBookings from '../DeahBoardPage/Customer/MyBookings/MyBookings';
-import PaymentHistory from '../DeahBoardPage/Customer/Payment History/PaymentHistory';
-import UpdateProfile from '../DeahBoardPage/UpdateProfile/UpdateProfile';
-import CarDetails from '../components/common/CarDetails/CarDetails';
-import NumberCard from '../components/shared/card/NumberCard';
-import BookAuto from '../page/services/BookAuto';
-import ForgetPassword from '../page/Authentication/ForgetPassword';
-import ChangePassword from '../DeahBoardPage/SettingsPage/ChangePassword';
-import ExpertDetails from '../page/About/expertsTeam/ExpertDetails';
-import ErrorPage from '../components/shared/ErrorPage';
-import StartTrip from '../DeahBoardPage/Driver/StartTrip';
-import TripHistory from '../DeahBoardPage/Driver/TripHistory';
-import CustomerReviews from '../DeahBoardPage/Driver/CustomerReviews';
-import Earnings from '../DeahBoardPage/Driver/Earnings';
-import SingleBooking from '../TextDelet/SingleBooking';
-import ManageCars from '../DeahBoardPage/Admin/ManageCars/ManageCars';
-import ManageBookings from '../DeahBoardPage/Admin/ManageBookings';
-import ManageDrivers from '../DeahBoardPage/Admin/ManageDrivers';
-import BillingPage from '../DeahBoardPage/Admin/BillingPage';
-import Updatecar from '../DeahBoardPage/Admin/ManageCars/Updatecar';
-import AvailableTrips from '../DeahBoardPage/Driver/AvailableTrips';
-import LiveChat from '../components/liveChat/LiveChat';
+
+import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
+import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
+import BrowseCars from "../DeahBoardPage/Customer/Browse Cars/BrowseCars";
+import MyBookings from "../DeahBoardPage/Customer/MyBookings/MyBookings";
+import PaymentHistory from "../DeahBoardPage/Customer/Payment History/PaymentHistory";
+import UpdateProfile from "../DeahBoardPage/UpdateProfile/UpdateProfile";
+import CarDetails from "../components/common/CarDetails/CarDetails";
+import NumberCard from "../components/shared/card/NumberCard";
+import BookAuto from "../page/services/BookAuto";
+import ForgetPassword from "../page/Authentication/ForgetPassword";
+import ChangePassword from "../DeahBoardPage/SettingsPage/ChangePassword";
+import ExpertDetails from "../page/About/expertsTeam/ExpertDetails";
+import ErrorPage from "../components/shared/ErrorPage";
+import StartTrip from "../DeahBoardPage/Driver/StartTrip";
+import TripHistory from "../DeahBoardPage/Driver/TripHistory";
+import CustomerReviews from "../DeahBoardPage/Driver/CustomerReviews";
+import Earnings from "../DeahBoardPage/Driver/Earnings";
+import SingleBooking from "../TextDelet/SingleBooking";
+import ManageCars from "../DeahBoardPage/Admin/ManageCars/ManageCars";
+import ManageBookings from "../DeahBoardPage/Admin/ManageBookings";
+import ManageDrivers from "../DeahBoardPage/Admin/ManageDrivers";
+import BillingPage from "../DeahBoardPage/Admin/BillingPage";
+import Updatecar from "../DeahBoardPage/Admin/ManageCars/Updatecar";
+import AvailableTrips from "../DeahBoardPage/Driver/AvailableTrips";
+import LiveChat from "../components/liveChat/LiveChat";
+import WriteBlog from "../page/WriteBlog/WriteBlog";
+import Blogs from "../page/blogs/Blogs";
+import BlogDetails from "../page/blogs/BlogDetails";
+
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +69,16 @@ export const router = createBrowserRouter([
         path: '/services',
         element: <Services />,
       },
+
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />,
+      },
+
 
       {
         path: '/car-details/:id',

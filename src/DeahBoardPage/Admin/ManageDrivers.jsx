@@ -91,6 +91,10 @@ const ManageDrivers = () => {
   return (
     <>
       <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
+      <div className="pl-3 py-4">
+        <h2 className="text-xl font-semibold ">Manage Drivers</h2>
+        <p> View and manage all driver accounts</p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
         {stats.map((stat, index) => (
           <div
@@ -113,8 +117,7 @@ const ManageDrivers = () => {
       >
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-xl font-semibold ">Manage Drivers</h2>
-            <p> View and manage all driver accounts</p>
+            <h2 className="text-xl font-semibold ">Driver Directory</h2>
           </div>
           <div className="relative">
             <input
@@ -132,16 +135,22 @@ const ManageDrivers = () => {
           <table className="min-w-full divide-y ">
             <thead>
               <tr>
-                {['Name', 'Email', 'Phone', 'Status', 'Actions'].map(
-                  heading => (
-                    <th
-                      key={heading}
-                      className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
-                    >
-                      {heading}
-                    </th>
-                  )
-                )}
+                {[
+                  'Name',
+                  'Email',
+                  'Phone',
+                  'Status',
+                  'Vehicles',
+                  'Rating',
+                  'Actions',
+                ].map(heading => (
+                  <th
+                    key={heading}
+                    className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+                  >
+                    {heading}
+                  </th>
+                ))}
               </tr>
             </thead>
 
@@ -162,7 +171,7 @@ const ManageDrivers = () => {
                             alt="user"
                             className="w-10 h-10 rounded-full border border-yellow-800"
                           />
-                          {u?.userInfo?.name}
+                          <p className="pt-2">{u?.userInfo?.name}</p>
                         </div>
                       </div>
                     </div>
@@ -186,6 +195,42 @@ const ManageDrivers = () => {
                     >
                       {u.isActive ? 'Active' : 'Inactive'}
                     </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">1</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="rating rating-xs">
+                      <input
+                        type="radio"
+                        name="rating-5"
+                        className="mask mask-star-2 bg-orange-400"
+                        aria-label="1 star"
+                      />
+                      <input
+                        type="radio"
+                        name="rating-5"
+                        className="mask mask-star-2 bg-orange-400"
+                        aria-label="2 star"
+                        defaultChecked
+                      />
+                      <input
+                        type="radio"
+                        name="rating-5"
+                        className="mask mask-star-2 bg-orange-400"
+                        aria-label="3 star"
+                      />
+                      <input
+                        type="radio"
+                        name="rating-5"
+                        className="mask mask-star-2 bg-orange-400"
+                        aria-label="4 star"
+                      />
+                      <input
+                        type="radio"
+                        name="rating-5"
+                        className="mask mask-star-2 bg-orange-400"
+                        aria-label="5 star"
+                      />
+                    </div>
                   </td>
 
                   <td className="px-6 py-4 whitespace-nowrap text-sm ">

@@ -9,6 +9,23 @@ import { motion } from 'framer-motion';
 import Spinner from '../../components/Spinner';
 
 const ManageDrivers = () => {
+  const stats = [
+    {
+      title: 'Total Drivers',
+      value: 28,
+      details: 'Active: 24 | Inactive: 4',
+    },
+    {
+      title: 'Average Rating',
+      value: '4.6',
+      details: 'Out of 5.0',
+    },
+    {
+      title: 'Total Vehicles',
+      value: 42,
+      details: 'Across all active drivers',
+    },
+  ];
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const axiosSecure = useAxiosSecure();
@@ -77,6 +94,20 @@ const ManageDrivers = () => {
   return (
     <>
       <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+        {stats.map((stat, index) => (
+          <div
+            key={index}
+            className="bg-[#f5b754]/10 rounded-2xl shadow-md p-6 hover:shadow-xl transition-all"
+          >
+            <h2 className="text-lg font-semibold text-SwiftRent/src/index.css">
+              {stat.title}
+            </h2>
+            <p className="text-4xl font-bold text-text-white">{stat.value}</p>
+            <p className="text-sm text-white mt-1">{stat.details}</p>
+          </div>
+        ))}
+      </div>
       <motion.div
         className="shadow-lg rounded-xl m-4 p-4 border dark:border-white/20 border-black/20"
         initial={{ opacity: 0, y: 20 }}
@@ -84,7 +115,10 @@ const ManageDrivers = () => {
         transition={{ delay: 0.2 }}
       >
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold ">Manage Lists</h2>
+          <div>
+            <h2 className="text-xl font-semibold ">Manage Drivers</h2>
+            <p> View and manage all driver accounts</p>
+          </div>
           <div className="relative">
             <input
               type="text"

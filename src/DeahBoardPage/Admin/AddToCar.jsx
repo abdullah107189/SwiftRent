@@ -14,6 +14,7 @@ const AddToCar = () => {
     year: '',
     transmission: '',
     seats: '',
+    booking: true,
     fuel: '',
     location: {
       city: '',

@@ -11,7 +11,6 @@ import OverviewPage from '../DeahBoardPage/OverviewPage';
 import AddToCar from '../DeahBoardPage/Admin/AddToCar';
 import CarProducatPage from '../DeahBoardPage/CarProducatPage';
 import UsersPage from '../DeahBoardPage/Admin/Users/UsersPage';
-
 import OrdersPage from '../DeahBoardPage/orderStats/OrdersPage';
 import SettingsPage from '../DeahBoardPage/SettingsPage/SettingsPage';
 import BrowseCars from '../DeahBoardPage/Customer/Browse Cars/BrowseCars';
@@ -43,6 +42,7 @@ import BlogDetails from '../page/blogs/BlogDetails';
 import UserDashboard from '../DeahBoardPage/Customer/UserDashboard/UserDashboard';
 import DashboardRedirect from './DashboardRedirect';
 
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -71,7 +71,9 @@ export const router = createBrowserRouter([
       },
 
       {
+m
         path: '/blogs',
+
         element: <Blogs />,
       },
       {
@@ -125,6 +127,7 @@ export const router = createBrowserRouter([
       { path: 'payments', element: <PaymentHistory /> },
       { path: 'profile', element: <UpdateProfile /> },
       { path: 'change-password', element: <ChangePassword /> },
+
 
       // Driver routes
       { path: 'start-trip', element: <StartTrip /> },

@@ -42,7 +42,6 @@ import BlogDetails from '../page/blogs/BlogDetails';
 import UserDashboard from '../DeahBoardPage/Customer/UserDashboard/UserDashboard';
 import DashboardRedirect from './DashboardRedirect';
 
-
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -71,9 +70,7 @@ export const router = createBrowserRouter([
       },
 
       {
-m
         path: '/blogs',
-
         element: <Blogs />,
       },
       {
@@ -100,12 +97,12 @@ m
       },
     ],
   },
+  //deshboard router start
   {
     path: '/dashboard',
     element: <Dashboard />,
     children: [
       { index: true, element: <DashboardRedirect /> },
-
       // Admin routes
       { path: 'overview', element: <OverviewPage /> },
       { path: 'add-car', element: <AddToCar /> },
@@ -128,7 +125,6 @@ m
       { path: 'profile', element: <UpdateProfile /> },
       { path: 'change-password', element: <ChangePassword /> },
 
-
       // Driver routes
       { path: 'start-trip', element: <StartTrip /> },
       { path: 'available-trips', element: <AvailableTrips /> },
@@ -137,6 +133,7 @@ m
       { path: 'earnings', element: <Earnings /> },
     ],
   },
+  //deshboard router Endg
   {
     path: '/register',
     element: <Register />,

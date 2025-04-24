@@ -1,9 +1,9 @@
-import Header from '../../../components/common/Header';
+import Header from "../../../components/common/Header";
 
-import UserActivityHeatmap from './userActivityData';
+import UserActivityHeatmap from "./userActivityData";
 
-import UserGrowthChart from './UserGrowthChart';
-import UsersTable from './UsersTable ';
+import UserGrowthChart from "./UserGrowthChart";
+import UsersTable from "./UsersTable ";
 
 const UsersPage = () => {
   return (

@@ -47,7 +47,7 @@ const PostList = ({ sortOrder, selectedCategory, searchTerm }) => {
       {blogs.map((blog) => (
         <div
           key={blog._id}
-          className="bg-[#2a2a2a] text-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-200 transform hover:scale-95"
+          className="bg-white dark:bg-[#2a2a2a] text-gray-900 dark:text-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-200 transform hover:scale-95"
         >
           {blog.coverImage ? (
             <img
@@ -56,21 +56,25 @@ const PostList = ({ sortOrder, selectedCategory, searchTerm }) => {
               className="w-full h-40 object-cover"
             />
           ) : (
-            <div className="w-full h-36 bg-gray-500 flex items-center justify-center text-white text-lg">
+            <div className="w-full h-36 bg-gray-300 dark:bg-gray-500 flex items-center justify-center text-gray-700 dark:text-white text-lg">
               No Image Available
             </div>
           )}
           <div className="p-4 space-y-3">
-            <p className="text-xs text-gray-400">{blog.category}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              {blog.category}
+            </p>
             <h3 className="text-lg font-semibold text-[#f5b754]">
               {blog.title}
             </h3>
-            <p className="text-gray-300 line-clamp-3 text-sm">{blog.desc}</p>
-            <p className="text-xs text-gray-500">
+            <p className="text-gray-700 dark:text-gray-300 line-clamp-3 text-sm">
+              {blog.desc}
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-500">
               {new Date(blog.date).toLocaleDateString()}
             </p>
             <button
-              className="mt-3 cursor-pointer bg-[#f5b754] text-black py-1 px-4 rounded-full hover:bg-white hover:text-black transition duration-300"
+              className="mt-3 cursor-pointer bg-[#f5b754] text-black py-1 px-4 rounded-full dark:hover:bg-white hover:text-black transition duration-300"
               onClick={() => navigate(`/blogs/${blog._id}`)}
             >
               Read More

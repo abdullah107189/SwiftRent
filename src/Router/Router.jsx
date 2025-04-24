@@ -11,6 +11,7 @@ import OverviewPage from "../DeahBoardPage/OverviewPage";
 import AddToCar from "../DeahBoardPage/Admin/AddToCar";
 import CarProducatPage from "../DeahBoardPage/CarProducatPage";
 import UsersPage from "../DeahBoardPage/Admin/Users/UsersPage";
+
 import OrdersPage from "../DeahBoardPage/orderStats/OrdersPage";
 import SettingsPage from "../DeahBoardPage/SettingsPage/SettingsPage";
 import BrowseCars from "../DeahBoardPage/Customer/Browse Cars/BrowseCars";
@@ -39,8 +40,10 @@ import LiveChat from "../components/liveChat/LiveChat";
 import WriteBlog from "../page/WriteBlog/WriteBlog";
 import Blogs from "../page/blogs/Blogs";
 import BlogDetails from "../page/blogs/BlogDetails";
+
 import UserDashboard from "../DeahBoardPage/Customer/UserDashboard/UserDashboard";
 import DashboardRedirect from "./DashboardRedirect";
+
 
 export const router = createBrowserRouter([
   {
@@ -102,8 +105,10 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     children: [
+
       { index: true, element: <DashboardRedirect /> },
       // Admin routes
+
       { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
       { path: "write-blog", element: <WriteBlog /> },
@@ -117,12 +122,20 @@ export const router = createBrowserRouter([
       { path: "live-chat", element: <LiveChat /> },
       { path: "settings", element: <SettingsPage /> },
 
+
       // Customer routes
       { path: "user-dashboard", element: <UserDashboard /> },
+
+      { path: "manage-bookings", element: <CarProducatPage /> },
+
+
       { path: "browse-cars", element: <BrowseCars /> },
       { path: "my-bookings", element: <MyBookings /> },
       { path: "payments", element: <PaymentHistory /> },
       { path: "profile", element: <UpdateProfile /> },
+
+      { path: "settings", element: <SettingsPage /> },
+
       { path: "change-password", element: <ChangePassword /> },
 
       // Driver routes

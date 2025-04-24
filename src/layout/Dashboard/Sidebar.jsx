@@ -16,9 +16,16 @@ import { Car, LogOut, Settings } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/auth/authSlice";
+
 import { FiEdit } from "react-icons/fi";
-import axios from "axios";
+
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+
+import { HiOutlineDocumentText } from "react-icons/hi";
+import { FiEdit } from "react-icons/fi";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import axios from "axios";
+
 
 const menuItems = {
   Admin: [

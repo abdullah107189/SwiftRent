@@ -40,6 +40,7 @@ import LiveChat from "../components/liveChat/LiveChat";
 import WriteBlog from "../page/WriteBlog/WriteBlog";
 import Blogs from "../page/blogs/Blogs";
 import BlogDetails from "../page/blogs/BlogDetails";
+import BlogManager from "../DeahBoardPage/Admin/blogManage/BlogManage";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,7 @@ export const router = createBrowserRouter([
       { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
       { path: "write-blog", element: <WriteBlog /> },
+      { path: "blogs-manage", element: <BlogManager /> },
       { path: "manage-cars", element: <ManageCars /> },
       { path: "update-car/:id", element: <Updatecar /> },
       { path: "manage-bookings", element: <ManageBookings /> },

@@ -18,12 +18,14 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/auth/authSlice";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { FiEdit } from "react-icons/fi";
+import { MdEdit } from "react-icons/md";
 
 const menuItems = {
   Admin: [
     { name: "Dashboard", path: "overview", icon: FaTachometerAlt },
     { name: "Add Car", path: "add-car", icon: Car },
     { name: "Write Blog", path: "write-blog", icon: FiEdit },
+    { name: "Blog Manage", path: "blogs-manage", icon: MdEdit },
     { name: "Manage Cars", path: "manage-cars", icon: FaCar },
     { name: "Manage Bookings", path: "manage-bookings", icon: FaClipboardList },
     { name: "Customers Management", path: "customers-manage", icon: FaUsers },

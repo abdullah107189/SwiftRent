@@ -19,6 +19,13 @@ const SideMenu = ({ setSortOrder, setSelectedCategory, setSearchTerm }) => {
       .catch((error) => console.error("Error fetching categories:", error));
   }, [axiosPublic]);
 
+  // Reset all filters to default values
+  const handleReset = () => {
+    setSortOrder("newest");
+    setSelectedCategory("");
+    setSearchTerm("");
+  };
+
   return (
     <div className="h-max sticky top-18 border border-[#2a2a2a] dark:border-[#444] pl-4 pr-14 py-6 rounded-lg">
       <div className="flex items-center border rounded-xl p-2 bg-white shadow-md">
@@ -74,6 +81,14 @@ const SideMenu = ({ setSortOrder, setSelectedCategory, setSearchTerm }) => {
           <p>Loading categories...</p>
         )}
       </div>
+
+      {/* Reset Button */}
+      <button
+        onClick={handleReset}
+        className="mt-6 bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition"
+      >
+        Reset Filters
+      </button>
     </div>
   );
 };

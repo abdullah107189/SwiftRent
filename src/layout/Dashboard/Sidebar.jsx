@@ -16,10 +16,16 @@ import { Car, LogOut, Settings } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/auth/authSlice";
+
+import { FiEdit } from "react-icons/fi";
+
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { FiEdit } from "react-icons/fi";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
+
 
 const menuItems = {
   Admin: [
@@ -56,7 +62,7 @@ const menuItems = {
 };
 
 const Sidebar = ({ userRole }) => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -67,7 +73,7 @@ const Sidebar = ({ userRole }) => {
       console.log(uid);
       dispatch(logoutUser());
 
-      await axios.patch(`/users/active/${uid}`, {
+      await axiosPublic.patch(`/users/active/${uid}`, {
         isActive: false,
       });
     } catch (error) {

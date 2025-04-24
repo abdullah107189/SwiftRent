@@ -41,6 +41,10 @@ import WriteBlog from "../page/WriteBlog/WriteBlog";
 import Blogs from "../page/blogs/Blogs";
 import BlogDetails from "../page/blogs/BlogDetails";
 
+import UserDashboard from "../DeahBoardPage/Customer/UserDashboard/UserDashboard";
+import DashboardRedirect from "./DashboardRedirect";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -101,8 +105,10 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     children: [
-      //admin
-      { index: true, element: <Navigate to="overview" /> },
+
+      { index: true, element: <DashboardRedirect /> },
+      // Admin routes
+
       { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
       { path: "write-blog", element: <WriteBlog /> },
@@ -115,15 +121,21 @@ export const router = createBrowserRouter([
       { path: "order", element: <OrdersPage /> },
       { path: "live-chat", element: <LiveChat /> },
       { path: "settings", element: <SettingsPage /> },
+
+
+      // Customer routes
+      { path: "user-dashboard", element: <UserDashboard /> },
+
       { path: "manage-bookings", element: <CarProducatPage /> },
 
-      // customer
-      { index: true, element: <Navigate to="browse-cars" /> },
+
       { path: "browse-cars", element: <BrowseCars /> },
       { path: "my-bookings", element: <MyBookings /> },
       { path: "payments", element: <PaymentHistory /> },
       { path: "profile", element: <UpdateProfile /> },
+
       { path: "settings", element: <SettingsPage /> },
+
       { path: "change-password", element: <ChangePassword /> },
 
       // Driver routes

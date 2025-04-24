@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Search } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
-import { FaRegTrashAlt } from 'react-icons/fa';
-import Spinner from '../../../components/Spinner';
-import Swal from 'sweetalert2';
-import toast from 'react-hot-toast';
+import { FaRegTrashAlt } from "react-icons/fa";
+import Spinner from "../../../components/Spinner";
+import toast from "react-hot-toast";
+import avater from "../../../assets/default-avatar.png";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 const UsersTable = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [isOpen, setIsOpen] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
 
-  const openModal = id => {
+  const openModal = (id) => {
     setUserIdToDelete(id);
     setIsOpen(true);
   };
@@ -25,15 +25,15 @@ const UsersTable = () => {
     setUserIdToDelete(null);
     setIsOpen(false);
   };
-  const role = 'customer';
+  const role = "customer";
   const {
     data: users = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['users', role],
+    queryKey: ["users", role],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/customers/${role}`);
+      const { data } = await axiosPublic(`/customers/${role}`);
       return data;
     },
   });
@@ -43,11 +43,11 @@ const UsersTable = () => {
   }, [users]);
 
   // Search Functionality
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     const filtered = users.filter(
-      u =>
+      (u) =>
         u.name.toLowerCase().includes(term) ||
         u.email.toLowerCase().includes(term)
     );
@@ -56,13 +56,12 @@ const UsersTable = () => {
 
   const handleUserDelete = async () => {
     try {
-      await axiosSecure.delete(`/user-delete/${userIdToDelete}`);
+      await axiosPublic.delete(`/user-delete/${userIdToDelete}`);
       closeModal();
       refetch();
-      toast.success('Customer Deleted Successfully');
+      toast.success("Customer Deleted Successfully");
     } catch (error) {
-      console.error('Error deleting user:', error);
-      toast.error('Failed to delete customer');
+      toast.error("Failed to delete customer");
     }
   };
 
@@ -97,12 +96,12 @@ const UsersTable = () => {
           <thead>
             <tr>
               {[
-                'Customer',
-                'Contact Info',
-                'Joined Date',
-                'Status',
-                'Actions',
-              ].map(heading => (
+                "Customer",
+                "Contact Info",
+                "Joined Date",
+                "Status",
+                "Actions",
+              ].map((heading) => (
                 <th
                   key={heading}
                   className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
@@ -114,7 +113,7 @@ const UsersTable = () => {
           </thead>
 
           <tbody className="divide-y ">
-            {filteredUsers.map(u => (
+            {filteredUsers.map((u) => (
               <motion.tr
                 key={u._id}
                 initial={{ opacity: 0 }}
@@ -126,7 +125,7 @@ const UsersTable = () => {
                     <div className="ml-4">
                       <div className="text-sm font-medium ">
                         <img
-                          src={u?.userInfo?.photoURL}
+                          src={u?.userInfo?.photoURL || avater}
                           alt="user"
                           className="w-10 h-10 rounded-full border"
                         />
@@ -140,8 +139,8 @@ const UsersTable = () => {
                   <div className="text-sm ">
                     {u?.userInfo?.email}
                     <br />
-                    <p className="px-2 pt-2  text-sm leading-5   cursor-pointer">
-                      {'+8801703500000'}
+                    <p className="pt-2 text-sm leading-5   cursor-pointer">
+                      {"+8801703500000"}
                     </p>
                   </div>
                 </td>
@@ -155,11 +154,11 @@ const UsersTable = () => {
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                       u.isActive
-                        ? 'bg-green-800 text-green-100'
-                        : 'bg-red-800 text-red-100'
+                        ? "bg-green-800 text-green-100"
+                        : "bg-red-800 text-red-100"
                     }`}
                   >
-                    {u.isActive ? 'Active' : 'Inactive'}
+                    {u.isActive ? "Active" : "Inactive"}
                   </span>
                 </td>
 

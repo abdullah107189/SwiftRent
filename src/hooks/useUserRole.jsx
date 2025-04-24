@@ -16,7 +16,7 @@ const useUserRole = () => {
     },
     enabled: !!user?.email,
   });
-
+  // console.log(userRole);
   return [userRole, isLoading];
 };
 

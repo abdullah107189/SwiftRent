@@ -40,7 +40,6 @@ import LiveChat from "../components/liveChat/LiveChat";
 import WriteBlog from "../page/WriteBlog/WriteBlog";
 import Blogs from "../page/blogs/Blogs";
 import BlogDetails from "../page/blogs/BlogDetails";
-import BlogManager from "../DeahBoardPage/Admin/blogManage/BlogManage";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +96,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  //deshboard router start
   {
     path: "/dashboard",
     element: <Dashboard />,
@@ -106,7 +106,6 @@ export const router = createBrowserRouter([
       { path: "overview", element: <OverviewPage /> },
       { path: "add-car", element: <AddToCar /> },
       { path: "write-blog", element: <WriteBlog /> },
-      { path: "blogs-manage", element: <BlogManager /> },
       { path: "manage-cars", element: <ManageCars /> },
       { path: "update-car/:id", element: <Updatecar /> },
       { path: "manage-bookings", element: <ManageBookings /> },
@@ -127,8 +126,7 @@ export const router = createBrowserRouter([
       { path: "settings", element: <SettingsPage /> },
       { path: "change-password", element: <ChangePassword /> },
 
-      //drivers
-      { index: true, element: <Navigate to="start-trip" /> },
+      // Driver routes
       { path: "start-trip", element: <StartTrip /> },
       { path: "available-trips", element: <AvailableTrips /> },
       { path: "trip-history", element: <TripHistory /> },
@@ -136,6 +134,7 @@ export const router = createBrowserRouter([
       { path: "earnings", element: <Earnings /> },
     ],
   },
+  //deshboard router End
   {
     path: "/register",
     element: <Register />,

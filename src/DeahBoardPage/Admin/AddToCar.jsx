@@ -14,6 +14,7 @@ const AddToCar = () => {
     year: '',
     transmission: '',
     seats: '',
+    booking: true,
     fuel: '',
     location: {
       city: '',
@@ -89,7 +90,7 @@ const AddToCar = () => {
 
   return (
     <div className="min-h-screen ">
-      <Header title="Add to Car" />
+      <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
       <div className="px-4 pb-4">
         <h1 className="text-xl font-bold py-6 text-center">Add Car list</h1>
         <form onSubmit={handleSubmit} className="space-y-6">

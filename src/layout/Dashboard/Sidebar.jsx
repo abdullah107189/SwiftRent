@@ -14,18 +14,18 @@ import {
 } from "react-icons/fa";
 import { Car, LogOut, Settings } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/auth/authSlice";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { FiEdit } from "react-icons/fi";
-import { MdEdit } from "react-icons/md";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import axios from "axios";
 
 const menuItems = {
   Admin: [
     { name: "Dashboard", path: "overview", icon: FaTachometerAlt },
     { name: "Add Car", path: "add-car", icon: Car },
     { name: "Write Blog", path: "write-blog", icon: FiEdit },
-    { name: "Blog Manage", path: "blogs-manage", icon: MdEdit },
     { name: "Manage Cars", path: "manage-cars", icon: FaCar },
     { name: "Manage Bookings", path: "manage-bookings", icon: FaClipboardList },
     { name: "Customers Management", path: "customers-manage", icon: FaUsers },
@@ -35,7 +35,11 @@ const menuItems = {
     { name: "Settings", path: "settings", icon: Settings },
   ],
   customer: [
-    { name: "Dashboard", path: "user-dashboard", icon: FaTachometerAlt },
+    {
+      name: "Dashboard",
+      path: "user-dashboard",
+      icon: FaTachometerAlt,
+    },
     { name: "Browse Cars", path: "browse-cars", icon: FaCar },
     { name: "My Bookings", path: "my-bookings", icon: FaShoppingCart },
     { name: "Payment History", path: "payments", icon: FaMoneyBill },
@@ -52,15 +56,25 @@ const menuItems = {
 };
 
 const Sidebar = ({ userRole }) => {
+  const axiosSecure = useAxiosSecure();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
 
-  const handleLogout = () => {
-    dispatch(logoutUser())
-      .unwrap()
-      .then(() => navigate("/login"))
-      .catch((error) => error.message);
-    // .catch((error) => console.error("Logout failed:", error));
+  const handleLogout = async () => {
+    try {
+      const uid = user?.userInfo[0]?.uid;
+      console.log(uid);
+      dispatch(logoutUser());
+
+      await axios.patch(`/users/active/${uid}`, {
+        isActive: false,
+      });
+    } catch (error) {
+      console.error("Logout failed:", error.message);
+    } finally {
+      navigate("/login");
+    }
   };
 
   const items = menuItems[userRole];
@@ -84,7 +98,7 @@ const Sidebar = ({ userRole }) => {
         <div className="divider">OR</div>
         <button
           onClick={handleLogout}
-          className="mt-auto flex items-center gap-3 p-3 rounded-lg bg-red-500 hover:bg-red-700 w-full"
+          className="mt-auto flex items-center gap-3 p-3 rounded-lg bg-red-500 hover:bg-red-700 w-full cursor-pointer"
         >
           <LogOut size={20} />
           <span>Logout</span>

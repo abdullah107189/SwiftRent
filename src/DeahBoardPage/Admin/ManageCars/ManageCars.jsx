@@ -66,7 +66,7 @@ const ManageCars = () => {
 
   return (
     <>
-      <Header title="Manage Car" />
+      <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
       <div className="mxw px-4 py-10">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold tBlack flex items-center gap-2">

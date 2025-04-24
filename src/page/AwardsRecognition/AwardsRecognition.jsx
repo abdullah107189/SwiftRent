@@ -41,7 +41,9 @@ const AwardsRecognition = () => {
                 alt={award.title}
                 className="w-full h-48 object-cover rounded-lg"
               />
-              <h3 className="text-2xl  font-semibold orange">{award.title}</h3>
+              <h3 className="text-2xl text-[#f5b754] dark:text-[#f5b754] font-semibold orange">
+                {award.title}
+              </h3>
               <p className="tBlack">{award.description}</p>
             </div>
           ))}

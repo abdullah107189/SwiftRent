@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { toast, ToastContainer } from "react-toastify";
@@ -75,6 +75,15 @@ function WriteBlog() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const theme = localStorage.getItem("theme") || "light";
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 bg-[#1a1a1a] text-white rounded-xl shadow-lg space-y-6">

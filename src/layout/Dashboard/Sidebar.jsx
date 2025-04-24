@@ -64,12 +64,12 @@ const Sidebar = ({ userRole }) => {
   const handleLogout = async () => {
     try {
       const uid = user?.userInfo[0]?.uid;
-      console.log(uid);
+      // console.log(uid);
       dispatch(logoutUser());
 
-      await axios.patch(`/users/active/${uid}`, {
-        isActive: false,
-      });
+      // await axios.patch(`/users/active/${uid}`, {
+      //   isActive: false,
+      // });
     } catch (error) {
       console.error('Logout failed:', error.message);
     } finally {

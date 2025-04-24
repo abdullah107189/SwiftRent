@@ -20,7 +20,7 @@ const SideMenu = ({ setSortOrder, setSelectedCategory, setSearchTerm }) => {
   }, [axiosPublic]);
 
   return (
-    <div className="h-max sticky top-18 border border-[#2a2a2a] pl-4 pr-14 py-6 rounded-lg">
+    <div className="h-max sticky top-18 border border-[#2a2a2a] dark:border-[#444] pl-4 pr-14 py-6 rounded-lg">
       <div className="flex items-center border rounded-xl p-2 bg-white shadow-md">
         <input
           type="text"
@@ -56,14 +56,14 @@ const SideMenu = ({ setSortOrder, setSelectedCategory, setSearchTerm }) => {
         </label>
       </div>
 
-      <h1 className="at-8 mb-2 mt-4 text-sm font-medium">Categories</h1>
+      <h1 className="at-8 mb-4 mt-4 text-sm font-medium">Categories</h1>
       <div className="flex flex-col gap-2 text-sm">
         {categories.length > 0 ? (
           categories.map((category, index) => (
             <button
               key={index}
               onClick={() => setSelectedCategory(category)}
-              className="text-left text-white underline cursor-pointer hover:text-[#f5b754]"
+              className="text-left text-black dark:text-white underline cursor-pointer hover:text-[#f5b754]"
             >
               {category
                 .replace(/-/g, " ")

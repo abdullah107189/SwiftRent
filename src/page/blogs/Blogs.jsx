@@ -11,11 +11,11 @@ const Blogs = () => {
   return (
     <div>
       <div className="mxw ">
-        <h1 className=" pt-25 text-3xl md:text-4xl font-bold text-white">
+        <h1 className=" pt-25 text-3xl md:text-4xl font-bold text-gray-900  dark:text-white ">
           Uncover Our Most Recent{" "}
           <span className="text-[#f5b754]">Blog Posts</span>
         </h1>
-        <p className="mt-3 text-gray-400 text-sm md:text-base">
+        <p className="mt-3 text-gray-600 dark:text-gray-400 text-sm md:text-base">
           Dive into trending topics, expert advice, and updates designed to keep
           you ahead of the curve.
         </p>
@@ -24,7 +24,7 @@ const Blogs = () => {
       <div className="mxw pt-20">
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className="bg-blue-800 text-sm text-white px-4 py-2 rounded-2xl mb-4 md:hidden"
+          className="bg-[#f5b754] text-sm text-white px-4 py-2 rounded-2xl mb-4 md:hidden"
         >
           {open ? "Close" : "Filter or Search"}
         </button>

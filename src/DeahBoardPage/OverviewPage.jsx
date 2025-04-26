@@ -29,7 +29,7 @@ const OverviewPage = () => {
 
   const [allUser, setAllUser] = useState([]);
   const [totalSeals, setTotalSales] = useState(0);
-  const [ordrs, setTotalorders] = useState([]);
+  const [orders, setTotalorders] = useState([]);
 
   const fetchAllUsers = async () => {
     try {
@@ -48,10 +48,20 @@ const OverviewPage = () => {
       console.error(error);
     }
   };
+  const fetchTotalOrders = async () => {
+    try {
+      const response = await axiosSecure.get('/total-orders');
+
+      setTotalorders(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchAllUsers();
     fetchTotalSales();
+    fetchTotalOrders();
   }, []);
 
   // if (loading) {
@@ -60,7 +70,9 @@ const OverviewPage = () => {
   // if (error) {
   //   return <p className="text-center text-red-500">ERROR:{error}</p>;
   // }
-  console.log(totalSeals, ordrs);
+
+  const conversionRate =
+    allUser.length > 0 ? (orders.length / allUser.length) * 100 : 0;
   return (
     <div className="">
       <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
@@ -80,21 +92,42 @@ const OverviewPage = () => {
             color="#6366F1"
           />
           <StatCard
-            name=" Users"
+            name="Users"
             icon={Users}
-            value={allUser.length}
+            value={
+              <CountUp
+                end={allUser.length}
+                duration={1.5}
+                separator=","
+                decimals={0}
+              />
+            }
             color="#BB5CF6"
           />
           <StatCard
             name="Total Orders"
             icon={ShoppingCart}
-            value={ordrs.length}
+            value={
+              <CountUp
+                end={orders.length}
+                duration={1.5}
+                separator=","
+                decimals={0}
+              />
+            }
             color="#EC4899"
           />
           <StatCard
             name="Conversion Rate"
             icon={BarChart}
-            value="12.34%"
+            value={
+              <CountUp
+                end={conversionRate}
+                suffix="%"
+                decimals={2}
+                duration={2}
+              />
+            }
             color="#10B981"
           />
         </motion.div>

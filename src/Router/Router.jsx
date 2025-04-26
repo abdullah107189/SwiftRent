@@ -43,7 +43,7 @@ import BlogDetails from "../page/blogs/BlogDetails";
 
 import UserDashboard from "../DeahBoardPage/Customer/UserDashboard/UserDashboard";
 import DashboardRedirect from "./DashboardRedirect";
-
+import BlogManager from "../DeahBoardPage/Admin/blogManage/BlogManage";
 
 export const router = createBrowserRouter([
   {
@@ -105,7 +105,6 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     children: [
-
       { index: true, element: <DashboardRedirect /> },
       // Admin routes
 
@@ -121,13 +120,12 @@ export const router = createBrowserRouter([
       { path: "order", element: <OrdersPage /> },
       { path: "live-chat", element: <LiveChat /> },
       { path: "settings", element: <SettingsPage /> },
-
+      { path: "blog-manage", element: <BlogManager /> },
 
       // Customer routes
       { path: "user-dashboard", element: <UserDashboard /> },
 
       { path: "manage-bookings", element: <CarProducatPage /> },
-
 
       { path: "browse-cars", element: <BrowseCars /> },
       { path: "my-bookings", element: <MyBookings /> },

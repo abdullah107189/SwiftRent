@@ -22,16 +22,17 @@ import { FiEdit } from "react-icons/fi";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 import { HiOutlineDocumentText } from "react-icons/hi";
-import { FiEdit } from "react-icons/fi";
+
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
-
+import { MdOutlineArticle } from "react-icons/md";
 
 const menuItems = {
   Admin: [
     { name: "Dashboard", path: "overview", icon: FaTachometerAlt },
     { name: "Add Car", path: "add-car", icon: Car },
     { name: "Write Blog", path: "write-blog", icon: FiEdit },
+    { name: "Blogs Manage", path: "blog-manage", icon: MdOutlineArticle },
     { name: "Manage Cars", path: "manage-cars", icon: FaCar },
     { name: "Manage Bookings", path: "manage-bookings", icon: FaClipboardList },
     { name: "Customers Management", path: "customers-manage", icon: FaUsers },

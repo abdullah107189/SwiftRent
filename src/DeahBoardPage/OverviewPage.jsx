@@ -1,23 +1,37 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react"; // Import useState and useEffect
-import Header from "../components/common/Header";
-import { motion } from "framer-motion";
-import StatCard from "../components/common/StatCard";
-import { BarChart, ShoppingCart, Users, Zap } from "lucide-react";
-import SalesOverviewChart from "../components/common/SalesOverviewChart";
-import CategoryDistributionChart from "../components/common/CategroyDistributionChart";
-import SalesChannelChart from "../components/common/SalesChannelChart";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useEffect, useState } from 'react';
+import Header from '../components/common/Header';
+import { motion } from 'framer-motion';
+import StatCard from '../components/common/StatCard';
+import { BarChart, ShoppingCart, Users, Zap } from 'lucide-react';
+import SalesOverviewChart from '../components/common/SalesOverviewChart';
+import CategoryDistributionChart from '../components/common/CategroyDistributionChart';
+import SalesChannelChart from '../components/common/SalesChannelChart';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTotalSales } from '../redux/Slice/totalSlice';
+import Spinner from '../components/Spinner';
 
 const OverviewPage = () => {
   const axiosSecure = useAxiosSecure();
 
-  // Define state for storing all users
+  const dispatch = useDispatch();
+  const { totalSales, loading, error } = useSelector(
+    state => state.totalSales?.amount ?? 0
+  );
+  const salesStatus = useSelector(state => state.totalSales?.status ?? 'idle');
+
+  useEffect(() => {
+    if (salesStatus === 'idle') {
+      dispatch(fetchTotalSales());
+    }
+  }, [salesStatus, dispatch]);
+
   const [allUser, setAllUser] = useState([]);
 
   const fetchAllUsers = async () => {
     try {
-      const response = await axiosSecure.get("/all-user");
+      const response = await axiosSecure.get('/all-user');
       setAllUser(response.data);
     } catch (error) {
       // console.error(error);
@@ -28,6 +42,12 @@ const OverviewPage = () => {
     fetchAllUsers();
   }, []);
 
+  if (loading) {
+    return <Spinner />;
+  }
+  if (error) {
+    return <p className="text-center text-red-500">ERROR:{error}</p>;
+  }
   return (
     <div className="">
       <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
@@ -41,7 +61,7 @@ const OverviewPage = () => {
           <StatCard
             name="Total Sales"
             icon={Zap}
-            value="$12,345"
+            value={totalSales}
             color="#6366F1"
           />
           <StatCard

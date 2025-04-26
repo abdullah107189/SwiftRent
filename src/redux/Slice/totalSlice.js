@@ -1,15 +1,22 @@
-// features/totalSales/totalSalesSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Async thunk to fetch total sales
+// total sales
 export const fetchTotalSales = createAsyncThunk(
   'totalSales/fetchTotalSales',
   async () => {
-    const response = await axios.get('http://localhost:5000/total-sales');
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASEURL}/total-sales`
+    );
     return response.data.totalSell;
   }
 );
+
+exprot const fetchAllUsers = createAsyncThunk('users/fetchAllUsers',
+  async () => {
+    
+  }
+)
 
 const totalSalesSlice = createSlice({
   name: 'totalSales',

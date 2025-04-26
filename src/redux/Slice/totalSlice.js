@@ -12,11 +12,10 @@ export const fetchTotalSales = createAsyncThunk(
   }
 );
 
-exprot const fetchAllUsers = createAsyncThunk('users/fetchAllUsers',
-  async () => {
-    
-  }
-)
+// export const fetchAllUsers = createAsyncThunk(
+//   'users/fetchAllUsers',
+//   async () => {}
+// );
 
 const totalSalesSlice = createSlice({
   name: 'totalSales',

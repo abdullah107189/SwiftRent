@@ -11,23 +11,25 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTotalSales } from '../redux/Slice/totalSlice';
 import Spinner from '../components/Spinner';
-
+import CountUp from 'react-countup';
 const OverviewPage = () => {
   const axiosSecure = useAxiosSecure();
 
-  const dispatch = useDispatch();
-  const { totalSales, loading, error } = useSelector(
-    state => state.totalSales?.amount ?? 0
-  );
-  const salesStatus = useSelector(state => state.totalSales?.status ?? 'idle');
+  // const dispatch = useDispatch();
+  // const { totalSales, loading, error } = useSelector(
+  //   state => state.totalSales?.amount ?? 0
+  // );
+  // const salesStatus = useSelector(state => state.totalSales?.status ?? 'idle');
 
-  useEffect(() => {
-    if (salesStatus === 'idle') {
-      dispatch(fetchTotalSales());
-    }
-  }, [salesStatus, dispatch]);
+  // useEffect(() => {
+  //   if (salesStatus === 'idle') {
+  //     dispatch(fetchTotalSales());
+  //   }
+  // }, [salesStatus, dispatch]);
 
   const [allUser, setAllUser] = useState([]);
+  const [totalSeals, setTotalSales] = useState(0);
+  const [ordrs, setTotalorders] = useState([]);
 
   const fetchAllUsers = async () => {
     try {
@@ -37,17 +39,28 @@ const OverviewPage = () => {
       // console.error(error);
     }
   };
+  const fetchTotalSales = async () => {
+    try {
+      const response = await axiosSecure.get('/total-sales');
+      setTotalSales(response.data.totalSell);
+      setTotalorders(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchAllUsers();
+    fetchTotalSales();
   }, []);
 
-  if (loading) {
-    return <Spinner />;
-  }
-  if (error) {
-    return <p className="text-center text-red-500">ERROR:{error}</p>;
-  }
+  // if (loading) {
+  //   return <Spinner />;
+  // }
+  // if (error) {
+  //   return <p className="text-center text-red-500">ERROR:{error}</p>;
+  // }
+  console.log(totalSeals, ordrs);
   return (
     <div className="">
       <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
@@ -61,7 +74,9 @@ const OverviewPage = () => {
           <StatCard
             name="Total Sales"
             icon={Zap}
-            value={totalSales}
+            value={
+              <CountUp end={totalSeals} prefix="$ " decimals={2} duration={2} />
+            }
             color="#6366F1"
           />
           <StatCard
@@ -73,7 +88,7 @@ const OverviewPage = () => {
           <StatCard
             name="Total Orders"
             icon={ShoppingCart}
-            value="54223"
+            value={ordrs.length}
             color="#EC4899"
           />
           <StatCard

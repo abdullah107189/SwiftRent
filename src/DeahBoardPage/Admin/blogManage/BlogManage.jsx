@@ -3,6 +3,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { FaTrash } from "react-icons/fa";
 import Spinner from "../../../components/Spinner";
+import Header from "../../../components/common/Header";
 
 const BlogManager = () => {
   const axiosPublic = useAxiosPublic();
@@ -89,7 +90,8 @@ const BlogManager = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="">
+      <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
       <h2 className="text-2xl font-bold mb-6">Manage Blogs</h2>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white dark:bg-[#1e1e1e] text-sm border border-gray-300 dark:border-gray-700">

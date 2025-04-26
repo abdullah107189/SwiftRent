@@ -65,7 +65,7 @@ const Navbar = () => {
                 : `${
                     isScrolled
                       ? "dark:text-white bg-transparent"
-                      : "dark:text-white text-white bg-transparent"
+                      : "dark:text-white text-[#f5b754] bg-transparent"
                   }`
             }`
           }
@@ -85,7 +85,7 @@ const Navbar = () => {
                   : `${
                       isScrolled
                         ? "dark:text-white bg-transparent"
-                        : "dark:text-white text-white bg-transparent"
+                        : "dark:text-white text-[#f5b754] bg-transparent"
                     }`
               }`
             }

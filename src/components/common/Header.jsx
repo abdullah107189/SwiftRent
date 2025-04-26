@@ -1,15 +1,15 @@
-import { IoIosNotificationsOutline } from 'react-icons/io';
-import { Link, NavLink } from 'react-router-dom';
-import avatar from '../../assets/default-avatar.png';
-import { useSelector } from 'react-redux';
-import ThemeToggle from '../shared/ThemeToggle';
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { Link, NavLink } from "react-router-dom";
+import avatar from "../../assets/default-avatar.png";
+import { useSelector } from "react-redux";
+import ThemeToggle from "../shared/ThemeToggle";
 const Header = ({ title, text }) => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   return (
-    <header className=" px-2 bg-opacity-50 backdrop-blur-lg border-b dark:border-gray-700 border-black/20 m sticky top-0 z-50 bolck py-2">
+    <header className="px-2 lg:pl-4 pl-[70px]  bg-opacity-50 backdrop-blur-lg border-b dark:border-gray-700 border-black/20 m sticky top-0 z-50 bolck py-2">
       <div className="flex justify-between items-center w-full">
-        <div className=" rounded-2xl shadow-md text-white mb-6">
+        <div className=" rounded-2xl shadow-md text-white ">
           <h1 className="text-3xl font-bold text-[#f5b754] mb-2">{title}</h1>
           <p className="text-lg text-gray-200">{text}</p>
         </div>

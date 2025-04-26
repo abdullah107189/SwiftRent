@@ -16,16 +16,23 @@ import { Car, LogOut, Settings } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authSlice';
-import { HiOutlineDocumentText } from 'react-icons/hi';
+
 import { FiEdit } from 'react-icons/fi';
+
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+
+import { HiOutlineDocumentText } from 'react-icons/hi';
+
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import axios from 'axios';
+import { MdOutlineArticle } from 'react-icons/md';
 
 const menuItems = {
   Admin: [
     { name: 'Dashboard', path: 'overview', icon: FaTachometerAlt },
     { name: 'Add Car', path: 'add-car', icon: Car },
     { name: 'Write Blog', path: 'write-blog', icon: FiEdit },
+    { name: 'Blogs Manage', path: 'blog-manage', icon: MdOutlineArticle },
     { name: 'Manage Cars', path: 'manage-cars', icon: FaCar },
     { name: 'Manage Bookings', path: 'manage-bookings', icon: FaClipboardList },
     { name: 'Customers Management', path: 'customers-manage', icon: FaUsers },
@@ -56,7 +63,7 @@ const menuItems = {
 };
 
 const Sidebar = ({ userRole }) => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector(state => state.auth);

@@ -54,6 +54,9 @@ const BlogDetails = () => {
     const newComment = {
       blogId: id,
       name: user.displayName,
+      image:
+        user.photoURL ||
+        "https://i.ibb.co.com/ZzZWppmV/blank-profile-picture-973460-1280.webp",
       email: user.email,
       text: commentText,
       date: new Date().toISOString(),
@@ -91,6 +94,9 @@ const BlogDetails = () => {
       email: user.email,
       text: replyText,
       date: new Date().toISOString(),
+      image:
+        user.photoURL ||
+        "https://i.ibb.co.com/ZzZWppmV/blank-profile-picture-973460-1280.webp",
     };
 
     try {
@@ -190,7 +196,7 @@ const BlogDetails = () => {
                         <div className="">
                           <img
                             src={
-                              user?.photoURL ||
+                              c.image ||
                               "https://i.ibb.co.com/ZzZWppmV/blank-profile-picture-973460-1280.webp"
                             }
                             alt="profile"

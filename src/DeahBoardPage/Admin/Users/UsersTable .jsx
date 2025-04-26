@@ -14,17 +14,17 @@ const UsersTable = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const axiosPublic = useAxiosPublic();
   const [isOpen, setIsOpen] = useState(false);
-  const [userIdToDelete, setUserIdToDelete] = useState(null);
+  // const [userIdToDelete, setUserIdToDelete] = useState(null);
 
-  const openModal = (id) => {
-    setUserIdToDelete(id);
-    setIsOpen(true);
-  };
+  // const openModal = (id) => {
+  //   setUserIdToDelete(id);
+  //   setIsOpen(true);
+  // };
 
-  const closeModal = () => {
-    setUserIdToDelete(null);
-    setIsOpen(false);
-  };
+  // const closeModal = () => {
+  //   setUserIdToDelete(null);
+  //   setIsOpen(false);
+  // };
   const role = "customer";
   const {
     data: users = [],
@@ -54,14 +54,27 @@ const UsersTable = () => {
     setFilteredUsers(filtered);
   };
 
-  const handleUserDelete = async () => {
+  // const handleUserDelete = async () => {
+  //   try {
+  //     await axiosPublic.delete(`/user-delete/${userIdToDelete}`);
+  //     closeModal();
+  //     refetch();
+  //     toast.success("Customer Deleted Successfully");
+  //   } catch (error) {
+  //     toast.error("Failed to delete customer");
+  //   }
+  // };
+
+  // Block/Unblock Handler
+
+  const handleBlockUnblock = async (email, isBlocked) => {
     try {
-      await axiosPublic.delete(`/user-delete/${userIdToDelete}`);
-      closeModal();
+      const url = isBlocked ? `/unblock-user/${email}` : `/block-user/${email}`;
+      await axiosPublic.patch(url);
       refetch();
-      toast.success("Customer Deleted Successfully");
+      toast.success(`User ${isBlocked ? "unblocked" : "blocked"} successfully`);
     } catch (error) {
-      toast.error("Failed to delete customer");
+      toast.error("Failed to update user status");
     }
   };
 
@@ -163,11 +176,22 @@ const UsersTable = () => {
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap text-sm ">
-                  <button
+                  {/* <button
                     onClick={() => openModal(u._id)}
                     className="orange hover:text-red-300 cursor-pointer"
                   >
                     <FaRegTrashAlt />
+                  </button> */}
+
+                  <button
+                    onClick={() =>
+                      handleBlockUnblock(u.userInfo.email, u.isBlock)
+                    }
+                    className={`p-2 ${
+                      u.isBlock ? "bg-green-500" : "bg-red-500"
+                    } text-white rounded`}
+                  >
+                    {u.isBlock ? "Unblock" : "Block"}
                   </button>
                 </td>
               </motion.tr>
@@ -176,7 +200,7 @@ const UsersTable = () => {
         </table>
 
         {/* Modal for Delete Confirmation */}
-        {isOpen && (
+        {/* {isOpen && (
           <div className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-[#222222]/60">
             <div className="relative p-4 w-full max-w-md">
               <div className="relative p-4 text-center  rounded-lg shadow bg-[#302a20] orange  sm:p-5">
@@ -231,7 +255,7 @@ const UsersTable = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </motion.div>
   );

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   PieChart,
@@ -7,18 +8,37 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-const categoryData = [
-  { name: 'Sedan', value: 5000 },
-  { name: 'SUV', value: 6500 },
-  { name: 'Truck', value: 4000 },
-  { name: 'Electric', value: 3000 },
-  { name: 'Sports Car', value: 2500 },
+const COLORS = [
+  '#6366F1',
+  '#8B5CF6',
+  '#EC4899',
+  '#10B981',
+  '#F59E0B',
+  '#F43F5E',
+  '#14B8A6',
 ];
 
-const COLORS = ['#6366F1', '#8B5CF6', '#EC4899', '#10B981', '#F59E0B'];
-
 const CategoryDistributionChart = () => {
+  const axiosSecure = useAxiosSecure();
+  const [categoryData, setCategoryData] = useState([]);
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      try {
+        const res = await axiosSecure.get('/category-distribution');
+
+        setCategoryData(res.data);
+      } catch (error) {
+        console.error('Error fetching category data:', error);
+      }
+    };
+
+    fetchCategoryData();
+  }, []);
+
+  console.log(categoryData);
   return (
     <motion.div
       className="sBgBlack backdrop-blur-md shadow-lg rounded-3xl md:p-6 p-3"
@@ -65,4 +85,5 @@ const CategoryDistributionChart = () => {
     </motion.div>
   );
 };
+
 export default CategoryDistributionChart;

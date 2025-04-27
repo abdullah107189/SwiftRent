@@ -47,12 +47,18 @@ export const loginUser = createAsyncThunk(
       );
       await axiosPublic.patch("/update-last-login", { email });
       return userCredential.user;
-    } catch (error) {
-      return rejectWithValue(
-        error.code === "auth/invalid-credential"
-          ? "Incorrect Email/Password"
-          : "Login failed: " + error.message
-      );
+    } catch (error) { if (error.response) {
+      // Backend sent an error response
+      if (error.response.status === 403) {
+        return rejectWithValue(error.response.data.message || "Your account is blocked.");
+      }
+      return rejectWithValue(error.response.data.message || "Login failed.");
+    } else if (error.code === "auth/invalid-credential") {
+      // Firebase login error
+      return rejectWithValue("Incorrect Email/Password");
+    } else {
+      return rejectWithValue("Login failed: " + error.message);
+    }
     }
   }
 );

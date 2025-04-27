@@ -29,7 +29,6 @@ import StartTrip from "../DeahBoardPage/Driver/StartTrip";
 import TripHistory from "../DeahBoardPage/Driver/TripHistory";
 import CustomerReviews from "../DeahBoardPage/Driver/CustomerReviews";
 import Earnings from "../DeahBoardPage/Driver/Earnings";
-import SingleBooking from "../TextDelet/SingleBooking";
 import ManageCars from "../DeahBoardPage/Admin/ManageCars/ManageCars";
 import ManageBookings from "../DeahBoardPage/Admin/ManageBookings";
 import ManageDrivers from "../DeahBoardPage/Admin/ManageDrivers";
@@ -53,10 +52,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-      },
-      {
-        path: "/singlebooking",
-        element: <SingleBooking></SingleBooking>,
       },
       {
         path: "/about",

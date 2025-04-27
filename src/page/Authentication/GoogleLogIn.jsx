@@ -67,13 +67,25 @@ const GoogleLogIn = ({ toggle = "", page = "" }) => {
       navigate("/");
     } catch (error) {
       // console.error("Google Login error:", error);
+    
+      let errorMessage = "Login failed.";
+    
+      if (error.response) {
+        // If the server responded with a custom error message
+        errorMessage = error.response.data.message || "Login failed.";
+      } else if (error.message) {
+        // If it's a Firebase or network error
+        errorMessage = error.message;
+      }
+    
       Swal.fire({
         icon: "error",
         title: "Login failed.",
-        text: error.message,
+        text: errorMessage,
         showConfirmButton: true,
       });
     }
+    
   };
 
   return (

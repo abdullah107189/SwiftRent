@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-import { FaRegTrashAlt } from "react-icons/fa";
+// import { FaRegTrashAlt } from "react-icons/fa";
 import Spinner from "../../../components/Spinner";
 import toast from "react-hot-toast";
 import avater from "../../../assets/default-avatar.png";
@@ -67,12 +67,12 @@ const UsersTable = () => {
 
   // Block/Unblock Handler
 
-  const handleBlockUnblock = async (email, isBlocked) => {
+  const handleBlockUnblock = async (email, isBlock) => {
     try {
-      const url = isBlocked ? `/unblock-user/${email}` : `/block-user/${email}`;
+      const url = isBlock ? `/unblock-user/${email}` : `/block-user/${email}`;
       await axiosPublic.patch(url);
       refetch();
-      toast.success(`User ${isBlocked ? "unblocked" : "blocked"} successfully`);
+      toast.success(`User ${isBlock ? "unblocked" : "blocked"} successfully`);
     } catch (error) {
       toast.error("Failed to update user status");
     }

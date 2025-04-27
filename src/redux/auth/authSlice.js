@@ -47,18 +47,21 @@ export const loginUser = createAsyncThunk(
       );
       await axiosPublic.patch("/update-last-login", { email });
       return userCredential.user;
-    } catch (error) { if (error.response) {
-      // Backend sent an error response
-      if (error.response.status === 403) {
-        return rejectWithValue(error.response.data.message || "Your account is blocked.");
+    } catch (error) {
+      if (error.response) {
+        // Backend sent an error response
+        if (error.response.status === 403) {
+          return rejectWithValue(
+            error.response.data.message || "Your account is blocked."
+          );
+        }
+        return rejectWithValue(error.response.data.message || "Login failed.");
+      } else if (error.code === "auth/invalid-credential") {
+        // Firebase login error
+        return rejectWithValue("Incorrect Email/Password");
+      } else {
+        return rejectWithValue("Login failed: " + error.message);
       }
-      return rejectWithValue(error.response.data.message || "Login failed.");
-    } else if (error.code === "auth/invalid-credential") {
-      // Firebase login error
-      return rejectWithValue("Incorrect Email/Password");
-    } else {
-      return rejectWithValue("Login failed: " + error.message);
-    }
     }
   }
 );
@@ -69,13 +72,18 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
 
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
-  async ({ newPassword }, { rejectWithValue }) => {
+  async ({ currentPassword, newPassword }, { rejectWithValue }) => {
     try {
       const user = auth.currentUser;
       if (!user) throw new Error("No user is currently logged in");
+      await signInWithEmailAndPassword(auth, user.email, currentPassword);
+      // If the current password is correct, update the password
       await updatePassword(user, newPassword);
       return "Password updated successfully";
     } catch (error) {
+      if (error.code === "auth/wrong-password") {
+        return rejectWithValue("Current password is incorrect");
+      }
       return rejectWithValue(error.message);
     }
   }

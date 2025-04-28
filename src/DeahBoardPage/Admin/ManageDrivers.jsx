@@ -4,35 +4,28 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { FaRegTrashAlt, FaTrashAlt } from 'react-icons/fa';
-import { Search } from 'lucide-react';
+import { Car, Search, User2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Spinner from '../../components/Spinner';
 import toast from 'react-hot-toast';
+import CountUp from 'react-countup';
+import StatCard from '../../components/common/StatCard';
 
 const ManageDrivers = () => {
   const stats = [
-    {
-      title: 'Total Drivers',
-      value: 28,
-      details: 'Active: 24 | Inactive: 4',
-    },
     {
       title: 'Average Rating',
       value: '4.6',
       details: 'Out of 5.0',
     },
-    {
-      title: 'Total Vehicles',
-      value: 42,
-      details: 'Across all active drivers',
-    },
   ];
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-
+  const [allCars, setCars] = useState([]);
   const openModal = id => {
     setUserIdToDelete(id);
     setIsOpen(true);
@@ -55,12 +48,20 @@ const ManageDrivers = () => {
       return data;
     },
   });
+  const fetchallCars = async () => {
+    try {
+      const response = await axiosSecure.get('/allCars');
+      setCars(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     setFilteredUsers(users);
+    fetchallCars();
   }, [users]);
 
-  // Search Functionality
   const handleSearch = e => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
@@ -72,17 +73,15 @@ const ManageDrivers = () => {
     setFilteredUsers(filtered);
   };
 
-  console.log(users[0]?.userInfo.name);
-
-  const handelDeriverDelete = async () => {
+  const handelDriverDelete = async () => {
     try {
       await axiosSecure.delete(`/user-delete/${userIdToDelete}`);
       closeModal();
       refetch();
-      toast.success('Deriver Deleted Successfully');
+      toast.success('Driver Deleted Successfully');
     } catch (error) {
       console.error('Error deleting user:', error);
-      toast.error('Failed to delete Deriver');
+      toast.error('Failed to delete Driver');
     }
   };
 
@@ -92,23 +91,46 @@ const ManageDrivers = () => {
     <>
       <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
       <div className="pl-3 py-4">
-        <h2 className="text-xl font-semibold ">Manage Drivers</h2>
-        <p> View and manage all driver accounts</p>
+        <h2 className="text-xl font-semibold">Manage Drivers</h2>
+        <p>View and manage all driver accounts</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+        <StatCard
+          name="Total Drivers"
+          icon={User2}
+          value={
+            <CountUp
+              end={users.length}
+              duration={1.5}
+              separator=","
+              decimals={0}
+            />
+          }
+          details={`Active: ${
+            users.filter(u => u.isActive).length
+          } | Inactive: ${users.filter(u => !u.isActive).length}`}
+          color="#6366F1"
+        />
+
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-[#f5b754]/10 rounded-2xl shadow-md p-6 hover:shadow-xl transition-all"
+            className="rounded-2xl shadow-md p-6 hover:shadow-xl transition-all"
           >
-            <h2 className="text-lg font-semibold text-SwiftRent/src/index.css">
-              {stat.title}
-            </h2>
-            <p className="text-4xl font-bold text-text-white">{stat.value}</p>
-            <p className="text-sm text-white mt-1">{stat.details}</p>
+            <h2 className="text-lg font-semibold">{stat.title}</h2>
+            <p className="text-4xl font-bold">{stat.value}</p>
+            <p className="text-sm mt-1">{stat.details}</p>
           </div>
         ))}
+        <StatCard
+          name="Total Vehicles"
+          icon={Car}
+          value={allCars.length}
+          color="#6366F1"
+          details="Across all active drivers"
+        />
       </div>
+
       <motion.div
         className="shadow-lg rounded-xl m-4 p-4 border dark:border-white/20 border-black/20"
         initial={{ opacity: 0, y: 20 }}
@@ -116,14 +138,12 @@ const ManageDrivers = () => {
         transition={{ delay: 0.2 }}
       >
         <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-xl font-semibold ">Driver Directory</h2>
-          </div>
+          <h2 className="text-xl font-semibold">Driver Directory</h2>
           <div className="relative">
             <input
               type="text"
-              placeholder="Search users..."
-              className="bg-[#f5b754]/10  placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              placeholder="Search drivers..."
+              className="bg-[#f5b754]/10 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
               value={searchTerm}
               onChange={handleSearch}
             />
@@ -132,7 +152,7 @@ const ManageDrivers = () => {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y ">
+          <table className="min-w-full divide-y">
             <thead>
               <tr>
                 {[
@@ -141,12 +161,12 @@ const ManageDrivers = () => {
                   'Phone',
                   'Status',
                   'Vehicles',
-                  'Rating',
+
                   'Actions',
                 ].map(heading => (
                   <th
                     key={heading}
-                    className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
                   >
                     {heading}
                   </th>
@@ -154,7 +174,7 @@ const ManageDrivers = () => {
               </tr>
             </thead>
 
-            <tbody className="divide-y ">
+            <tbody className="divide-y">
               {filteredUsers.map(u => (
                 <motion.tr
                   key={u._id}
@@ -164,30 +184,28 @@ const ManageDrivers = () => {
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="ml-4">
-                        <div className="text-sm font-medium ">
-                          <img
-                            src={u?.userInfo?.photoURL}
-                            alt="user"
-                            className="w-10 h-10 rounded-full border border-yellow-800"
-                          />
-                          <p className="pt-2">{u?.userInfo?.name}</p>
-                        </div>
-                      </div>
+                      {/* <img
+                        src={u?.userInfo?.photoURL}
+                        alt="user"
+                        className="w-10 h-10 rounded-full border border-yellow-800"
+                      /> */}
+                      <p className="ml-4 text-sm font-medium">
+                        {u?.userInfo?.name}
+                      </p>
                     </div>
                   </td>
 
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm ">{u?.userInfo?.email}</div>
+                    <div className="text-sm">{u?.userInfo?.email}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-[#f5b754] text-whaite cursor-pointer">
+                    <span className="px-2 inline-flex text-sm font-semibold rounded-full bg-[#f5b754] text-white">
                       {'+8801703500000'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      className={`px-2 inline-flex text-xs font-semibold rounded-full ${
                         u.isActive
                           ? 'bg-green-800 text-green-100'
                           : 'bg-red-800 text-red-100'
@@ -197,43 +215,21 @@ const ManageDrivers = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">1</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  {/* <td className="px-6 py-4 whitespace-nowrap">
                     <div className="rating rating-xs">
-                      <input
-                        type="radio"
-                        name="rating-5"
-                        className="mask mask-star-2 bg-orange-400"
-                        aria-label="1 star"
-                      />
-                      <input
-                        type="radio"
-                        name="rating-5"
-                        className="mask mask-star-2 bg-orange-400"
-                        aria-label="2 star"
-                        defaultChecked
-                      />
-                      <input
-                        type="radio"
-                        name="rating-5"
-                        className="mask mask-star-2 bg-orange-400"
-                        aria-label="3 star"
-                      />
-                      <input
-                        type="radio"
-                        name="rating-5"
-                        className="mask mask-star-2 bg-orange-400"
-                        aria-label="4 star"
-                      />
-                      <input
-                        type="radio"
-                        name="rating-5"
-                        className="mask mask-star-2 bg-orange-400"
-                        aria-label="5 star"
-                      />
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <input
+                          key={i}
+                          type="radio"
+                          name="rating-5"
+                          className="mask mask-star-2 bg-orange-400"
+                          defaultChecked={i + 1 === Math.floor(u.rating)}
+                        />
+                      ))}
                     </div>
-                  </td>
+                  </td> */}
 
-                  <td className="px-6 py-4 whitespace-nowrap text-sm ">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <button
                       onClick={() => openModal(u._id)}
                       className="orange hover:text-red-300 cursor-pointer"
@@ -246,14 +242,15 @@ const ManageDrivers = () => {
             </tbody>
           </table>
         </div>
+
         {/* Modal for Delete Confirmation */}
         {isOpen && (
           <div className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-[#222222]/60">
             <div className="relative p-4 w-full max-w-md">
-              <div className="relative p-4 text-center  rounded-lg shadow bg-[#302a20] orange  sm:p-5">
+              <div className="relative p-4 text-center rounded-lg shadow bg-[#302a20] sm:p-5">
                 <button
                   onClick={closeModal}
-                  className="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                 >
                   <svg
                     aria-hidden="true"
@@ -263,40 +260,27 @@ const ManageDrivers = () => {
                   >
                     <path
                       fillRule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 4.293z"
                       clipRule="evenodd"
                     ></path>
                   </svg>
+                  <span className="sr-only">Close modal</span>
                 </button>
-
-                <svg
-                  className="text-[#f5b754]  w-11 h-11 mb-3.5 mx-auto"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-
-                <p className="mb-4 text-white">
-                  Are you sure you want to delete this driver?
-                </p>
-
-                <div className="flex justify-center items-center space-x-4">
+                <h3 className="text-lg font-medium leading-6 text-white">
+                  Are you sure?
+                </h3>
+                <div className="mt-4">
                   <button
-                    onClick={closeModal}
-                    className="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                    onClick={handelDriverDelete}
+                    className="mr-2 px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 focus:outline-none"
                   >
-                    No, cancel
+                    Yes, Delete
                   </button>
                   <button
-                    onClick={handelDeriverDelete}
-                    className="py-2 px-3 text-sm font-medium text-center text-black hover:bg-white bg-[#f5b754] rounded-lg hover:hover:bg-[#f5b754] focus:ring-4 focus:outline-none focus:ring-red-300  dark:hover:bg-red-600 dark:focus:ring-red-900 cursor-pointer"
+                    onClick={closeModal}
+                    className="px-4 py-2 rounded-lg bg-gray-600 text-white hover:bg-gray-700 focus:outline-none"
                   >
-                    Yes, I'm sure
+                    Cancel
                   </button>
                 </div>
               </div>

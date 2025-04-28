@@ -59,7 +59,7 @@ const Register = () => {
         <div className="flex flex-col md:w-1/3 w-full p-6  items-center justify-center mx-auto md:bg-transparent">
           <div className="mb-6 text-center">
             <h1 className="my-3 text-4xl font-bold">
-              <Link to={'/'} className="font-black ">
+              <Link to={"/"} className="font-black ">
                 <span className="orange">S</span>wift
                 <span className="orange">R</span>ent
               </Link>

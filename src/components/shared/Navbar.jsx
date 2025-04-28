@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Menu, ChevronRight } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -8,6 +9,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,7 +51,7 @@ const Navbar = () => {
         setIsMenuOpen(false);
       })
       .catch((error) => {
-        // console.error("Logout failed:", error);
+        // toast ("Logout failed:", error);
       });
   };
 

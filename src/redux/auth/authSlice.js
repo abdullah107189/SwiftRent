@@ -5,12 +5,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updatePassword,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const axiosPublic = useAxiosPublic();
-
 // Thunks for async actions
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
@@ -25,6 +25,14 @@ export const registerUser = createAsyncThunk(
         ...userInfo,
         uid: userCredential.user.uid,
       });
+
+      await updateProfile(userCredential.user, {
+        displayName: userInfo?.name,
+        photoURL: "https://i.ibb.co.com/ZRYZQhzL/default-avatar.png",
+      }).then(() => {
+        console.log("perfect working........");
+      });
+
       return response.data.user;
     } catch (error) {
       return rejectWithValue(

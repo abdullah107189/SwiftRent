@@ -67,7 +67,6 @@ const Sidebar = ({ userRole }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
   const handleLogout = async () => {
     try {
       const uid = user?.userInfo[0]?.uid;

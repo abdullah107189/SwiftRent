@@ -1,4 +1,3 @@
-
 /* eslint-disable no-unused-vars */
 
 import { User } from "lucide-react";
@@ -6,13 +5,12 @@ import SettingSection from "./SettingSection";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import imageUploade from "../../components/CarImageUploade/ImageChanges";
-import Header from "../../components/common/Header";
 import UpdateProfile from "../UpdateProfile/UpdateProfile";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
 
-  // console.log(user?.displayName);
+  console.log(user?.displayName);
 
   const dispatch = useDispatch();
   const [image, setImage] = useState(user?.photoURL || "");
@@ -27,11 +25,7 @@ const Profile = () => {
         setImage(uploadedImageUrl);
         setImageFile(file);
       } catch (error) {
-
-        
-
         // console.error("Error uploading image:", error);
-
       }
     }
   };
@@ -45,7 +39,7 @@ const Profile = () => {
           {/* Profile Image */}
           <label htmlFor="file-upload" className="cursor-pointer">
             <img
-              src={image}
+              src={user?.photoURL || ""}
               alt="Profile"
               referrerPolicy="no-referrer"
               className="rounded-full w-20 h-20 object-cover mr-4"

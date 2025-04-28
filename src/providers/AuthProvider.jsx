@@ -31,8 +31,9 @@ const AuthProvider = ({ children }) => {
     updateProfile(auth, {
       displayName: name,
       photoURL: photo,
-    })
+    });
   };
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("User logged in");
@@ -69,6 +70,7 @@ const AuthProvider = ({ children }) => {
     loading,
     createUser,
     signIn,
+    updateProfileUser,
     logOut,
   };
   return (

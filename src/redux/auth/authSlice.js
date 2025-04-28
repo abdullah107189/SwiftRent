@@ -78,6 +78,28 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   await signOut(auth);
 });
 
+export const updateProfileUser = createAsyncThunk(
+  "auth/updateProfileUser",
+  async ({ name, photo }, { rejectWithValue }) => {
+    try {
+      const user = auth.currentUser;
+      if (!user) throw new Error("No user is currently logged in.");
+
+      await updateProfile(user, {
+        displayName: name,
+        photoURL: photo,
+      });
+
+      return {
+        name,
+        photo,
+      };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
   async ({ currentPassword, newPassword }, { rejectWithValue }) => {
@@ -144,6 +166,23 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       })
+      //update-profile
+      .addCase(updateProfileUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProfileUser.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.displayName = action.payload.name;
+          state.user.photoURL = action.payload.photo;
+        }
+        state.loading = false;
+      })
+      .addCase(updateProfileUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
       // change password
       .addCase(changePassword.pending, (state) => {
         state.loading = true;

@@ -13,6 +13,7 @@ const Dashboard = () => {
   useEffect(() => {
     authStateListener(dispatch);
   }, [dispatch]);
+  
   const userRole = useUserRole();
 
   return (

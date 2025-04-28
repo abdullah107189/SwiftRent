@@ -91,12 +91,25 @@ const UpdateCar = () => {
     }
   };
 
+  const handleFeaturesChange = e => {
+    const { value, checked } = e.target;
+    setCarData(prevState => {
+      if (checked) {
+        return { ...prevState, features: [...prevState.features, value] };
+      } else {
+        return {
+          ...prevState,
+          features: prevState.features.filter(f => f !== value),
+        };
+      }
+    });
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     try {
       setLoading(true);
       const response = await axiosSecure.patch(`/cars-update/${id}`, carData);
-      console.log(response);
       if (response.data.modifiedCount > 0) {
         Swal.fire({
           title: 'Success!',
@@ -151,7 +164,7 @@ const UpdateCar = () => {
                 value={carData.name}
                 onChange={handleChange}
                 placeholder="Car Name"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
@@ -163,7 +176,7 @@ const UpdateCar = () => {
                 value={carData.brand}
                 onChange={handleChange}
                 placeholder="Brand"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
@@ -179,17 +192,8 @@ const UpdateCar = () => {
                 <input
                   type="file"
                   onChange={e => handleImageChange(e, index)}
-                  className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border-2 border-dashed border-white"
+                  className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border-2 border-dashed border-white"
                 />
-                {/* {img && (
-                  <div className="mt-2">
-                    <img
-                      src={img}
-                      alt={`Preview ${index + 1}`}
-                      className="h-20 object-cover"
-                    />
-                  </div>
-                )} */}
               </div>
             ))}
           </div>
@@ -206,7 +210,7 @@ const UpdateCar = () => {
                 value={carData.type}
                 onChange={handleChange}
                 placeholder="Car Type"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
@@ -218,7 +222,7 @@ const UpdateCar = () => {
                 value={carData.year}
                 onChange={handleChange}
                 placeholder="Year"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
@@ -236,7 +240,7 @@ const UpdateCar = () => {
                 value={carData.transmission}
                 onChange={handleChange}
                 placeholder="Transmission"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
@@ -248,13 +252,13 @@ const UpdateCar = () => {
                 value={carData.seats}
                 onChange={handleChange}
                 placeholder="Seats"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
           </div>
 
-          {/* Fuel Type and Price */}
+          {/* Fuel and Price */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium pb-1.5">
@@ -266,7 +270,7 @@ const UpdateCar = () => {
                 value={carData.fuel}
                 onChange={handleChange}
                 placeholder="Fuel Type"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
@@ -278,13 +282,13 @@ const UpdateCar = () => {
                 value={carData.price}
                 onChange={handleChange}
                 placeholder="Price"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
           </div>
 
-          {/* Location Fields */}
+          {/* Location */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium pb-1.5">City</label>
@@ -294,7 +298,7 @@ const UpdateCar = () => {
                 value={carData.location.city}
                 onChange={handleChange}
                 placeholder="City"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
@@ -308,14 +312,11 @@ const UpdateCar = () => {
                 value={carData.location.pickupPoint}
                 onChange={handleChange}
                 placeholder="Pickup Point"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            <div>
+            <div className="md:col-span-2">
               <label className="block text-sm font-medium pb-1.5">
                 Drop Off Point
               </label>
@@ -325,42 +326,44 @@ const UpdateCar = () => {
                 value={carData.location.dropOffPoint}
                 onChange={handleChange}
                 placeholder="Drop Off Point"
-                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
+                className="w-full p-4 bg-[#222222] text-gray-400 rounded-full border border-white"
                 required
               />
             </div>
           </div>
 
-          {/* Features (optional) */}
+          {/* Features */}
           <div>
-            <label className="block text-sm font-medium pb-1.5">
-              Features (comma separated)
-            </label>
-            <input
-              type="text"
-              name="features"
-              value={carData.features.join(', ')}
-              onChange={e => {
-                const features = e.target.value.split(',').map(f => f.trim());
-                setCarData(prev => ({ ...prev, features }));
-              }}
-              placeholder="GPS, Bluetooth, Air Conditioning"
-              className="w-full p-4 bg-[#222222] text-gray-400 rounded-full focus:outline-none focus:ring-0 border border-white"
-            />
+            <label className="block text-sm font-medium pb-1.5">Features</label>
+            <div className="flex flex-wrap gap-4">
+              {[
+                'GPS',
+                'Bluetooth',
+                'Air Conditioning',
+                'Heated Seats',
+                'Backup Camera',
+                'Cruise Control',
+              ].map((feature, index) => (
+                <label key={index} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    value={feature}
+                    checked={carData.features.includes(feature)}
+                    onChange={handleFeaturesChange}
+                  />
+                  {feature}
+                </label>
+              ))}
+            </div>
           </div>
 
           {/* Submit Button */}
-          <div className="text-center">
-            <button
-              type="submit"
-              disabled={loading}
-              className={`px-6 w-full py-3 ${
-                loading ? 'bg-gray-500' : 'bg-[#f5b754]'
-              } text-white font-semibold rounded-lg hover:bg-[#d49343] transition`}
-            >
-              {loading ? 'Updating...' : 'Update Car'}
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="w-full p-4 rounded-full bg-[#f5b754]  hover:bg-[#a68f6c]  transition-all font-semibold text-white"
+          >
+            Update Car
+          </button>
         </form>
       </div>
     </div>

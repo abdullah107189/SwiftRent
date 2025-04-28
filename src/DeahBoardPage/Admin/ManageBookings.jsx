@@ -35,7 +35,7 @@ const ManageBookings = () => {
   return (
     <>
       <div className="">
-        <Header title="Manage Bookings" />
+        <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
         <h2 className="text-2xl font-semibold px-4 mb-6 ">All Bookings</h2>
         <div className="overflow-x-auto px-4">
           <table className="min-w-full  rounded-xl overflow-hidden">

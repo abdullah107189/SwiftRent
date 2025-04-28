@@ -75,14 +75,8 @@ const ManageBookings = () => {
                   <td className="py-3 px-4 text-center">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium
-      ${
-        booking.paymentStatus === 'Success' ? 'bg-green-100 text-green-700' : ''
-      }
-      ${
-        booking.paymentStatus === 'Pending'
-          ? 'bg-orange-100 text-orange-700'
-          : ''
-      }
+      ${booking.paymentStatus === 'Success' ? ' bg-green-700' : ''}
+      ${booking.paymentStatus === 'Pending' ? ' bg-orange-500' : ''}
     `}
                     >
                       {booking.paymentStatus}

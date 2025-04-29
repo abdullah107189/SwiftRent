@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from 'react';
-import Header from '../components/common/Header';
-import { motion } from 'framer-motion';
-import StatCard from '../components/common/StatCard';
-import { BarChart, ShoppingCart, Users, Zap } from 'lucide-react';
-import SalesOverviewChart from '../components/common/SalesOverviewChart';
-import CategoryDistributionChart from '../components/common/CategroyDistributionChart';
-import SalesChannelChart from '../components/common/SalesChannelChart';
-import useAxiosSecure from '../hooks/useAxiosSecure';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTotalSales } from '../redux/Slice/totalSlice';
-import Spinner from '../components/Spinner';
-import CountUp from 'react-countup';
+import { useEffect, useState } from "react";
+import Header from "../components/common/Header";
+import { motion } from "framer-motion";
+import StatCard from "../components/common/StatCard";
+import { BarChart, ShoppingCart, Users, Zap } from "lucide-react";
+import SalesOverviewChart from "../components/common/SalesOverviewChart";
+import CategoryDistributionChart from "../components/common/CategroyDistributionChart";
+import SalesChannelChart from "../components/common/SalesChannelChart";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTotalSales } from "../redux/Slice/totalSlice";
+import Spinner from "../components/Spinner";
+import CountUp from "react-countup";
 const OverviewPage = () => {
   const axiosSecure = useAxiosSecure();
 
@@ -33,7 +33,7 @@ const OverviewPage = () => {
 
   const fetchAllUsers = async () => {
     try {
-      const response = await axiosSecure.get('/all-user');
+      const response = await axiosSecure.get("/all-user");
       setAllUser(response.data);
     } catch (error) {
       // console.error(error);
@@ -41,7 +41,7 @@ const OverviewPage = () => {
   };
   const fetchTotalSales = async () => {
     try {
-      const response = await axiosSecure.get('/total-sales');
+      const response = await axiosSecure.get("/total-sales");
       setTotalSales(response.data.totalSell);
       setTotalorders(response.data);
     } catch (error) {
@@ -50,7 +50,7 @@ const OverviewPage = () => {
   };
   const fetchTotalOrders = async () => {
     try {
-      const response = await axiosSecure.get('/total-orders');
+      const response = await axiosSecure.get("/total-orders");
 
       setTotalorders(response.data);
     } catch (error) {

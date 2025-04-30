@@ -1,35 +1,32 @@
 import { useState } from "react";
-import { FaUser, FaSave, FaUpload, FaTrash } from "react-icons/fa";
+import { FaUser, FaSave } from "react-icons/fa";
+import useSingleUser from "../../hooks/useSingleUser";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { updateProfileUser } from "../../redux/auth/authSlice";
 
 const UpdateProfile = () => {
-  const [user, setUser] = useState({
-    firstName: "Ali",
-    lastName: "Tufan",
-    email: "alitufan@gmail.com",
-    phone: "+01 4561 3214",
-    dob: "03 Jun 1990",
-    address: "8800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A.",
-    profilePic: "",
-  });
+  const axiosPublic = useAxiosPublic();
+  const { userInfo, refetch } = useSingleUser();
 
-  const [newEmail, setNewEmail] = useState({
-    currentEmail: "",
-    newEmail: "",
-    confirmNewEmail: "",
+  const dispatch = useDispatch();
+
+  const [user, setUser] = useState({
+    name: userInfo?.userInfo?.name || "",
+    phone: userInfo?.userInfo?.phone || "",
+    dob: userInfo?.userInfo?.dob || "",
+    address: userInfo?.userInfo?.address || "",
+    profilePic: userInfo?.userInfo?.profilePic || "",
+    email: userInfo?.userInfo?.email || "",
   });
 
   const [imageError, setImageError] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
-      // Validate file size (Max 5MB) and dimensions (Min 150x150)
       if (file.size > 5 * 1024 * 1024) {
         setImageError("File size exceeds 5MB. Please choose a smaller image.");
         return;
@@ -48,18 +45,32 @@ const UpdateProfile = () => {
     }
   };
 
-  // const handleRemoveImage = () => {
-  //   setUser({ ...user, profilePic: '' });
-  // };
-
-  const handleEmailChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewEmail({ ...newEmail, [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Profile updated successfully!");
+
+    try {
+      await dispatch(
+        updateProfileUser({ name: user?.name, photo: user?.profilePic })
+      ).unwrap();
+
+      const res = await axiosPublic.patch(
+        `/update-profile/${userInfo?.userInfo?.email}`,
+        user
+      );
+
+      if (res.status === 200) {
+        refetch();
+        toast.success("Profile updated successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message || "Failed to update profile.");
+    }
   };
 
   return (
@@ -70,27 +81,32 @@ const UpdateProfile = () => {
             <FaUser /> Update Profile
           </h1>
 
-          <div className="space-y-8 flex gap-4 ">
-            {/* Personal Information Section */}
-            <form onSubmit={handleSubmit} className="space-y-6 w-full">
-              <div className="text-center">
+          <form onSubmit={handleSubmit} className="space-y-6 w-full">
+            {/* Profile Image Upload */}
+
+            {/* Form Fields */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+              <div>
+                <label className="block font-medium ">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  defaultValue={userInfo?.userInfo?.name}
+                  placeholder="write your name"
+                  onChange={handleChange}
+                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent outline-none rounded-2xl"
+                />
+              </div>
+              <div className="text-center mt-3 rounded-full border">
                 <label htmlFor="profilePic" className="cursor-pointer">
-                  {user.profilePic ? (
+                  {user?.profilePic ? (
                     <img
-                      src={user.profilePic}
+                      src={user?.profilePic}
                       alt="Profile"
-                      className="w-16 h-16 rounded-full mx-auto border-4 border-blue-500 object-cover"
+                      className="rounded-2xl w-12 h-12 ml-1 border-blue-500 object-cover"
                     />
                   ) : (
-                    <div className="w-full border py-2 rounded-full flex items-center justify-center text-gray-500">
-                      <svg
-                        className="w-6 mr-3"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M15 8V4H5V20H19V8H15ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918ZM11 9.5C11 10.3284 10.3284 11 9.5 11C8.67157 11 8 10.3284 8 9.5C8 8.67157 8.67157 8 9.5 8C10.3284 8 11 8.67157 11 9.5ZM17.5 17L13.5 10L8 17H17.5Z"></path>
-                      </svg>
+                    <div className=" border p-3 rounded-full flex items-center justify-center text-gray-500">
                       No file chosen
                     </div>
                   )}
@@ -102,159 +118,55 @@ const UpdateProfile = () => {
                   onChange={handleImageChange}
                   accept=".jpg,.png"
                 />
-                {/* <div className="mt-2">
-                  <button
-                    type="button"
-                    onClick={handleRemoveImage}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <FaTrash /> Remove Image
-                  </button>
-                </div> */}
                 {imageError && (
-                  <p className="text-red-500 text-sm mt-1">{imageError}</p>
+                  <p className="text-red-500 text-sm ">{imageError}</p>
                 )}
               </div>
+            </div>
 
-              {/* Name */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="blockfont-medium pb-1">First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={user.firstName}
-                    onChange={handleChange}
-                    className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent outline-none rounded-lg "
-                  />
-                </div>
-                <div>
-                  <label className="block font-medium pb-1">Last Name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={user.lastName}
-                    onChange={handleChange}
-                    className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                  />
-                </div>
-              </div>
+            <div>
+              <label className="block font-medium pb-1">Phone Number</label>
+              <input
+                type="text"
+                name="phone"
+                placeholder="write your number"
+                defaultValue={user?.phone}
+                onChange={handleChange}
+                className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent outline-none rounded-2xl"
+              />
+            </div>
 
-              {/* Email */}
-              <div>
-                <label className="block   font-medium pb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={user.email}
-                  onChange={handleChange}
-                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                  readOnly
-                />
-              </div>
+            <div>
+              <label className="block font-medium pb-1">Date of Birth</label>
+              <input
+                type="date"
+                name="dob"
+                defaultValue={user?.dob}
+                onChange={handleChange}
+                className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent outline-none rounded-2xl"
+              />
+            </div>
 
-              {/* Phone number */}
-              <div>
-                <label className="block   font-medium pb-1">Phone Number</label>
-                <input
-                  type="text"
-                  name="phone"
-                  value={user.phone}
-                  onChange={handleChange}
-                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                />
-              </div>
+            <div>
+              <label className="block font-medium pb-1">Address</label>
+              <textarea
+                name="address"
+                defaultValue={user?.address}
+                onChange={handleChange}
+                rows="3"
+                placeholder="write your present address"
+                className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent outline-none rounded-2xl"
+              ></textarea>
+            </div>
 
-              {/* Date of Birth */}
-              <div>
-                <label className="block   font-medium pb-1">
-                  Date of Birth
-                </label>
-                <input
-                  type="date"
-                  name="dob"
-                  value={user.dob}
-                  onChange={handleChange}
-                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                />
-              </div>
-
-              {/* Address */}
-              <div>
-                <label className="block   font-medium pb-1">Address</label>
-                <textarea
-                  name="address"
-                  value={user.address}
-                  onChange={handleChange}
-                  rows="3"
-                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                ></textarea>
-              </div>
-
-              {/* Save Changes Button */}
-              <button
-                type="submit"
-                className="w-full fillBtn  py-3 rounded-lg flex items-center justify-center gap-2  transition duration-300"
-              >
-                <FaSave /> Save Changes
-              </button>
-            </form>
-
-            <hr className="my-6" />
-
-            {/* Change Email Section */}
-            <form className="space-y-6 w-full">
-              <h2 className="text-xl font-semibold  ">Change Email</h2>
-
-              {/* Current Email */}
-              <div>
-                <label className="block  font-medium pb-1">Current Email</label>
-                <input
-                  type="email"
-                  name="currentEmail"
-                  value={newEmail.currentEmail}
-                  onChange={handleEmailChange}
-                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                />
-              </div>
-
-              {/* New Email */}
-              <div>
-                <label className="block  font-medium pb-1">New Email</label>
-                <input
-                  type="email"
-                  name="newEmail"
-                  value={newEmail.newEmail}
-                  onChange={handleEmailChange}
-                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                />
-              </div>
-
-              {/* Confirm New Email */}
-              <div>
-                <label className="block  font-medium pb-1">
-                  Confirm New Email
-                </label>
-                <input
-                  type="email"
-                  name="confirmNewEmail"
-                  value={newEmail.confirmNewEmail}
-                  onChange={handleEmailChange}
-                  className="w-full p-3 dark:border border-orange-300 tBgBlack dark:bg-transparent rounded-lg  outline-none"
-                />
-              </div>
-
-              {/* Save New Email Button */}
-              <button
-                type="submit"
-                className="w-full fillBtn  py-3 rounded-lg flex items-center justify-center gap-2  transition duration-300"
-              >
-                <FaSave /> Save New Email
-              </button>
-            </form>
-          </div>
+            {/* Save Button */}
+            <button
+              type="submit"
+              className="w-full fillBtn py-3 rounded-2xl flex items-center justify-center gap-2 transition duration-300"
+            >
+              <FaSave /> Save Changes
+            </button>
+          </form>
         </div>
       </div>
     </>

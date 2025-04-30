@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Menu, ChevronRight } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -49,7 +50,7 @@ const Navbar = () => {
         setIsMenuOpen(false);
       })
       .catch((error) => {
-        // console.error("Logout failed:", error);
+        // toast ("Logout failed:", error);
       });
   };
 
@@ -65,7 +66,7 @@ const Navbar = () => {
                 : `${
                     isScrolled
                       ? "dark:text-white bg-transparent"
-                      : "dark:text-white text-white bg-transparent"
+                      : "dark:text-white text-[#f5b754] bg-transparent"
                   }`
             }`
           }
@@ -74,7 +75,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {["Services", "About", "Contact",].map((item, index) => (
+      {["Services", "About", "Contact", "Blogs"].map((item, index) => (
         <li key={index} onClick={() => setIsMenuOpen(false)}>
           <NavLink
             to={`/${item.toLowerCase()}`}
@@ -85,7 +86,7 @@ const Navbar = () => {
                   : `${
                       isScrolled
                         ? "dark:text-white bg-transparent"
-                        : "dark:text-white text-white bg-transparent"
+                        : "dark:text-white text-[#f5b754] bg-transparent"
                     }`
               }`
             }

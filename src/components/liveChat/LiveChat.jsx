@@ -18,6 +18,15 @@ const LiveChat = () => {
   const [showDrawer, setShowDrawer] = useState(false);
 
   useEffect(() => {
+    const theme = localStorage.getItem("theme") || "light";
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchUserInfo = async () => {
       if (!user?.displayName && user?.uid) {
         try {
@@ -93,13 +102,6 @@ const LiveChat = () => {
     setMessage("");
   };
 
-  useEffect(() => {
-    chatBoxRef.current?.scrollTo({
-      top: chatBoxRef.current.scrollHeight,
-      behavior: "smooth",
-    });
-  }, [messages]);
-
   const customersMap = {};
 
   messages.forEach((msg) => {
@@ -125,6 +127,12 @@ const LiveChat = () => {
     (a, b) => new Date(b.time) - new Date(a.time)
   );
 
+  useEffect(() => {
+    if (role === "Admin" && customers.length > 0 && !selectedCustomer) {
+      setSelectedCustomer(customers[0]);
+    }
+  }, [role, customers, selectedCustomer]);
+
   const visibleMessages = messages.filter((msg) =>
     role === "Admin"
       ? selectedCustomer
@@ -134,13 +142,22 @@ const LiveChat = () => {
       : msg.senderUid === user?.uid || msg.receiverUid === user?.uid
   );
 
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
-    <div className="mxw rounded h-[550px] flex overflow-hidden relative">
+    <div className="mxw rounded h-full flex overflow-hidden relative">
       {/* Sidebar for Admin - Large devices */}
       {role === "Admin" && (
-        <div className="hidden sm:block w-1/4 bg-[#1f1f1f] p-2 border-r border-gray-700 overflow-y-auto custom-scrollbar">
-          <h3 className="text-lg font-semibold mb-3 text-center text-white">
-            Customers
+        <div className="hidden sm:block w-1/4 bg-[#1f1f1f]  border-r border-gray-700 overflow-y-auto custom-scrollbar">
+          <h3 className="text-lg font-semibold p-4 orange border-b border-gray-200 mb-4">
+            Chat
+            <span className="ml-2 bgOrange text-white text-xs font-semibold px-2 py-1 rounded-full">
+              NEW
+            </span>
           </h3>
           {customers.map((c) => {
             const lastMessage = messages
@@ -154,7 +171,7 @@ const LiveChat = () => {
                 key={c.uid}
                 className={`flex items-center gap-2 px-2 py-2 rounded-lg cursor-pointer transition-colors duration-200 ${
                   selectedCustomer?.uid === c.uid
-                    ? "bg-blue-700"
+                    ? "bg-[#493e34]"
                     : "hover:bg-[#2c2c2c]"
                 }`}
                 onClick={() => setSelectedCustomer(c)}
@@ -200,8 +217,11 @@ const LiveChat = () => {
               showDrawer ? "translate-x-0" : "-translate-x-full"
             }`}
           >
-            <h3 className="text-lg font-semibold mb-3 text-center text-white">
-              Customers
+            <h3 className="text-lg font-semibold p-4 orange border-b border-gray-200 mb-4">
+              Chat
+              <span className="ml-2 bgOrange text-white text-xs font-semibold px-2 py-1 rounded-full">
+                NEW
+              </span>
             </h3>
             {customers.map((c) => {
               const lastMessage = messages
@@ -215,7 +235,7 @@ const LiveChat = () => {
                   key={c.uid}
                   className={`flex items-center gap-2 px-2 py-2 rounded-lg cursor-pointer transition-colors duration-200 ${
                     selectedCustomer?.uid === c.uid
-                      ? "bg-blue-700"
+                      ? "bg-[#493e34]"
                       : "hover:bg-[#2c2c2c]"
                   }`}
                   onClick={() => {
@@ -245,19 +265,22 @@ const LiveChat = () => {
 
       {/* Chat Section */}
       <div
-        className={`flex flex-col w-full ${
+        className={`flex flex-col w-full h-[calc(100vh-10px)] ${
           role !== "Admin" ? "lg:w-full" : ""
         }`}
       >
         <div className="sBgBlack  py-4 border-b border-gray-700 flex items-center">
-          <h2 className="text-lg font-semibold ml-8 md:ml-0">
+          <h2 className="text-lg font-semibold ml-18 md:ml-8">
             {role === "Admin"
               ? selectedCustomer?.name || "Select a Customer"
               : "SwiftRent Live Support"}
           </h2>
         </div>
 
-        <div ref={chatBoxRef} className="flex-1 overflow-y-auto p-6 space-y-4 ">
+        <div
+          ref={chatBoxRef}
+          className="flex-1 overflow-y-auto p-6 space-y-4 pb-40 "
+        >
           {visibleMessages.map((msg, index) => {
             const isOwn = msg.senderUid === user?.uid;
             return (
@@ -297,7 +320,10 @@ const LiveChat = () => {
           })}
         </div>
 
-        <form onSubmit={handleSubmit} className="flex items-center mb-1">
+        <form
+          onSubmit={handleSubmit}
+          className="flex items-center p-3 border-t border-gray-700 bg-[#1a1a1a] sticky bottom-0 z-10"
+        >
           <input
             type="text"
             placeholder="Type your message..."

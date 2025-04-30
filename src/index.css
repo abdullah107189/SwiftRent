@@ -1,9 +1,9 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "daisyui";
 @custom-variant dark (&:where(.dark, .dark *));
 
 #root {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .dark body {
@@ -47,7 +47,7 @@ body {
   }
 
   .fontOutfit > {
-    font-family: 'Outfit', sans-serif;
+    font-family: "Outfit", sans-serif;
     font-optical-sizing: auto;
   }
   /* action btn  */

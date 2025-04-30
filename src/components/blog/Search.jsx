@@ -1,14 +1,16 @@
 import React from "react";
+import { FaSearch } from "react-icons/fa";
 
-const Search = () => {
+const Search = ({ setSearchTerm }) => {
   return (
-    <div>
-      {" "}
+    <div className="flex items-center border rounded-xl p-2 bg-white shadow-md">
       <input
         type="text"
         placeholder="Search blog..."
-        className="w-32 p-2 rounded-xl shadow-md bg-white text-black text-sm outline-none"
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full bg-transparent text-black text-sm outline-none"
       />
+      <FaSearch className="text-gray-400 mr-2" />
     </div>
   );
 };

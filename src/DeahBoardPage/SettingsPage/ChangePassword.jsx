@@ -1,10 +1,9 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { changePassword } from '../../redux/auth/authSlice';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
-import auth from '../../firebase/firebase.config';
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { changePassword } from "../../redux/auth/authSlice";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const ChangePassword = () => {
   const {
@@ -13,42 +12,44 @@ const ChangePassword = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector(state => state.auth);
+  const { loading, error } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  const onSubmit = async data => {
-    // console.log('Current user:', auth.currentUser);
+  const onSubmit = async (data) => {
     if (data.newPassword !== data.confirmPassword) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'New password and confirmation do not match',
-        confirmButtonColor: '#f5b754',
+        icon: "error",
+        title: "Oops...",
+        text: "New password and confirmation do not match",
+        confirmButtonColor: "#f5b754",
       });
       return;
     }
 
     try {
       const result = await dispatch(
-        changePassword({ newPassword: data.newPassword })
+        changePassword({
+          currentPassword: data.currentPassword,
+          newPassword: data.newPassword,
+        })
       ).unwrap();
       Swal.fire({
-        icon: 'success',
-        title: 'Success!',
+        icon: "success",
+        title: "Success!",
         text: result,
-        confirmButtonColor: '#f5b754',
+        confirmButtonColor: "#f5b754",
         timer: 1500,
         timerProgressBar: true,
         showCloseButton: true,
       }).then(() => {
-        navigate('../settings');
+        navigate("../settings");
       });
     } catch (err) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error || 'Failed to change password',
-        confirmButtonColor: '#f5b754',
+        icon: "error",
+        title: "Oops...",
+        text: "Current password is incorrect",
+        confirmButtonColor: "#f5b754",
       });
     }
   };
@@ -62,6 +63,28 @@ const ChangePassword = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label
+              htmlFor="currentPassword"
+              className="block mb-1 text-gray-600 text-sm"
+            >
+              Current Password
+            </label>
+            <input
+              type="password"
+              id="currentPassword"
+              {...register("currentPassword", {
+                required: "Current password is required",
+              })}
+              placeholder="Enter current password"
+              className="w-full px-3 py-2 border-2 rounded-md text-gray-500 border-gray-300 focus:border-[#f5b754] focus:outline-none"
+            />
+            {errors.currentPassword && (
+              <p className="text-red-500 text-sm">
+                {errors.currentPassword.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <label
               htmlFor="newPassword"
               className="block mb-1 text-gray-600 text-sm"
             >
@@ -70,11 +93,11 @@ const ChangePassword = () => {
             <input
               type="password"
               id="newPassword"
-              {...register('newPassword', {
-                required: 'New password is required',
+              {...register("newPassword", {
+                required: "New password is required",
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters',
+                  message: "Password must be at least 6 characters",
                 },
               })}
               placeholder="Enter new password"
@@ -96,8 +119,8 @@ const ChangePassword = () => {
             <input
               type="password"
               id="confirmPassword"
-              {...register('confirmPassword', {
-                required: 'Please confirm your new password',
+              {...register("confirmPassword", {
+                required: "Please confirm your new password",
               })}
               placeholder="Confirm new password"
               className="w-full px-3 py-2 border-2 rounded-md text-gray-500 border-gray-300 focus:border-[#f5b754] focus:outline-none"
@@ -112,11 +135,11 @@ const ChangePassword = () => {
             <button
               type="submit"
               className={`bg-[#f5b754] w-full rounded-md py-3 text-white hover:bg-[#f5b754ef] ${
-                loading ? 'opacity-50 cursor-not-allowed' : ''
+                loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
               disabled={loading}
             >
-              {loading ? 'Changing...' : 'Change Password'}
+              {loading ? "Changing..." : "Change Password"}
             </button>
           </div>
         </form>

@@ -1,4 +1,4 @@
-import { FaCar } from 'react-icons/fa';
+import { FaCar } from "react-icons/fa";
 
 const Spinner = () => {
   return (

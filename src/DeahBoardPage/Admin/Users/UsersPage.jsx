@@ -8,7 +8,7 @@ import UsersTable from "./UsersTable ";
 const UsersPage = () => {
   return (
     <div>
-      <Header title={"Users"} />
+      <Header title="Admin Dashboard" text="Welcome to SwiftRent " />
       <div className="px-4 py-4">
         {/* USER Table */}
         <UsersTable />

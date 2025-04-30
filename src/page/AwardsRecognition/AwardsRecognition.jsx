@@ -23,7 +23,7 @@ const awards = [
 
 const AwardsRecognition = () => {
   return (
-    <div className="md:py-16 py-10 fBgBlack">
+    <div className="md:py-16 py-10 ">
       <div className="mxw px-4">
         <SectionHeader
           title="Awards & Recognition"
@@ -34,14 +34,16 @@ const AwardsRecognition = () => {
           {awards.map((award, index) => (
             <div
               key={index}
-              className="sBgBlack md:p-6 p-3 rounded-lg shadow-xl space-y-4"
+              className="bg-white dark:bg-[#222222] md:p-6 p-3 rounded-lg shadow-xl space-y-4"
             >
               <img
                 src={award.image}
                 alt={award.title}
                 className="w-full h-48 object-cover rounded-lg"
               />
-              <h3 className="text-2xl font-semibold orange">{award.title}</h3>
+              <h3 className="text-2xl text-[#f5b754] dark:text-[#f5b754] font-semibold orange">
+                {award.title}
+              </h3>
               <p className="tBlack">{award.description}</p>
             </div>
           ))}

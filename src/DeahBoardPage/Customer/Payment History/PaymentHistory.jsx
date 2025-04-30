@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { FaMoneyBill } from "react-icons/fa";
 import Header from "../../../components/common/Header";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Spinner from "../../../components/Spinner";
 
 const PaymentHistory = () => {
   const { user } = useSelector((state) => state.auth);
@@ -33,7 +34,7 @@ const PaymentHistory = () => {
       .finally(() => setLoading(false));
   }, [user, axiosSecure]);
 
-  if (loading) return <div>Loading your payment history…</div>;
+  if (loading) return <Spinner />;
 
   return (
     <>

@@ -5,6 +5,7 @@ import Header from "../../../components/common/Header";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import moment from "moment";
 import Swal from "sweetalert2";
+import Spinner from "../../../components/Spinner";
 
 const MyBookings = () => {
   const { user } = useSelector((state) => state.auth);
@@ -87,7 +88,7 @@ const MyBookings = () => {
     }
   };
 
-  if (loading) return <div>Loading your bookings…</div>;
+  if (loading) return <Spinner />;
 
   return (
     <>

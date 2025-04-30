@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Link, useNavigate } from "react-router-dom";
 import BookingModal from "../../../components/common/Modal/BookingModal";
+import Spinner from "../../../components/Spinner";
 
 const BrowseCars = () => {
   const [cars, setCars] = useState([]);
@@ -32,7 +33,7 @@ const BrowseCars = () => {
       .finally(() => setLoading(false));
   }, [axiosPublic]);
 
-  if (loading) return <p className="text-center mt-10 ">Loading...</p>;
+  if (loading) return <Spinner />;
 
   // Fallback if expert is not found
   if (!cars) {

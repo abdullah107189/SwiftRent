@@ -92,6 +92,18 @@ export const router = createBrowserRouter([
         path: "/expert/:id",
         element: <ExpertDetails />,
       },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <LogIn />,
+      },
+      {
+        path: "/forget-password",
+        element: <ForgetPassword />,
+      },
     ],
   },
   //deshboard router start
@@ -139,18 +151,6 @@ export const router = createBrowserRouter([
     ],
   },
   //deshboard router End
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/login",
-    element: <LogIn />,
-  },
-  {
-    path: "/forget-password",
-    element: <ForgetPassword />,
-  },
 
   {
     path: "*",

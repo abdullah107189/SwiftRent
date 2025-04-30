@@ -38,7 +38,7 @@ const menuItems = {
     { name: 'Customers Management', path: 'customers-manage', icon: FaUsers },
     { name: 'Manage Drivers', path: 'manage-drivers', icon: FaUserCog },
     { name: 'Customer Message', path: 'live-chat', icon: FaUserCog },
-    { name: 'Billing & Payments', path: 'billing', icon: FaMoneyBill },
+    // { name: 'Billing & Payments', path: 'billing', icon: FaMoneyBill },
     { name: 'Settings', path: 'settings', icon: Settings },
   ],
   customer: [
@@ -56,7 +56,7 @@ const menuItems = {
     { name: 'Start Trip', path: 'start-trip', icon: FaRoute },
     { name: 'Available Trips', path: 'available-trips', icon: FaMapMarkedAlt },
     { name: 'Trip History', path: 'trip-history', icon: FaClipboardList },
-    { name: 'Customer Reviews', path: 'customer-reviews', icon: FaStar },
+    // { name: 'Customer Reviews', path: 'customer-reviews', icon: FaStar },
     { name: 'Earnings', path: 'earnings', icon: FaMoneyBill },
     { name: 'Settings', path: 'settings', icon: Settings },
   ],

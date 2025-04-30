@@ -1,20 +1,10 @@
-import React from "react";
-import { FaTag } from "react-icons/fa"; // Importing FaTag from react-icons
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { FaTag } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import BookingModal from "../../../components/common/Modal/BookingModal"; 
 
 const NumberCard = ({ _id, name, image, number, brand, price }) => {
-  const navigate = useNavigate();
-
-  const handleBookNow = () => {
-    const bookingDetails = {
-      _id,
-      name,
-      image,
-      brand,
-      price,
-    };
-    navigate(`/book-auto`, { state: { bookingDetails } });
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="relative w-full h-[420px] rounded-3xl overflow-hidden group dark:border border-[#999]/20 shadow-lg dark:shadow-gray-900">
@@ -68,7 +58,7 @@ const NumberCard = ({ _id, name, image, number, brand, price }) => {
           </p>
           <p className="flex items-center">
             <i className="fas fa-dollar-sign mr-2"></i>
-            <span className=" font-semibold flex items-center justify-center gap-1">
+            <span className="font-semibold flex items-center justify-center gap-1">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -93,11 +83,20 @@ const NumberCard = ({ _id, name, image, number, brand, price }) => {
           <Link to={`/car-details/${_id}`} className="fillBtn">
             View Details
           </Link>
-          <button onClick={handleBookNow} className="outlineBtn">
+          <button onClick={() => setIsModalOpen(true)} className="outlineBtn">
             Book Now
           </button>
         </div>
       </div>
+
+      {/* Booking Modal */}
+      {isModalOpen && (
+        <BookingModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          car={{ _id, name, image, brand, price }}
+        />
+      )}
     </div>
   );
 };

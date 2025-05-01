@@ -6,7 +6,7 @@ const NameCard = ({ name, image, number, onClick }) => {
       onClick={onClick}
       className="relative h-[300px] w-full md:h-[350px] rounded-3xl overflow-hidden group"
     >
-      {/* content  */}
+      {/* content  car */}
       <div className="relative w-full h-full rounded-xl overflow-hidden transition-transform duration-300 hover:scale-100">
         <img
           src={image}

@@ -8,10 +8,14 @@ import "./rentel.css";
 import { Navigation, Pagination } from "swiper/modules";
 import NameCard from "../../../components/shared/card/NameCard";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
+
 
 export default function RentalCarTypes() {
   const axiosPublic = useAxiosPublic();
   const [carTypes, setCarTypes] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +54,11 @@ export default function RentalCarTypes() {
       >
         {carTypes.map((car, index) => (
           <SwiperSlide key={index}>
-            <NameCard image={car?.image} name={car?.name}></NameCard>
+            <NameCard
+              image={car?.image}
+              name={car?.name}
+              onClick={() => navigate("/services")}
+            ></NameCard>
           </SwiperSlide>
         ))}
       </Swiper>

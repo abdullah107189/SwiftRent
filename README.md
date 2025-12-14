@@ -15,6 +15,15 @@ This is the frontend part of the SwiftRent Car Rental System, a modern platform 
 * Real-time updates via Socket.io
 * Review, rating system also Carousel.
 
+## 🔑 Default Login Credentials (for testing)
+
+The following credentials are provided for testing different user roles and access control features:
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Admin** | `admin@gmail.com` | `asdfAa` |
+| **Customer** | `customer@gmail.com` | `asdfAa` |
+| **Driver** | `driver@gmail.com` | `asdfAa` |
 
 ## 🛠️ Tech Stack
 
